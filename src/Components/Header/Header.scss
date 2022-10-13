@@ -13,14 +13,19 @@
   .header-links {
     display: flex;
     width: 60%;
-    justify-content: space-evenly;
+    justify-content: space-between;
 
     a {
       font-size: 20px;
+      display: flex;
+      align-items: center;
     }
   }
 
   .login-button {
     background-color: #C4E5E8;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    padding: .2em .6em;
+    border-radius: 15px;
   }
 }
