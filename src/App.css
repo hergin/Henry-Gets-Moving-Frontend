@@ -1,4 +1,5 @@
 .App {
-  background-color: #C4E5E8;
   height: 100vh;
+  background: #C4E5E8 url(../src/Assets/Background.png) no-repeat center bottom;
+  background-size: cover;
 }
