@@ -1,3 +1,51 @@
-.home{
+.home {
+  height: 61vh;
+  .book-container {
+    display: flex;
+    justify-content: center;
+    background-color: #FDEE1F;
+  }
 
+  .home-content {
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+    background: #C4E5E8 url(../../Assets/HomeBackground.png) no-repeat center bottom;
+    background-size: cover;
+    height: 100%;
+  }
+
+  .of-the-day {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 75%;
+
+    p {
+
+    }
+
+    a {
+
+    }
+
+    img {
+
+    }
+  }
+  //Desktop Styling
+  @media (min-width: 1050px){
+    .home-content{
+      background: #C4E5E8 url(../../Assets/HomeBackgroundDesktop.png) no-repeat center bottom;
+      background-size: cover;
+    }
+    .of-the-day{
+      height: 100%;
+    }
+  }
+  //Phone Styling
+  @media (max-width: 750px){
+
+  }
 }
