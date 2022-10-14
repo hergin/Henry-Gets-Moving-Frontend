@@ -5,7 +5,7 @@ import swings from "../../Assets/Swings.png";
 const Register = () => {
     return (
         <div className="register">
-            <p>Register</p>
+            <h1>Register</h1>
             <form>
                 <div className='email-input'>
                     <label>Email</label>
@@ -14,7 +14,7 @@ const Register = () => {
                     <input/>
                 </div>
                 <div className='buttons'>
-                    <button>Register</button>
+                    <button className='red-button'>Register</button>
                 </div>
             </form>
             <div className='swings'>
