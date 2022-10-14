@@ -5,15 +5,15 @@ import swings from '../../Assets/Swings.png';
 const Login = () => {
     return (
         <div className="login">
-            <p>Login</p>
+            <h1>Login</h1>
             <form>
                 <div className='email-input'>
                     <label>Email</label>
                     <input/>
                 </div>
                 <div className='buttons'>
-                    <button>Login</button>
-                    <Link to={'/register'}>Register</Link>
+                    <button className='red-button'>Login</button>
+                    <Link to={'/register'} className='register-button red-button'>Register</Link>
                 </div>
             </form>
             <div className='swings'>
