@@ -2,10 +2,14 @@ import './About.scss';
 import teamPhoto from '../../Assets/HGMteam.jpg';
 import youtube from '../../Assets/YoutubeIcon.png';
 import facebook from '../../Assets/FacebookIcon.png';
+import footerImage from "../../Assets/grass.svg";
+import React from "react";
+import weather from "../../Assets/Weather.svg";
 
 const About = () => {
     return (
         <div className="about">
+            <img src={weather} className='weather'/>
             <div className='team-photo'>
                 <img src={teamPhoto}/>
             </div>
@@ -39,6 +43,7 @@ const About = () => {
                     </a>
                 </div>
             </div>
+            <img src={footerImage} className='footer'/>
         </div>
     )
 }

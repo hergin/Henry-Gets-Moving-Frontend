@@ -1,7 +1,7 @@
 .about {
   .team-photo {
     width: 60%;
-    margin: 4em auto 0;
+    margin: auto;
     img{
       box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
     }
@@ -30,6 +30,7 @@
     width: 20%;
     display: flex;
     margin: auto 0 auto auto;
+    padding-bottom: 5em;
 
     a {
       display: flex;
