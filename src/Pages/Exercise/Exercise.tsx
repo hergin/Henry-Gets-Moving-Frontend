@@ -6,7 +6,49 @@ import React from "react";
 import footerImage from "../../Assets/grass.svg";
 import {Link} from "react-router-dom";
 
+type Exercise = {
+    [key: string]: any;
+    thumbnail: string;
+    name: string;
+    category: string;
+}
+
 const Exercise = () => {
+    const exercise_list = [
+        {
+            thumbnail: 'https://media.istockphoto.com/id/1132957137/video/woman-doing-lunges-exercise-on-white-background.jpg?s=640x640&k=20&c=c39G5V_c3mpAJgfMZdu5ynVpKYTVWrn1tBb47w6MgkY=',
+            name: "Some name",
+            category: "Yoga",
+        },
+        {
+            thumbnail: 'https://media.istockphoto.com/id/1132957137/video/woman-doing-lunges-exercise-on-white-background.jpg?s=640x640&k=20&c=c39G5V_c3mpAJgfMZdu5ynVpKYTVWrn1tBb47w6MgkY=',
+            name: "Some name",
+            category: "Yoga",
+        },
+        {
+            thumbnail: 'https://media.istockphoto.com/id/1132957137/video/woman-doing-lunges-exercise-on-white-background.jpg?s=640x640&k=20&c=c39G5V_c3mpAJgfMZdu5ynVpKYTVWrn1tBb47w6MgkY=',
+            name: "Some name",
+            category: "Yoga",
+        },
+        {
+            thumbnail: 'https://media.istockphoto.com/id/1132957137/video/woman-doing-lunges-exercise-on-white-background.jpg?s=640x640&k=20&c=c39G5V_c3mpAJgfMZdu5ynVpKYTVWrn1tBb47w6MgkY=',
+            name: "Some name",
+            category: "Yoga",
+        },
+    ]
+
+    const exerciseLayout = (individualExercise: Exercise[]) => {
+        return individualExercise.map((exercise) => {
+                return (
+                    <div className='grid-content'>
+                        <img src={exercise.thumbnail}/>
+                        <p>{exercise.name}</p>
+                        <p>{exercise.category}</p>
+                    </div>
+                )
+            }
+        )
+    }
     return (
         <div className="exercise">
             <img src={weather} className='weather'/>
@@ -41,9 +83,7 @@ const Exercise = () => {
                     <Link to={'/calendar'} className='red-button'>View All Logs</Link>
                 </div>
                 <div className='exercise-grid'>
-                    <img src={exerciseStock}/>
-                    <p>Exercise Name</p>
-                    <p>Category</p>
+                    {exerciseLayout(exercise_list)}
                 </div>
                 <button className='red-button'>See More</button>
             </div>
