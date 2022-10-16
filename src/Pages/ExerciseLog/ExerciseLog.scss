@@ -1,3 +1,61 @@
-.exercise-log{
+.exercise-log {
+  h1 {
+    width: 70%;
+    margin: 0 auto .8em;
+  }
 
+  label {
+    margin: 1em 0;
+    font-weight: 700;
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+  }
+
+  form {
+    padding: 10px 40px;
+  }
+
+  .label-input {
+    display: flex;
+    justify-content: space-between;
+
+    p {
+      text-align: center;
+    }
+  }
+
+  .intensity-icon {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    img {
+      width: 65px;
+    }
+  }
+
+  input {
+    padding: .6em;
+    font-size: 1.2rem;
+    border-radius: 10px;
+    border: 1px solid black;
+    margin: auto 0 auto auto;
+    width: 60%;
+  }
+
+  .intensity {
+    display: flex;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: space-around;
+    margin: 1em 0;
+  }
+
+  .red-button{
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
 }
