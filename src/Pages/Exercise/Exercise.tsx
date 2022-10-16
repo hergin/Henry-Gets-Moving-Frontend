@@ -72,8 +72,8 @@ const Exercise = () => {
                     <p>Keep up the good work!</p>
                 </div>
             </div>
-            <div className='log-exercise'>
-                <Link to={'/log-exercise'} className='red-button'>Log Exercise</Link>
+            <div className='exercise-log'>
+                <Link to={'/exercise-log'} className='red-button'>Log Exercise</Link>
             </div>
             <div className='exercise-content'>
                 <div className='select-link'>
