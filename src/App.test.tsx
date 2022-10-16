@@ -1,9 +1,11 @@
-import React from 'react';
 import { render, screen } from '@testing-library/react';
 import App from './App';
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
-});
+describe ('first react test App.tsx', () => {
+  describe('when displayed on the screen', () => {
+    it('should show the Recipe of the Day text', () => {
+      render(<App />);
+      expect(screen.getByText(/Recipe of the Day/)).toBeInTheDocument();
+    })
+  })
+})
