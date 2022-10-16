@@ -85,7 +85,10 @@ const Exercise = () => {
                 <div className='exercise-grid'>
                     {exerciseLayout(exercise_list)}
                 </div>
-                <button className='red-button'>See More</button>
+                <div className='see-more'>
+                    <button className='red-button'>See More</button>
+                </div>
+
             </div>
             <img src={footerImage} className='footer'/>
         </div>
