@@ -42,8 +42,8 @@ const Recipe = () => {
                 return (
                     <div className='grid-content'>
                         <img src={recipe.thumbnail}/>
-                        <p>{recipe.name}</p>
-                        <p>{recipe.category}</p>
+                        <p className='name'>{recipe.name}</p>
+                        <p className='category'>{recipe.category}</p>
                     </div>
                 )
             }
