@@ -42,8 +42,8 @@ const Exercise = () => {
                 return (
                     <div className='grid-content'>
                         <img src={exercise.thumbnail}/>
-                        <p>{exercise.name}</p>
-                        <p>{exercise.category}</p>
+                        <p className='name'>{exercise.name}</p>
+                        <p className='category'>{exercise.category}</p>
                     </div>
                 )
             }
