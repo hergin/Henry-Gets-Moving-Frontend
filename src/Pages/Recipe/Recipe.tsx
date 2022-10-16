@@ -66,7 +66,7 @@ const Recipe = () => {
                     <select>
                         <option value="" hidden={true}>Category Selection</option>
                     </select>
-                    <input placeholder="Search"/>
+                    <input id='search' placeholder="Search"/>
                 </div>
                 <div className='recipe-grid'>
                     {recipeLayout(recipe_list)}
