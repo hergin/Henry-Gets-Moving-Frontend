@@ -1,0 +1,20 @@
+name: automated unit tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: setup node
+        uses: actions/setup-node@v3
+      - name: install dependencies
+      - run: npm install
+      - name: run tests
+      - run: npm test
