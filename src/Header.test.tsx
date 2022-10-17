@@ -1,7 +1,30 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import App from './App';
 
-describe('header', () => {
+describe('buttons exist',()=>{
+  test('login button exists',()=>{
+    render(<App/>);
+    expect(screen.getByText(/Login/)).toBeInTheDocument();
+  });
+  test('get moving button exists',()=>{
+    render(<App/>);
+    expect(screen.getByText(/Get Moving/)).toBeInTheDocument();
+  });
+  test('eat healthy button exists',()=>{
+    render(<App/>);
+    expect(screen.getByText(/Eat Healthy/)).toBeInTheDocument();
+  });
+  test('games button exists',()=>{
+    render(<App/>);
+    expect(screen.getByText(/Games/)).toBeInTheDocument();
+  });
+  test('about button exists',()=>{
+    render(<App/>)
+    expect(screen.getByText(/About/)).toBeInTheDocument();
+  });
+});
+
+describe('buttons function', () => {
 
   describe('when login button clicked', () => {
     it('should go to the right page', () => {
