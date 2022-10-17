@@ -41,7 +41,7 @@ const Recipe = () => {
         return individualRecipe.map((recipe) => {
                 return (
                     <div className='grid-content'>
-                        <img src={recipe.thumbnail}/>
+                        <Link to={'/individual-recipe'}><img src={recipe.thumbnail}/></Link>
                         <p className='name'>{recipe.name}</p>
                         <p className='category'>{recipe.category}</p>
                     </div>
