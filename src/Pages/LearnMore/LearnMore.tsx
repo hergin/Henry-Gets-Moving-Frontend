@@ -79,7 +79,7 @@ const LearnMore = () => {
             <img src={weather} className='weather'/>
             <div className='diagrams'>
                 <h2>Diagrams</h2>
-                <div className='demo-image'>
+                <div className='diagram-grid'>
                     {diagramLayout(diagram_list)}
                 </div>
             </div>
