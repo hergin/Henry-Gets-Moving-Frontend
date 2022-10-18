@@ -80,7 +80,7 @@ const Exercise = () => {
                     <select>
                         <option value="" hidden={true}>Category Selection</option>
                     </select>
-                    <Link to={'/calendar'} className='red-button'>View All Logs</Link>
+                    <Link to={'/all-logs'} className='red-button'>View All Logs</Link>
                 </div>
                 <div className='exercise-grid'>
                     {exerciseLayout(exercise_list)}
