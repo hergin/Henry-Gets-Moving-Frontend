@@ -13,14 +13,16 @@ const IndividualRecipe = () => {
             <div>
                 <Link to={'/recipes'}><img src={back} alt="<"/>Back</Link>
             </div>
-            <div>
-                <img src={recipeStock}/>
-                <div>
+            <div className='recipe-otd'>
+                <div className='otd-image'>
+                    <img src={recipeStock} alt='Recipe Name'/>
+                </div>
+                <div className='otd-text'>
                     <h2>Recipe of the Day</h2>
                     <p>Cook Time</p>
                 </div>
             </div>
-            <div>
+            <div className='recipe-text'>
                 <p>
                     Ingredients:
                 </p>
