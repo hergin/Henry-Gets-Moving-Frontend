@@ -36,7 +36,7 @@ const About = () => {
                 </div>
                 <div className='links'>
                     <a href={'https://www.youtube.com/channel/UCf5XxC_7PcJx_t5vU9Es2pA'} target={"_blank"} className='yt'>
-                        <img src={youtube} alt='Youtube'/>
+                        <img src={youtube} alt='YouTube'/>
                     </a>
                     <a href={'https://m.facebook.com/profile.php?id=100063703680476&_rdr'} target={"_blank"}>
                         <img src={facebook} alt='Facebook'/>
