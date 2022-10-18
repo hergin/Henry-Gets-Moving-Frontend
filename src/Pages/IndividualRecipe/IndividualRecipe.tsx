@@ -10,10 +10,10 @@ const IndividualRecipe = () => {
     return (
         <div className="individual-recipe">
             <img src={weather} className='weather'/>
-            <div>
+            <div className='back-arrow'>
                 <Link to={'/recipes'}><img src={back} alt="<"/>Back</Link>
             </div>
-            <div className='recipe-otd'>
+            <div className='otd-div'>
                 <div className='otd-image'>
                     <img src={recipeStock} alt='Recipe Name'/>
                 </div>
