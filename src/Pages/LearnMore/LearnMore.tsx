@@ -21,24 +21,24 @@ type Diagram = {
 const LearnMore = () => {
     const demonstration_list = [
         {
-            thumbnail: 'https://www.vegrecipesofindia.com/wp-content/uploads/2016/09/veg-pizza-puffs-recipe-280x280.jpg',
+            thumbnail: 'https://miro.medium.com/max/1024/1*fHAtQWD_4n2eH3zNSRpZPA.jpeg',
             name: "Some name",
             category: "Healthy",
         },
         {
-            thumbnail: 'https://www.vegrecipesofindia.com/wp-content/uploads/2016/09/veg-pizza-puffs-recipe-280x280.jpg',
+            thumbnail: 'https://miro.medium.com/max/1024/1*fHAtQWD_4n2eH3zNSRpZPA.jpeg',
             name: "Some name",
-            category: "Healthy",
+            category: "Food",
         },
         {
-            thumbnail: 'https://www.vegrecipesofindia.com/wp-content/uploads/2016/09/veg-pizza-puffs-recipe-280x280.jpg',
+            thumbnail: 'https://miro.medium.com/max/1024/1*fHAtQWD_4n2eH3zNSRpZPA.jpeg',
             name: "Some name",
-            category: "Healthy",
+            category: "Sugar",
         },
         {
-            thumbnail: 'https://www.vegrecipesofindia.com/wp-content/uploads/2016/09/veg-pizza-puffs-recipe-280x280.jpg',
+            thumbnail: 'https://miro.medium.com/max/1024/1*fHAtQWD_4n2eH3zNSRpZPA.jpeg',
             name: "Some name",
-            category: "Healthy",
+            category: "Science",
         },
     ]
 
@@ -48,9 +48,6 @@ const LearnMore = () => {
         },
         {
             thumbnail: 'https://www.ncagr.gov/agscool/images/pyramid.gif',
-        },
-        {
-            thumbnail: 'http://www.washingtonpost.com/wp-srv/nation/daily/graphics/diet_042005.gif',
         },
     ]
 
