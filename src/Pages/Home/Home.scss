@@ -42,10 +42,30 @@
     }
   }
 
+  .footer-desktop{
+    display: none;
+  }
+
   //Desktop Styling
   @media (min-width: 1050px) {
     .home-content {
       justify-content: space-around;
+    }
+    .otd-div{
+      margin-bottom: 10em;
+    }
+
+    .footer-desktop{
+      display: flex;
+      align-items: center;
+      width: 100%;
+      justify-content: center;
+      bottom: 0;
+      position: fixed;
+    }
+
+    .footer{
+      display: none;
     }
   }
   //Phone Styling
