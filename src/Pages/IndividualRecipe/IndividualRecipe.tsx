@@ -5,10 +5,16 @@ import footerImage from "../../Assets/grass.svg";
 import {Link} from "react-router-dom";
 import back from '../../Assets/BackArrow.svg';
 import recipeStock from '../../Assets/recipeStock.jpg';
+import {Helmet, HelmetProvider} from "react-helmet-async";
 
 const IndividualRecipe = () => {
     return (
         <div className="individual-recipe">
+            <HelmetProvider>
+                <Helmet>
+                    <title>Recipe Name</title>
+                </Helmet>
+            </HelmetProvider>
             <div className='weather-div'>
                 <img src={weather} className='weather' alt={"Weather"}/>
             </div>
