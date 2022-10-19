@@ -3,6 +3,7 @@ import weather from "../../Assets/Weather.svg";
 import footerImage from "../../Assets/grass.svg";
 import React, {useState} from "react";
 import exit from "../../Assets/Exit.svg";
+import {Helmet, HelmetProvider} from "react-helmet-async";
 
 type Demonstration = {
     [key: string]: any;
@@ -76,6 +77,11 @@ const LearnMore = () => {
     }
     return (
         <div className="learn-more">
+            <HelmetProvider>
+                <Helmet>
+                    <title>Learn More</title>
+                </Helmet>
+            </HelmetProvider>
             <div className='weather-div'>
                 <img src={weather} className='weather' alt={"Weather"}/>
             </div>
