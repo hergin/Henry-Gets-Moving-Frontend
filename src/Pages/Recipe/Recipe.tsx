@@ -4,6 +4,7 @@ import recipeStock from "../../Assets/recipeStock.jpg";
 import {Link} from "react-router-dom";
 import footerImage from "../../Assets/grass.svg";
 import React from "react";
+import {Helmet, HelmetProvider} from "react-helmet-async";
 
 type Recipe = {
     [key: string]: any;
@@ -50,6 +51,11 @@ const Recipe = () => {
     }
     return (
         <div className="recipe">
+            <HelmetProvider>
+                <Helmet>
+                    <title>Recipes</title>
+                </Helmet>
+            </HelmetProvider>
             <div className='weather-div'>
                 <img src={weather} className='weather' alt={"Weather"}/>
             </div>
