@@ -5,10 +5,16 @@ import facebook from '../../Assets/FacebookIcon.png';
 import footerImage from "../../Assets/grass.svg";
 import React from "react";
 import weather from "../../Assets/Weather.svg";
+import {Helmet, HelmetProvider} from "react-helmet-async"
 
 const About = () => {
     return (
         <div className="about">
+            <HelmetProvider>
+                <Helmet>
+                    <title>About</title>
+                </Helmet>
+            </HelmetProvider>
             <div className='weather-div'>
                 <img src={weather} className='weather' alt={"Weather"}/>
             </div>
