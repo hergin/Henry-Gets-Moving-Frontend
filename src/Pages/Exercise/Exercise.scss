@@ -165,4 +165,16 @@
       height: 100%;
     }
   }
+  .dbox-name{
+    font-size: 1.4rem;
+    font-weight: 700;
+    justify-content: center;
+    display: flex;
+  }
+
+  .dbox-category{
+    font-size: 1.2rem;
+    justify-content: center;
+    display: flex;
+  }
 }
