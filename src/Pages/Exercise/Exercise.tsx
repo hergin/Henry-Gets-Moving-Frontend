@@ -11,6 +11,7 @@ type Exercise = {
     [key: string]: any;
     thumbnail: string;
     name: string;
+    video_url: string,
     category: string;
 }
 
@@ -18,22 +19,26 @@ const Exercise = () => {
     const exercise_list = [
         {
             thumbnail: 'https://media.istockphoto.com/id/1132957137/video/woman-doing-lunges-exercise-on-white-background.jpg?s=640x640&k=20&c=c39G5V_c3mpAJgfMZdu5ynVpKYTVWrn1tBb47w6MgkY=',
+            video_url: 'https://archive.org/download/Starry_Sky_Time_Lapse/Stars%20H264.mp4',
             name: "Some name",
             category: "Yoga",
         },
         {
             thumbnail: 'https://media.istockphoto.com/id/1132957137/video/woman-doing-lunges-exercise-on-white-background.jpg?s=640x640&k=20&c=c39G5V_c3mpAJgfMZdu5ynVpKYTVWrn1tBb47w6MgkY=',
             name: "Some name",
+            video_url: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
             category: "Yoga",
         },
         {
             thumbnail: 'https://media.istockphoto.com/id/1132957137/video/woman-doing-lunges-exercise-on-white-background.jpg?s=640x640&k=20&c=c39G5V_c3mpAJgfMZdu5ynVpKYTVWrn1tBb47w6MgkY=',
             name: "Some name",
+            video_url: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
             category: "Yoga",
         },
         {
             thumbnail: 'https://media.istockphoto.com/id/1132957137/video/woman-doing-lunges-exercise-on-white-background.jpg?s=640x640&k=20&c=c39G5V_c3mpAJgfMZdu5ynVpKYTVWrn1tBb47w6MgkY=',
             name: "Some name",
+            video_url: '',
             category: "Yoga",
         },
     ]
@@ -43,11 +48,14 @@ const Exercise = () => {
     const exerciseLayout = (individualExercise: Exercise[]) => {
         return individualExercise.map((exercise) => {
                 return (
-                    <div className='grid-content'>
-                        <img src={exercise.thumbnail} onClick={event => (setSelectedExercise(exercise))}/>
-                        <p className='name'>{exercise.name}</p>
-                        <p className='category'>{exercise.category}</p>
-                    </div>
+                    <>
+                        <div className='grid-content'>
+                            <img src={exercise.thumbnail} onClick={event => (setSelectedExercise(exercise))}/>
+                            <p className='name'>{exercise.name}</p>
+                            <p className='category'>{exercise.category}</p>
+                        </div>
+
+                    </>
                 )
             }
         )
@@ -98,15 +106,18 @@ const Exercise = () => {
                         <div className='episode-player'>
                             <div className='video-player'>
                                 <iframe
-                                    src="https://archive.org/download/Starry_Sky_Time_Lapse/Stars%20H264.mp4"
+                                    src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
                                     frameBorder="0" allow="autoplay; fullscreen; picture-in-picture"
                                     allowFullScreen
                                 />
                             </div>
                         </div>
-                        <div className='episode-text'>
-                            <p className='episode-number'>{selectedExercise.name}</p>
-                            <p className='episode-title'>{selectedExercise.category}</p>
+                        <div className='exercise-text'>
+                            <p className='dbox-name'>{selectedExercise.name}</p>
+                            <p className='dbox-category'>{selectedExercise.category}</p>
+                        </div>
+                        <div>
+                        {/*TODO Add picture of henry here*/}
                         </div>
                         <img src={footerImage} className='footer'/>
                     </div>
@@ -116,7 +127,6 @@ const Exercise = () => {
                 <div className='see-more'>
                     <button className='red-button'>See More</button>
                 </div>
-
             </div>
             <img src={footerImage} className='footer'/>
         </div>
