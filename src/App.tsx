@@ -12,7 +12,7 @@ import LearnMore from "./Pages/LearnMore/LearnMore";
 import Login from "./Pages/Login/Login";
 import Recipe from "./Pages/Recipe/Recipe";
 import Register from "./Pages/Register/Register";
-import './App.css';
+import './App.scss';
 
 function App() {
   return (
