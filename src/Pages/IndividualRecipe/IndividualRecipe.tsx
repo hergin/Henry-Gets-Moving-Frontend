@@ -6,6 +6,7 @@ import {Link} from "react-router-dom";
 import back from '../../Assets/BackArrow.svg';
 import recipeStock from '../../Assets/recipeStock.jpg';
 import {Helmet, HelmetProvider} from "react-helmet-async";
+import grassDesktop from "../../Assets/grassDesktop.svg";
 
 const IndividualRecipe = () => {
     return (
@@ -43,6 +44,7 @@ const IndividualRecipe = () => {
                 </p>
             </div>
             <img src={footerImage} className='footer' alt={"Grass"}/>
+            <img src={grassDesktop} className='footer-desktop' alt={"Grass"}/>
         </div>
     )
 }

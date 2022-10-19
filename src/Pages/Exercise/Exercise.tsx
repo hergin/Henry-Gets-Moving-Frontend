@@ -7,6 +7,7 @@ import footerImage from "../../Assets/grass.svg";
 import {Link} from "react-router-dom";
 import exit from '../../Assets/Exit.svg';
 import {Helmet, HelmetProvider} from "react-helmet-async";
+import grassDesktop from "../../Assets/grassDesktop.svg";
 
 type Exercise = {
     [key: string]: any;
@@ -137,6 +138,7 @@ const Exercise = () => {
                 </div>
             </div>
             <img src={footerImage} className='footer' alt={"Grass"}/>
+            <img src={grassDesktop} className='footer-desktop' alt={"Grass"}/>
         </div>
     )
 }

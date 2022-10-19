@@ -7,6 +7,7 @@ import light from '../../Assets/lightIntensityFace.svg';
 import medium from '../../Assets/mediumIntensityFace.svg';
 import hard from '../../Assets/intenseIntensityFace.svg';
 import {Helmet, HelmetProvider} from "react-helmet-async";
+import grassDesktop from "../../Assets/grassDesktop.svg";
 
 const ExerciseLog = () => {
     return (
@@ -58,6 +59,7 @@ const ExerciseLog = () => {
                 <img src={swings} alt={"Henry and Jasmine on Swings"}/>
             </div>
             <img src={footerImage} className='footer' alt={"Grass"}/>
+            <img src={grassDesktop} className='footer-desktop' alt={"Grass"}/>
         </div>
     )
 }

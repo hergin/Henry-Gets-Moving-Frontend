@@ -5,6 +5,7 @@ import footerImage from "../../Assets/grass.svg";
 import React from "react";
 import weather from "../../Assets/Weather.svg";
 import {Helmet, HelmetProvider} from "react-helmet-async";
+import grassDesktop from "../../Assets/grassDesktop.svg";
 
 const Login = () => {
     return (
@@ -32,6 +33,7 @@ const Login = () => {
                 <img src={swings} alt={"Henry and Jasmine on Swings"}/>
             </div>
             <img src={footerImage} className='footer' alt={"Grass"}/>
+            <img src={grassDesktop} className='footer-desktop' alt={"Grass"}/>
         </div>
     )
 }

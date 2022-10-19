@@ -3,9 +3,11 @@ import teamPhoto from '../../Assets/HGMteam.jpg';
 import youtube from '../../Assets/YoutubeIcon.png';
 import facebook from '../../Assets/FacebookIcon.png';
 import footerImage from "../../Assets/grass.svg";
+import grassDesktop from '../../Assets/grassDesktop.svg';
 import React from "react";
 import weather from "../../Assets/Weather.svg";
 import {Helmet, HelmetProvider} from "react-helmet-async"
+import footerDesktopImage from "../../Assets/HomeFooterDesktop.png";
 
 const About = () => {
     return (
@@ -52,6 +54,7 @@ const About = () => {
                 </div>
             </div>
             <img src={footerImage} className='footer' alt={"Grass"}/>
+            <img src={grassDesktop} className='footer-desktop' alt={"Grass"}/>
         </div>
     )
 }

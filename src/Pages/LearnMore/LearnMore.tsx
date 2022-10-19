@@ -4,6 +4,7 @@ import footerImage from "../../Assets/grass.svg";
 import React, {useState} from "react";
 import exit from "../../Assets/Exit.svg";
 import {Helmet, HelmetProvider} from "react-helmet-async";
+import grassDesktop from "../../Assets/grassDesktop.svg";
 
 type Demonstration = {
     [key: string]: any;
@@ -131,6 +132,7 @@ const LearnMore = () => {
                 </div>
             </div>
             <img src={footerImage} className='footer' alt={"Grass"}/>
+            <img src={grassDesktop} className='footer-desktop' alt={"Grass"}/>
         </div>
     )
 }
