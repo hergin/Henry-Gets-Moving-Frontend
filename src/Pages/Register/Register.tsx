@@ -1,5 +1,4 @@
 import './Register.scss';
-import {Link} from "react-router-dom";
 import swings from "../../Assets/Swings.png";
 import footerImage from "../../Assets/grass.svg";
 import React from "react";
@@ -9,7 +8,7 @@ const Register = () => {
     return (
         <div className="register">
             <div className='weather-div'>
-                <img src={weather} className='weather'/>
+                <img src={weather} className='weather' alt={"Weather"}/>
             </div>
             <h1>Register</h1>
             <form>
@@ -24,9 +23,9 @@ const Register = () => {
                 </div>
             </form>
             <div className='swings'>
-                <img src={swings}/>
+                <img src={swings} alt={"Henry and Jasmine on Swings"}/>
             </div>
-            <img src={footerImage} className='footer'/>
+            <img src={footerImage} className='footer' alt={"Grass"}/>
         </div>
     )
 }

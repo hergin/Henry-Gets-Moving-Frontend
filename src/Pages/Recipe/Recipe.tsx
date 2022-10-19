@@ -1,7 +1,6 @@
 import './Recipe.scss';
 import weather from "../../Assets/Weather.svg";
 import recipeStock from "../../Assets/recipeStock.jpg";
-import trophy from "../../Assets/40mins.svg";
 import {Link} from "react-router-dom";
 import footerImage from "../../Assets/grass.svg";
 import React from "react";
@@ -41,7 +40,7 @@ const Recipe = () => {
         return individualRecipe.map((recipe) => {
                 return (
                     <div className='grid-content'>
-                        <Link to={'/individual-recipe'}><img src={recipe.thumbnail}/></Link>
+                        <Link to={'/individual-recipe'}><img src={recipe.thumbnail} alt={recipe.name + "Thumbnail"}/></Link>
                         <p className='name'>{recipe.name}</p>
                         <p className='category'>{recipe.category}</p>
                     </div>
@@ -52,11 +51,11 @@ const Recipe = () => {
     return (
         <div className="recipe">
             <div className='weather-div'>
-                <img src={weather} className='weather'/>
+                <img src={weather} className='weather' alt={"Weather"}/>
             </div>
             <div className='otd-div'>
                 <div className='otd-image'>
-                    <img src={recipeStock}/>
+                    <img src={recipeStock} alt={"OTD Thumbnail"}/>
                 </div>
                 <div className='otd-text'>
                     <h2>Recipe of the Day</h2>
@@ -77,7 +76,7 @@ const Recipe = () => {
                     <button className='red-button'>See More</button>
                 </div>
             </div>
-            <img src={footerImage} className='footer'/>
+            <img src={footerImage} className='footer' alt={"Grass"}/>
         </div>
     )
 }

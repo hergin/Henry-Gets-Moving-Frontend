@@ -10,7 +10,7 @@ const IndividualRecipe = () => {
     return (
         <div className="individual-recipe">
             <div className='weather-div'>
-                <img src={weather} className='weather'/>
+                <img src={weather} className='weather' alt={"Weather"}/>
             </div>
             <div className='back-arrow'>
                 <Link to={'/recipes'}><img src={back} alt="<"/>Back</Link>
@@ -36,7 +36,7 @@ const IndividualRecipe = () => {
                     culpa qui officia deserunt mollit anim id est laborum.
                 </p>
             </div>
-            <img src={footerImage} className='footer'/>
+            <img src={footerImage} className='footer' alt={"Grass"}/>
         </div>
     )
 }

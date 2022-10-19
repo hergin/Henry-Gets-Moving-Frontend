@@ -50,7 +50,7 @@ const Exercise = () => {
                 return (
                     <>
                         <div className='grid-content'>
-                            <img src={exercise.thumbnail} onClick={event => (setSelectedExercise(exercise))}/>
+                            <img src={exercise.thumbnail} onClick={e => (setSelectedExercise(exercise))} alt={exercise.name + "Thumbnail"}/>
                             <p className='name'>{exercise.name}</p>
                             <p className='category'>{exercise.category}</p>
                         </div>
@@ -63,11 +63,11 @@ const Exercise = () => {
     return (
         <div className="exercise">
             <div className='weather-div'>
-                <img src={weather} className='weather'/>
+                <img src={weather} className='weather' alt={"Weather"}/>
             </div>
             <div className='otd-div'>
                 <div className='otd-image'>
-                    <img src={exerciseStock}/>
+                    <img src={exerciseStock} alt={"OTD Thumbnail"}/>
                 </div>
                 <div className='otd-text'>
                     <h2>Exercise of the Day</h2>
@@ -76,7 +76,7 @@ const Exercise = () => {
             </div>
             <div className='trophy-div'>
                 <div className='trophy-image'>
-                    <img src={trophy}/>
+                    <img src={trophy} alt={"Trophy"}/>
                 </div>
                 <div className='trophy-text'>
                     <p>You Have Logged</p>
@@ -101,7 +101,7 @@ const Exercise = () => {
                 {selectedExercise &&
                 <div className='dialog-box'>
                     <div className='background-color'>
-                        <img className='weather' src={weather}/>
+                        <img className='weather' src={weather} alt={"Weather"}/>
                         <div className='exit-button'>
                             <img src={exit} alt='Exit' onClick={e => (setSelectedExercise(null))}/>
                         </div>
@@ -121,7 +121,7 @@ const Exercise = () => {
                         <div>
                         {/*TODO Add picture of henry here*/}
                         </div>
-                        <img src={footerImage} className='footer'/>
+                        <img src={footerImage} className='footer' alt={"Grass"}/>
                     </div>
                     <div className='background'/>
                 </div>
@@ -130,7 +130,7 @@ const Exercise = () => {
                     <button className='red-button'>See More</button>
                 </div>
             </div>
-            <img src={footerImage} className='footer'/>
+            <img src={footerImage} className='footer' alt={"Grass"}/>
         </div>
     )
 }

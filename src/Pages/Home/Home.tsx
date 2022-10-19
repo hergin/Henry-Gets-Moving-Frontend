@@ -4,7 +4,6 @@ import {Link} from "react-router-dom";
 import recipeImage from '../../Assets/recipeStock.jpg';
 import exerciseImage from '../../Assets/exerciseStock.jpg';
 import React from "react";
-// import footerImage from "../../Assets/HomeFooter.png";
 import footerImage from "../../Assets/grass.svg";
 import weather from '../../Assets/Weather.svg';
 
@@ -16,7 +15,7 @@ const Home = () => {
             </div>
             <div className='home-content'>
                 <div className='weather-div'>
-                    <img src={weather} className='weather'/>
+                    <img src={weather} className='weather' alt={"Weather"}/>
                 </div>
                <div className='otd-div'>
                    <div className='of-the-day'>
@@ -31,7 +30,7 @@ const Home = () => {
                    </div>
                </div>
             </div>
-            <img src={footerImage} className='footer'/>
+            <img src={footerImage} className='footer' alt={"Grass"}/>
         </div>
     )
 }

@@ -10,10 +10,10 @@ const About = () => {
     return (
         <div className="about">
             <div className='weather-div'>
-                <img src={weather} className='weather'/>
+                <img src={weather} className='weather' alt={"Weather"}/>
             </div>
             <div className='team-photo'>
-                <img src={teamPhoto}/>
+                <img src={teamPhoto} alt={"Henry Gets Moving Team"}/>
             </div>
             <div className='content'>
                 <h1>Henry Gets Moving Team</h1>
@@ -45,7 +45,7 @@ const About = () => {
                     </a>
                 </div>
             </div>
-            <img src={footerImage} className='footer'/>
+            <img src={footerImage} className='footer' alt={"Grass"}/>
         </div>
     )
 }

@@ -11,7 +11,7 @@ const ExerciseLog = () => {
     return (
         <div className="exercise-log">
             <div className='weather-div'>
-                <img src={weather} className='weather'/>
+                <img src={weather} className='weather' alt={"Weather"}/>
             </div>
             <h1>Exercise Log</h1>
             <form>
@@ -27,15 +27,15 @@ const ExerciseLog = () => {
                     <div className='intensity label-input'>
                         <label>Intensity</label>
                         <div className='intensity-icon'>
-                            <img src={light}/>
+                            <img src={light} alt={"Light Intensity"}/>
                             <p>Light</p>
                         </div>
                         <div className='intensity-icon'>
-                            <img src={medium}/>
+                            <img src={medium} alt={"Moderate Intensity"}/>
                             <p>Moderate</p>
                         </div>
                         <div className='intensity-icon'>
-                            <img src={hard}/>
+                            <img src={hard} alt={"Vigorous Intensity"}/>
                             <p>Vigorous</p>
                         </div>
                     </div>
@@ -49,9 +49,9 @@ const ExerciseLog = () => {
                 </div>
             </form>
             <div className='swings'>
-                <img src={swings}/>
+                <img src={swings} alt={"Henry and Jasmine on Swings"}/>
             </div>
-            <img src={footerImage} className='footer'/>
+            <img src={footerImage} className='footer' alt={"Grass"}/>
         </div>
     )
 }

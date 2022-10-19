@@ -9,7 +9,7 @@ const Login = () => {
     return (
         <div className="login">
             <div className='weather-div'>
-                <img src={weather} className='weather'/>
+                <img src={weather} className='weather' alt={"Weather"}/>
             </div>
             <h1>Login</h1>
             <form>
@@ -23,9 +23,9 @@ const Login = () => {
                 </div>
             </form>
             <div className='swings'>
-                <img src={swings}/>
+                <img src={swings} alt={"Henry and Jasmine on Swings"}/>
             </div>
-            <img src={footerImage} className='footer'/>
+            <img src={footerImage} className='footer' alt={"Grass"}/>
         </div>
     )
 }

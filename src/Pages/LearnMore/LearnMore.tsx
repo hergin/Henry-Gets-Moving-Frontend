@@ -1,11 +1,8 @@
 import './LearnMore.scss';
-import {Link} from "react-router-dom";
 import weather from "../../Assets/Weather.svg";
-import recipeStock from "../../Assets/recipeStock.jpg";
 import footerImage from "../../Assets/grass.svg";
 import React, {useState} from "react";
 import exit from "../../Assets/Exit.svg";
-import Exercise from "../Exercise/Exercise";
 
 type Demonstration = {
     [key: string]: any;
@@ -16,9 +13,8 @@ type Demonstration = {
 
 type Diagram = {
     [key: string]: any;
-    thumbnail: string;
+    diagram: string;
 }
-
 
 const LearnMore = () => {
     const demonstration_list = [
@@ -46,10 +42,10 @@ const LearnMore = () => {
 
     const diagram_list = [
         {
-            thumbnail: 'https://myplate-prod.azureedge.us/sites/default/files/styles/medium/public/2020-11/myplate-brand--labelled.png?itok=7VtFXcBC',
+            diagram: 'https://myplate-prod.azureedge.us/sites/default/files/styles/medium/public/2020-11/myplate-brand--labelled.png?itok=7VtFXcBC',
         },
         {
-            thumbnail: 'https://www.ncagr.gov/agscool/images/pyramid.gif',
+            diagram: 'https://www.ncagr.gov/agscool/images/pyramid.gif',
         },
     ]
 
@@ -59,7 +55,7 @@ const LearnMore = () => {
         return individualDemo.map((demo) => {
                 return (
                     <div className='grid-content'>
-                       <img src={demo.thumbnail} onClick={event => (setSelectedDemo(demo))}/>
+                       <img src={demo.thumbnail} onClick={e => (setSelectedDemo(demo))} alt={demo.name + "Thumbnail"}/>
                         <p className='name'>{demo.name}</p>
                         <p className='category'>{demo.category}</p>
                     </div>
@@ -72,7 +68,7 @@ const LearnMore = () => {
         return individualDiagram.map((diagram) => {
                 return (
                     <div className='content'>
-                        <img src={diagram.thumbnail}/>
+                        <img src={diagram.diagram} alt={"Diagram"}/>
                     </div>
                 )
             }
@@ -81,7 +77,7 @@ const LearnMore = () => {
     return (
         <div className="learn-more">
             <div className='weather-div'>
-                <img src={weather} className='weather'/>
+                <img src={weather} className='weather' alt={"Weather"}/>
             </div>
             <div className='diagrams'>
                 <h2>Diagrams</h2>
@@ -103,7 +99,7 @@ const LearnMore = () => {
                 {selectedDemo &&
                 <div className='dialog-box'>
                     <div className='background-color'>
-                        <img className='weather' src={weather}/>
+                        <img className='weather' src={weather} alt={"Weather"}/>
                         <div className='exit-button'>
                             <img src={exit} alt='Exit' onClick={e => (setSelectedDemo(null))}/>
                         </div>
@@ -119,7 +115,7 @@ const LearnMore = () => {
                         <div>
                             {/*TODO Add picture of henry here*/}
                         </div>
-                        <img src={footerImage} className='footer'/>
+                        <img src={footerImage} className='footer' alt={"Grass"}/>
                     </div>
                     <div className='background'/>
                 </div>
@@ -128,7 +124,7 @@ const LearnMore = () => {
                     <button className='red-button'>See More</button>
                 </div>
             </div>
-            <img src={footerImage} className='footer'/>
+            <img src={footerImage} className='footer' alt={"Grass"}/>
         </div>
     )
 }
