@@ -6,10 +6,16 @@ import exerciseImage from '../../Assets/exerciseStock.jpg';
 import React from "react";
 import footerImage from "../../Assets/grass.svg";
 import weather from '../../Assets/Weather.svg';
+import {Helmet, HelmetProvider} from "react-helmet-async";
 
 const Home = () => {
     return (
         <div className="home">
+            <HelmetProvider>
+                <Helmet>
+                    <title>Henry Gets Moving</title>
+                </Helmet>
+            </HelmetProvider>
             <div className='book-container'>
                 <img src={homePhoto} alt="Henry Gets Moving"/>
             </div>
