@@ -6,10 +6,16 @@ import React from "react";
 import light from '../../Assets/lightIntensityFace.svg';
 import medium from '../../Assets/mediumIntensityFace.svg';
 import hard from '../../Assets/intenseIntensityFace.svg';
+import {Helmet, HelmetProvider} from "react-helmet-async";
 
 const ExerciseLog = () => {
     return (
         <div className="exercise-log">
+            <HelmetProvider>
+                <Helmet>
+                    <title>Log Exercise</title>
+                </Helmet>
+            </HelmetProvider>
             <div className='weather-div'>
                 <img src={weather} className='weather' alt={"Weather"}/>
             </div>
