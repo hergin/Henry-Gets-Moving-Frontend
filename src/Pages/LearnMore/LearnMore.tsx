@@ -80,7 +80,9 @@ const LearnMore = () => {
     }
     return (
         <div className="learn-more">
-            <img src={weather} className='weather'/>
+            <div className='weather-div'>
+                <img src={weather} className='weather'/>
+            </div>
             <div className='diagrams'>
                 <h2>Diagrams</h2>
                 <div className='diagram-grid'>

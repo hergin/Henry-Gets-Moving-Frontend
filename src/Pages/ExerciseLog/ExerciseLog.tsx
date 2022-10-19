@@ -10,7 +10,9 @@ import hard from '../../Assets/intenseIntensityFace.svg';
 const ExerciseLog = () => {
     return (
         <div className="exercise-log">
-            <img src={weather} className='weather'/>
+            <div className='weather-div'>
+                <img src={weather} className='weather'/>
+            </div>
             <h1>Exercise Log</h1>
             <form>
                 <div className='log-input'>

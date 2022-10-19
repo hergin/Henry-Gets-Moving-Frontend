@@ -8,7 +8,9 @@ import weather from "../../Assets/Weather.svg";
 const Register = () => {
     return (
         <div className="register">
-            <img src={weather} className='weather'/>
+            <div className='weather-div'>
+                <img src={weather} className='weather'/>
+            </div>
             <h1>Register</h1>
             <form>
                 <div className='email-input'>

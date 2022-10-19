@@ -62,7 +62,9 @@ const Exercise = () => {
     }
     return (
         <div className="exercise">
-            <img src={weather} className='weather'/>
+            <div className='weather-div'>
+                <img src={weather} className='weather'/>
+            </div>
             <div className='otd-div'>
                 <div className='otd-image'>
                     <img src={exerciseStock}/>

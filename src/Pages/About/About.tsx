@@ -9,7 +9,9 @@ import weather from "../../Assets/Weather.svg";
 const About = () => {
     return (
         <div className="about">
-            <img src={weather} className='weather'/>
+            <div className='weather-div'>
+                <img src={weather} className='weather'/>
+            </div>
             <div className='team-photo'>
                 <img src={teamPhoto}/>
             </div>

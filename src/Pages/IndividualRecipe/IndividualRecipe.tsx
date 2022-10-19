@@ -9,7 +9,9 @@ import recipeStock from '../../Assets/recipeStock.jpg';
 const IndividualRecipe = () => {
     return (
         <div className="individual-recipe">
-            <img src={weather} className='weather'/>
+            <div className='weather-div'>
+                <img src={weather} className='weather'/>
+            </div>
             <div className='back-arrow'>
                 <Link to={'/recipes'}><img src={back} alt="<"/>Back</Link>
             </div>

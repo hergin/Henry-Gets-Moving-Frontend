@@ -51,7 +51,9 @@ const Recipe = () => {
     }
     return (
         <div className="recipe">
-            <img src={weather} className='weather'/>
+            <div className='weather-div'>
+                <img src={weather} className='weather'/>
+            </div>
             <div className='otd-div'>
                 <div className='otd-image'>
                     <img src={recipeStock}/>

@@ -15,7 +15,7 @@ const Home = () => {
                 <img src={homePhoto} alt="Henry Gets Moving"/>
             </div>
             <div className='home-content'>
-                <div className='weather-header'>
+                <div className='weather-div'>
                     <img src={weather} className='weather'/>
                 </div>
                <div className='otd-div'>
