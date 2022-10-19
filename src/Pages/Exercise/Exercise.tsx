@@ -6,6 +6,7 @@ import React, {useState} from "react";
 import footerImage from "../../Assets/grass.svg";
 import {Link} from "react-router-dom";
 import exit from '../../Assets/Exit.svg';
+import {Helmet, HelmetProvider} from "react-helmet-async";
 
 type Exercise = {
     [key: string]: any;
@@ -62,6 +63,11 @@ const Exercise = () => {
     }
     return (
         <div className="exercise">
+            <HelmetProvider>
+                <Helmet>
+                    <title>Get Moving</title>
+                </Helmet>
+            </HelmetProvider>
             <div className='weather-div'>
                 <img src={weather} className='weather' alt={"Weather"}/>
             </div>
