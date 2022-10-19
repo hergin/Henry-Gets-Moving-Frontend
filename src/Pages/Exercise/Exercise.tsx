@@ -2,9 +2,10 @@ import './Exercise.scss';
 import exerciseStock from '../../Assets/exerciseStock.jpg'
 import trophy from '../../Assets/40mins.svg'
 import weather from "../../Assets/Weather.svg";
-import React from "react";
+import React, {useState} from "react";
 import footerImage from "../../Assets/grass.svg";
 import {Link} from "react-router-dom";
+import exit from '../../Assets/Exit.svg';
 
 type Exercise = {
     [key: string]: any;
@@ -37,11 +38,13 @@ const Exercise = () => {
         },
     ]
 
+    const [selectedExercise, setSelectedExercise] = useState<null | Exercise>(null);
+
     const exerciseLayout = (individualExercise: Exercise[]) => {
         return individualExercise.map((exercise) => {
                 return (
                     <div className='grid-content'>
-                        <img src={exercise.thumbnail}/>
+                        <img src={exercise.thumbnail} onClick={event => (setSelectedExercise(exercise))}/>
                         <p className='name'>{exercise.name}</p>
                         <p className='category'>{exercise.category}</p>
                     </div>
@@ -85,6 +88,31 @@ const Exercise = () => {
                 <div className='exercise-grid'>
                     {exerciseLayout(exercise_list)}
                 </div>
+                {selectedExercise &&
+                <div className='dialog-box'>
+                    <div className='background-color'>
+                        <img className='weather' src={weather}/>
+                        <div className='exit-button'>
+                            <img src={exit} alt='Exit' onClick={e => (setSelectedExercise(null))}/>
+                        </div>
+                        <div className='episode-player'>
+                            <div className='video-player'>
+                                <iframe
+                                    src="https://archive.org/download/Starry_Sky_Time_Lapse/Stars%20H264.mp4"
+                                    frameBorder="0" allow="autoplay; fullscreen; picture-in-picture"
+                                    allowFullScreen
+                                />
+                            </div>
+                        </div>
+                        <div className='episode-text'>
+                            <p className='episode-number'>{selectedExercise.name}</p>
+                            <p className='episode-title'>{selectedExercise.category}</p>
+                        </div>
+                        <img src={footerImage} className='footer'/>
+                    </div>
+                    <div className='background'/>
+                </div>
+                }
                 <div className='see-more'>
                     <button className='red-button'>See More</button>
                 </div>
