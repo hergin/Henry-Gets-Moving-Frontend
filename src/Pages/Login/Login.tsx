@@ -4,10 +4,16 @@ import swings from '../../Assets/Swings.png';
 import footerImage from "../../Assets/grass.svg";
 import React from "react";
 import weather from "../../Assets/Weather.svg";
+import {Helmet, HelmetProvider} from "react-helmet-async";
 
 const Login = () => {
     return (
         <div className="login">
+            <HelmetProvider>
+                <Helmet>
+                    <title>Login</title>
+                </Helmet>
+            </HelmetProvider>
             <div className='weather-div'>
                 <img src={weather} className='weather' alt={"Weather"}/>
             </div>
