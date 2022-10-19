@@ -3,7 +3,9 @@ import {Link} from "react-router-dom";
 import weather from "../../Assets/Weather.svg";
 import recipeStock from "../../Assets/recipeStock.jpg";
 import footerImage from "../../Assets/grass.svg";
-import React from "react";
+import React, {useState} from "react";
+import exit from "../../Assets/Exit.svg";
+import Exercise from "../Exercise/Exercise";
 
 type Demonstration = {
     [key: string]: any;
@@ -51,11 +53,13 @@ const LearnMore = () => {
         },
     ]
 
+    const [selectedDemo, setSelectedDemo] = useState<null | Demonstration>(null);
+
     const demoLayout = (individualDemo: Demonstration[]) => {
         return individualDemo.map((demo) => {
                 return (
                     <div className='grid-content'>
-                       <img src={demo.thumbnail}/>
+                       <img src={demo.thumbnail} onClick={event => (setSelectedDemo(demo))}/>
                         <p className='name'>{demo.name}</p>
                         <p className='category'>{demo.category}</p>
                     </div>
@@ -94,6 +98,30 @@ const LearnMore = () => {
                 <div className='demo-grid'>
                     {demoLayout(demonstration_list)}
                 </div>
+                {selectedDemo &&
+                <div className='dialog-box'>
+                    <div className='background-color'>
+                        <img className='weather' src={weather}/>
+                        <div className='exit-button'>
+                            <img src={exit} alt='Exit' onClick={e => (setSelectedDemo(null))}/>
+                        </div>
+                        <div className='episode-player'>
+                            <div className='video-player'>
+                                <iframe
+                                    src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+                                    frameBorder="0" allow="autoplay; fullscreen; picture-in-picture"
+                                    allowFullScreen
+                                />
+                            </div>
+                        </div>
+                        <div>
+                            {/*TODO Add picture of henry here*/}
+                        </div>
+                        <img src={footerImage} className='footer'/>
+                    </div>
+                    <div className='background'/>
+                </div>
+                }
                 <div className='see-more'>
                     <button className='red-button'>See More</button>
                 </div>
