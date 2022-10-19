@@ -2,7 +2,8 @@
   .team-photo {
     width: 60%;
     margin: auto;
-    img{
+
+    img {
       box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
     }
   }
@@ -44,7 +45,26 @@
 
   //Desktop Styling
   @media (min-width: 1050px) {
+    .team-photo {
+      width: 40%;
+    }
 
+    .content{
+      width: 70%;
+      p{
+        font-size: 1.4rem;
+        line-height: 1.5;
+      }
+
+      h1{
+        font-size: 2.2rem;
+      }
+    }
+
+    .links {
+      width: 15%;
+      padding-bottom: 5em;
+    }
   }
   //Phone Styling
   @media (max-width: 750px) {
