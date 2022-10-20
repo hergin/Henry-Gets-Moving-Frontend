@@ -7,6 +7,8 @@ import {Helmet, HelmetProvider} from "react-helmet-async";
 import grassDesktop from "../../Assets/grassDesktop.svg";
 import weatherDialog from "../../Assets/WeatherDialog.svg";
 import weatherMobile from "../../Assets/WeatherMobile.svg";
+import Grass from "../../Components/Grass";
+import Weather from "../../Components/Weather";
 
 type Demonstration = {
     [key: string]: any;
@@ -85,9 +87,7 @@ const LearnMore = () => {
                     <title>Learn More</title>
                 </Helmet>
             </HelmetProvider>
-            <div className='weather-div'>
-                <img src={weather} className='weather' alt={"Weather"}/>
-            </div>
+           <Weather/>
             <div className='diagrams'>
                 <h2>Diagrams</h2>
                 <div className='diagram-grid'>
@@ -135,8 +135,7 @@ const LearnMore = () => {
                     <button className='red-button'>See More</button>
                 </div>
             </div>
-            <img src={footerImage} className='footer' alt={"Grass"}/>
-            <img src={grassDesktop} className='footer-desktop' alt={"Grass"}/>
+          <Grass/>
         </div>
     )
 }
