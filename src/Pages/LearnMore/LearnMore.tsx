@@ -5,6 +5,7 @@ import React, {useState} from "react";
 import exit from "../../Assets/Exit.svg";
 import {Helmet, HelmetProvider} from "react-helmet-async";
 import grassDesktop from "../../Assets/grassDesktop.svg";
+import weatherDialog from "../../Assets/WeatherDialog.svg";
 
 type Demonstration = {
     [key: string]: any;
@@ -106,7 +107,7 @@ const LearnMore = () => {
                 {selectedDemo &&
                 <div className='dialog-box'>
                     <div className='background-color'>
-                        <img className='weather' src={weather} alt={"Weather"}/>
+                        <img className='weather' src={weatherDialog} alt={"Weather"}/>
                         <div className='exit-button'>
                             <img src={exit} alt='Exit' onClick={e => (setSelectedDemo(null))}/>
                         </div>
