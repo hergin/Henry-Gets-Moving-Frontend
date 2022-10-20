@@ -92,7 +92,10 @@
 
   //Desktop Styling
   @media (min-width: 1050px) {
-
+    .episode-player {
+      width: 50%;
+      margin: 0 auto;
+    }
   }
   //Phone Styling
   @media (max-width: 750px) {
