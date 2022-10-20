@@ -10,6 +10,8 @@ import exit from '../../Assets/Exit.svg';
 import {Helmet, HelmetProvider} from "react-helmet-async";
 import grassDesktop from "../../Assets/grassDesktop.svg";
 import weatherMobile from "../../Assets/WeatherMobile.svg";
+import Grass from "../../Components/Grass";
+import Weather from "../../Components/Weather";
 
 type Exercise = {
     [key: string]: any;
@@ -72,10 +74,7 @@ const Exercise = () => {
                     <title>Get Moving</title>
                 </Helmet>
             </HelmetProvider>
-            <div className='weather-div'>
-                <img src={weather} className='weather' alt={"Weather"}/>
-                <img src={weatherMobile} className='weather-mobile' alt={"Weather"}/>
-            </div>
+           <Weather/>
             <div className='otd-div'>
                 <div className='otd-image'>
                     <img src={exerciseStock} alt={"OTD Thumbnail"}/>
@@ -137,8 +136,7 @@ const Exercise = () => {
                         <div>
                             {/*TODO Add picture of henry here*/}
                         </div>
-                        <img src={footerImage} className='footer' alt={"Grass"}/>
-                        <img src={grassDesktop} className='footer-desktop' alt={"Grass"}/>
+                      <Grass/>
                     </div>
                     <div className='background'/>
                 </div>
