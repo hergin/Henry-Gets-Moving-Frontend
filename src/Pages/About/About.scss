@@ -68,7 +68,18 @@
   }
   //Phone Styling
   @media (max-width: 750px) {
-
+    .content{
+      width: 90%;
+    }
+    h1{
+      font-size: 1.8rem;
+    }
+    p{
+      font-size: 1.2rem;
+    }
+    .links{
+      width: 30%;
+      padding-bottom: 2em;
+    }
   }
-
 }
