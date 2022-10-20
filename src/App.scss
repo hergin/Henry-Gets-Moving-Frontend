@@ -170,6 +170,14 @@ form {
     .weather{
         display: none;
     }
+
+    .grid-content{
+        width: 45%;
+        p{
+           display: flex;
+            justify-content: center;
+        }
+    }
 }
 
 
