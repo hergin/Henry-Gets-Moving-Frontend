@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import {Route, Routes} from "react-router-dom";
 import Header from '../src/Components/Header/Header';
 import About from "./Pages/About/About";
 import Calendar from "./Pages/Calendar/Calendar";
