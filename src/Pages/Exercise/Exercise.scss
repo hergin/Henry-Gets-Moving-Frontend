@@ -153,23 +153,25 @@
   @media (max-width: 750px) {
     .otd-div {
       flex-direction: column;
-      img{
+
+      img {
         margin-right: 0;
       }
     }
-    .otd-image{
+    .otd-image {
       justify-content: center;
       display: flex;
     }
-  }
-  .trophy-div{
-    flex-direction: column;
-    margin: 1em auto;
-  }
-  .trophy-image{
-    justify-content: center;
-  }
-  .exercise-log{
-    margin-bottom: 2em;
+
+    .trophy-div {
+      flex-direction: column;
+      margin: 1em auto;
+    }
+    .trophy-image {
+      justify-content: center;
+    }
+    .exercise-log {
+      margin-bottom: 2em;
+    }
   }
 }
