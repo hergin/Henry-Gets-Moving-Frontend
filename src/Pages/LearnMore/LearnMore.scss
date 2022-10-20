@@ -75,25 +75,6 @@
     }
   }
 
-  .grid-content {
-    width: 30%;
-    flex-direction: column;
-    display: flex;
-    margin: 10px auto;
-
-    &:first-child {
-      margin-left: 0;
-    }
-
-    &:nth-child(3) {
-      margin-right: 0;
-    }
-
-    p {
-      margin: 5px 0;
-    }
-  }
-
   .name {
     font-size: 1.4rem;
     font-weight: 700;
