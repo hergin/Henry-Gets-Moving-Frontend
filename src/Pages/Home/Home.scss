@@ -3,6 +3,9 @@
     display: flex;
     justify-content: center;
     background-color: #FDEE1F;
+    img{
+      width: 100%;
+    }
   }
 
   .home-content {
@@ -60,6 +63,9 @@
   }
   //Phone Styling
   @media (max-width: 750px) {
-
+    .otd-div {
+      flex-direction: column;
+      margin-bottom: 5em;
+    }
   }
 }
