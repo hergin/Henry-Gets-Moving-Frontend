@@ -13,3 +13,14 @@ describe('social media nav buttons',()=>{
         });
     });
 });
+
+describe('about text',()=>{
+    test('henry the hamster text exists',()=>{
+        render(<About/>);
+        expect(screen.getByText(/Henry the Hamster is a young boy who overcomes his obesity challenge with an active lifestyle and healthy eating\.[\s\S]*/)).toBeInTheDocument();
+    });
+    test('obesity text exists',()=>{
+        render(<About/>);
+        expect(screen.getByText(/Obesity is the foremost American public health problem[\s\S]*/)).toBeInTheDocument();
+    });
+})
