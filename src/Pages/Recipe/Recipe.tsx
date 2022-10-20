@@ -7,6 +7,8 @@ import React from "react";
 import {Helmet, HelmetProvider} from "react-helmet-async";
 import grassDesktop from "../../Assets/grassDesktop.svg";
 import weatherMobile from "../../Assets/WeatherMobile.svg";
+import Weather from "../../Components/Weather";
+import Grass from "../../Components/Grass";
 
 type Recipe = {
     [key: string]: any;
@@ -58,10 +60,7 @@ const Recipe = () => {
                     <title>Recipes</title>
                 </Helmet>
             </HelmetProvider>
-            <div className='weather-div'>
-                <img src={weather} className='weather' alt={"Weather"}/>
-                <img src={weatherMobile} className='weather-mobile' alt={"Weather"}/>
-            </div>
+            <Weather/>
             <div className='otd-div'>
                 <div className='otd-image'>
                     <img src={recipeStock} alt={"OTD Thumbnail"}/>
@@ -85,8 +84,7 @@ const Recipe = () => {
                     <button className='red-button'>See More</button>
                 </div>
             </div>
-            <img src={footerImage} className='footer' alt={"Grass"}/>
-            <img src={grassDesktop} className='footer-desktop' alt={"Grass"}/>
+           <Grass/>
         </div>
     )
 }
