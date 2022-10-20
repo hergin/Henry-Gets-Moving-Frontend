@@ -123,6 +123,7 @@ const LearnMore = () => {
                             {/*TODO Add picture of henry here*/}
                         </div>
                         <img src={footerImage} className='footer' alt={"Grass"}/>
+                        <img src={grassDesktop} className='footer-desktop' alt={"Grass"}/>
                     </div>
                     <div className='background'/>
                 </div>
