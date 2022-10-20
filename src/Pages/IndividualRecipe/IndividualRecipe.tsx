@@ -8,6 +8,8 @@ import recipeStock from '../../Assets/recipeStock.jpg';
 import {Helmet, HelmetProvider} from "react-helmet-async";
 import grassDesktop from "../../Assets/grassDesktop.svg";
 import weatherMobile from "../../Assets/WeatherMobile.svg";
+import Weather from "../../Components/Weather";
+import Grass from "../../Components/Grass";
 
 const IndividualRecipe = () => {
     return (
@@ -17,10 +19,7 @@ const IndividualRecipe = () => {
                     <title>Recipe Name</title>
                 </Helmet>
             </HelmetProvider>
-            <div className='weather-div'>
-                <img src={weather} className='weather' alt={"Weather"}/>
-                <img src={weatherMobile} className='weather-mobile' alt={"Weather"}/>
-            </div>
+           <Weather/>
             <div className='back-arrow'>
                 <Link to={'/recipes'}><img src={back} alt="<"/>Back</Link>
             </div>
@@ -44,8 +43,7 @@ const IndividualRecipe = () => {
                     culpa qui officia deserunt mollit anim id est laborum.
                 </p>
             </div>
-            <img src={footerImage} className='footer' alt={"Grass"}/>
-            <img src={grassDesktop} className='footer-desktop' alt={"Grass"}/>
+           <Grass/>
         </div>
     )
 }
