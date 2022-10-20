@@ -1,4 +1,4 @@
-import About from './Pages/About/About';
+import About from '../Pages/About/About';
 import {fireEvent,render,screen} from '@testing-library/react';
 
 describe('social media nav buttons',()=>{
