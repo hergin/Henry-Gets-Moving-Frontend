@@ -125,6 +125,29 @@
     .trophy-text{
       font-size: 1.4rem;
     }
+
+    .episode-player {
+      width: 50%;
+      margin: 0 10em;
+    }
+
+    .desktop-dialog{
+      display: flex;
+    }
+
+    .exercise-text{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .dbox-name {
+      font-size: 2.2rem;
+    }
+
+    .dbox-category {
+      font-size: 1.6rem;
+    }
   }
   //Phone Styling
   @media (max-width: 750px) {

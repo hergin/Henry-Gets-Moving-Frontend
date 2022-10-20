@@ -2,6 +2,7 @@ import './Exercise.scss';
 import exerciseStock from '../../Assets/exerciseStock.jpg'
 import trophy from '../../Assets/40mins.svg'
 import weather from "../../Assets/Weather.svg";
+import weatherDialog from '../../Assets/WeatherDialog.svg';
 import React, {useState} from "react";
 import footerImage from "../../Assets/grass.svg";
 import {Link} from "react-router-dom";
@@ -52,7 +53,8 @@ const Exercise = () => {
                 return (
                     <>
                         <div className='grid-content'>
-                            <img src={exercise.thumbnail} onClick={e => (setSelectedExercise(exercise))} alt={exercise.name + "Thumbnail"}/>
+                            <img src={exercise.thumbnail} onClick={e => (setSelectedExercise(exercise))}
+                                 alt={exercise.name + "Thumbnail"}/>
                             <p className='name'>{exercise.name}</p>
                             <p className='category'>{exercise.category}</p>
                         </div>
@@ -108,27 +110,30 @@ const Exercise = () => {
                 {selectedExercise &&
                 <div className='dialog-box'>
                     <div className='background-color'>
-                        <img className='weather' src={weather} alt={"Weather"}/>
+                        <img className='weather' src={weatherDialog} alt={"Weather"}/>
                         <div className='exit-button'>
                             <img src={exit} alt='Exit' onClick={e => (setSelectedExercise(null))}/>
                         </div>
-                        <div className='episode-player'>
-                            <div className='video-player'>
-                                <iframe
-                                    src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-                                    frameBorder="0" allow="autoplay; fullscreen; picture-in-picture"
-                                    allowFullScreen
-                                />
+                        <div className='desktop-dialog'>
+                            <div className='episode-player'>
+                                <div className='video-player'>
+                                    <iframe
+                                        src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+                                        frameBorder="0" allow="autoplay; fullscreen; picture-in-picture"
+                                        allowFullScreen
+                                    />
+                                </div>
+                            </div>
+                            <div className='exercise-text'>
+                                <p className='dbox-name'>{selectedExercise.name}</p>
+                                <p className='dbox-category'>{selectedExercise.category}</p>
                             </div>
                         </div>
-                        <div className='exercise-text'>
-                            <p className='dbox-name'>{selectedExercise.name}</p>
-                            <p className='dbox-category'>{selectedExercise.category}</p>
-                        </div>
                         <div>
-                        {/*TODO Add picture of henry here*/}
+                            {/*TODO Add picture of henry here*/}
                         </div>
                         <img src={footerImage} className='footer' alt={"Grass"}/>
+                        <img src={grassDesktop} className='footer-desktop' alt={"Grass"}/>
                     </div>
                     <div className='background'/>
                 </div>
