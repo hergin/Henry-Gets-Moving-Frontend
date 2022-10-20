@@ -15,27 +15,25 @@ import Register from "./Pages/Register/Register";
 import './App.scss';
 
 function App() {
-  return (
-    <div className="App">
-     <Router>
-        <Header/>
-         <Routes>
-             <Route path='/' element={<Home/>}/>
-             <Route path='/about' element={<About/>}/>
-             <Route path='/all-logs' element={<Calendar/>}/>
-             <Route path='/get-moving' element={<Exercise/>}/>
-             <Route path='/exercise-log' element={<ExerciseLog/>}/>
-             <Route path='/games' element={<Game/>}/>
+    return (
+        <div className="App">
+            <Header/>
+            <Routes>
+                <Route path='/' element={<Home/>}/>
+                <Route path='/about' element={<About/>}/>
+                <Route path='/all-logs' element={<Calendar/>}/>
+                <Route path='/get-moving' element={<Exercise/>}/>
+                <Route path='/exercise-log' element={<ExerciseLog/>}/>
+                <Route path='/games' element={<Game/>}/>
                 {/*TODO Set this up so that the url is the recipe name*/}
-             <Route path='/individual-recipe' element={<IndividualRecipe/>}/>
-             <Route path='/learn-more' element={<LearnMore/>}/>
-             <Route path='/login' element={<Login/>}/>
-             <Route path='/recipes' element={<Recipe/>}/>
-             <Route path='/register' element={<Register/>}/>
-         </Routes>
-     </Router>
-    </div>
-  );
+                <Route path='/individual-recipe' element={<IndividualRecipe/>}/>
+                <Route path='/learn-more' element={<LearnMore/>}/>
+                <Route path='/login' element={<Login/>}/>
+                <Route path='/recipes' element={<Recipe/>}/>
+                <Route path='/register' element={<Register/>}/>
+            </Routes>
+        </div>
+    );
 }
 
 export default App;
