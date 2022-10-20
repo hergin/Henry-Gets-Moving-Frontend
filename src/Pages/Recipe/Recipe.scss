@@ -93,7 +93,15 @@
 
   //Desktop Styling
   @media (min-width: 1050px) {
+    .otd-text{
+      p {
+        font-size: 1.6rem;
+      }
+    }
 
+    h2 {
+      font-size: 2rem;
+    }
   }
   //Phone Styling
   @media (max-width: 750px) {

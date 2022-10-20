@@ -33,7 +33,15 @@
 
   //Desktop Styling
   @media (min-width: 1050px) {
+    a {
+      font-size: 2rem;
+    }
 
+   .header-links{
+     a {
+       font-size: 1.6rem;
+     }
+    }
   }
   //Phone Styling
   @media (max-width: 750px) {

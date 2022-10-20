@@ -42,6 +42,12 @@
     }
   }
 
+  @media (max-width: 1050px) and (min-width: 1000px) {
+    .otd-div {
+      margin-top: 5em;
+    }
+  }
+
 
   //Desktop Styling
   @media (min-width: 1050px) {
