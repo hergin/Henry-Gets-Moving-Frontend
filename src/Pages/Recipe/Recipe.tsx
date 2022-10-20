@@ -6,6 +6,7 @@ import footerImage from "../../Assets/grass.svg";
 import React from "react";
 import {Helmet, HelmetProvider} from "react-helmet-async";
 import grassDesktop from "../../Assets/grassDesktop.svg";
+import weatherMobile from "../../Assets/WeatherMobile.svg";
 
 type Recipe = {
     [key: string]: any;
@@ -59,6 +60,7 @@ const Recipe = () => {
             </HelmetProvider>
             <div className='weather-div'>
                 <img src={weather} className='weather' alt={"Weather"}/>
+                <img src={weatherMobile} className='weather-mobile' alt={"Weather"}/>
             </div>
             <div className='otd-div'>
                 <div className='otd-image'>

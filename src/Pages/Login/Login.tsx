@@ -6,6 +6,7 @@ import React from "react";
 import weather from "../../Assets/Weather.svg";
 import {Helmet, HelmetProvider} from "react-helmet-async";
 import grassDesktop from "../../Assets/grassDesktop.svg";
+import weatherMobile from "../../Assets/WeatherMobile.svg";
 
 const Login = () => {
     return (
@@ -17,6 +18,7 @@ const Login = () => {
             </HelmetProvider>
             <div className='weather-div'>
                 <img src={weather} className='weather' alt={"Weather"}/>
+                <img src={weatherMobile} className='weather-mobile' alt={"Weather"}/>
             </div>
             <h1>Login</h1>
             <form>

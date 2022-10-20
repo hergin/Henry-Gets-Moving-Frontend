@@ -45,6 +45,9 @@
   }
   //Phone Styling
   @media (max-width: 750px) {
-
+    .header-home{
+      display: flex;
+      align-items: center;
+    }
   }
 }

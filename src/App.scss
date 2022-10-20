@@ -53,6 +53,10 @@ form {
     width: 100%;
 }
 
+.weather-mobile{
+    display: none;
+}
+
 .dialog-box {
     position: fixed;
     top: 0;
@@ -144,7 +148,7 @@ form {
         display: none;
     }
 
-    .grid-content{
+    .grid-content {
         width: 20%;
 
         &:nth-child(3) {
@@ -154,6 +158,17 @@ form {
         &:nth-child(4) {
             margin-right: 0;
         }
+    }
+}
+
+//Phone Styling
+@media (max-width: 750px) {
+    .weather-mobile{
+        display: flex;
+        width: 100vw;
+    }
+    .weather{
+        display: none;
     }
 }
 

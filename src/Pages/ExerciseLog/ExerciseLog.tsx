@@ -8,6 +8,7 @@ import medium from '../../Assets/mediumIntensityFace.svg';
 import hard from '../../Assets/intenseIntensityFace.svg';
 import {Helmet, HelmetProvider} from "react-helmet-async";
 import grassDesktop from "../../Assets/grassDesktop.svg";
+import weatherMobile from "../../Assets/WeatherMobile.svg";
 
 const ExerciseLog = () => {
     return (
@@ -19,6 +20,7 @@ const ExerciseLog = () => {
             </HelmetProvider>
             <div className='weather-div'>
                 <img src={weather} className='weather' alt={"Weather"}/>
+                <img src={weatherMobile} className='weather-mobile' alt={"Weather"}/>
             </div>
             <h1>Exercise Log</h1>
             <form>

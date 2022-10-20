@@ -8,6 +8,7 @@ import footerImage from "../../Assets/HomeFooter.png";
 import footerDesktopImage from '../../Assets/HomeFooterDesktop.png';
 import weather from '../../Assets/Weather.svg';
 import {Helmet, HelmetProvider} from "react-helmet-async";
+import weatherMobile from "../../Assets/WeatherMobile.svg";
 
 const Home = () => {
     return (
@@ -23,6 +24,7 @@ const Home = () => {
             <div className='home-content'>
                 <div className='weather-div'>
                     <img src={weather} className='weather' alt={"Weather"}/>
+                    <img src={weatherMobile} className='weather-mobile' alt={"Weather"}/>
                 </div>
                <div className='otd-div'>
                    <div className='of-the-day'>

@@ -9,6 +9,7 @@ import {Link} from "react-router-dom";
 import exit from '../../Assets/Exit.svg';
 import {Helmet, HelmetProvider} from "react-helmet-async";
 import grassDesktop from "../../Assets/grassDesktop.svg";
+import weatherMobile from "../../Assets/WeatherMobile.svg";
 
 type Exercise = {
     [key: string]: any;
@@ -73,6 +74,7 @@ const Exercise = () => {
             </HelmetProvider>
             <div className='weather-div'>
                 <img src={weather} className='weather' alt={"Weather"}/>
+                <img src={weatherMobile} className='weather-mobile' alt={"Weather"}/>
             </div>
             <div className='otd-div'>
                 <div className='otd-image'>
@@ -110,7 +112,10 @@ const Exercise = () => {
                 {selectedExercise &&
                 <div className='dialog-box'>
                     <div className='background-color'>
-                        <img className='weather' src={weatherDialog} alt={"Weather"}/>
+                        <div className='weather-div'>
+                            <img src={weather} className='weather' alt={"Weather"}/>
+                            <img src={weatherMobile} className='weather-mobile' alt={"Weather"}/>
+                        </div>
                         <div className='exit-button'>
                             <img src={exit} alt='Exit' onClick={e => (setSelectedExercise(null))}/>
                         </div>
