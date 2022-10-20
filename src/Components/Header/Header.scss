@@ -37,17 +37,22 @@
       font-size: 2rem;
     }
 
-   .header-links{
-     a {
-       font-size: 1.6rem;
-     }
+    .header-links {
+      a {
+        font-size: 1.6rem;
+      }
     }
   }
   //Phone Styling
   @media (max-width: 750px) {
-    .header-home{
+    .header-home {
       display: flex;
       align-items: center;
+    }
+    .header-links {
+      flex-direction: column;
+      align-items: center;
+      width: 35%;
     }
   }
 }
