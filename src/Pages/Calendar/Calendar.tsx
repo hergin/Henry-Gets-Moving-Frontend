@@ -13,7 +13,7 @@ const Calendar = () => {
                     <title>Calendar</title>
                 </Helmet>
             </HelmetProvider>
-            <ReactCalendar onChange={selectDay} value={today} minDate={minimumDate}/>
+            <ReactCalendar onChange={selectDay} value={today} minDate={minimumDate} className="date-picker"/>
         </div>
     )
 }
