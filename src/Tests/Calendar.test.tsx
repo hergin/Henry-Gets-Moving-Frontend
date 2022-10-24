@@ -33,3 +33,17 @@ describe('month',()=>{
         expect(screen.getByText(new RegExp(`.*12/${days[1]}/${days[2]}.*`))).toBeInTheDocument();
     })
 })
+
+describe('disabled',()=>{
+    test('can\'t choose day before October 20th, 2022',()=>{
+        render(<Calendar/>);
+        // make sure it's october 2022, if this test is being run in the far future
+        const today = new Date();
+        fireEvent.click(screen.getByText(today.toLocaleString('default',{month:'long'})+' '+today.getFullYear()));
+        fireEvent.click(screen.getByText(today.getFullYear()));
+        fireEvent.click(screen.getByText('2022'));
+        fireEvent.click(screen.getByText('October'));
+        fireEvent.click(screen.getByText('10'));
+        expect(screen.getByText(new RegExp(`.*${new Date().toLocaleDateString()}.*`))).toBeInTheDocument();
+    })
+})
