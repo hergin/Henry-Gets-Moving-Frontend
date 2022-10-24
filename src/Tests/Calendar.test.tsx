@@ -22,4 +22,14 @@ describe('month',()=>{
         fireEvent.click(screen.getByText(days[1]));
         expect(screen.getByText(new RegExp(`.*${parseInt(days[0])+1}/${days[1]}/${days[2]}.*`))).toBeInTheDocument();
     });
+
+    test('can be changed via menu',()=>{
+        render(<Calendar/>);
+        const today = new Date();
+        const days = today.toLocaleDateString().split('/');
+        fireEvent.click(screen.getByText(today.toLocaleString('default',{month:'long'})+' '+today.getFullYear()));
+        fireEvent.click(screen.getByText('December'));
+        fireEvent.click(screen.getByText(days[1]));
+        expect(screen.getByText(new RegExp(`.*12/${days[1]}/${days[2]}.*`))).toBeInTheDocument();
+    })
 })
