@@ -18,5 +18,27 @@ jobs:
         uses: actions/setup-node@v3
       - name: install dependencies
         run: npm install
+
+  run-home-tests:
+    needs: build
+    steps:
       - name: run tests
-        run: npm test
+        run: npm test Home
+
+  run-calendar-tests:
+    needs: build
+    steps:
+      - name: run tests
+        run: npm test Calendar
+
+  run-about-tests:
+    needs: build
+    steps:
+      - name: run tests
+        run: npm test About
+
+  run-header-tests:
+    needs: build
+    steps:
+      - name: run tests
+        run: npm test Header
