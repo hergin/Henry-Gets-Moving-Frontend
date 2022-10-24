@@ -122,7 +122,7 @@ const Exercise = () => {
                             <div className='episode-player'>
                                 <div className='video-player'>
                                     <iframe
-                                        src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+                                        src={selectedExercise.video_url}
                                         frameBorder="0" allow="autoplay; fullscreen; picture-in-picture"
                                         allowFullScreen
                                     />
