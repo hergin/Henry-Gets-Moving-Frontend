@@ -9,6 +9,7 @@ on:
 jobs:
 
   run-home-tests:
+    name: Home.tsx tests
     runs-on: ubuntu-latest
     steps:
       - name: checkout
@@ -21,6 +22,7 @@ jobs:
         run: npm test Home
 
   run-calendar-tests:
+    name: Calendar.tsx tests
     runs-on: ubuntu-latest
     steps:
       - name: checkout
@@ -33,6 +35,7 @@ jobs:
         run: npm test Calendar
 
   run-about-tests:
+    name: About.tsx tests
     runs-on: ubuntu-latest
     steps:
       - name: checkout
@@ -45,6 +48,7 @@ jobs:
         run: npm test About
 
   run-header-tests:
+    name: Header.tsx tests
     runs-on: ubuntu-latest
     steps:
       - name: checkout
