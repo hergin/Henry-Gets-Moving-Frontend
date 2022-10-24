@@ -10,7 +10,6 @@ jobs:
 
   run-home-tests:
     runs-on: ubuntu-latest
-    needs: build
     steps:
       - name: checkout
         uses: actions/checkout@v2.5.0
@@ -23,7 +22,6 @@ jobs:
 
   run-calendar-tests:
     runs-on: ubuntu-latest
-    needs: build
     steps:
       - name: checkout
         uses: actions/checkout@v2.5.0
@@ -36,7 +34,6 @@ jobs:
 
   run-about-tests:
     runs-on: ubuntu-latest
-    needs: build
     steps:
       - name: checkout
         uses: actions/checkout@v2.5.0
@@ -49,7 +46,6 @@ jobs:
 
   run-header-tests:
     runs-on: ubuntu-latest
-    needs: build
     steps:
       - name: checkout
         uses: actions/checkout@v2.5.0
