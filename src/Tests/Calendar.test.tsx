@@ -45,5 +45,18 @@ describe('disabled',()=>{
         fireEvent.click(screen.getByText('October'));
         fireEvent.click(screen.getByText('10'));
         expect(screen.getByText(new RegExp(`.*${new Date().toLocaleDateString()}.*`))).toBeInTheDocument();
-    })
-})
+    });
+
+    test('can\'t choose month before october 2022',()=>{
+        render(<Calendar/>);
+        const today = new Date();
+        fireEvent.click(screen.getByText(today.toLocaleString('default',{month:'long'})+' '+today.getFullYear()));
+        fireEvent.click(screen.getByText(today.getFullYear()));
+        fireEvent.click(screen.getByText('2022'));
+        fireEvent.click(screen.getByText('January'));
+        // expect the "10" button for choosing the day not to be in the document,
+        // chosen as an arbitrary day just to make sure we weren't taken to the
+        // january month page
+        expect(screen.queryByText('10')).not.toBeInTheDocument();
+    });
+});
