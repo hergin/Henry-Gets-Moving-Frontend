@@ -7,10 +7,10 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
 
+  run-home-tests:
     runs-on: ubuntu-latest
-
+    needs: build
     steps:
       - name: checkout
         uses: actions/checkout@v2.5.0
@@ -18,11 +18,6 @@ jobs:
         uses: actions/setup-node@v3
       - name: install dependencies
         run: npm install
-
-  run-home-tests:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
       - name: run tests
         run: npm test Home
 
@@ -30,6 +25,12 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
+      - name: checkout
+        uses: actions/checkout@v2.5.0
+      - name: setup node
+        uses: actions/setup-node@v3
+      - name: install dependencies
+        run: npm install
       - name: run tests
         run: npm test Calendar
 
@@ -37,6 +38,12 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
+      - name: checkout
+        uses: actions/checkout@v2.5.0
+      - name: setup node
+        uses: actions/setup-node@v3
+      - name: install dependencies
+        run: npm install
       - name: run tests
         run: npm test About
 
@@ -44,5 +51,11 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
+      - name: checkout
+        uses: actions/checkout@v2.5.0
+      - name: setup node
+        uses: actions/setup-node@v3
+      - name: install dependencies
+        run: npm install
       - name: run tests
         run: npm test Header
