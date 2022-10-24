@@ -59,4 +59,16 @@ describe('disabled',()=>{
         // january month page
         expect(screen.queryByText('10')).not.toBeInTheDocument();
     });
+
+    test('can\'t choose year before 2022',()=>{
+        render(<Calendar/>);
+        const today = new Date();
+        fireEvent.click(screen.getByText(today.toLocaleString('default',{month:'long'})+' '+today.getFullYear()));
+        fireEvent.click(screen.getByText(today.getFullYear()));
+        fireEvent.click(screen.getByText('2021'));
+        // expect the "January" button for choosing the month not to be in the document,
+        // chosen as an arbitrary month just to make sure we weren't taken to the
+        // month selection page
+        expect(screen.queryByText('January')).not.toBeInTheDocument();
+    })
 });
