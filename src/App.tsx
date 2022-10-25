@@ -12,6 +12,7 @@ import LearnMore from "./Pages/LearnMore/LearnMore";
 import Login from "./Pages/Login/Login";
 import Recipe from "./Pages/Recipe/Recipe";
 import Register from "./Pages/Register/Register";
+import Admin from "./Pages/Admin/Admin";
 import './App.scss';
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
                 <Route path='/login' element={<Login/>}/>
                 <Route path='/recipes' element={<Recipe/>}/>
                 <Route path='/register' element={<Register/>}/>
+                <Route path='/admin' element={<Admin/>}/>
             </Routes>
         </div>
     );
