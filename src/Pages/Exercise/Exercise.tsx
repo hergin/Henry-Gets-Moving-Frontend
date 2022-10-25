@@ -112,7 +112,7 @@ const Exercise = () => {
                 <div className='dialog-box'>
                     <div className='background-color'>
                         <div className='weather-div'>
-                            <img src={weather} className='weather' alt={"Weather"}/>
+                            <img src={weatherDialog} className='weather' alt={"Weather"}/>
                             <img src={weatherMobile} className='weather-mobile' alt={"Weather"}/>
                         </div>
                         <div className='exit-button'>
