@@ -139,8 +139,13 @@ form {
         justify-content: space-around;
     }
 
+    .weather{
+        display: none;
+    }
+
     .weather-desktop{
         display: flex;
+        width: 100%;
     }
 
     .footer-desktop{
