@@ -102,6 +102,12 @@
     h2 {
       font-size: 2rem;
     }
+    input#search {
+     width: 20%;
+    }
+    select{
+      width: 20%;
+    }
   }
   //Phone Styling
   @media (max-width: 750px) {
