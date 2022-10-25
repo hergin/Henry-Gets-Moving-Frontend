@@ -1,7 +1,14 @@
 import './Header.scss';
-import {Link} from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 
 const Header = () => {
+    let location = useLocation()
+    let excludedPaths = ['/admin']
+
+    if(excludedPaths.includes(location.pathname)){
+        return null;
+    }
+
     return (
         <div className="header">
             <div className='header-home'>
