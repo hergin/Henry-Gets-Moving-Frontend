@@ -4,8 +4,7 @@ import React, { useState } from "react";
 import {Calendar as ReactCalendar} from "react-calendar";
 
 const Calendar = () => {
-    const [today, selectDay] = useState(new Date());
-    const minimumDate = new Date(2022, 10, 20);
+    const [selectedDate, selectDay] = useState(new Date());
     return (
         <div className="calendar">
             <HelmetProvider>
@@ -13,7 +12,13 @@ const Calendar = () => {
                     <title>Calendar</title>
                 </Helmet>
             </HelmetProvider>
-            <ReactCalendar onChange={selectDay} value={today} minDate={minimumDate} className="date-picker"/>
+            <ReactCalendar onChange={selectDay} value={selectedDate} minDate={new Date(2022, 9, 20)} className="date-picker"/>
+            <br/>
+            <h2>On {selectedDate.toLocaleDateString()}…</h2>
+            <p>[FAMILY MEMBER 1] logged [MINUTES] minutes of activity! Almost there!</p>
+            <p>[FAMILY MEMBER 2] logged [MINUTES OVER 60] minutes of activity! Great job!</p>
+            <p>et cetera…</p>
+            // TODO: pull this from the le epic database
         </div>
     )
 }

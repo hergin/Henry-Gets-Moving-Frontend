@@ -7,10 +7,10 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
 
+  run-home-tests:
+    name: Home.tsx tests
     runs-on: ubuntu-latest
-
     steps:
       - name: checkout
         uses: actions/checkout@v2.5.0
@@ -19,4 +19,43 @@ jobs:
       - name: install dependencies
         run: npm install
       - name: run tests
-        run: npm test
+        run: npm test Home
+
+  run-calendar-tests:
+    name: Calendar.tsx tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2.5.0
+      - name: setup node
+        uses: actions/setup-node@v3
+      - name: install dependencies
+        run: npm install
+      - name: run tests
+        run: npm test Calendar
+
+  run-about-tests:
+    name: About.tsx tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2.5.0
+      - name: setup node
+        uses: actions/setup-node@v3
+      - name: install dependencies
+        run: npm install
+      - name: run tests
+        run: npm test About
+
+  run-header-tests:
+    name: Header.tsx tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2.5.0
+      - name: setup node
+        uses: actions/setup-node@v3
+      - name: install dependencies
+        run: npm install
+      - name: run tests
+        run: npm test Header
