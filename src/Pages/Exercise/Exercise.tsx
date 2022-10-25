@@ -1,15 +1,12 @@
 import './Exercise.scss';
 import exerciseStock from '../../Assets/exerciseStock.jpg'
 import trophy from '../../Assets/40mins.svg'
-import weather from "../../Assets/Weather.svg";
-import weatherDialog from '../../Assets/WeatherDialog.svg';
 import React, {useState} from "react";
 import footerImage from "../../Assets/grass.svg";
 import {Link} from "react-router-dom";
 import exit from '../../Assets/Exit.svg';
 import {Helmet, HelmetProvider} from "react-helmet-async";
 import grassDesktop from "../../Assets/grassDesktop.svg";
-import weatherMobile from "../../Assets/WeatherMobile.svg";
 import Grass from "../../Components/Grass";
 import Weather from "../../Components/Weather";
 
@@ -111,10 +108,7 @@ const Exercise = () => {
                 {selectedExercise &&
                 <div className='dialog-box'>
                     <div className='background-color'>
-                        <div className='weather-div'>
-                            <img src={weatherDialog} className='weather' alt={"Weather"}/>
-                            <img src={weatherMobile} className='weather-mobile' alt={"Weather"}/>
-                        </div>
+                       <Weather/>
                         <div className='exit-button'>
                             <img src={exit} alt='Exit' onClick={e => (setSelectedExercise(null))}/>
                         </div>

@@ -1,14 +1,10 @@
 import './ExerciseLog.scss';
-import weather from "../../Assets/Weather.svg";
 import swings from "../../Assets/Swings.png";
-import footerImage from "../../Assets/grass.svg";
 import React from "react";
 import light from '../../Assets/lightIntensityFace.svg';
 import medium from '../../Assets/mediumIntensityFace.svg';
 import hard from '../../Assets/intenseIntensityFace.svg';
 import {Helmet, HelmetProvider} from "react-helmet-async";
-import grassDesktop from "../../Assets/grassDesktop.svg";
-import weatherMobile from "../../Assets/WeatherMobile.svg";
 import Weather from "../../Components/Weather";
 import Grass from "../../Components/Grass";
 

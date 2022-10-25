@@ -57,6 +57,10 @@ form {
     display: none;
 }
 
+.weather-desktop{
+    display: none;
+}
+
 .dialog-box {
     position: fixed;
     top: 0;
@@ -135,6 +139,10 @@ form {
         justify-content: space-around;
     }
 
+    .weather-desktop{
+        display: flex;
+    }
+
     .footer-desktop{
         display: flex;
         align-items: center;
@@ -166,6 +174,9 @@ form {
     .weather-mobile{
         display: flex;
         width: 100vw;
+    }
+    .weather-desktop{
+        display: none;
     }
     .weather{
         display: none;

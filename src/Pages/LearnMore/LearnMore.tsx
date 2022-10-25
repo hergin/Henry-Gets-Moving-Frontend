@@ -1,12 +1,9 @@
 import './LearnMore.scss';
-import weather from "../../Assets/Weather.svg";
 import footerImage from "../../Assets/grass.svg";
 import React, {useState} from "react";
 import exit from "../../Assets/Exit.svg";
 import {Helmet, HelmetProvider} from "react-helmet-async";
 import grassDesktop from "../../Assets/grassDesktop.svg";
-import weatherDialog from "../../Assets/WeatherDialog.svg";
-import weatherMobile from "../../Assets/WeatherMobile.svg";
 import Grass from "../../Components/Grass";
 import Weather from "../../Components/Weather";
 
@@ -108,8 +105,7 @@ const LearnMore = () => {
                 {selectedDemo &&
                 <div className='dialog-box'>
                     <div className='background-color'>
-                        <img className='weather' src={weatherDialog} alt={"Weather"}/>
-                        <img src={weatherMobile} className='weather-mobile' alt={"Weather"}/>
+                        <Weather/>
                         <div className='exit-button'>
                             <img src={exit} alt='Exit' onClick={e => (setSelectedDemo(null))}/>
                         </div>

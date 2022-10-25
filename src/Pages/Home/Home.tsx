@@ -6,7 +6,7 @@ import exerciseImage from '../../Assets/exerciseStock.jpg';
 import React from "react";
 import footerImage from "../../Assets/HomeFooter.png";
 import footerDesktopImage from '../../Assets/HomeFooterDesktop.png';
-import weather from '../../Assets/Weather.svg';
+import weather from '../../Assets/WeatherDesktop.svg';
 import {Helmet, HelmetProvider} from "react-helmet-async";
 import weatherMobile from "../../Assets/WeatherMobile.svg";
 

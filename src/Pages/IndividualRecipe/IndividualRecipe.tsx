@@ -1,13 +1,9 @@
 import './IndividualRecipe.scss';
-import weather from "../../Assets/Weather.svg";
 import React from "react";
-import footerImage from "../../Assets/grass.svg";
 import {Link} from "react-router-dom";
 import back from '../../Assets/BackArrow.svg';
 import recipeStock from '../../Assets/recipeStock.jpg';
 import {Helmet, HelmetProvider} from "react-helmet-async";
-import grassDesktop from "../../Assets/grassDesktop.svg";
-import weatherMobile from "../../Assets/WeatherMobile.svg";
 import Weather from "../../Components/Weather";
 import Grass from "../../Components/Grass";
 
