@@ -6,9 +6,8 @@ import exerciseImage from '../../Assets/exerciseStock.jpg';
 import React from "react";
 import footerImage from "../../Assets/HomeFooter.png";
 import footerDesktopImage from '../../Assets/HomeFooterDesktop.png';
-import weather from '../../Assets/WeatherDesktop.svg';
 import {Helmet, HelmetProvider} from "react-helmet-async";
-import weatherMobile from "../../Assets/WeatherMobile.svg";
+import Weather from "../../Components/Weather";
 
 const Home = () => {
     return (
@@ -22,10 +21,7 @@ const Home = () => {
                 <img src={homePhoto} alt="Henry Gets Moving"/>
             </div>
             <div className='home-content'>
-                <div className='weather-div'>
-                    <img src={weather} className='weather' alt={"Weather"}/>
-                    <img src={weatherMobile} className='weather-mobile' alt={"Weather"}/>
-                </div>
+                <Weather/>
                <div className='otd-div'>
                    <div className='of-the-day'>
                        <p>Exercise of the Day</p>
