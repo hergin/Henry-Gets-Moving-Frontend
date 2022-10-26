@@ -18,9 +18,13 @@ form {
 
 .swings {
     display: flex;
-    width: 100%;
+    width: 50%;
+    margin: auto;
     justify-content: center;
     transform: translateY(-5px);
+    img{
+       width: 100%;
+    }
 }
 
 .red-button {
@@ -156,6 +160,11 @@ form {
     .grid-content {
         width: 20%;
     }
+
+    .swings{
+        width: 30%;
+        margin: auto auto 3em;
+    }
 }
 
 //Phone Styling
@@ -178,6 +187,11 @@ form {
             justify-content: center;
         }
     }
+
+    form{
+        padding: 40px;
+    }
+
 }
 
 
