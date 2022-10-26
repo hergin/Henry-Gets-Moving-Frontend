@@ -45,7 +45,7 @@ const ExerciseLog = () => {
                     </div>
                     <div className='label-input'>
                         <label>Duration</label>
-                        <input/>
+                        <input placeholder="# of Minutes"/>
                     </div>
                 </div>
                 <div className='buttons'>
