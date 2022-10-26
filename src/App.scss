@@ -116,14 +116,6 @@ form {
     flex-direction: column;
     margin: 10px auto;
 
-    &:first-child {
-        margin-left: 0;
-    }
-
-    &:nth-child(3) {
-        margin-right: 0;
-    }
-
     p {
         margin: 5px 0;
     }
@@ -163,14 +155,6 @@ form {
 
     .grid-content {
         width: 20%;
-
-        &:nth-child(3) {
-            margin-right: auto;
-        }
-
-        &:nth-child(4) {
-            margin-right: 0;
-        }
     }
 }
 
