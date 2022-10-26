@@ -47,6 +47,12 @@
   }
   //Phone Styling
   @media (max-width: 750px) {
+    .buttons{
+      justify-content: space-between;
+    }
 
+    h1{
+      width: 80%;
+    }
   }
 }
