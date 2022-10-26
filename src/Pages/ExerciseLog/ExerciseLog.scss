@@ -28,6 +28,7 @@
   .intensity-icon {
     display: flex;
     justify-content: center;
+    align-items: center;
     flex-direction: column;
 
     img {
@@ -54,7 +55,7 @@
     margin: 1em 0;
   }
 
-  .red-button{
+  .red-button {
     font-size: 1.2rem;
     font-weight: 600;
   }
@@ -65,6 +66,33 @@
   }
   //Phone Styling
   @media (max-width: 750px) {
+    h1{
+      width: 90%;
+    }
+    form {
+      width: 80%;
+      padding: 10px 20px;
+    }
+    label{
+      font-size: 1rem;
+    }
+    input{
+      font-size: 1rem;
+      padding: .4em;
+    }
 
+    .intensity{
+      margin-top: 10px;
+    }
+    .intensity-icon{
+      img{
+        width: 40px;
+      }
+    }
+    .label-input{
+      p{
+        margin-top: 5px;
+      }
+    }
   }
 }
