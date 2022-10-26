@@ -3,6 +3,7 @@ import {Helmet, HelmetProvider} from "react-helmet-async";
 import React from "react";
 import squirmMaze from '../../Assets/squirm_maze.png';
 import crossword from '../../Assets/crossword.png';
+import race from '../../Assets/henry_race.png';
 type Game = {
     [key: string]: any;
     thumbnail: string;
@@ -13,6 +14,10 @@ const Game = () => {
         {
             thumbnail: crossword,
             name: "Healthy Eating Crossword"
+        },
+        {
+            thumbnail: race,
+            name: "Henry's Big Race"
         }
     ];
     const gamesLayout = (game: Game[]) => {
