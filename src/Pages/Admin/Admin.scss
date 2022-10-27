@@ -16,6 +16,7 @@
 
   .form-div {
     width: 45%;
+    margin: auto;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -51,11 +52,12 @@
     width: 40%;
     justify-content: space-between;
 
-    label{
+    label {
       font-size: 1rem;
       font-weight: 600;
     }
-    select{
+
+    select {
       border-radius: 10px;
       background-color: white;
       border: 1px solid black;
@@ -64,7 +66,7 @@
     }
   }
 
-  .otd{
+  .otd {
     margin-bottom: 20px;
   }
 
@@ -105,7 +107,7 @@
       width: 55%;
     }
 
-    textarea{
+    textarea {
       width: 65%;
       height: 15vh;
       resize: none;
@@ -115,35 +117,41 @@
       font-family: Mulish, serif;
     }
   }
-  .save{
+
+  .save {
     border: 1px solid #1BC7D7;
     background-color: #1BC7D7;
   }
 
-  .delete{
+  .delete {
     border: 1px solid #EC2B23;
     background-color: #EC2B23;
   }
 
-  button{
-      box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
-      text-decoration: none;
-      color: white;
-      border-radius: 15px;
-      font-weight: 700;
-      padding: 5px 20px;
-      text-shadow: 0 4px 4px #00000040;
+  button {
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    text-decoration: none;
+    color: white;
+    border-radius: 15px;
+    font-weight: 700;
+    padding: 5px 20px;
+    text-shadow: 0 4px 4px #00000040;
     font-size: 1rem;
   }
 
-  hr{
+  hr {
     border: 2px solid #EC2B23;
     border-radius: 5px;
   }
 
-  .buttons{
+  .buttons {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+  }
+
+  .otd-save {
+    justify-content: end;
+    display: flex;
   }
 
   .swings {
