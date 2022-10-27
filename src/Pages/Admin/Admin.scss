@@ -1,19 +1,21 @@
-.admin{
-  .content{
+.admin {
+  .content {
     display: flex;
     background-color: #FDEE1F;
     width: 90%;
     margin: auto;
+    padding: 20px;
   }
 
-  h1{
+  h1 {
     width: 90%;
     margin: auto;
   }
 
-  .form-div{
+  .form-div {
     width: 45%;
   }
+
   form {
     display: flex;
     flex-direction: column;
@@ -21,19 +23,43 @@
     margin: auto;
     background-color: #FDEE1F;
     border-radius: 0;
-    padding:0;
+    padding: 0;
     box-shadow: none;
     border: none;
   }
 
-  .add-edit{
+  .add-edit {
     display: flex;
     justify-content: space-between;
     width: 100%;
   }
 
-  .edit-select{
+  h2 {
+    margin: 0;
+    font-size: 2rem;
+  }
+
+  .edit-select {
     align-items: center;
     display: flex;
+  }
+
+  .exercise-form {
+    margin-bottom: 20px;
+  }
+
+  .field {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+
+    label {
+      font-size: 1.6rem;
+      font-weight: 600;
+    }
+
+    input {
+      width: 70%;
+    }
   }
 }
