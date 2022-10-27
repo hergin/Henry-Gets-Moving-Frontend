@@ -17,6 +17,22 @@ const Admin = () => {
                                 <select></select>
                             </div>
                         </div>
+                        <div>
+                            <label>Name</label>
+                            <input/>
+                        </div>
+                        <div>
+                            <label>Video</label>
+                            <input type="file"/>
+                        </div>
+                        <div>
+                            <label>Category</label>
+                            <select></select>
+                        </div>
+                        <div className='buttons'>
+                            <button className='delete'>Delete Exercise</button>
+                            <button className='save'>Save Exercise</button>
+                        </div>
                     </form>
                     <form>
 
