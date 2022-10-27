@@ -77,6 +77,8 @@
     label {
       font-size: 1.5rem;
       font-weight: 600;
+      display: flex;
+      //align-items: center;
     }
 
     input {
@@ -106,7 +108,8 @@
       resize: none;
       border: 1px solid black;
       border-radius: 10px;
-      padding: 10px;
+      padding: 5px;
+      font-family: Mulish, serif;
     }
   }
 
