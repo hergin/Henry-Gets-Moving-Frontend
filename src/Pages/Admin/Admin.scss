@@ -82,17 +82,19 @@
       background-color: white;
       border: 1px solid black;
       border-radius: 10px;
+      padding: 10px;
     }
 
     select {
-      width: 71%;
+      width: 74%;
       background-color: white;
       border: 1px solid black;
       border-radius: 10px;
+      padding: 10px;
     }
 
     .otd-select {
-      width: 50%;
+      width: 55%;
     }
 
     textarea{
@@ -101,6 +103,7 @@
       resize: none;
       border: 1px solid black;
       border-radius: 10px;
+      padding: 10px;
     }
   }
 
@@ -108,7 +111,6 @@
     display: flex;
     justify-content: space-around;
   }
-
 
   .swings {
     width: 30%;
