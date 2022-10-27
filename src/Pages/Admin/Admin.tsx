@@ -1,6 +1,8 @@
 import './Admin.scss'
 import Weather from "../../Components/Weather";
 import Grass from "../../Components/Grass";
+import swings from "../../Assets/Swings.png";
+import React from "react";
 
 const Admin = () => {
     return (
@@ -89,6 +91,9 @@ const Admin = () => {
                         </div>
                     </form>
                 </div>
+            </div>
+            <div className='swings'>
+                <img src={swings} alt={"Henry and Jasmine on Swings"}/>
             </div>
             <Grass/>
         </div>
