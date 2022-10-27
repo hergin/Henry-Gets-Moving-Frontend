@@ -35,7 +35,17 @@ const Admin = () => {
                         </div>
                     </form>
                     <form>
-
+                        <div>
+                            <label>Recipe of the Day</label>
+                            <select></select>
+                        </div>
+                        <div>
+                            <label>Exercise of the Day</label>
+                            <select></select>
+                        </div>
+                        <div className='buttons'>
+                            <button className='save'>Save Changes</button>
+                        </div>
                     </form>
                 </div>
                 <hr/>
