@@ -2,13 +2,15 @@
   .content {
     display: flex;
     background-color: #FDEE1F;
-    width: 90%;
+    width: 80%;
     margin: auto;
     padding: 20px;
+    border: 1px solid black;
+    border-radius: 15px;
   }
 
   h1 {
-    width: 90%;
+    width: 80%;
     margin: auto;
   }
 
@@ -37,7 +39,7 @@
 
   h2 {
     margin: 0;
-    font-size: 2rem;
+    font-size: 1.6rem;
   }
 
   .edit-select {
@@ -47,7 +49,7 @@
     justify-content: space-between;
 
     label{
-      font-size: 1.2rem;
+      font-size: 1rem;
       font-weight: 600;
     }
     select{
@@ -73,12 +75,12 @@
     margin-bottom: 20px;
 
     label {
-      font-size: 1.6rem;
+      font-size: 1.5rem;
       font-weight: 600;
     }
 
     input {
-      width: 70%;
+      width: 65%;
       background-color: white;
       border: 1px solid black;
       border-radius: 10px;
@@ -86,7 +88,7 @@
     }
 
     select {
-      width: 74%;
+      width: 69%;
       background-color: white;
       border: 1px solid black;
       border-radius: 10px;
@@ -98,7 +100,7 @@
     }
 
     textarea{
-      width: 70%;
+      width: 65%;
       height: 15vh;
       resize: none;
       border: 1px solid black;
