@@ -32,6 +32,7 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
+    margin-bottom: 20px;
   }
 
   h2 {
@@ -56,6 +57,10 @@
       width: 50%;
       padding: 5px;
     }
+  }
+
+  .otd{
+    margin-bottom: 20px;
   }
 
   .exercise-form {
@@ -88,6 +93,14 @@
 
     .otd-select {
       width: 50%;
+    }
+
+    textarea{
+      width: 70%;
+      height: 15vh;
+      resize: none;
+      border: 1px solid black;
+      border-radius: 10px;
     }
   }
 
