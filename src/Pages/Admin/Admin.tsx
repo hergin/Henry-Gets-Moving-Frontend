@@ -79,11 +79,11 @@ const Admin = () => {
                         </div>
                         <div className='field'>
                             <label>Ingredients</label>
-                            <textarea/>
+                            <textarea placeholder="1. Ingredient&#10;2. Ingredient&#10;3. Ingredient"/>
                         </div>
                         <div className='field'>
                             <label>Recipe Steps</label>
-                            <textarea/>
+                            <textarea placeholder="1. Step&#10;2. Step&#10;3. Step"/>
                         </div>
                         <div className='buttons'>
                             <button className='delete'>Delete Exercise</button>
