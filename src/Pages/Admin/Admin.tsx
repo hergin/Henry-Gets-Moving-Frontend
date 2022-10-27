@@ -36,7 +36,7 @@ const Admin = () => {
                             <button className='save'>Save Exercise</button>
                         </div>
                     </form>
-                    <h2>Of the Day</h2>
+                    <h2 className='otd'>Of the Day</h2>
                     <form className='otd-form'>
                         <div className='field'>
                             <label>Recipe of the Day</label>
