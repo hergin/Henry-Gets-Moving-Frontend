@@ -10,7 +10,13 @@ const Admin = () => {
             <div className='content'>
                 <div className="form-div">
                     <form>
-
+                        <div className='add-edit'>
+                            <h2>Add Exercise</h2>
+                            <div className='edit-select'>
+                                <label>Edit Exercise</label>
+                                <select></select>
+                            </div>
+                        </div>
                     </form>
                     <form>
 
