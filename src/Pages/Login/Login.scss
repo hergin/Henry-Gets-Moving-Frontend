@@ -43,7 +43,9 @@
 
   //Desktop Styling
   @media (min-width: 1050px) {
-
+    h1{
+      width: 65%;
+    }
   }
   //Phone Styling
   @media (max-width: 750px) {
