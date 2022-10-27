@@ -24,7 +24,7 @@ const Game = () => {
         return game.map((game) => {
                 return (
                     <div className='grid-content'>
-                        <img src={game.thumbnail} alt={game.name + "Thumbnail"}/>
+                        <img src={game.thumbnail} alt={game.name + " Thumbnail"}/>
                         <p className='name'>{game.name}</p>
                     </div>
                 )
