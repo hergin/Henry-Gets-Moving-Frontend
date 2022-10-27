@@ -49,7 +49,7 @@ const Admin = () => {
                                 <label>Exercise of the Day</label>
                                 <select className='otd-select'></select>
                             </div>
-                            <div className='buttons'>
+                            <div className='otd-save'>
                                 <button className='save'>Save Changes</button>
                             </div>
                         </form>
