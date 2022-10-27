@@ -25,7 +25,7 @@ const Admin = () => {
                         </div>
                         <div className='field'>
                             <label>Video</label>
-                            <input type="file"/>
+                            <input/>
                         </div>
                         <div className='field'>
                             <label>Category</label>
@@ -40,11 +40,11 @@ const Admin = () => {
                     <form className='otd-form'>
                         <div className='field'>
                             <label>Recipe of the Day</label>
-                            <select></select>
+                            <select className='otd-select'></select>
                         </div>
                         <div className='field'>
                             <label>Exercise of the Day</label>
-                            <select></select>
+                            <select className='otd-select'></select>
                         </div>
                         <div className='buttons'>
                             <button className='save'>Save Changes</button>
@@ -67,7 +67,7 @@ const Admin = () => {
                         </div>
                         <div className='field'>
                             <label>Thumbnail</label>
-                            <input type="file"/>
+                            <input/>
                         </div>
                         <div className='field'>
                             <label>Category</label>
