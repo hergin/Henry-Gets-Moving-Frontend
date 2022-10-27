@@ -9,7 +9,7 @@ const Admin = () => {
             <h1>Admin Panel</h1>
             <div className='content'>
                 <div className="form-div">
-                    <form>
+                    <form className='exercise-form'>
                         <div className='add-edit'>
                             <h2>Add Exercise</h2>
                             <div className='edit-select'>
@@ -17,15 +17,15 @@ const Admin = () => {
                                 <select></select>
                             </div>
                         </div>
-                        <div>
+                        <div className='field'>
                             <label>Name</label>
                             <input/>
                         </div>
-                        <div>
+                        <div className='field'>
                             <label>Video</label>
                             <input type="file"/>
                         </div>
-                        <div>
+                        <div className='field'>
                             <label>Category</label>
                             <select></select>
                         </div>
@@ -35,12 +35,12 @@ const Admin = () => {
                         </div>
                     </form>
                     <h2>Of the Day</h2>
-                    <form>
-                        <div>
+                    <form className='otd-form'>
+                        <div className='field'>
                             <label>Recipe of the Day</label>
                             <select></select>
                         </div>
-                        <div>
+                        <div className='field'>
                             <label>Exercise of the Day</label>
                             <select></select>
                         </div>
@@ -51,7 +51,7 @@ const Admin = () => {
                 </div>
                 <hr/>
                 <div className="form-div">
-                    <form>
+                    <form className='recipe-form'>
                         <div className='add-edit'>
                             <h2>Add Recipe</h2>
                             <div className='edit-select'>
@@ -59,27 +59,27 @@ const Admin = () => {
                                 <select></select>
                             </div>
                         </div>
-                        <div>
+                        <div className='field'>
                             <label>Name</label>
                             <input/>
                         </div>
-                        <div>
+                        <div className='field'>
                             <label>Thumbnail</label>
                             <input type="file"/>
                         </div>
-                        <div>
+                        <div className='field'>
                             <label>Category</label>
                             <select></select>
                         </div>
-                        <div>
+                        <div className='field'>
                             <label>Cook Time</label>
                             <input/>
                         </div>
-                        <div>
+                        <div className='field'>
                             <label>Ingredients</label>
                             <textarea/>
                         </div>
-                        <div>
+                        <div className='field'>
                             <label>Recipe Steps</label>
                             <textarea/>
                         </div>
