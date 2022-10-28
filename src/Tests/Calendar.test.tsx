@@ -29,7 +29,11 @@ describe('month',()=>{
         const days = today.toLocaleDateString().split('/');
         fireEvent.click(screen.getByText(today.toLocaleString('default',{month:'long'})+' '+today.getFullYear()));
         fireEvent.click(screen.getByText('December'));
-        fireEvent.click(screen.getByText(days[1]));
+        try {
+            fireEvent.click(screen.getAllByText(days[1])[1]);
+        } catch (e:any) {
+            fireEvent.click(screen.getAllByText(days[1])[0]);
+        }
         expect(screen.getByText(new RegExp(`.*12/${days[1]}/${days[2]}.*`))).toBeInTheDocument();
     })
 })
