@@ -22,5 +22,12 @@ describe('text boxes',()=>{
             userEvent.type(emailBox,"test@mail.whatever");
             expect(emailBox).toHaveValue('test@mail.whatever');
         });
+        test('confirm email box',()=>{
+            render(<Router><Register/></Router>);
+            const emailBox = screen.getByLabelText('Confirm Email');
+            fireEvent.click(screen.getByLabelText('Confirm Email'));
+            userEvent.type(emailBox,"test@mail.whatever");
+            expect(emailBox).toHaveValue('test@mail.whatever');
+        });
     });
 });
