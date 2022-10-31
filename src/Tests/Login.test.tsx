@@ -9,4 +9,8 @@ describe('register button',()=>{
         fireEvent.click(screen.getByText('Register'));
         expect(global.window.location.pathname).toContain('/register');
     });
+
+    it('exists',()=>{
+        
+    });
 });
