@@ -17,10 +17,10 @@ const Register = () => {
             <h1>Register</h1>
             <form>
                 <div className='email-input'>
-                    <label>Email</label>
-                    <input/>
-                    <label>Confirm Email</label>
-                    <input/>
+                    <label htmlFor='email-box'>Email</label>
+                    <input id='email-box'/>
+                    <label htmlFor='confirm-email-box'>Confirm Email</label>
+                    <input id='confirm-email-box'/>
                 </div>
                 <div className='buttons'>
                     <button className='red-button'>Register</button>
