@@ -19,8 +19,8 @@ describe('month',()=>{
         render(<Calendar/>);
         const days = new Date().toLocaleDateString().split('/');
         fireEvent.click(screen.getByText('›'));
-        fireEvent.click(screen.getByText(days[1]));
-        expect(screen.getByText(new RegExp(`.*${parseInt(days[0])+1}/${days[1]}/${days[2]}.*`))).toBeInTheDocument();
+        fireEvent.click(screen.getByText(parseInt(days[1])<31?days[1]:parseInt(days[1])-1));
+        expect(screen.getByText(new RegExp(`.*${parseInt(days[0])+1}/${parseInt(days[1])<31?days[1]:parseInt(days[1])-1}/${days[2]}.*`))).toBeInTheDocument();
     });
 
     test('can be changed via menu',()=>{
