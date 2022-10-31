@@ -8,5 +8,8 @@ describe('text boxes',()=>{
         render(<Router><Register/></Router>);
         expect(screen.getByLabelText('Email')).toBeInTheDocument();
     });
-    
+    test('confirm email',()=>{
+        render(<Router><Register/></Router>);
+        expect(screen.getByLabelText('Confirm Email')).toBeInTheDocument();
+    });
 });
