@@ -19,8 +19,8 @@ describe('month',()=>{
         render(<Calendar/>);
         const days = new Date().toLocaleDateString().split('/');
         fireEvent.click(screen.getByText('›'));
-        fireEvent.click(screen.getByText(days[1]));
-        expect(screen.getByText(new RegExp(`.*${parseInt(days[0])+1}/${days[1]}/${days[2]}.*`))).toBeInTheDocument();
+        fireEvent.click(screen.getByText(parseInt(days[1])<31?days[1]:parseInt(days[1])-1));
+        expect(screen.getByText(new RegExp(`.*${parseInt(days[0])+1}/${parseInt(days[1])<31?days[1]:parseInt(days[1])-1}/${days[2]}.*`))).toBeInTheDocument();
     });
 
     test('can be changed via menu',()=>{
@@ -29,7 +29,11 @@ describe('month',()=>{
         const days = today.toLocaleDateString().split('/');
         fireEvent.click(screen.getByText(today.toLocaleString('default',{month:'long'})+' '+today.getFullYear()));
         fireEvent.click(screen.getByText('December'));
-        fireEvent.click(screen.getByText(days[1]));
+        try {
+            fireEvent.click(screen.getAllByText(days[1])[1]);
+        } catch (e:any) {
+            fireEvent.click(screen.getAllByText(days[1])[0]);
+        }
         expect(screen.getByText(new RegExp(`.*12/${days[1]}/${days[2]}.*`))).toBeInTheDocument();
     })
 })
