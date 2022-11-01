@@ -7,6 +7,7 @@ import hard from '../../Assets/intenseIntensityFace.svg';
 import {Helmet, HelmetProvider} from "react-helmet-async";
 import Weather from "../../Components/Weather";
 import Grass from "../../Components/Grass";
+import BackArrow from "../../Components/BackArrow/BackArrow";
 
 const ExerciseLog = () => {
     return (
@@ -17,6 +18,7 @@ const ExerciseLog = () => {
                 </Helmet>
             </HelmetProvider>
             <Weather/>
+            <BackArrow route="/get-moving"/>
             <h1>Exercise Log</h1>
             <form>
                 <div className='log-input'>
