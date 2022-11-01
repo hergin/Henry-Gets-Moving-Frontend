@@ -4,6 +4,7 @@ import React from "react";
 import {Helmet, HelmetProvider} from "react-helmet-async";
 import Weather from "../../Components/Weather";
 import Grass from "../../Components/Grass";
+import BackArrow from "../../Components/BackArrow/BackArrow";
 
 const Register = () => {
     return (
@@ -14,6 +15,7 @@ const Register = () => {
                 </Helmet>
             </HelmetProvider>
             <Weather/>
+            <BackArrow route="/login"/>
             <h1>Register</h1>
             <form>
                 <div className='email-input'>
