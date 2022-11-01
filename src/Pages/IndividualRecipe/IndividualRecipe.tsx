@@ -6,6 +6,7 @@ import recipeStock from '../../Assets/recipeStock.jpg';
 import {Helmet, HelmetProvider} from "react-helmet-async";
 import Weather from "../../Components/Weather";
 import Grass from "../../Components/Grass";
+import BackArrow from "../../Components/BackArrow/BackArrow";
 
 const IndividualRecipe = () => {
     return (
@@ -16,9 +17,7 @@ const IndividualRecipe = () => {
                 </Helmet>
             </HelmetProvider>
            <Weather/>
-            <div className='back-arrow'>
-                <Link to={'/recipes'}><img src={back} alt="<"/>Back</Link>
-            </div>
+            <BackArrow route="/recipes"/>
             <div className='otd-div'>
                 <div className='otd-image'>
                     <img src={recipeStock} alt='Recipe Name'/>
