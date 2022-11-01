@@ -1,6 +1,7 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import back from '../../Assets/BackArrow.svg';
+import './BackArrow.scss';
 
 interface BackArrowProps {
     route: string;
