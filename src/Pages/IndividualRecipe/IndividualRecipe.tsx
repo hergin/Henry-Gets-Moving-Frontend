@@ -1,7 +1,5 @@
 import './IndividualRecipe.scss';
 import React from "react";
-import {Link} from "react-router-dom";
-import back from '../../Assets/BackArrow.svg';
 import recipeStock from '../../Assets/recipeStock.jpg';
 import {Helmet, HelmetProvider} from "react-helmet-async";
 import Weather from "../../Components/Weather";
@@ -16,7 +14,7 @@ const IndividualRecipe = () => {
                     <title>Recipe Name</title>
                 </Helmet>
             </HelmetProvider>
-           <Weather/>
+            <Weather/>
             <BackArrow route="/recipes"/>
             <div className='otd-div'>
                 <div className='otd-image'>
@@ -38,7 +36,7 @@ const IndividualRecipe = () => {
                     culpa qui officia deserunt mollit anim id est laborum.
                 </p>
             </div>
-           <Grass/>
+            <Grass/>
         </div>
     )
 }
