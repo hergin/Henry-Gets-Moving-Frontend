@@ -99,6 +99,23 @@
   }
   //Phone Styling
   @media (max-width: 750px) {
+    .select-search {
+      width: 85%;
+    }
 
+    select {
+      width: 47%;
+      font-size: 1rem;
+    }
+    input {
+      width: 45%;
+    }
+
+    .category{
+      font-size: 1rem;
+    }
+    .name{
+      font-size: 1.2rem;
+    }
   }
 }
