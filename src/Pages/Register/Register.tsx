@@ -5,17 +5,42 @@ import {Helmet, HelmetProvider} from "react-helmet-async";
 import Weather from "../../Components/Weather";
 import Grass from "../../Components/Grass";
 import BackArrow from "../../Components/BackArrow/BackArrow";
+import {useNavigate} from "react-router-dom";
 
 const Register = () => {
     const [email, setEmail] = useState("");
     const [confirmEmail, setConfirmEmail] = useState("");
+    const navigate = useNavigate();
 
     function checkEmailsMatch() {
         return email === confirmEmail && email.length > 0 && confirmEmail.length > 0;
     }
 
-    function handleSubmit(event: { preventDefault: () => void; }) {
-        event.preventDefault();
+    function handleSubmit(e: { preventDefault: () => void; }) {
+        e.preventDefault();
+        // return fetch(`${API_URL}/users`, {
+        //     method: "POST",
+        //     headers: {
+        //         "Content-Type": "application/json"
+        //     },
+        //     body: JSON.stringify({
+        //         email: email
+        //     })
+        // })
+        //     .then(response => {
+        //         if(response.ok) {
+        //             return response.json();
+        //         }
+        //         throw new Error("Invalid email");
+        //     })
+        //     .then(response => {
+        //         // sessionStorage.setItem("session_key", response.token);
+        //         navigate("/login");
+        //     })
+        //     .catch(err => {
+        //         // sessionStorage.clear();
+        //         window.alert(err);
+        //     })
     }
 
     return (
