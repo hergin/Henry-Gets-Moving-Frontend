@@ -15,6 +15,29 @@ const Login = () => {
 
     function handleSubmit(event: { preventDefault: () => void; }) {
         event.preventDefault();
+        // return fetch(`${API_URL}/users/login`, {
+        //     method: "POST",
+        //     headers: {
+        //         "Content-Type": "application/json"
+        //     },
+        //     body: JSON.stringify({
+        //         email: email
+        //     })
+        // })
+        //     .then(response => {
+        //         if(response.ok) {
+        //             return response.json();
+        //         }
+        //         throw new Error("Invalid email");
+        //     })
+        //     .then(response => {
+        //         // sessionStorage.setItem("session_key", response.token);
+        //         navigate("/get-moving");
+        //     })
+        //     .catch(err => {
+        //         // sessionStorage.clear();
+        //         window.alert(err);
+        //     })
     }
 
     return (
