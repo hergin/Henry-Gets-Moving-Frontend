@@ -60,6 +60,19 @@
   @media (max-width: 750px) {
     h1 {
       width: 80%;
+      font-size: 1.8rem;
+    }
+    .email-input{
+      margin-bottom: 2em;
+    }
+    label{
+      font-size: 1.4rem;
+    }
+    input{
+      font-size: 1rem;
+    }
+    .red-button{
+      font-size: 1.2rem;
     }
   }
 }
