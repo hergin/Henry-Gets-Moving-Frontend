@@ -32,17 +32,19 @@ const ExerciseLog = () => {
                     </div>
                     <div className='intensity label-input'>
                         <label>Intensity</label>
-                        <div className='intensity-icon'>
-                            <img src={light} alt={"Light Intensity"}/>
-                            <p>Light</p>
-                        </div>
-                        <div className='intensity-icon'>
-                            <img src={medium} alt={"Moderate Intensity"}/>
-                            <p>Moderate</p>
-                        </div>
-                        <div className='intensity-icon'>
-                            <img src={hard} alt={"Vigorous Intensity"}/>
-                            <p>Vigorous</p>
+                        <div className="icons">
+                            <div className='intensity-icon'>
+                                <img src={light} alt={"Light Intensity"}/>
+                                <p>Light</p>
+                            </div>
+                            <div className='intensity-icon'>
+                                <img src={medium} alt={"Moderate Intensity"}/>
+                                <p>Moderate</p>
+                            </div>
+                            <div className='intensity-icon'>
+                                <img src={hard} alt={"Vigorous Intensity"}/>
+                                <p>Vigorous</p>
+                            </div>
                         </div>
                     </div>
                     <div className='label-input'>

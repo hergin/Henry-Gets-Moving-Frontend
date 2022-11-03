@@ -14,6 +14,7 @@
 
   form {
     padding: 10px 40px;
+    width: 60%;
   }
 
   .label-input {
@@ -45,6 +46,13 @@
     width: 60%;
   }
 
+  .icons{
+    display: flex;
+    width: 60%;
+    justify-content: space-between;
+    padding: 0.6em;
+  }
+
   .intensity {
     display: flex;
   }
@@ -62,12 +70,24 @@
 
   //Desktop Styling
   @media (min-width: 1050px) {
-
+    form{
+      width: 50%;
+    }
+    input{
+      width: 70%;
+    }
+    h1{
+      width: 55%;
+    }
+    .icons{
+      width: 70%;
+    }
   }
   //Phone Styling
   @media (max-width: 750px) {
     h1{
       width: 90%;
+      font-size: 1.6rem;
     }
     form {
       width: 80%;
@@ -88,6 +108,13 @@
       img{
         width: 40px;
       }
+    }
+    .icons{
+      width: 65%;
+      padding: 0;
+    }
+    .swings{
+      padding-bottom: 2em;
     }
     .label-input{
       p{
