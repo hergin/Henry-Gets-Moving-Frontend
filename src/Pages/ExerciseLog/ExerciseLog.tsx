@@ -72,15 +72,15 @@ const ExerciseLog = () => {
                     <div className='intensity label-input'>
                         <label>Intensity</label>
                         <div className="icons">
-                            <div className='intensity-icon' onClick={(e => setIntensity("Light"))}>
+                            <div className={intensity === 'Light' ? 'intensity-icon selected' : "intensity-icon"} onClick={(e => setIntensity("Light"))}>
                                 <img src={light} alt={"Light Intensity"} />
                                 <p>Light</p>
                             </div>
-                            <div className='intensity-icon' onClick={(e => setIntensity("Moderate"))}>
+                            <div className={intensity === 'Moderate' ? 'intensity-icon selected' : "intensity-icon"} onClick={(e => setIntensity("Moderate"))}>
                                 <img src={medium} alt={"Moderate Intensity"}/>
                                 <p>Moderate</p>
                             </div>
-                            <div className='intensity-icon' onClick={(e => setIntensity("Vigorous"))}>
+                            <div className={intensity === 'Vigorous' ? 'intensity-icon selected' : "intensity-icon"} onClick={(e => setIntensity("Vigorous"))}>
                                 <img src={hard} alt={"Vigorous Intensity"}/>
                                 <p>Vigorous</p>
                             </div>
