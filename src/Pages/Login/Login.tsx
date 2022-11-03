@@ -29,7 +29,7 @@ const Login = () => {
             <form onSubmit={handleSubmit}>
                 <div className='email-input'>
                     <label>Email</label>
-                    <input onChange={(e) => setEmail(e.target.value)} value={email}/>
+                    <input onChange={(e) => setEmail(e.target.value)} value={email} type="email"/>
                 </div>
                 <div className='buttons'>
                     <button className='red-button' type="submit" disabled={!validateForm()}>Login</button>
