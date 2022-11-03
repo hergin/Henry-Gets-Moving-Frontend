@@ -31,9 +31,9 @@ const Register = () => {
             <form onSubmit={handleSubmit}>
                 <div className='email-input'>
                     <label htmlFor='email-box'>Email</label>
-                    <input id='email-box' value={email} onChange={(e) => setEmail(e.target.value)}/>
+                    <input id='email-box' type="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
                     <label htmlFor='confirm-email-box'>Confirm Email</label>
-                    <input id='confirm-email-box' value={email} onChange={(e) => setConfirmEmail(e.target.value)}/>
+                    <input id='confirm-email-box' type="email" value={confirmEmail} onChange={(e) => setConfirmEmail(e.target.value)}/>
                 </div>
                 <div className='buttons'>
                     <button className='red-button' type="submit" disabled={!checkEmailsMatch()}>Register</button>
