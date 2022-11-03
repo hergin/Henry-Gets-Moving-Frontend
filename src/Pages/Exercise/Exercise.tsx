@@ -92,7 +92,7 @@ const Exercise = () => {
                     <p>Keep up the good work!</p>
                 </div>
             </div>
-            <div className='exercise-log'>
+            <div className='exercise-log-exercise'>
                 <Link to={'/exercise-log'} className='red-button'>Log Exercise</Link>
             </div>
             <div className='exercise-content'>
