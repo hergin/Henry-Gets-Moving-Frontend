@@ -1,4 +1,4 @@
-.back-arrow{
+.back-arrow {
   a {
     display: flex;
     align-items: center;
@@ -8,8 +8,22 @@
     font-size: 1.4rem;
     width: 15%;
   }
+
   @media (min-width: 1000px) {
     width: 90%;
     margin: auto;
+  }
+
+  //Phone Styling
+  @media (max-width: 750px) {
+    width: 95%;
+    margin: auto;
+    a {
+      width: 25%;
+      font-size: 1rem;
+    }
+    img {
+      height: 25px;
+    }
   }
 }
