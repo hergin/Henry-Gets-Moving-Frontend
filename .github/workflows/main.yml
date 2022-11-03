@@ -98,3 +98,68 @@ jobs:
         run: npm install
       - name: run tests
         run: npm test Register
+
+  run-game-tests:
+    name: Game.tsx tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2.5.0
+      - name: setup node
+        uses: actions/setup-node@v3
+      - name: install dependencies
+        run: npm install
+      - name: run tests
+        run: npm test Game
+
+  run-exercise-tests:
+    name: Exercise.tsx tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2.5.0
+      - name: setup node
+        uses: actions/setup-node@v3
+      - name: install dependencies
+        run: npm install
+      - name: run tests
+        run: npm test Exercise
+
+  run-exercise-log-tests:
+    name: ExerciseLog.tsx tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2.5.0
+      - name: setup node
+        uses: actions/setup-node@v3
+      - name: install dependencies
+        run: npm install
+      - name: run tests
+        run: npm test ExerciseLog
+
+  run-admin-tests:
+    name: Admin.tsx tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2.5.0
+      - name: setup node
+        uses: actions/setup-node@v3
+      - name: install dependencies
+        run: npm install
+      - name: run tests
+        run: npm test Admin
+
+  run-learnmore-tests:
+    name: LearnMore.tsx tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2.5.0
+      - name: setup node
+        uses: actions/setup-node@v3
+      - name: install dependencies
+        run: npm install
+      - name: run tests
+        run: npm test LearnMore

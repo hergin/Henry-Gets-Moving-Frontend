@@ -31,3 +31,8 @@ describe('text boxes',()=>{
         });
     });
 });
+
+describe('register button',()=>{
+    test.todo('creates new account with email');
+    test.todo('fails if text boxes don\'t match');
+});

@@ -90,8 +90,8 @@ const Admin = () => {
                             <textarea placeholder="1. Step&#10;2. Step&#10;3. Step"/>
                         </div>
                         <div className='buttons'>
-                            <button className='delete'>Delete Exercise</button>
-                            <button className='save'>Save Exercise</button>
+                            <button className='delete'>Delete Recipe</button>
+                            <button className='save'>Save Recipe</button>
                         </div>
                     </form>
                 </div>
