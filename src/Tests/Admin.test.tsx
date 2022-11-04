@@ -24,7 +24,7 @@ describe('updates database',()=>{
         render(<Admin/>);
         const name = screen.getAllByRole('input')[0];
         const video = screen.getAllByRole('input')[1];
-        const category = screen.getAllByRole('input')[1];
+        const category = screen.getAllByRole('input')[2];
         fireEvent.click(name);
         userEvent.type(name, 'Test Exercise');
         fireEvent.click(video);
@@ -32,15 +32,24 @@ describe('updates database',()=>{
         fireEvent.click(category);
         userEvent.type(category, 'Yoga');
         fireEvent.click(screen.getByText('Save Exercise'));
+        fireEvent.click(screen.getAllByRole('select')[0]);
+        fireEvent.click(screen.getByText('Test Exercise'));
+        fireEvent.click(name);
+        userEvent.type(name, 'Test Exercise Edited');
+        fireEvent.click(video);
+        userEvent.type(video, 'https://www.youtube.com/watch?v=dQw4w9WgXcQ');
+        fireEvent.click(category);
+        userEvent.type(category, 'Yoga');
+        fireEvent.click(screen.getByText('Save Exercise'));
         render(<Router><App/></Router>);
         fireEvent.click(screen.getByText('Get Moving'));
-        expect(screen.getByText('Test Exercise')).toBeInTheDocument();
+        expect(screen.getByText('Test Exercise Edited')).toBeInTheDocument();
     });
     test('exercise adder/deleter',()=>{
         render(<Admin/>);
         const name = screen.getAllByRole('input')[0];
         const video = screen.getAllByRole('input')[1];
-        const category = screen.getAllByRole('input')[1];
+        const category = screen.getAllByRole('input')[2];
         fireEvent.click(name);
         userEvent.type(name, 'Test Exercise');
         fireEvent.click(video);
