@@ -29,4 +29,14 @@ describe('login button',()=>{
         fireEvent.click(screen.getByText('Login'));
         // TODO: make sure is logged in
     })
+
+    test.skip('can\'t log-in non-existent user',()=>{
+        render(<Router><App/></Router>);
+        fireEvent.click(screen.getByText('Login'));
+        const emailBox = screen.getByRole('input');
+        fireEvent.click(emailBox);
+        userEvent.type(emailBox, 'non.existent@bsu.edu');
+        fireEvent.click(screen.getByText('Login'));
+        expect(screen.getByText("Account doesn't exist")).toBeInTheDocument()
+    })
 })
