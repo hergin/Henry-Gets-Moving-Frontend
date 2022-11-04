@@ -21,9 +21,6 @@ describe('sections',()=>{
 
 describe('updates database',()=>{
     test('exercise editor',()=>{
-        
-    });
-    test('exercise adder',()=>{
         render(<Admin/>);
         const name = screen.getAllByRole('input')[0];
         const video = screen.getAllByRole('input')[1];
@@ -38,6 +35,36 @@ describe('updates database',()=>{
         render(<Router><App/></Router>);
         fireEvent.click(screen.getByText('Get Moving'));
         expect(screen.getByText('Test Exercise')).toBeInTheDocument();
+    });
+    test('exercise adder/deleter',()=>{
+        render(<Admin/>);
+        const name = screen.getAllByRole('input')[0];
+        const video = screen.getAllByRole('input')[1];
+        const category = screen.getAllByRole('input')[1];
+        fireEvent.click(name);
+        userEvent.type(name, 'Test Exercise');
+        fireEvent.click(video);
+        userEvent.type(video, 'https://www.youtube.com/watch?v=dQw4w9WgXcQ');
+        fireEvent.click(category);
+        userEvent.type(category, 'Yoga');
+        fireEvent.click(screen.getByText('Save Exercise'));
+        // check the exercise exists
+        render(<Router><App/></Router>);
+        fireEvent.click(screen.getByText('Get Moving'));
+        expect(screen.getByText('Test Exercise')).toBeInTheDocument();
+        // delete the test exercise
+        render(<Admin/>);
+        fireEvent.click(name);
+        userEvent.type(name, 'Test Exercise');
+        fireEvent.click(video);
+        userEvent.type(video, 'https://www.youtube.com/watch?v=dQw4w9WgXcQ');
+        fireEvent.click(category);
+        userEvent.type(category, 'Yoga');
+        fireEvent.click(screen.getByText('Delete Exercise'));
+        render(<Router><App/></Router>);
+        // make sure it's not there anymore
+        fireEvent.click(screen.getByText('Get Moving'));
+        expect(screen.queryByText('Test Exercise')).not.toBeInTheDocument();
     });
     test.todo('recipe adder');
     test.todo('recipe editor');
