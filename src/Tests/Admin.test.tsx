@@ -20,7 +20,7 @@ describe('sections',()=>{
 });
 
 describe('updates database',()=>{
-    test('exercise editor',()=>{
+    test.skip('exercise editor',()=>{
         render(<Admin/>);
         const name = screen.getAllByRole('input')[0];
         const video = screen.getAllByRole('input')[1];
@@ -45,7 +45,7 @@ describe('updates database',()=>{
         fireEvent.click(screen.getByText('Get Moving'));
         expect(screen.getByText('Test Exercise Edited')).toBeInTheDocument();
     });
-    test('exercise adder/deleter',()=>{
+    test.skip('exercise adder/deleter',()=>{
         render(<Admin/>);
         const name = screen.getAllByRole('input')[0];
         const video = screen.getAllByRole('input')[1];
