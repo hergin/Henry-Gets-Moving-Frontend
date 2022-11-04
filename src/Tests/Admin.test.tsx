@@ -75,7 +75,45 @@ describe('updates database',()=>{
         fireEvent.click(screen.getByText('Get Moving'));
         expect(screen.queryByText('Test Exercise')).not.toBeInTheDocument();
     });
-    test.todo('recipe adder');
-    test.todo('recipe editor');
+    test.skip('recipe adder/remover',()=>{
+        render(<Admin/>);
+        const name = screen.getAllByRole('input')[3];
+        const thumbnail = screen.getAllByRole('input')[4];
+        const category = screen.getAllByRole('input')[5];
+        const time = screen.getAllByRole('input')[6];
+        const ingredients = screen.getAllByRole('input')[7];
+        const steps = screen.getAllByRole('input')[8];
+        fireEvent.click(name);
+        userEvent.type(name, 'Test Recipe');
+        fireEvent.click(thumbnail);
+        userEvent.type(thumbnail, 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpngimg.com%2Fuploads%2Fpokemon%2Fpokemon_PNG14.png');
+        fireEvent.click(category);
+        userEvent.type(category, 'Food');
+        fireEvent.click(time);
+        userEvent.type(time, '1 hour');
+        fireEvent.click(ingredients);
+        userEvent.type(ingredients, 'Pants, Microphone');
+        fireEvent.click(steps);
+        userEvent.type(steps, '1. cook 2. eat');
+        fireEvent.click(screen.getByText('Save Recipe'));
+        // check the exercise exists
+        render(<Router><App/></Router>);
+        fireEvent.click(screen.getByText('Eat Healthy'));
+        expect(screen.getByText('Test Recipe')).toBeInTheDocument();
+        // delete the test exercise
+        render(<Admin/>);
+        fireEvent.click(name);
+        userEvent.type(name, 'Test Recipe');
+        fireEvent.click(thumbnail);
+        userEvent.type(thumbnail, 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpngimg.com%2Fuploads%2Fpokemon%2Fpokemon_PNG14.png');
+        fireEvent.click(category);
+        userEvent.type(category, 'Food');
+        fireEvent.click(screen.getByText('Delete Recipe'));
+        render(<Router><App/></Router>);
+        // make sure it's not there anymore
+        fireEvent.click(screen.getByText('Eat Healthy'));
+        expect(screen.queryByText('Test Recipe')).not.toBeInTheDocument();
+    });
+    test.skip('recipe editor');
     test.todo('of the day');
 });
