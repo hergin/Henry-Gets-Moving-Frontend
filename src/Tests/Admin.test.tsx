@@ -157,6 +157,29 @@ describe('updates database',()=>{
         expect(screen.getByText('Test Recipe Edited')).toBeInTheDocument();
     });
     test.skip('of the day',()=>{
-
+        render(<Admin/>);
+        // add exercise to make sure there is one there in existence
+        const name = screen.getAllByRole('textbox')[3];
+        const thumbnail = screen.getAllByRole('textbox')[4];
+        const category = screen.getAllByRole('textbox')[5];
+        const time = screen.getAllByRole('textbox')[6];
+        const ingredients = screen.getAllByRole('textbox')[7];
+        const steps = screen.getAllByRole('textbox')[8];
+        
+        fireEvent.click(name);
+        userEvent.type(name, 'Test Recipe');
+        fireEvent.click(thumbnail);
+        userEvent.type(thumbnail, 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpngimg.com%2Fuploads%2Fpokemon%2Fpokemon_PNG14.png');
+        fireEvent.click(category);
+        userEvent.type(category, 'Food');
+        fireEvent.click(time);
+        userEvent.type(time, '1 hour');
+        fireEvent.click(ingredients);
+        userEvent.type(ingredients, 'Pants, Microphone');
+        fireEvent.click(steps);
+        userEvent.type(steps, '1. cook 2. eat');
+        fireEvent.click(screen.getByText('Save Recipe'));
+        const rotd = screen.getAllByRole('combobox')[2];
+        fireEvent.click(rotd);
     });
 });
