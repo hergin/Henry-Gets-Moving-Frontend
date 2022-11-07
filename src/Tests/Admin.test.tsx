@@ -120,8 +120,8 @@ describe('updates database',()=>{
         const thumbnail = screen.getAllByRole('textbox')[4];
         const category = screen.getAllByRole('textbox')[5];
         const time = screen.getAllByRole('textbox')[6];
-        const ingredients = screen.getAllByRole('textbox')[7];
-        const steps = screen.getAllByRole('textbox')[8];
+        const ingredients = screen.getByPlaceholderText(/.*Ingredient.*/);
+        const steps = screen.getByPlaceholderText(/.*Step.*/);
         
         fireEvent.click(name);
         userEvent.type(name, 'Test Recipe');
@@ -137,7 +137,7 @@ describe('updates database',()=>{
         userEvent.type(steps, '1. cook 2. eat');
         fireEvent.click(screen.getByText('Save Recipe'));
 
-        fireEvent.click(screen.getAllByRole('select')[1]);
+        userEvent.selectOptions(screen.getAllByRole('combobox')[2], 'Test Recipe');
         fireEvent.click(screen.getByText('Test Recipe'));
         fireEvent.click(name);
         userEvent.type(name, 'Test Recipe Edited');
@@ -156,15 +156,15 @@ describe('updates database',()=>{
         fireEvent.click(screen.getByText('Eat Healthy'));
         expect(screen.getByText('Test Recipe Edited')).toBeInTheDocument();
     });
-    test.skip('of the day',()=>{
+    test('of the day',()=>{
         render(<Admin/>);
         // add exercise to make sure there is one there in existence
         const name = screen.getAllByRole('textbox')[3];
         const thumbnail = screen.getAllByRole('textbox')[4];
         const category = screen.getAllByRole('textbox')[5];
         const time = screen.getAllByRole('textbox')[6];
-        const ingredients = screen.getAllByRole('textbox')[7];
-        const steps = screen.getAllByRole('textbox')[8];
+        const ingredients = screen.getByPlaceholderText(/.*Ingredient.*/);
+        const steps = screen.getByPlaceholderText(/.*Step.*/);
         
         fireEvent.click(name);
         userEvent.type(name, 'Test Recipe');
