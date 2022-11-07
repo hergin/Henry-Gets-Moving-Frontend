@@ -19,7 +19,6 @@ describe('intensity labels',()=>{
             expect(screen.getByText('Vigorous')).toBeInTheDocument();
         });
     });
-    test.todo('function');
 });
 test('back arrow goes back',()=>{
     render(<Router><App/></Router>);
