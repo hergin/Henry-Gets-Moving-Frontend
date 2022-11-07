@@ -22,9 +22,9 @@ describe('sections',()=>{
 describe('updates database',()=>{
     test.skip('exercise editor',()=>{
         render(<Admin/>);
-        const name = screen.getAllByRole('input')[0];
-        const video = screen.getAllByRole('input')[1];
-        const category = screen.getAllByRole('input')[2];
+        const name = screen.getAllByRole('textbox')[0];
+        const video = screen.getAllByRole('textbox')[1];
+        const category = screen.getAllByRole('textbox')[2];
         fireEvent.click(name);
         userEvent.type(name, 'Test Exercise');
         fireEvent.click(video);
@@ -47,9 +47,9 @@ describe('updates database',()=>{
     });
     test.skip('exercise adder/deleter',()=>{
         render(<Admin/>);
-        const name = screen.getAllByRole('input')[0];
-        const video = screen.getAllByRole('input')[1];
-        const category = screen.getAllByRole('input')[2];
+        const name = screen.getAllByRole('textbox')[0];
+        const video = screen.getAllByRole('textbox')[1];
+        const category = screen.getAllByRole('textbox')[2];
         fireEvent.click(name);
         userEvent.type(name, 'Test Exercise');
         fireEvent.click(video);
@@ -77,12 +77,12 @@ describe('updates database',()=>{
     });
     test.skip('recipe adder/remover',()=>{
         render(<Admin/>);
-        const name = screen.getAllByRole('input')[3];
-        const thumbnail = screen.getAllByRole('input')[4];
-        const category = screen.getAllByRole('input')[5];
-        const time = screen.getAllByRole('input')[6];
-        const ingredients = screen.getAllByRole('input')[7];
-        const steps = screen.getAllByRole('input')[8];
+        const name = screen.getAllByRole('textbox')[3];
+        const thumbnail = screen.getAllByRole('textbox')[4];
+        const category = screen.getAllByRole('textbox')[5];
+        const time = screen.getAllByRole('textbox')[6];
+        const ingredients = screen.getAllByRole('textbox')[7];
+        const steps = screen.getAllByRole('textbox')[8];
         fireEvent.click(name);
         userEvent.type(name, 'Test Recipe');
         fireEvent.click(thumbnail);
@@ -116,12 +116,12 @@ describe('updates database',()=>{
     });
     test.skip('recipe editor',()=>{
         render(<Admin/>);
-        const name = screen.getAllByRole('input')[3];
-        const thumbnail = screen.getAllByRole('input')[4];
-        const category = screen.getAllByRole('input')[5];
-        const time = screen.getAllByRole('input')[6];
-        const ingredients = screen.getAllByRole('input')[7];
-        const steps = screen.getAllByRole('input')[8];
+        const name = screen.getAllByRole('textbox')[3];
+        const thumbnail = screen.getAllByRole('textbox')[4];
+        const category = screen.getAllByRole('textbox')[5];
+        const time = screen.getAllByRole('textbox')[6];
+        const ingredients = screen.getAllByRole('textbox')[7];
+        const steps = screen.getAllByRole('textbox')[8];
         
         fireEvent.click(name);
         userEvent.type(name, 'Test Recipe');
@@ -156,5 +156,7 @@ describe('updates database',()=>{
         fireEvent.click(screen.getByText('Eat Healthy'));
         expect(screen.getByText('Test Recipe Edited')).toBeInTheDocument();
     });
-    test.todo('of the day');
+    test.skip('of the day',()=>{
+
+    });
 });
