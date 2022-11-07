@@ -34,5 +34,10 @@ describe('text boxes',()=>{
 
 describe('register button',()=>{
     test.todo('creates new account with email');
-    test.todo('fails if text boxes don\'t match');
+    test('fails if text boxes don\'t match',()=>{
+        render(<Router><Register/></Router>);
+        userEvent.type(screen.getByLabelText('Confirm Email'),'not@the.same');
+        userEvent.type(screen.getByLabelText('Email'),"test@mail.whatever");
+        expect(screen.getAllByText('Register')[1]).toBeDisabled();
+    });
 });
