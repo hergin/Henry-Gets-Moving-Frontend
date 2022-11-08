@@ -23,3 +23,15 @@ export type ExerciseCategory = {
     id: number,
     name: string
 }
+
+export type User = {
+    id: number,
+    email: string
+}
+
+export type FamilyMember = {
+    id: number,
+    name: string,
+    user_id: number,
+    User: User
+}
