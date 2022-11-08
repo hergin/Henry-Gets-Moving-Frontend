@@ -34,3 +34,20 @@ const getExercises = async (): Promise<Exercise[]> => {
             });
         });
 }
+
+const getExerciseCategories = async (): Promise<ExerciseCategory[]> => {
+    return await fetch('http://127.0.0.1:3333/exerciseCategories')
+        .then((response) => {
+            if (response.ok) return response.json();
+            return {
+                errorCode: response.status,
+                error: response.statusText,
+            }
+        }).then((response) => {
+            return response.map((exercise: any) => {
+                return {
+                    ...exercise
+                } as Exercise
+            });
+        });
+}
