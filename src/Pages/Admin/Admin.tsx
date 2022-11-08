@@ -2,9 +2,22 @@ import './Admin.scss'
 import Weather from "../../Components/Weather";
 import Grass from "../../Components/Grass";
 import swings from "../../Assets/Swings.png";
-import React from "react";
+import React, {useEffect, useState} from "react";
+import {Exercise, Recipe} from "../../Structs/DataTypes";
+import API from "../../API";
 
 const Admin = () => {
+
+    const [recipes, setRecipes] = useState([] as Recipe[]);
+    const [exercises, setExercises] = useState([] as Exercise[])
+    const [recipe, setRecipe] = useState({} as Recipe)
+    const [exercise, setExercise] = useState({} as Exercise)
+
+    useEffect(() => {
+        API.getRecipes().then((recipes) => setRecipes(recipes));
+        API.getExercises().then((exercises) => setExercises(exercises))
+    })
+
     return (
         <div className='admin'>
             <Weather/>
