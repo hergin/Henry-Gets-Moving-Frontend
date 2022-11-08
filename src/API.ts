@@ -1,5 +1,4 @@
 import {Recipe, Exercise, RecipeCategory, ExerciseCategory} from "./Structs/DataTypes";
-import exercise from "./Pages/Exercise/Exercise";
 
 const getRecipes = async (): Promise<Recipe[]> => {
     return await fetch('http://127.0.0.1:3333/recipes')
@@ -68,3 +67,12 @@ const getRecipeCategories = async (): Promise<RecipeCategory[]> => {
             });
         });
 }
+
+const API ={
+    getRecipes,
+    getExercises,
+    getRecipeCategories,
+    getExerciseCategories
+}
+
+export default API;
