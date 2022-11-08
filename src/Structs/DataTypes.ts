@@ -35,3 +35,12 @@ export type FamilyMember = {
     user_id: number,
     User: User
 }
+
+export type ExerciseLog = {
+    id: number,
+    type: string,
+    intensity: string,
+    duration: string,
+    family_member_id: number,
+    FamilyMember: FamilyMember
+}
