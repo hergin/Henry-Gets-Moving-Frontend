@@ -38,12 +38,13 @@ const Game = () => {
                     <title>Game</title>
                 </Helmet>
             </HelmetProvider>
-            <div className="game-container">
-                <img src={squirmMaze} alt="Squirm's maze"/>
-            </div>
-            <div className="game-picker">
-                {gamesLayout(games_list)}
-            </div>
+            {/*<div className="game-container">*/}
+            {/*    <img src={squirmMaze} alt="Squirm's maze"/>*/}
+            {/*</div>*/}
+            {/*<div className="game-picker">*/}
+            {/*    {gamesLayout(games_list)}*/}
+            {/*</div>*/}
+            <h1>Coming Soon...</h1>
         </div>
     )
 }
