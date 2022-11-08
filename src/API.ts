@@ -44,10 +44,27 @@ const getExerciseCategories = async (): Promise<ExerciseCategory[]> => {
                 error: response.statusText,
             }
         }).then((response) => {
-            return response.map((exercise: any) => {
+            return response.map((exerciseCategory: any) => {
                 return {
-                    ...exercise
-                } as Exercise
+                    ...exerciseCategory
+                } as ExerciseCategory
+            });
+        });
+}
+
+const getRecipeCategories = async (): Promise<RecipeCategory[]> => {
+    return await fetch('http://127.0.0.1:3333/recipeCategories')
+        .then((response) => {
+            if (response.ok) return response.json();
+            return {
+                errorCode: response.status,
+                error: response.statusText,
+            }
+        }).then((response) => {
+            return response.map((recipeCategory: any) => {
+                return {
+                    ...recipeCategory
+                } as RecipeCategory
             });
         });
 }
