@@ -107,7 +107,7 @@ const Exercise = () => {
                         <option value="Yoga">Yoga</option>
                         <option value="Stretching">Stretching</option>
                     </select>
-                    <Link to={'/all-logs'} className='red-button'>View All Logs</Link>
+                    <button onClick={()=>{navigate(API.isLoggedIn()?'/all-logs':'/login');}} className='red-button'>View All Logs</button>
                 </div>
                 <div className='exercise-grid'>
                     {exerciseLayout(exercise_list)}
