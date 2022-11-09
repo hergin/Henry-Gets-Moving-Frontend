@@ -1,7 +1,7 @@
 import './Exercise.scss';
 import exerciseStock from '../../Assets/exerciseStock.jpg'
 import trophy from '../../Assets/40mins.svg'
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import footerImage from "../../Assets/grass.svg";
 import {Link, useNavigate} from "react-router-dom";
 import exit from '../../Assets/Exit.svg';
@@ -13,20 +13,18 @@ import API from '../../API';
 import {Exercise} from "../../Structs/DataTypes";
 
 const ExercisePage = () => {
-
-
     const [selectedExercise, setSelectedExercise] = useState<null | Exercise>(null);
-
+    const [exercises, setExercises] = useState([] as Exercise[])
     const navigate = useNavigate();
     const exerciseLayout = (individualExercise: Exercise[]) => {
         return individualExercise.map((exercise) => {
                 return (
                     <>
                         <div className='grid-content'>
-                            <img src={exercise.thumbnail} onClick={e => (setSelectedExercise(exercise))}
+                            <img src={exercise.videoLink} onClick={e => (setSelectedExercise(exercise))}
                                  alt={exercise.name + "Thumbnail"}/>
                             <p className='name'>{exercise.name}</p>
-                            <p className='category'>{exercise.category}</p>
+                            <p className='category'>{exercise.exerciseCategory?.name}</p>
                         </div>
 
                     </>
@@ -34,6 +32,10 @@ const ExercisePage = () => {
             }
         )
     }
+
+    useEffect(() => {
+        API.getExercises().then((exercises) => setExercises(exercises));
+    }, [])
 
     return (
         <div className="exercise">
@@ -78,7 +80,7 @@ const ExercisePage = () => {
                     <button onClick={()=>{navigate(API.isLoggedIn()?'/all-logs':'/login');}} className='red-button'>View All Logs</button>
                 </div>
                 <div className='exercise-grid'>
-                    {exerciseLayout(exercise_list)}
+                    {exerciseLayout(exercises)}
                 </div>
                 {selectedExercise &&
                 <div className='dialog-box'>
@@ -91,7 +93,7 @@ const ExercisePage = () => {
                             <div className='episode-player'>
                                 <div className='video-player'>
                                     <iframe
-                                        src={selectedExercise.video_url}
+                                        src={selectedExercise.videoLink}
                                         frameBorder="0" allow="autoplay; fullscreen; picture-in-picture"
                                         allowFullScreen
                                     />
@@ -99,7 +101,7 @@ const ExercisePage = () => {
                             </div>
                             <div className='exercise-text'>
                                 <p className='dbox-name'>{selectedExercise.name}</p>
-                                <p className='dbox-category'>{selectedExercise.category}</p>
+                                <p className='dbox-category'>{selectedExercise.exerciseCategory?.name}</p>
                             </div>
                         </div>
                         <div>
@@ -120,4 +122,4 @@ const ExercisePage = () => {
     )
 }
 
-export default ExercisePage;
+export default ExercisePage
