@@ -122,4 +122,5 @@ const ExercisePage = () => {
     )
 }
 
+// @ts-ignore
 export default ExercisePage
