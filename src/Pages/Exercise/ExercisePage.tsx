@@ -15,13 +15,16 @@ import {Exercise} from "../../Structs/DataTypes";
 const ExercisePage = () => {
     const [selectedExercise, setSelectedExercise] = useState<null | Exercise>(null);
     const [exercises, setExercises] = useState([] as Exercise[])
+    useEffect(() => {
+        API.getExercises().then((exercises) => setExercises(exercises))
+    }, [])
     const navigate = useNavigate();
     const exerciseLayout = (individualExercise: Exercise[]) => {
         return individualExercise.map((exercise) => {
                 return (
                     <>
                         <div className='grid-content'>
-                            <img src={exercise.videoLink} onClick={e => (setSelectedExercise(exercise))}
+                            <img src={exercise.thumbnailLink} onClick={e => (setSelectedExercise(exercise))}
                                  alt={exercise.name + "Thumbnail"}/>
                             <p className='name'>{exercise.name}</p>
                             <p className='category'>{exercise.exerciseCategory?.name}</p>
@@ -93,7 +96,7 @@ const ExercisePage = () => {
                             <div className='episode-player'>
                                 <div className='video-player'>
                                     <iframe
-                                        src={selectedExercise.videoLink}
+                                        src={"https://www.youtube.com/embed/3n9rDwpa6QA?list=PL0nhBlgFkftzaBqgQjvo-1z81P1vkBJYN"}
                                         frameBorder="0" allow="autoplay; fullscreen; picture-in-picture"
                                         allowFullScreen
                                     />
@@ -116,8 +119,7 @@ const ExercisePage = () => {
                     <button className='red-button'>See More</button>
                 </div>
             </div>
-            <img src={footerImage} className='footer' alt={"Grass"}/>
-            <img src={grassDesktop} className='footer-desktop' alt={"Grass"}/>
+            <Grass/>
         </div>
     )
 }

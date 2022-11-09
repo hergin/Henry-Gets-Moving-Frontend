@@ -61,7 +61,7 @@ jobs:
         run: npm test Header
 
   run-recipe-tests:
-    name: Recipe.tsx tests
+    name: RecipePage.tsx tests
     runs-on: ubuntu-latest
     steps:
       - name: checkout
@@ -71,7 +71,7 @@ jobs:
       - name: install dependencies
         run: npm install
       - name: run tests
-        run: npm test Recipe
+        run: npm test RecipePage
 
   run-login-tests:
     name: Login.tsx tests
@@ -113,7 +113,7 @@ jobs:
         run: npm test Game
 
   run-exercise-tests:
-    name: Exercise.tsx tests
+    name: ExercisePage.tsx tests
     runs-on: ubuntu-latest
     steps:
       - name: checkout
@@ -123,10 +123,10 @@ jobs:
       - name: install dependencies
         run: npm install
       - name: run tests
-        run: npm test Exercise
+        run: npm test ExercisePage
 
   run-exercise-log-tests:
-    name: ExerciseLog.tsx tests
+    name: ExerciseLogPage.tsx tests
     runs-on: ubuntu-latest
     steps:
       - name: checkout
@@ -136,7 +136,7 @@ jobs:
       - name: install dependencies
         run: npm install
       - name: run tests
-        run: npm test ExerciseLog
+        run: npm test ExerciseLogPage
 
   run-admin-tests:
     name: Admin.tsx tests
