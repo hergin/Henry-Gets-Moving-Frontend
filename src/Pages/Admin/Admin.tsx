@@ -41,7 +41,7 @@ const Admin = () => {
         const formData = new FormData()
         formData.append("name", exercise.name)
         formData.append("video_link", exercise.video_link)
-        formData.append("video_link", exercise.video_link)
+        formData.append("thumbnail_link", exercise.thumbnail_link)
         formData.append("category_id", String(exercise.category_id))
         if (exercise.is_featured) {
             formData.append("is_featured", String(exercise.is_featured))
@@ -182,7 +182,7 @@ const Admin = () => {
                                        value={exercise?.video_link ? String(exercise?.video_link) : ""}
                                        onChange={event => {
                                            setExercise((exercise) => {
-                                               return {...exercise, videoLink: event.target.value} as Exercise
+                                               return {...exercise, video_link: event.target.value} as Exercise
                                            });
 
                                        }}/>
