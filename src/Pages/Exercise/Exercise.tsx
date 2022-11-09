@@ -99,6 +99,10 @@ const Exercise = () => {
                 <div className='select-link'>
                     <select>
                         <option value="" hidden={true}>Category Selection</option>
+                        <option value="All">All</option>
+                        <option value="Cardio">Cardio</option>
+                        <option value="Yoga">Yoga</option>
+                        <option value="Stretching">Stretching</option>
                     </select>
                     <Link to={'/all-logs'} className='red-button'>View All Logs</Link>
                 </div>
