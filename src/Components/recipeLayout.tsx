@@ -7,7 +7,7 @@ const recipeLayout = (individualRecipe: Recipe[]) => {
     return individualRecipe.map((recipe) => {
             return (
                 <div className='grid-content'>
-                    <Link to={'/individual-recipe/:id'}><img src={recipe.thumbnail} alt={recipe.name + "Thumbnail"}/></Link>
+                    <Link to={`/individual-recipe/${recipe.id}`}><img src={recipe.thumbnail} alt={recipe.name + "Thumbnail"}/></Link>
                     <p className='name'>{recipe.name}</p>
                     <p className='category'>{recipe.recipeCategory?.name}</p>
                 </div>
