@@ -76,7 +76,8 @@ const API ={
     getRecipes,
     getExercises,
     getRecipeCategories,
-    getExerciseCategories
+    getExerciseCategories,
+    isLoggedIn
 }
 
 export default API;
