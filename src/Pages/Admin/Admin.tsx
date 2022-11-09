@@ -168,7 +168,13 @@ const Admin = () => {
                             </div>
                             <div className='field'>
                                 <label>Thumbnail Link</label>
-                                <input/>
+                                <input title ={exercise.thumbnail_link} value={exercise?.thumbnail_link ? String(exercise?.thumbnail_link) : ""}
+                                       onChange={event => {
+                                           setExercise((exercise) => {
+                                               return {...exercise, thumbnail_link: event.target.value} as Exercise
+                                           });
+
+                                       }}/>
                             </div>
                             <div className='field'>
                                 <label>Embed Video Link</label>
