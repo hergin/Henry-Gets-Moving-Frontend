@@ -1,13 +1,26 @@
 import './Header.scss';
 import {Link, useLocation} from "react-router-dom";
+import API from "../../API";
+import squirm from '../../Assets/worm.png'
 
 const Header = () => {
     let location = useLocation()
     let excludedPaths = ['/admin']
 
-    if(excludedPaths.includes(location.pathname)){
+    if (excludedPaths.includes(location.pathname)) {
         return null;
     }
+
+    function headerLogIn(){
+        if (API.isLoggedIn()) {
+            return <img src={squirm} alt="" className='squirm'/>
+        }
+        else{
+            return <Link to={'/login'} className='login-button'>Login</Link>
+        }
+    }
+
+
 
     return (
         <div className="header">
@@ -20,7 +33,7 @@ const Header = () => {
                 <Link to={'/recipes'}>Eat Healthy</Link>
                 <Link to={'/games'}>Games</Link>
                 <Link to={'/about'}>About</Link>
-                <Link to={'/login'} className='login-button'>Login</Link>
+                {headerLogIn()}
             </nav>
         </div>
     )
