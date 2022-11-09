@@ -3,13 +3,25 @@ import homePhoto from '../../Assets/henry-gets-moving-home.jpg'
 import {Link} from "react-router-dom";
 import recipeImage from '../../Assets/recipeStock.jpg';
 import exerciseImage from '../../Assets/exerciseStock.jpg';
-import React from "react";
+import React, {useEffect, useState} from "react";
 import footerImage from "../../Assets/HomeFooter.png";
 import footerDesktopImage from '../../Assets/HomeFooterDesktop.png';
+import footerMobileImage from '../../Assets/HomeFooterMobile.png'
 import {Helmet, HelmetProvider} from "react-helmet-async";
 import Weather from "../../Components/Weather";
+import API from "../../API";
+import {Exercise, Recipe} from "../../Structs/DataTypes";
 
 const Home = () => {
+
+    const [exerciseFeatured, setExerciseFeatured] = useState<Exercise>();
+    const [recipeFeatured, setRecipeFeatured] = useState<Recipe>();
+
+    useEffect(() => {
+        API.getFeaturedExercise().then((exercise) => setExerciseFeatured(exercise))
+        API.getFeaturedRecipe().then((recipe) => setRecipeFeatured(recipe))
+    }, [])
+
     return (
         <div className="home">
             <HelmetProvider>
@@ -37,6 +49,7 @@ const Home = () => {
             </div>
             <img src={footerImage} className='footer' alt={"Grass"}/>
             <img src={footerDesktopImage} className='footer-desktop' alt={"Grass"}/>
+            <img src={footerMobileImage} className='footer-mobile' alt={"Grass"}/>
         </div>
     )
 }
