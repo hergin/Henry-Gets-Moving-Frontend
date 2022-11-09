@@ -103,7 +103,10 @@ const API ={
     getExercises,
     getRecipeCategories,
     getExerciseCategories,
-    isLoggedIn
+    getFeaturedRecipe,
+    getFeaturedExercise,
+    isLoggedIn,
+
 }
 
 export default API;
