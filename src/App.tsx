@@ -26,8 +26,7 @@ function App() {
                 <Route path='/get-moving' element={<ExercisePage/>}/>
                 <Route path='/exercise-log' element={<ExerciseLogPage/>}/>
                 <Route path='/games' element={<Game/>}/>
-                {/*TODO Set this up so that the url is the recipe name*/}
-                <Route path='/individual-recipe' element={<IndividualRecipe/>}/>
+                <Route path='/individual-recipe/:id' element={<IndividualRecipe/>}/>
                 <Route path='/learn-more' element={<LearnMore/>}/>
                 <Route path='/login' element={<Login/>}/>
                 <Route path='/recipes' element={<RecipePage/>}/>
