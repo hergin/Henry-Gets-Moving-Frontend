@@ -101,12 +101,13 @@ const Admin = () => {
         event.preventDefault()
         console.log(event.currentTarget.value)
         const index: number = parseInt(event.currentTarget.value, 10)
+        console.log(recipes[index])
 
-        setRecipe(
-            recipes[index] as Recipe
-        )
-        setRecipeCategory(recipes[index].recipeCategory as RecipeCategory)
+        setRecipe(recipe => {
+            return {...(recipes[index] as Recipe)}
 
+        })
+        setRecipeCategory((recipes[index].recipeCategory as RecipeCategory))
     }
     const saveRecipe = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
@@ -123,7 +124,7 @@ const Admin = () => {
             formData.append("is_featured", String(false))
         }
         if (recipe.id) {
-            await fetch(`http://127.0.0.1:3333/exercises/${recipe.id}`, {
+            await fetch(`http://127.0.0.1:3333/recipes/${recipe.id}`, {
                 method: 'PUT',
                 body: formData,
             }).then((response) => {
@@ -131,7 +132,7 @@ const Admin = () => {
                     console.log(response);
                     alert("Bad response from server")
                 } else {
-                    window.alert("Exercise submitted!")
+                    window.alert("Recipe submitted!")
                     window.location.reload()
                     return response.json()
                 }
@@ -148,6 +149,22 @@ const Admin = () => {
                     window.alert("Exercise submitted!")
                     window.location.reload()
                     return response.json()
+                }
+            })
+        }
+    }
+    const deleteRecipe = async (e: { preventDefault: () => void; }) => {
+        e.preventDefault()
+        const confirm = window.confirm("Are you sure you want to delete?")
+        if (confirm) {
+            await fetch(`http://127.0.0.1:3333/recipes/${recipe.id}`, {
+                method: 'DELETE',
+            }).then((res) => {
+                if (res.status >= 400 && res.status < 600) {
+                    alert("Bad response from server")
+                } else {
+                    window.location.reload()
+                    return res.json()
                 }
             })
         }
@@ -246,7 +263,7 @@ const Admin = () => {
                 </div>
                 <hr/>
                 <div className="form-div">
-                    <form className='recipe-form'>
+                    <form className='recipe-form' onSubmit={saveRecipe}>
                         <div className='add-edit'>
                             <h2>Add Recipe</h2>
                             <div className='edit-select'>
@@ -280,14 +297,18 @@ const Admin = () => {
                         </div>
                         <div className='field'>
                             <label>Category</label>
-                            <select value={recipe.recipeCategory?.name ? String(recipe.recipeCategory.name) : ""}
-                                    onChange={event => {
-                                        event.preventDefault()
-                                        setRecipe(recipe => {
-                                            return {...recipe, category_id: parseInt(event.target.value)} as Recipe
-                                        })
-                                    }}>
+                            <select
+                                defaultValue={""}
+                                onChange={event => {
+                                    event.preventDefault()
+                                    setRecipe(recipe => {
+                                        return {...recipe, category_id: parseInt(event.target.value)} as Recipe
+                                    })
+                                }}>
                                 <option value="" disabled>Select Category</option>
+                                {recipeCategories && recipeCategories.map((category) => (
+                                    <option selected={category.id == recipe.category_id} value={category.id}>{category?.name}</option>
+                                ))}
                             </select>
                         </div>
                         <div className='field'>
@@ -324,7 +345,7 @@ const Admin = () => {
                                       }}/>
                         </div>
                         <div className='buttons'>
-                            <button className='delete'>Delete Recipe</button>
+                            <button className='delete' onClick={deleteRecipe}>Delete Recipe</button>
                             <button className='save'>Save Recipe</button>
                         </div>
                     </form>
