@@ -18,29 +18,28 @@ const Register = () => {
 
     function handleSubmit(e: { preventDefault: () => void; }) {
         e.preventDefault();
-        // return fetch(`${API_URL}/users`, {
-        //     method: "POST",
-        //     headers: {
-        //         "Content-Type": "application/json"
-        //     },
-        //     body: JSON.stringify({
-        //         email: email
-        //     })
-        // })
-        //     .then(response => {
-        //         if(response.ok) {
-        //             return response.json();
-        //         }
-        //         throw new Error("Invalid email");
-        //     })
-        //     .then(response => {
-        //         // sessionStorage.setItem("session_key", response.token);
-        //         navigate("/login");
-        //     })
-        //     .catch(err => {
-        //         // sessionStorage.clear();
-        //         window.alert(err);
-        //     })
+        return fetch(`http://127.0.0.1:3333/users`, {
+            method: "POST",
+            headers: {
+                "Access-Control-Allow-Origin": "http://127.0.0.1:3333",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                email: email
+            })
+        })
+            .then(response => {
+                if(response.ok) {
+                    return response.json();
+                }
+                throw new Error("Invalid email");
+            })
+            .then(response => {
+                navigate("/login");
+            })
+            .catch(err => {
+                window.alert(err);
+            })
     }
 
     return (
