@@ -2,6 +2,9 @@ export type Recipe = {
     id: number,
     name: string,
     thumbnail: string,
+    cook_time: string,
+    ingredients: string,
+    recipe_steps: string,
     category_id: number,
     isFeatured: boolean,
     recipeCategory?: RecipeCategory
