@@ -78,9 +78,25 @@ const Admin = () => {
                 }
             })
         }
-
-
     }
+
+    const deleteExercise = async (e: { preventDefault: () => void; }) => {
+        e.preventDefault()
+        const confirm = window.confirm("Are you sure you want to delete?")
+        if (confirm) {
+            await fetch(`http://127.0.0.1:3333/exercises/${exercise.id}`, {
+                method: 'DELETE',
+            }).then((res) => {
+                if (res.status >= 400 && res.status < 600) {
+                    alert("Bad response from server")
+                } else {
+                    window.location.reload()
+                    return res.json()
+                }
+            })
+        }
+    }
+
     const loadRecipe = (event: React.FormEvent<HTMLSelectElement>) => {
         event.preventDefault()
         console.log(event.currentTarget.value)
@@ -136,6 +152,7 @@ const Admin = () => {
             })
         }
     }
+
 
 
     return (
@@ -205,7 +222,7 @@ const Admin = () => {
                                 </select>
                             </div>
                             <div className='buttons'>
-                                <button className='delete'>Delete Exercise</button>
+                                <button className='delete' onClick={deleteExercise}>Delete Exercise</button>
                                 <button className='save'>Save Exercise</button>
                             </div>
                         </form>
@@ -320,5 +337,6 @@ const Admin = () => {
         </div>
     )
 }
+
 
 export default Admin;
