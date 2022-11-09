@@ -100,7 +100,11 @@ const Admin = () => {
                                 }}/>
                             </div>
                             <div className='field'>
-                                <label>Video</label>
+                                <label>Thumbnail Link</label>
+                                <input/>
+                            </div>
+                            <div className='field'>
+                                <label>Embed Video Link</label>
                                 <input title={exercise?.videoLink} value={exercise?.videoLink ? String(exercise?.videoLink) : ""} onChange={event =>
                                 {setExercise((exercise) => {
                                         return {...exercise, videoLink: event.target.value} as Exercise
@@ -160,7 +164,7 @@ const Admin = () => {
                             <input/>
                         </div>
                         <div className='field'>
-                            <label>Thumbnail</label>
+                            <label>Thumbnail Link</label>
                             <input/>
                         </div>
                         <div className='field'>
