@@ -71,7 +71,7 @@ jobs:
       - name: install dependencies
         run: npm install
       - name: run tests
-        run: npm test RecipePage
+        run: npm test Recipe
 
   run-login-tests:
     name: Login.tsx tests
@@ -123,7 +123,7 @@ jobs:
       - name: install dependencies
         run: npm install
       - name: run tests
-        run: npm test ExercisePage
+        run: npm test Exercise
 
   run-exercise-log-tests:
     name: ExerciseLogPage.tsx tests
@@ -136,7 +136,7 @@ jobs:
       - name: install dependencies
         run: npm install
       - name: run tests
-        run: npm test ExerciseLogPage
+        run: npm test ExerciseLog
 
   run-admin-tests:
     name: Admin.tsx tests
