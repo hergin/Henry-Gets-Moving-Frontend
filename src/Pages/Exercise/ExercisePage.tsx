@@ -24,7 +24,7 @@ const ExercisePage = () => {
                 return (
                     <>
                         <div className='grid-content'>
-                            <img src={exercise.thumbnailLink} onClick={e => (setSelectedExercise(exercise))}
+                            <img src={exercise.thumbnail_link} onClick={e => (setSelectedExercise(exercise))}
                                  alt={exercise.name + "Thumbnail"}/>
                             <p className='name'>{exercise.name}</p>
                             <p className='category'>{exercise.exerciseCategory?.name}</p>
