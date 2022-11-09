@@ -6,7 +6,7 @@ export type Recipe = {
     ingredients: string,
     recipe_steps: string,
     category_id: number,
-    isFeatured: boolean,
+    is_featured: boolean,
     recipeCategory?: RecipeCategory
 }
 export type RecipeCategory = {
@@ -17,9 +17,9 @@ export type RecipeCategory = {
 export type Exercise = {
     id: number,
     name: string,
-    thumbnailLink: string,
-    videoLink: string,
-    isFeatured: boolean,
+    thumbnail_link: string,
+    video_link: string,
+    is_featured: boolean,
     category_id: number,
     exerciseCategory?: ExerciseCategory
 }
