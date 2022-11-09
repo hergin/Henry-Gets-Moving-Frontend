@@ -81,7 +81,7 @@ const getFeaturedRecipe = async (): Promise<Recipe[]> => {
         });
 }
 
-const getFeaturedExercise = async (): Promise<Recipe[]> => {
+const getFeaturedExercise = async (): Promise<Exercise[]> => {
     return await fetch('http://127.0.0.1:3333/execise/featured')
         .then((response) => {
             if (response.ok) return response.json();
