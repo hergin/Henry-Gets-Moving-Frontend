@@ -3,7 +3,7 @@ import exerciseStock from '../../Assets/exerciseStock.jpg'
 import trophy from '../../Assets/40mins.svg'
 import React, {useState} from "react";
 import footerImage from "../../Assets/grass.svg";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import exit from '../../Assets/Exit.svg';
 import {Helmet, HelmetProvider} from "react-helmet-async";
 import grassDesktop from "../../Assets/grassDesktop.svg";
@@ -47,6 +47,8 @@ const Exercise = () => {
     ]
 
     const [selectedExercise, setSelectedExercise] = useState<null | Exercise>(null);
+
+    const navigate = useNavigate();
 
     const exerciseLayout = (individualExercise: Exercise[]) => {
         return individualExercise.map((exercise) => {
