@@ -81,6 +81,19 @@ const getFeaturedRecipe = async (): Promise<Recipe[]> => {
         });
 }
 
+const getFeaturedExercise = async (): Promise<Recipe[]> => {
+    return await fetch('http://127.0.0.1:3333/execise/featured')
+        .then((response) => {
+            if (response.ok) return response.json();
+            return {
+                errorCode: response.status,
+                error: response.statusText,
+            }
+        }).then((response) => {
+            return response;
+        });
+}
+
 const isLoggedIn = (): boolean => {
     return sessionStorage.getItem('session_key') != null;
 }
