@@ -24,13 +24,13 @@ const Home = () => {
                 <Weather/>
                <div className='otd-div'>
                    <div className='of-the-day'>
-                       <p>Exercise of the Day</p>
-                       <Link to={'/get-moving'}><img src={exerciseImage} alt="Exercise Photo"/></Link>
+                       <p>ExercisePage of the Day</p>
+                       <Link to={'/get-moving'}><img src={exerciseImage} alt="ExercisePage Photo"/></Link>
                        <Link to={'/get-moving'}>Title</Link>
                    </div>
                    <div className='of-the-day'>
-                       <p>Recipe of the Day</p>
-                       <Link to={'/recipes'}><img src={recipeImage} alt="Recipe Photo"/></Link>
+                       <p>RecipePage of the Day</p>
+                       <Link to={'/recipes'}><img src={recipeImage} alt="RecipePage Photo"/></Link>
                        <Link to={'/recipes'}>Title</Link>
                    </div>
                </div>

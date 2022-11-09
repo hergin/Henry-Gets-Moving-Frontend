@@ -9,7 +9,7 @@ import Grass from "../../Components/Grass";
 import API from "../../API";
 import {Recipe} from "../../Structs/DataTypes";
 
-const Recipe = () => {
+const RecipePage = () => {
     const [recipes, setRecipes] = useState([] as Recipe[])
     useEffect(() => {
         API.getRecipes().then((recipes) => setRecipes(recipes));
@@ -56,4 +56,4 @@ const Recipe = () => {
     )
 }
 
-export default Recipe;
+export default RecipePage;

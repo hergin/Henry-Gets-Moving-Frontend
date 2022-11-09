@@ -1,27 +1,27 @@
 import {fireEvent, render,screen} from '@testing-library/react';
 import {BrowserRouter as Router} from 'react-router-dom';
 import App from '../App';
-import Exercise from '../Pages/Exercise/Exercise';
+import ExercisePage from '../Pages/Exercise/ExercisePage';
 
 describe('of the day',()=>{
     test('thumbnail exists',()=>{
-        render(<Router><Exercise/></Router>)
+        render(<Router><ExercisePage/></Router>)
         expect(screen.getByAltText('OTD Thumbnail')).toBeInTheDocument();
     });
     test('name exists',()=>{
         // TODO: update when OTD implemented
-        render(<Router><Exercise/></Router>);
-        expect(screen.getByText('Exercise Name')).toBeInTheDocument();
+        render(<Router><ExercisePage/></Router>);
+        expect(screen.getByText('ExercisePage Name')).toBeInTheDocument();
     });
 });
 
 describe('trophy',()=>{
     test('image exists',()=>{
-        render(<Router><Exercise/></Router>);
+        render(<Router><ExercisePage/></Router>);
         expect(screen.getByAltText('Trophy')).toBeInTheDocument();
     });
     test('text exists',()=>{
-        render(<Router><Exercise/></Router>);
+        render(<Router><ExercisePage/></Router>);
         expect(screen.getByText('You Have Logged')).toBeInTheDocument();
     });
     test.todo('image updates with exercise logged');
@@ -31,7 +31,7 @@ describe('trophy',()=>{
 test('log exercise button takes to login page if not logged in',()=>{
     render(<Router><App/></Router>);
     fireEvent.click(screen.getByText("Get Moving"));
-    fireEvent.click(screen.getByText('Log Exercise'));
+    fireEvent.click(screen.getByText('Log ExercisePage'));
     expect(global.window.location.pathname).toContain('/login');
 });
 
@@ -43,19 +43,19 @@ test('all logs button takes to login page if user not logged in',()=>{
 });
 
 test('category selector exists in document',()=>{
-    render(<Router><Exercise/></Router>);
+    render(<Router><ExercisePage/></Router>);
     expect(screen.getByText('Category Selection')).toBeInTheDocument();
 });
 
 describe('video player',()=>{
     test('opens on click',()=>{
-        render(<Router><Exercise/></Router>);
+        render(<Router><ExercisePage/></Router>);
         // TODO: update when exercises added
         fireEvent.click(screen.getAllByAltText('Some nameThumbnail')[0]);
         expect(screen.getByAltText('Exit')).toBeInTheDocument();
     });
     test('exit button works',()=>{
-        render(<Router><Exercise/></Router>);
+        render(<Router><ExercisePage/></Router>);
         // TODO: update when exercises added
         fireEvent.click(screen.getAllByAltText('Some nameThumbnail')[0]);
         fireEvent.click(screen.getByAltText('Exit'));

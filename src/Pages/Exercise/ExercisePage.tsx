@@ -10,47 +10,14 @@ import grassDesktop from "../../Assets/grassDesktop.svg";
 import Grass from "../../Components/Grass";
 import Weather from "../../Components/Weather";
 import API from '../../API';
+import {Exercise} from "../../Structs/DataTypes";
 
-type Exercise = {
-    [key: string]: any;
-    thumbnail: string;
-    name: string;
-    video_url: string,
-    category: string;
-}
+const ExercisePage = () => {
 
-const Exercise = () => {
-    const exercise_list = [
-        {
-            thumbnail: 'https://media.istockphoto.com/id/1132957137/video/woman-doing-lunges-exercise-on-white-background.jpg?s=640x640&k=20&c=c39G5V_c3mpAJgfMZdu5ynVpKYTVWrn1tBb47w6MgkY=',
-            video_url: 'https://archive.org/download/Starry_Sky_Time_Lapse/Stars%20H264.mp4',
-            name: "Some name",
-            category: "Yoga",
-        },
-        {
-            thumbnail: 'https://media.istockphoto.com/id/1132957137/video/woman-doing-lunges-exercise-on-white-background.jpg?s=640x640&k=20&c=c39G5V_c3mpAJgfMZdu5ynVpKYTVWrn1tBb47w6MgkY=',
-            name: "Some name",
-            video_url: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-            category: "Yoga",
-        },
-        {
-            thumbnail: 'https://media.istockphoto.com/id/1132957137/video/woman-doing-lunges-exercise-on-white-background.jpg?s=640x640&k=20&c=c39G5V_c3mpAJgfMZdu5ynVpKYTVWrn1tBb47w6MgkY=',
-            name: "Some name",
-            video_url: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
-            category: "Yoga",
-        },
-        {
-            thumbnail: 'https://media.istockphoto.com/id/1132957137/video/woman-doing-lunges-exercise-on-white-background.jpg?s=640x640&k=20&c=c39G5V_c3mpAJgfMZdu5ynVpKYTVWrn1tBb47w6MgkY=',
-            name: "Some name",
-            video_url: '',
-            category: "Yoga",
-        },
-    ]
 
     const [selectedExercise, setSelectedExercise] = useState<null | Exercise>(null);
 
     const navigate = useNavigate();
-
     const exerciseLayout = (individualExercise: Exercise[]) => {
         return individualExercise.map((exercise) => {
                 return (
@@ -67,6 +34,7 @@ const Exercise = () => {
             }
         )
     }
+
     return (
         <div className="exercise">
             <HelmetProvider>
@@ -152,4 +120,4 @@ const Exercise = () => {
     )
 }
 
-export default Exercise;
+export default ExercisePage;

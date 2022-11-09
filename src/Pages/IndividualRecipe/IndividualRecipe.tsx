@@ -11,17 +11,17 @@ const IndividualRecipe = () => {
         <div className="individual-recipe">
             <HelmetProvider>
                 <Helmet>
-                    <title>Recipe Name</title>
+                    <title>RecipePage Name</title>
                 </Helmet>
             </HelmetProvider>
             <Weather/>
             <BackArrow route="/recipes"/>
             <div className='otd-div'>
                 <div className='otd-image'>
-                    <img src={recipeStock} alt='Recipe Name'/>
+                    <img src={recipeStock} alt='RecipePage Name'/>
                 </div>
                 <div className='otd-text'>
-                    <h2>Recipe of the Day</h2>
+                    <h2>RecipePage of the Day</h2>
                     <p>Cook Time</p>
                 </div>
             </div>

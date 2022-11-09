@@ -1,7 +1,7 @@
 import {render, screen, fireEvent} from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import App from '../App';
-import Recipe from '../Pages/Recipe/Recipe';
+import RecipePage from '../Pages/Recipe/RecipePage';
 
 describe('recipe buttons',()=>{
     test('are clickable',()=>{
@@ -12,7 +12,7 @@ describe('recipe buttons',()=>{
         expect(global.window.location.pathname).toContain('/individual-recipe');
     });
     it('exist',()=>{
-        render(<Router><Recipe/></Router>);
+        render(<Router><RecipePage/></Router>);
         expect(screen.getAllByAltText(/Thumbnail$/)).toBeInstanceOf(Array);
     });
 });

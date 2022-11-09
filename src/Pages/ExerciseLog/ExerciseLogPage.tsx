@@ -10,7 +10,7 @@ import Grass from "../../Components/Grass";
 import BackArrow from "../../Components/BackArrow/BackArrow";
 import {useNavigate} from "react-router-dom";
 
-const ExerciseLog = () => {
+const ExerciseLogPage = () => {
     const [child, setChild] = useState("");
     const [exercise, setExercise] = useState("");
     const [intensity, setIntensity] = useState("");
@@ -103,4 +103,4 @@ const ExerciseLog = () => {
     )
 }
 
-export default ExerciseLog;
+export default ExerciseLogPage;
