@@ -34,6 +34,7 @@ const Admin = () => {
             return {...(exercises[index] as Exercise)}
 
         })
+        setExerciseCategory((exercises[index].exerciseCategory as ExerciseCategory))
     }
 
     const saveExercise = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -190,7 +191,7 @@ const Admin = () => {
                             <div className='field'>
                                 <label>Category</label>
                                 <select
-                                    value={exercise.exerciseCategory?.name ? String(exercise.exerciseCategory.name) : ""}
+                                    defaultValue={"Select Exercise"}
                                     onChange={event => {
                                         event.preventDefault()
                                         setExercise(exercise => {
@@ -199,7 +200,7 @@ const Admin = () => {
                                     }}>
                                     <option value="" disabled>Select Category</option>
                                     {exerciseCategories && exerciseCategories.map((category) => (
-                                        <option value={category.id}>{category?.name}</option>
+                                        <option selected={category.id == exercise.category_id} value={category.id}>{category?.name}</option>
                                     ))}
                                 </select>
                             </div>
