@@ -13,9 +13,19 @@ const IndividualRecipe = () => {
     const [recipe, setRecipe] = useState<Recipe>()
     const id = useParams();
     useEffect( () => {
-        const getRecipe = async() => {
-            const recipeFromServer = await fetch(`http://127.0.0.1:3333/recipes/${id}`)
-            setRecipe(await recipeFromServer.json())
+        const getRecipe = async () => {
+            const recipe =  await fetch(`http://127.0.0.1:3333/recipes/${id.id}`)
+                .then((response) => {
+                    if (response.ok) return response.json();
+                    return {
+                        errorCode: response.status,
+                        error: response.statusText,
+                    }
+                }).then((response) => {
+                    return response as Recipe
+                });
+            console.log(recipe)
+            setRecipe(recipe)
         }
         getRecipe()
     }, [])
