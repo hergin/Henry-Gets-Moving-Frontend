@@ -4,7 +4,7 @@ export type Recipe = {
     thumbnail: string,
     category_id: number,
     isFeatured: boolean,
-    recipeCategory: RecipeCategory
+    recipeCategory?: RecipeCategory
 }
 export type RecipeCategory = {
     id: number,
@@ -17,7 +17,7 @@ export type Exercise = {
     videoLink: string,
     isFeatured: boolean,
     category_id: number,
-    exerciseCategory: ExerciseCategory
+    exerciseCategory?: ExerciseCategory
 }
 export type ExerciseCategory = {
     id: number,
@@ -33,7 +33,7 @@ export type FamilyMember = {
     id: number,
     name: string,
     user_id: number,
-    User: User
+    User?: User
 }
 
 export type ExerciseLog = {
@@ -42,5 +42,5 @@ export type ExerciseLog = {
     intensity: string,
     duration: string,
     family_member_id: number,
-    FamilyMember: FamilyMember
+    FamilyMember?: FamilyMember
 }
