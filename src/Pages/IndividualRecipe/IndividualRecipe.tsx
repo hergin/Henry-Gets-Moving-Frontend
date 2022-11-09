@@ -11,7 +11,7 @@ const IndividualRecipe = () => {
         <div className="individual-recipe">
             <HelmetProvider>
                 <Helmet>
-                    <title>RecipePage Name</title>
+                    <title>Recipe Name</title>
                 </Helmet>
             </HelmetProvider>
             <Weather/>
@@ -21,7 +21,7 @@ const IndividualRecipe = () => {
                     <img src={recipeStock} alt='RecipePage Name'/>
                 </div>
                 <div className='otd-text'>
-                    <h2>RecipePage of the Day</h2>
+                    <h2>Recipe of the Day</h2>
                     <p>Cook Time</p>
                 </div>
             </div>
