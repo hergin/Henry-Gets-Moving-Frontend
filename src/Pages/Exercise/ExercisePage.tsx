@@ -2,11 +2,9 @@ import './Exercise.scss';
 import exerciseStock from '../../Assets/exerciseStock.jpg'
 import trophy from '../../Assets/40mins.svg'
 import React, {useEffect, useState} from "react";
-import footerImage from "../../Assets/grass.svg";
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import exit from '../../Assets/Exit.svg';
 import {Helmet, HelmetProvider} from "react-helmet-async";
-import grassDesktop from "../../Assets/grassDesktop.svg";
 import Grass from "../../Components/Grass";
 import Weather from "../../Components/Weather";
 import API from '../../API';
@@ -25,7 +23,7 @@ const ExercisePage = () => {
                     <>
                         <div className='grid-content'>
                             <img src={exercise.thumbnail_link} onClick={e => (setSelectedExercise(exercise))}
-                                 alt={exercise.name + "Thumbnail"}/>
+                                 alt={exercise.name + " Thumbnail"}/>
                             <p className='name'>{exercise.name}</p>
                             <p className='category'>{exercise.exerciseCategory?.name}</p>
                         </div>
