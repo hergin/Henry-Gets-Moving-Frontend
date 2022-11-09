@@ -9,6 +9,7 @@ import {Helmet, HelmetProvider} from "react-helmet-async";
 import grassDesktop from "../../Assets/grassDesktop.svg";
 import Grass from "../../Components/Grass";
 import Weather from "../../Components/Weather";
+import API from '../../API';
 
 type Exercise = {
     [key: string]: any;
@@ -95,7 +96,7 @@ const Exercise = () => {
                 </div>
             </div>
             <div className='exercise-log-exercise'>
-                <Link to={'/exercise-log'} className='red-button'>Log Exercise</Link>
+                <button onClick={()=>{navigate(API.isLoggedIn()?'/exercise-log':'/login');}} className='red-button'>Log Exercise</button>
             </div>
             <div className='exercise-content'>
                 <div className='select-link'>
