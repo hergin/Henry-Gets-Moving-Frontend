@@ -40,13 +40,13 @@ const Admin = () => {
         event.preventDefault()
         const formData = new FormData()
         formData.append("name", exercise.name)
-        formData.append("videoLink", exercise.videoLink)
-        formData.append("videoLink", exercise.videoLink)
+        formData.append("video_link", exercise.video_link)
+        formData.append("video_link", exercise.video_link)
         formData.append("category_id", String(exercise.category_id))
-        if (exercise.isFeatured) {
-            formData.append("isFeatured", String(exercise.isFeatured))
+        if (exercise.is_featured) {
+            formData.append("is_featured", String(exercise.is_featured))
         } else {
-            formData.append("isFeatured", String(false))
+            formData.append("is_featured", String(false))
         }
         if (exercise.id) {
             await fetch(`http://127.0.0.1:3333/exercises/${exercise.id}`, {
@@ -100,10 +100,10 @@ const Admin = () => {
         formData.append("ingredients", recipe.ingredients)
         formData.append("recipe_steps", recipe.recipe_steps)
         formData.append("category_id", String(recipe.category_id))
-        if (recipe.isFeatured) {
-            formData.append("isFeatured", String(exercise.isFeatured))
+        if (recipe.is_featured) {
+            formData.append("is_featured", String(exercise.is_featured))
         } else {
-            formData.append("isFeatured", String(false))
+            formData.append("is_featured", String(false))
         }
         if (recipe.id) {
             await fetch(`http://127.0.0.1:3333/exercises/${recipe.id}`, {
@@ -172,8 +172,8 @@ const Admin = () => {
                             </div>
                             <div className='field'>
                                 <label>Embed Video Link</label>
-                                <input title={exercise?.videoLink}
-                                       value={exercise?.videoLink ? String(exercise?.videoLink) : ""}
+                                <input title={exercise?.video_link}
+                                       value={exercise?.video_link ? String(exercise?.video_link) : ""}
                                        onChange={event => {
                                            setExercise((exercise) => {
                                                return {...exercise, videoLink: event.target.value} as Exercise
