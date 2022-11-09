@@ -20,7 +20,7 @@ const About = () => {
                 <img src={teamPhoto} alt={"Henry Gets Moving Team"}/>
             </div>
             <div className='content'>
-                <h1>Henry Gets Moving Team</h1>
+                <h1>Henry Gets Moving in Delaware County</h1>
                 <div className='text'>
                     <p>
                         Henry the Hamster is a young boy who overcomes his obesity challenge with an active lifestyle
