@@ -68,6 +68,10 @@ const getRecipeCategories = async (): Promise<RecipeCategory[]> => {
         });
 }
 
+const isLoggedIn = (): boolean => {
+    return sessionStorage.getItem('session_key') != null;
+}
+
 const API ={
     getRecipes,
     getExercises,
