@@ -16,6 +16,11 @@ form {
     border: 1px black solid;
 }
 
+img{
+    user-select: none;
+    pointer-events: none;
+}
+
 .swings {
     display: flex;
     width: 50%;
