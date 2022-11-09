@@ -70,6 +70,11 @@ const Recipe = () => {
                 <div className='select-search'>
                     <select>
                         <option value="" hidden={true}>Category Selection</option>
+                        <option value="All">All</option>
+                        <option value="Vegetarian">Vegetarian</option>
+                        <option value="Nut-Free">Nut-Free</option>
+                        <option value="Vegan">Vegan</option>
+                        <option value="Gluten Free">Gluten Free</option>
                     </select>
                     <input id='search' placeholder="Search"/>
                 </div>
