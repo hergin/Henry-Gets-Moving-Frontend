@@ -30,29 +30,25 @@ const Admin = () => {
         const index: number = parseInt(event.currentTarget.value, 10)
         console.log(exercises[index])
 
-        setExercise(
-             (exercises[index] as Exercise)
-        )
-        setExerciseCategory(
-            (exercises[index].exerciseCategory as ExerciseCategory)
-        )
+        setExercise(exercise => {
+            return {...(exercises[index] as Exercise)}
 
+        })
     }
 
     const saveExercise = async (event: React.FormEvent<HTMLFormElement>) => {
-        console.log(exercise)
         event.preventDefault()
         const formData = new FormData()
         formData.append("name", exercise.name)
         formData.append("videoLink", exercise.videoLink)
+        formData.append("videoLink", exercise.videoLink)
         formData.append("category_id", String(exercise.category_id))
-        if(exercise.isFeatured){
+        if (exercise.isFeatured) {
             formData.append("isFeatured", String(exercise.isFeatured))
-        }
-        else {
+        } else {
             formData.append("isFeatured", String(false))
         }
-        if(exercise.id){
+        if (exercise.id) {
             await fetch(`http://127.0.0.1:3333/exercises/${exercise.id}`, {
                 method: 'PUT',
                 body: formData,
@@ -66,8 +62,7 @@ const Admin = () => {
                     return response.json()
                 }
             })
-        }
-        else{
+        } else {
             await fetch(`http://127.0.0.1:3333/exercises`, {
                 method: 'POST',
                 body: formData,
@@ -105,13 +100,12 @@ const Admin = () => {
         formData.append("ingredients", recipe.ingredients)
         formData.append("recipe_steps", recipe.recipe_steps)
         formData.append("category_id", String(recipe.category_id))
-        if(recipe.isFeatured){
+        if (recipe.isFeatured) {
             formData.append("isFeatured", String(exercise.isFeatured))
-        }
-        else {
+        } else {
             formData.append("isFeatured", String(false))
         }
-        if(recipe.id){
+        if (recipe.id) {
             await fetch(`http://127.0.0.1:3333/exercises/${recipe.id}`, {
                 method: 'PUT',
                 body: formData,
@@ -125,8 +119,7 @@ const Admin = () => {
                     return response.json()
                 }
             })
-        }
-        else{
+        } else {
             await fetch(`http://127.0.0.1:3333/recipes`, {
                 method: 'POST',
                 body: formData,
@@ -159,18 +152,19 @@ const Admin = () => {
                                     <select onChange={loadExercise}>
                                         <option value="select">Select Exercise</option>
                                         {exercises && exercises.map((exercise, index: number) => (
-                                        <option value={index}>{exercise.name}</option>
-                                    ))}</select>
+                                            <option value={index}>{exercise.name}</option>
+                                        ))}</select>
                                 </div>
                             </div>
                             <div className='field'>
                                 <label>Name</label>
-                                <input title={exercise?.name} value={exercise?.name ? String(exercise?.name) : ""} onChange={event => {
-                                    setExercise((exercise) => {
-                                        return {...exercise, name: event.target.value} as Exercise
-                                    });
+                                <input title={exercise?.name} value={exercise?.name ? String(exercise?.name) : ""}
+                                       onChange={event => {
+                                           setExercise((exercise) => {
+                                               return {...exercise, name: event.target.value} as Exercise
+                                           });
 
-                                }}/>
+                                       }}/>
                             </div>
                             <div className='field'>
                                 <label>Thumbnail Link</label>
@@ -178,24 +172,28 @@ const Admin = () => {
                             </div>
                             <div className='field'>
                                 <label>Embed Video Link</label>
-                                <input title={exercise?.videoLink} value={exercise?.videoLink ? String(exercise?.videoLink) : ""} onChange={event =>
-                                {setExercise((exercise) => {
-                                        return {...exercise, videoLink: String(event.target.value)} as Exercise
-                                    });
+                                <input title={exercise?.videoLink}
+                                       value={exercise?.videoLink ? String(exercise?.videoLink) : ""}
+                                       onChange={event => {
+                                           setExercise((exercise) => {
+                                               return {...exercise, videoLink: event.target.value} as Exercise
+                                           });
 
-                                }}/>
+                                       }}/>
                             </div>
                             <div className='field'>
                                 <label>Category</label>
-                                <select value={exercise.exerciseCategory?.name ? exercise.exerciseCategory.name : ""} onChange={event => {event.preventDefault()
-
-                                    setExercise(exercise => {
-                                    return {...exercise, category_id: parseInt(event.target.value)} as Exercise
-                                })
+                                <select
+                                    value={exercise.exerciseCategory?.name ? String(exercise.exerciseCategory.name) : ""}
+                                    onChange={event => {
+                                        event.preventDefault()
+                                        setExercise(exercise => {
+                                            return {...exercise, category_id: parseInt(event.target.value)} as Exercise
+                                        })
                                     }}>
                                     <option value="" disabled>Select Category</option>
                                     {exerciseCategories && exerciseCategories.map((category) => (
-                                    <option value={category.id}>{category?.name}</option>
+                                        <option value={category.id}>{category?.name}</option>
                                     ))}
                                 </select>
                             </div>
@@ -224,7 +222,7 @@ const Admin = () => {
                 </div>
                 <hr/>
                 <div className="form-div">
-                    <form className='recipe-form' onSubmit={saveRecipe}>
+                    <form className='recipe-form'>
                         <div className='add-edit'>
                             <h2>Add Recipe</h2>
                             <div className='edit-select'>
@@ -232,35 +230,46 @@ const Admin = () => {
                                 <select onChange={loadRecipe}>
                                     <option value="select">Select Recipe</option>
                                     {recipes && recipes.map((recipe, index) => (
-                                    <option value={index}>{recipe.name}</option>
-                                ))}</select>
+                                        <option value={index}>{recipe.name}</option>
+                                    ))}</select>
                             </div>
                         </div>
                         <div className='field'>
                             <label>Name</label>
-                            <input title={recipe?.name} value={recipe?.name ? String(recipe?.name) : ""} onChange={event => {
-                                setRecipe((recipe) => {
-                                    return {...recipe, name: event.target.value} as Recipe
-                                });
+                            <input title={recipe?.name} value={recipe?.name ? String(recipe?.name) : ""}
+                                   onChange={event => {
+                                       setRecipe((recipe) => {
+                                           return {...recipe, name: event.target.value} as Recipe
+                                       });
 
-                            }}/>
+                                   }}/>
                         </div>
                         <div className='field'>
                             <label>Thumbnail Link</label>
-                            <input title={recipe?.thumbnail} value={recipe?.thumbnail ? String(recipe?.thumbnail) : ""} onChange={event => {
-                                setRecipe((recipe) => {
-                                    return {...recipe, thumbnail: event.target.value} as Recipe
-                                });
+                            <input title={recipe?.thumbnail} value={recipe?.thumbnail ? String(recipe?.thumbnail) : ""}
+                                   onChange={event => {
+                                       setRecipe((recipe) => {
+                                           return {...recipe, thumbnail: event.target.value} as Recipe
+                                       });
 
-                            }}/>
+                                   }}/>
                         </div>
                         <div className='field'>
                             <label>Category</label>
-                            <select></select>
+                            <select value={recipe.recipeCategory?.name ? String(recipe.recipeCategory.name) : ""}
+                                    onChange={event => {
+                                        event.preventDefault()
+                                        setRecipe(recipe => {
+                                            return {...recipe, category_id: parseInt(event.target.value)} as Recipe
+                                        })
+                                    }}>
+                                <option value="" disabled>Select Category</option>
+                            </select>
                         </div>
                         <div className='field'>
                             <label>Cook Time</label>
-                            <input defaultValue={recipe?.cook_time} value={recipe?.cook_time ? String(recipe?.cook_time) : ""} onChange={event => {
+                            <input defaultValue={recipe?.cook_time}
+                                   value={recipe?.cook_time ? String(recipe?.cook_time) : ""} onChange={event => {
                                 setRecipe((recipe) => {
                                     return {...recipe, cook_time: event.target.value} as Recipe
                                 });
@@ -269,21 +278,26 @@ const Admin = () => {
                         </div>
                         <div className='field'>
                             <label>Ingredients</label>
-                            <textarea placeholder="1. Ingredient&#10;2. Ingredient&#10;3. Ingredient" defaultValue={recipe?.ingredients} value={recipe?.ingredients ? String(recipe?.ingredients) : ""} onChange={event => {
-                                setRecipe((recipe) => {
-                                    return {...recipe, ingredients: event.target.value} as Recipe
-                                });
+                            <textarea placeholder="1. Ingredient&#10;2. Ingredient&#10;3. Ingredient"
+                                      defaultValue={recipe?.ingredients}
+                                      value={recipe?.ingredients ? String(recipe?.ingredients) : ""}
+                                      onChange={event => {
+                                          setRecipe((recipe) => {
+                                              return {...recipe, ingredients: event.target.value} as Recipe
+                                          });
 
-                            }}/>
+                                      }}/>
                         </div>
                         <div className='field'>
                             <label>Recipe Steps</label>
-                            <textarea placeholder="1. Step&#10;2. Step&#10;3. Step" defaultValue={recipe?.recipe_steps} value={recipe?.recipe_steps ? String(recipe?.recipe_steps) : ""} onChange={event => {
-                                setRecipe((recipe) => {
-                                    return {...recipe, recipe_steps: event.target.value} as Recipe
-                                });
+                            <textarea placeholder="1. Step&#10;2. Step&#10;3. Step" defaultValue={recipe?.recipe_steps}
+                                      value={recipe?.recipe_steps ? String(recipe?.recipe_steps) : ""}
+                                      onChange={event => {
+                                          setRecipe((recipe) => {
+                                              return {...recipe, recipe_steps: event.target.value} as Recipe
+                                          });
 
-                            }}/>
+                                      }}/>
                         </div>
                         <div className='buttons'>
                             <button className='delete'>Delete Recipe</button>
