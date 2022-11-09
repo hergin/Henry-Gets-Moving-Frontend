@@ -56,4 +56,5 @@ const RecipePage = () => {
     )
 }
 
-export default RecipePage;
+// @ts-ignore
+export default RecipePage
