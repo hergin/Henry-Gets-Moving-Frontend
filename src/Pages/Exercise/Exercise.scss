@@ -75,6 +75,7 @@
     flex-flow: row wrap;
     margin: auto;
     width: 90%;
+    justify-content: center;
 
     img {
       width: 100%;
@@ -133,6 +134,11 @@
 
     .desktop-dialog{
       display: flex;
+    }
+
+    .see-more{
+      padding-bottom: 3em;
+      margin-top: 3em;
     }
 
     .exercise-text{
