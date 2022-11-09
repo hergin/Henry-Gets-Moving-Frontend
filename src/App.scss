@@ -97,6 +97,7 @@ img{
     img {
         display: flex;
         margin: auto;
+        pointer-events: auto;
     }
 }
 
@@ -129,6 +130,10 @@ img{
 
     p {
         margin: 5px 0;
+    }
+
+    img{
+        pointer-events: auto;
     }
 }
 
