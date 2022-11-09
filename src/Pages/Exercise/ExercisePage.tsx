@@ -91,7 +91,7 @@ const ExercisePage = () => {
                             <div className='episode-player'>
                                 <div className='video-player'>
                                     <iframe
-                                        src={"https://www.youtube.com/embed/3n9rDwpa6QA?list=PL0nhBlgFkftzaBqgQjvo-1z81P1vkBJYN"}
+                                        src={selectedExercise.video_link}
                                         frameBorder="0" allow="autoplay; fullscreen; picture-in-picture"
                                         allowFullScreen
                                     />
