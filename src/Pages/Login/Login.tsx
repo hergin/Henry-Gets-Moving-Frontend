@@ -1,5 +1,5 @@
 import './Login.scss';
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import swings from '../../Assets/Swings.png';
 import React, {useState} from "react";
 import {Helmet, HelmetProvider} from "react-helmet-async";
@@ -8,6 +8,7 @@ import Grass from "../../Components/Grass";
 
 const Login = () => {
     const [email, setEmail] = useState("");
+    const navigate = useNavigate()
 
     function validateForm() {
         return email.length > 0;
@@ -15,29 +16,29 @@ const Login = () => {
 
     function handleSubmit(event: { preventDefault: () => void; }) {
         event.preventDefault();
-        // return fetch(`${API_URL}/users/login`, {
-        //     method: "POST",
-        //     headers: {
-        //         "Content-Type": "application/json"
-        //     },
-        //     body: JSON.stringify({
-        //         email: email
-        //     })
-        // })
-        //     .then(response => {
-        //         if(response.ok) {
-        //             return response.json();
-        //         }
-        //         throw new Error("Invalid email");
-        //     })
-        //     .then(response => {
-        //         // sessionStorage.setItem("session_key", response.token);
-        //         navigate("/get-moving");
-        //     })
-        //     .catch(err => {
-        //         // sessionStorage.clear();
-        //         window.alert(err);
-        //     })
+        return fetch(`http://127.0.0.1:3333/users/login`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                email: email
+            })
+        })
+            .then(response => {
+                if(response.ok) {
+                    return response.json();
+                }
+                throw new Error("Invalid email");
+            })
+            .then(response => {
+                sessionStorage.setItem("session_key", response.token);
+                navigate("/");
+            })
+            .catch(err => {
+                sessionStorage.clear();
+                window.alert(err);
+            })
     }
 
     return (
