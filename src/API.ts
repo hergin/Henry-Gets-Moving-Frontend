@@ -68,7 +68,7 @@ const getRecipeCategories = async (): Promise<RecipeCategory[]> => {
         });
 }
 
-const getFeaturedRecipe = async (): Promise<Recipe[]> => {
+const getFeaturedRecipe = async (): Promise<Recipe> => {
     return await fetch('http://127.0.0.1:3333/recipes/featured')
         .then((response) => {
             if (response.ok) return response.json();
@@ -81,7 +81,7 @@ const getFeaturedRecipe = async (): Promise<Recipe[]> => {
         });
 }
 
-const getFeaturedExercise = async (): Promise<Exercise[]> => {
+const getFeaturedExercise = async (): Promise<Exercise> => {
     return await fetch('http://127.0.0.1:3333/execise/featured')
         .then((response) => {
             if (response.ok) return response.json();
