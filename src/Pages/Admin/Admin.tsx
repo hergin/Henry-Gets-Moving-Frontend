@@ -16,7 +16,7 @@ const Admin = () => {
     useEffect(() => {
         API.getRecipes().then((recipes) => setRecipes(recipes));
         API.getExercises().then((exercises) => setExercises(exercises))
-    })
+    }, [])
 
     return (
         <div className='admin'>
@@ -30,7 +30,9 @@ const Admin = () => {
                                 <h2>Add Exercise</h2>
                                 <div className='edit-select'>
                                     <label>Edit Exercise</label>
-                                    <select></select>
+                                    <select>{exercises && exercises.map(({name}) => (
+                                        <option>{name}</option>
+                                    ))}</select>
                                 </div>
                             </div>
                             <div className='field'>
@@ -75,7 +77,9 @@ const Admin = () => {
                             <h2>Add Recipe</h2>
                             <div className='edit-select'>
                                 <label>Edit Recipe</label>
-                                <select></select>
+                                <select>{recipes && recipes.map(({name}) => (
+                                    <option>{name}</option>
+                                ))}</select>
                             </div>
                         </div>
                         <div className='field'>
