@@ -7,11 +7,11 @@ import {BrowserRouter as Router} from 'react-router-dom';
 describe('sections',()=>{
     test('exercise section exists',()=>{
         render(<Admin/>);
-        expect(screen.getByText('Add ExercisePage')).toBeInTheDocument();
+        expect(screen.getByText('Add Exercise')).toBeInTheDocument();
     });
     test('recipe section exists',()=>{
         render(<Admin/>);
-        expect(screen.getByText('Add RecipePage')).toBeInTheDocument();
+        expect(screen.getByText('Add Recipe')).toBeInTheDocument();
     });
     test('OTD form',()=>{
         render(<Admin/>);
@@ -26,24 +26,24 @@ describe('updates database',()=>{
         const video = screen.getAllByRole('textbox')[1];
         const category = screen.getAllByRole('textbox')[2];
         fireEvent.click(name);
-        userEvent.type(name, 'Test ExercisePage');
+        userEvent.type(name, 'Test Exercise');
         fireEvent.click(video);
         userEvent.type(video, 'https://www.youtube.com/watch?v=dQw4w9WgXcQ');
         fireEvent.click(category);
         userEvent.type(category, 'Yoga');
-        fireEvent.click(screen.getByText('Save ExercisePage'));
+        fireEvent.click(screen.getByText('Save Exercise'));
         fireEvent.click(screen.getAllByRole('select')[0]);
-        fireEvent.click(screen.getByText('Test ExercisePage'));
+        fireEvent.click(screen.getByText('Test Exercise'));
         fireEvent.click(name);
-        userEvent.type(name, 'Test ExercisePage Edited');
+        userEvent.type(name, 'Test Exercise Edited');
         fireEvent.click(video);
         userEvent.type(video, 'https://www.youtube.com/watch?v=dQw4w9WgXcQ');
         fireEvent.click(category);
         userEvent.type(category, 'Yoga');
-        fireEvent.click(screen.getByText('Save ExercisePage'));
+        fireEvent.click(screen.getByText('Save Exercise'));
         render(<Router><App/></Router>);
         fireEvent.click(screen.getByText('Get Moving'));
-        expect(screen.getByText('Test ExercisePage Edited')).toBeInTheDocument();
+        expect(screen.getByText('Test Exercise Edited')).toBeInTheDocument();
     });
     test.skip('exercise adder/deleter',()=>{
         render(<Admin/>);
@@ -51,29 +51,29 @@ describe('updates database',()=>{
         const video = screen.getAllByRole('textbox')[1];
         const category = screen.getAllByRole('textbox')[2];
         fireEvent.click(name);
-        userEvent.type(name, 'Test ExercisePage');
+        userEvent.type(name, 'Test Exercise');
         fireEvent.click(video);
         userEvent.type(video, 'https://www.youtube.com/watch?v=dQw4w9WgXcQ');
         fireEvent.click(category);
         userEvent.type(category, 'Yoga');
-        fireEvent.click(screen.getByText('Save ExercisePage'));
+        fireEvent.click(screen.getByText('Save Exercise'));
         // check the exercise exists
         render(<Router><App/></Router>);
         fireEvent.click(screen.getByText('Get Moving'));
-        expect(screen.getByText('Test ExercisePage')).toBeInTheDocument();
+        expect(screen.getByText('Test Exercise')).toBeInTheDocument();
         // delete the test exercise
         render(<Admin/>);
         fireEvent.click(name);
-        userEvent.type(name, 'Test ExercisePage');
+        userEvent.type(name, 'Test Exercise');
         fireEvent.click(video);
         userEvent.type(video, 'https://www.youtube.com/watch?v=dQw4w9WgXcQ');
         fireEvent.click(category);
         userEvent.type(category, 'Yoga');
-        fireEvent.click(screen.getByText('Delete ExercisePage'));
+        fireEvent.click(screen.getByText('Delete Exercise'));
         render(<Router><App/></Router>);
         // make sure it's not there anymore
         fireEvent.click(screen.getByText('Get Moving'));
-        expect(screen.queryByText('Test ExercisePage')).not.toBeInTheDocument();
+        expect(screen.queryByText('Test Exercise')).not.toBeInTheDocument();
     });
     test.skip('recipe adder/remover',()=>{
         render(<Admin/>);
@@ -84,7 +84,7 @@ describe('updates database',()=>{
         const ingredients = screen.getAllByRole('textbox')[7];
         const steps = screen.getAllByRole('textbox')[8];
         fireEvent.click(name);
-        userEvent.type(name, 'Test RecipePage');
+        userEvent.type(name, 'Test Recipe');
         fireEvent.click(thumbnail);
         userEvent.type(thumbnail, 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpngimg.com%2Fuploads%2Fpokemon%2Fpokemon_PNG14.png');
         fireEvent.click(category);
@@ -95,24 +95,24 @@ describe('updates database',()=>{
         userEvent.type(ingredients, 'Pants, Microphone');
         fireEvent.click(steps);
         userEvent.type(steps, '1. cook 2. eat');
-        fireEvent.click(screen.getByText('Save RecipePage'));
+        fireEvent.click(screen.getByText('Save Recipe'));
         // check the exercise exists
         render(<Router><App/></Router>);
         fireEvent.click(screen.getByText('Eat Healthy'));
-        expect(screen.getByText('Test RecipePage')).toBeInTheDocument();
+        expect(screen.getByText('Test Recipe')).toBeInTheDocument();
         // delete the test exercise
         render(<Admin/>);
         fireEvent.click(name);
-        userEvent.type(name, 'Test RecipePage');
+        userEvent.type(name, 'Test Recipe');
         fireEvent.click(thumbnail);
         userEvent.type(thumbnail, 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpngimg.com%2Fuploads%2Fpokemon%2Fpokemon_PNG14.png');
         fireEvent.click(category);
         userEvent.type(category, 'Food');
-        fireEvent.click(screen.getByText('Delete RecipePage'));
+        fireEvent.click(screen.getByText('Delete Recipe'));
         render(<Router><App/></Router>);
         // make sure it's not there anymore
         fireEvent.click(screen.getByText('Eat Healthy'));
-        expect(screen.queryByText('Test RecipePage')).not.toBeInTheDocument();
+        expect(screen.queryByText('Test Recipe')).not.toBeInTheDocument();
     });
     test.skip('recipe editor',()=>{
         render(<Admin/>);
@@ -124,7 +124,7 @@ describe('updates database',()=>{
         const steps = screen.getByPlaceholderText(/.*Step.*/);
         
         fireEvent.click(name);
-        userEvent.type(name, 'Test RecipePage');
+        userEvent.type(name, 'Test Recipe');
         fireEvent.click(thumbnail);
         userEvent.type(thumbnail, 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpngimg.com%2Fuploads%2Fpokemon%2Fpokemon_PNG14.png');
         fireEvent.click(category);
@@ -135,12 +135,12 @@ describe('updates database',()=>{
         userEvent.type(ingredients, 'Pants, Microphone');
         fireEvent.click(steps);
         userEvent.type(steps, '1. cook 2. eat');
-        fireEvent.click(screen.getByText('Save RecipePage'));
+        fireEvent.click(screen.getByText('Save Recipe'));
 
-        userEvent.selectOptions(screen.getAllByRole('combobox')[2], 'Test RecipePage');
-        fireEvent.click(screen.getByText('Test RecipePage'));
+        userEvent.selectOptions(screen.getAllByRole('combobox')[2], 'Test Recipe');
+        fireEvent.click(screen.getByText('Test Recipe'));
         fireEvent.click(name);
-        userEvent.type(name, 'Test RecipePage Edited');
+        userEvent.type(name, 'Test Recipe Edited');
         fireEvent.click(thumbnail);
         userEvent.type(thumbnail, 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpngimg.com%2Fuploads%2Fpokemon%2Fpokemon_PNG14.png');
         fireEvent.click(category);
@@ -151,10 +151,10 @@ describe('updates database',()=>{
         userEvent.type(ingredients, 'Pants, Microphone');
         fireEvent.click(steps);
         userEvent.type(steps, '1. cook 2. eat');
-        fireEvent.click(screen.getByText('Save RecipePage'));
+        fireEvent.click(screen.getByText('Save Recipe'));
         render(<Router><App/></Router>);
         fireEvent.click(screen.getByText('Eat Healthy'));
-        expect(screen.getByText('Test RecipePage Edited')).toBeInTheDocument();
+        expect(screen.getByText('Test Recipe Edited')).toBeInTheDocument();
     });
     test('of the day',()=>{
         render(<Admin/>);
@@ -167,7 +167,7 @@ describe('updates database',()=>{
         const steps = screen.getByPlaceholderText(/.*Step.*/);
         
         fireEvent.click(name);
-        userEvent.type(name, 'Test RecipePage');
+        userEvent.type(name, 'Test Recipe');
         fireEvent.click(thumbnail);
         userEvent.type(thumbnail, 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpngimg.com%2Fuploads%2Fpokemon%2Fpokemon_PNG14.png');
         fireEvent.click(category);
@@ -178,7 +178,7 @@ describe('updates database',()=>{
         userEvent.type(ingredients, 'Pants, Microphone');
         fireEvent.click(steps);
         userEvent.type(steps, '1. cook 2. eat');
-        fireEvent.click(screen.getByText('Save RecipePage'));
+        fireEvent.click(screen.getByText('Save Recipe'));
         const rotd = screen.getAllByRole('combobox')[2];
         fireEvent.click(rotd);
     });
