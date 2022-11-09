@@ -225,7 +225,7 @@ const Admin = () => {
                             <div className='field'>
                                 <label>Category</label>
                                 <select
-                                    defaultValue={"Select Exercise"}
+                                    defaultValue={""}
                                     onChange={event => {
                                         event.preventDefault()
                                         setExercise(exercise => {
