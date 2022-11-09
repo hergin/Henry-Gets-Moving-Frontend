@@ -78,7 +78,7 @@ const Admin = () => {
             <div className='content'>
                 <div className="form-div">
                     <div>
-                        <form className='exercise-form'>
+                        <form className='exercise-form' onSubmit={saveExercise}>
                             <div className='add-edit'>
                                 <h2>Add Exercise</h2>
                                 <div className='edit-select'>
