@@ -1,54 +1,20 @@
 import './Recipe.scss';
 import recipeStock from "../../Assets/recipeStock.jpg";
 import {Link} from "react-router-dom";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {Helmet, HelmetProvider} from "react-helmet-async";
+import recipeLayout from '../../Components/recipeLayout'
 import Weather from "../../Components/Weather";
 import Grass from "../../Components/Grass";
-
-type Recipe = {
-    [key: string]: any;
-    thumbnail: string;
-    name: string;
-    category: string;
-}
+import API from "../../API";
+import {Recipe} from "../../Structs/DataTypes";
 
 const Recipe = () => {
-    const recipe_list = [
-        {
-            thumbnail: 'https://www.vegrecipesofindia.com/wp-content/uploads/2016/09/veg-pizza-puffs-recipe-280x280.jpg',
-            name: "Some name",
-            category: "Healthy",
-        },
-        {
-            thumbnail: 'https://www.vegrecipesofindia.com/wp-content/uploads/2016/09/veg-pizza-puffs-recipe-280x280.jpg',
-            name: "Some name",
-            category: "Healthy",
-        },
-        {
-            thumbnail: 'https://www.vegrecipesofindia.com/wp-content/uploads/2016/09/veg-pizza-puffs-recipe-280x280.jpg',
-            name: "Some name",
-            category: "Healthy",
-        },
-        {
-            thumbnail: 'https://www.vegrecipesofindia.com/wp-content/uploads/2016/09/veg-pizza-puffs-recipe-280x280.jpg',
-            name: "Some name",
-            category: "Healthy",
-        },
-    ]
+    const [recipes, setRecipes] = useState([] as Recipe[])
+    useEffect(() => {
+        API.getRecipes().then((recipes) => setRecipes(recipes));
+    }, [])
 
-    const recipeLayout = (individualRecipe: Recipe[]) => {
-        return individualRecipe.map((recipe) => {
-                return (
-                    <div className='grid-content'>
-                        <Link to={'/individual-recipe'}><img src={recipe.thumbnail} alt={recipe.name + "Thumbnail"}/></Link>
-                        <p className='name'>{recipe.name}</p>
-                        <p className='category'>{recipe.category}</p>
-                    </div>
-                )
-            }
-        )
-    }
     return (
         <div className="recipe">
             <HelmetProvider>
@@ -79,7 +45,7 @@ const Recipe = () => {
                     <input id='search' placeholder="Search"/>
                 </div>
                 <div className='recipe-grid'>
-                    {recipeLayout(recipe_list)}
+                    {recipeLayout(recipes)}
                 </div>
                 <div className='see-more'>
                     <button className='red-button'>See More</button>
