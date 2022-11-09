@@ -11,16 +11,13 @@ const Header = () => {
         return null;
     }
 
-    function headerLogIn(){
+    function headerLogIn() {
         if (API.isLoggedIn()) {
-            return <img src={squirm} alt="" className='squirm'/>
-        }
-        else{
+            return <div className='squirm'><img src={squirm} alt=""/></div>
+        } else {
             return <Link to={'/login'} className='login-button'>Login</Link>
         }
     }
-
-
 
     return (
         <div className="header">
