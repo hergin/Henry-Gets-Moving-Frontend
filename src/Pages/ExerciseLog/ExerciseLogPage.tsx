@@ -9,6 +9,7 @@ import Weather from "../../Components/Weather";
 import Grass from "../../Components/Grass";
 import BackArrow from "../../Components/BackArrow/BackArrow";
 import {useNavigate} from "react-router-dom";
+import {ExerciseLog} from "../../Structs/DataTypes";
 
 const ExerciseLogPage = () => {
     const [child, setChild] = useState("");
@@ -16,7 +17,7 @@ const ExerciseLogPage = () => {
     const [intensity, setIntensity] = useState("");
     const [duration, setDuration] = useState("");
     const navigate = useNavigate();
-
+    const [exerciseLog, setExerciseLog] = useState<ExerciseLog>()
 
     function checkAllFormsFilled() {
         return child.length > 0 && exercise.length > 0 && intensity.length > 0 && duration.length > 0;
@@ -24,29 +25,33 @@ const ExerciseLogPage = () => {
 
     function handleSubmit(e: { preventDefault: () => void; }) {
         e.preventDefault();
-        // return fetch(`${API_URL}/users`, {
-        //     method: "POST",
-        //     headers: {
-        //         "Content-Type": "application/json"
-        //     },
-        //     body: JSON.stringify({
-        //         email: email
-        //     })
-        // })
-        //     .then(response => {
-        //         if(response.ok) {
-        //             return response.json();
-        //         }
-        //         throw new Error("Invalid email");
-        //     })
-        //     .then(response => {
-        //         // sessionStorage.setItem("session_key", response.token);
-        //         navigate("/login");
-        //     })
-        //     .catch(err => {
-        //         // sessionStorage.clear();
-        //         window.alert(err);
-        //     })
+        const formData = new FormData();
+        formData.append("family_member_name", child)
+        formData.append("intensity", intensity)
+        formData.append("duration", duration)
+        formData.append("type", exercise)
+        return fetch(`http://127.0.0.1:3333/exerciseLogs`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: formData,
+
+        })
+            .then(response => {
+                if(response.ok) {
+                    return response.json();
+                }
+                throw new Error("Invalid email");
+            })
+            .then(response => {
+                // sessionStorage.setItem("session_key", response.token);
+                navigate("/login");
+            })
+            .catch(err => {
+                // sessionStorage.clear();
+                window.alert(err);
+            })
     }
 
     return (
