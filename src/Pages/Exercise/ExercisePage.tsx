@@ -35,11 +35,6 @@ const ExercisePage = () => {
             }
         )
     }
-
-    useEffect(() => {
-        API.getExercises().then((exercises) => setExercises(exercises));
-    }, [])
-
     return (
         <div className="exercise">
             <HelmetProvider>
