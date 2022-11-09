@@ -17,6 +17,7 @@ export type RecipeCategory = {
 export type Exercise = {
     id: number,
     name: string,
+    thumbnailLink: string,
     videoLink: string,
     isFeatured: boolean,
     category_id: number,
