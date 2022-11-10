@@ -172,6 +172,8 @@ button:disabled {
         align-items: center;
         width: 100%;
         justify-content: center;
+        position: fixed;
+        bottom: 0;
     }
 
     .footer{
@@ -209,6 +211,8 @@ button:disabled {
     .footer-mobile{
         display: flex;
         width: 100%;
+        position: fixed;
+        bottom: 0;
     }
 
     .footer-desktop{
