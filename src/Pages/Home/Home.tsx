@@ -4,9 +4,9 @@ import {Link} from "react-router-dom";
 import recipeImage from '../../Assets/recipeStock.jpg';
 import exerciseImage from '../../Assets/exerciseStock.jpg';
 import React, {useEffect, useState} from "react";
-import footerImage from "../../Assets/HomeFooter.png";
-import footerDesktopImage from '../../Assets/HomeFooterDesktop.png';
-import footerMobileImage from '../../Assets/HomeFooterMobile.png'
+import footerImage from "../../Assets/HomeFooter.svg";
+import footerDesktopImage from '../../Assets/HomeFooterDesktop.svg';
+import footerMobileImage from '../../Assets/HomeFooterMobile.svg'
 import {Helmet, HelmetProvider} from "react-helmet-async";
 import Weather from "../../Components/Weather";
 import API from "../../API";
