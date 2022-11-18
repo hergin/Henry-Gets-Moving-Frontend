@@ -18,7 +18,7 @@ const ExerciseLogPage = () => {
     const [intensity, setIntensity] = useState("");
     const [duration, setDuration] = useState("");
     const navigate = useNavigate();
-    const [exerciseLog, setExerciseLog] = useState<ExerciseLog>()
+    const [exerciseLog, setExerciseLog] = useState<ExerciseLog>({} as ExerciseLog);
 
     function checkAllFormsFilled() {
         return child.length > 0 && exercise.length > 0 && intensity.length > 0 && duration.length > 0;
