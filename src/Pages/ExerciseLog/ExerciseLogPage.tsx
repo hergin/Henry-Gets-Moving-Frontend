@@ -9,7 +9,7 @@ import Weather from "../../Components/Weather";
 import Grass from "../../Components/Grass";
 import BackArrow from "../../Components/BackArrow/BackArrow";
 import {useNavigate} from "react-router-dom";
-import {ExerciseLog} from "../../Structs/DataTypes";
+import {ExerciseLog, FamilyMember} from "../../Structs/DataTypes";
 
 const ExerciseLogPage = () => {
     const [child, setChild] = useState("");
@@ -17,7 +17,7 @@ const ExerciseLogPage = () => {
     const [intensity, setIntensity] = useState("");
     const [duration, setDuration] = useState("");
     const navigate = useNavigate();
-    const [exerciseLog, setExerciseLog] = useState<ExerciseLog>()
+    const [exerciseLog, setExerciseLog] = useState({} as ExerciseLog);
 
     function checkAllFormsFilled() {
         return child.length > 0 && exercise.length > 0 && intensity.length > 0 && duration.length > 0;
@@ -68,7 +68,11 @@ const ExerciseLogPage = () => {
                 <div className='log-input'>
                     <div className='label-input'>
                         <label>Child's Name</label>
-                        <input value={child} onChange={(e) => setChild(e.target.value)}/>
+                        <input value={exerciseLog?.family_member_name ? String(exerciseLog?.family_member_name) : ""} onChange={(e) => {
+                            setExerciseLog((exerciseLog) => {
+                                return {...exerciseLog, child: e.target.value} as ExerciseLog
+                            });
+                        }}/>
                     </div>
                     <div className='label-input'>
                         <label>Exercise Type</label>
