@@ -101,7 +101,11 @@ const ExerciseLogPage = () => {
                     </div>
                     <div className='label-input'>
                         <label>Duration</label>
-                        <input placeholder="# of Minutes" value={duration} onChange={(e) => setDuration(e.target.value)}/>
+                        <input placeholder="# of Minutes" value={duration} onChange={(e) => {
+                            setExerciseLog((exerciseLog) => {
+                                return {...exerciseLog, duration: e.target.value}
+                            });
+                        }}/>
                     </div>
                 </div>
                 <div className='buttons'>
