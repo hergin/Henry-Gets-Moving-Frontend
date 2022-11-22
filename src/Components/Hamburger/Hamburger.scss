@@ -15,4 +15,14 @@
     transform-origin: 1px;
     transition: all 0.3s linear;
   }
+  .rotate45{
+    transform: rotate(45deg);
+  }
+  .translate{
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  .rotate-45{
+    transform: rotate(-45deg);
+  }
 }
