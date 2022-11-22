@@ -20,7 +20,7 @@ export default function Nav() {
                     <li>Login</li>
                 </ul>
                 <div className='hamburger' onClick={toggleMenu}>
-                    <Hamburger/>
+                    <Hamburger isOpen={open}/>
                 </div>
             </div>
         </div>
