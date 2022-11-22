@@ -4,75 +4,9 @@
   background-color: #FDEE1F;
   padding: 20px;
 
-  .dropbtn {
-    font-size: 24px;
-    color: #000000;
-    font-weight: 500;
-    border: none;
-    background-color: #FDEE1F;
-    padding: 10px;
-    cursor: pointer;
-  }
-
-  .dropdown {
-    position: relative;
-    display: inline-block;
-  }
-
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #C4E5E8;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-  }
-
-  .dropdown-content {
-    .dropdown-links {
-      color: black;
-      padding: 12px;
-      text-decoration: none;
-      display: block;
-      font-size: 22px;
-    }
-  }
-
-  .dropdown-content a:hover {
-    background-color: #D1FBFF;
-  }
-
-  .dropdown:hover {
-    .dropdown-content {
-      display: block;
-    }
-  }
-
-
-  .dropdown:hover {
-    .dropbtn {
-      background-color: #A5DFE5;
-    }
-  }
-
-  a {
-    text-decoration: none;
-    font-size: 24px;
-    color: #000000;
-    font-weight: 700;
-  }
 
   .header-links {
-    display: flex;
-    width: 60%;
-    justify-content: space-between;
-    align-items: center;
-
-    a {
-      font-size: 20px;
-      display: flex;
-      align-items: center;
-      font-weight: 600;
-    }
+    display: none;
   }
 
   .login-button {
@@ -90,15 +24,85 @@
     }
   }
 
+  .header-home{
+    a{
+      font-size: 2rem;
+      text-decoration: none;
+      color: black;
+      font-weight: 600;
+    }
+  }
+
   //Desktop Styling
   @media (min-width: 1050px) {
-    a {
-      font-size: 2rem;
+    .dropbtn {
+      font-size: 24px;
+      color: #000000;
+      font-weight: 500;
+      border: none;
+      background-color: #FDEE1F;
+      padding: 10px;
+      cursor: pointer;
+    }
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #C4E5E8;
+      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+    }
+
+    .dropdown-content {
+      .dropdown-links {
+        color: black;
+        padding: 12px;
+        text-decoration: none;
+        display: block;
+        font-size: 22px;
+      }
+    }
+
+    .dropdown-content a:hover {
+      background-color: #D1FBFF;
+    }
+
+    .dropdown:hover {
+      .dropdown-content {
+        display: block;
+      }
+    }
+
+    .dropdown:hover {
+      .dropbtn {
+        background-color: #A5DFE5;
+      }
     }
 
     .header-links {
+      display: flex;
+      width: 60%;
+      justify-content: space-between;
+      align-items: center;
+
       a {
-        font-size: 1.6rem;
+        font-size: 24px;
+        display: flex;
+        align-items: center;
+        font-weight: 600;
+        text-decoration: none;
+        color: black;
+      }
+    }
+
+    .header-home{
+      a{
+        font-size: 2rem;
       }
     }
   }
@@ -107,6 +111,9 @@
     .header-home {
       display: flex;
       align-items: center;
+      a{
+        font-size: 1.6rem;
+      }
     }
     .header-links {
       flex-direction: column;
