@@ -17,4 +17,21 @@
       padding-right: 10px;
     }
   }
+
+  .hamburger{
+    position: fixed;
+    padding-top: 10px;
+    margin-left: 10px;
+    z-index: 10;
+  }
+
+  @media (min-width: 1050px) {
+    .hamburger{
+      display: none;
+    }
+  }
+
+  @media (max-width: 750px) {
+
+  }
 }
