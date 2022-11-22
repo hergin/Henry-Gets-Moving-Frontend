@@ -5,6 +5,7 @@ import React, {useState} from "react";
 import {Helmet, HelmetProvider} from "react-helmet-async";
 import Weather from "../../Components/Weather";
 import Grass from "../../Components/Grass";
+import {API_URL} from "../../API";
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -16,7 +17,7 @@ const Login = () => {
 
     function handleSubmit(event: { preventDefault: () => void; }) {
         event.preventDefault();
-        return fetch(`http://127.0.0.1:3333/users/login`, {
+        return fetch(`${API_URL}/users/login`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
