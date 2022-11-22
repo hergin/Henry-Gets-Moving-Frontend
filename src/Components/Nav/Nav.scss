@@ -12,6 +12,14 @@
       padding: 0 25px;
     }
 
+    .open{
+      display: inline;
+      width: 100px;
+    }
+    .closed{
+      display: none;
+    }
+
     li {
       list-style-type: none;
       padding-right: 10px;
@@ -19,10 +27,11 @@
   }
 
   .hamburger{
-    position: fixed;
-    padding-top: 10px;
+    position: absolute;
+    padding-top: 25px;
     margin-left: 10px;
     z-index: 10;
+    top: 0;
   }
 
   @media (min-width: 1050px) {
