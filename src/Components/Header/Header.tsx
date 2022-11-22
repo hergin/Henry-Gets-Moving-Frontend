@@ -26,13 +26,19 @@ const Header = () => {
             </div>
             <nav className='header-links'>
                 <Link to={'/get-moving'}>Get Moving</Link>
-                {/*//TODO Make eat healthy an on hover dropdown linking to recipes and learn-more*/}
-                <Link to={'/recipes'}>Eat Healthy</Link>
+                <div className="dropdown">
+                    <button className="dropbtn">Eat Healthy</button>
+                    <div className="dropdown-content">
+                        <Link to={'/recipes'} className='dropdown-links'>Recipes</Link>
+                        <Link to={'/learn-more'} className='dropdown-links'>Learn More</Link>
+                    </div>
+                </div>
                 <Link to={'/games'}>Games</Link>
                 <Link to={'/about'}>About</Link>
                 {headerLogIn()}
             </nav>
         </div>
+
     )
 }
 
