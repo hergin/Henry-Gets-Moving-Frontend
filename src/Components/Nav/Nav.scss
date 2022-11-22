@@ -4,7 +4,7 @@
     height: 50px;
 
     ul {
-     height: 100vh;
+      height: 90%;
       width: 20vw;
       margin-top: 50px;
       position: absolute;
@@ -12,20 +12,29 @@
       background-color: #FDEE1F;
     }
 
-    .open{
+    .open {
       display: inline;
     }
-    .closed{
+
+    .closed {
       display: none;
     }
 
     li {
       list-style-type: none;
       padding-right: 10px;
+      margin: 10px 0;
+    }
+
+    a {
+      text-decoration: none;
+      color: black;
+      font-size: 1.4rem;
+      font-weight: 600;
     }
   }
 
-  .hamburger{
+  .hamburger {
     position: absolute;
     padding-top: 25px;
     margin-left: 10px;
@@ -34,12 +43,16 @@
   }
 
   @media (min-width: 1050px) {
-    .hamburger{
+    .hamburger {
       display: none;
     }
   }
 
   @media (max-width: 750px) {
-
+    .navigation {
+      ul {
+        width: 50vw;
+      }
+    }
   }
 }
