@@ -24,14 +24,13 @@ const Header = () => {
             <div className='header-home'>
                 <Link to={'/'}>Home</Link>
             </div>
-
             <nav className='header-links'>
                 <Link to={'/get-moving'}>Get Moving</Link>
                 <div className="dropdown">
-                    <button className="dropbtn">Dropdown</button>
+                    <button className="dropbtn">Eat Healthy</button>
                     <div className="dropdown-content">
-                        <Link to={'/recipes'}>Eat Healthy</Link>
-                        <Link to={'/learn-more'}>Learn More</Link>
+                        <Link to={'/recipes'} className='dropdown-links'>Recipes</Link>
+                        <Link to={'/learn-more'} className='dropdown-links'>Learn More</Link>
                     </div>
                 </div>
                 <Link to={'/games'}>Games</Link>
