@@ -46,7 +46,7 @@ describe('buttons function', () => {
   describe('when eat healthy button clicked',()=> {
     it('should go to the recipes page',()=>{
       render(<Router><App/></Router>);
-      fireEvent.click(screen.getByText(/Eat Healthy/));
+      fireEvent.click(screen.getByText(/Recipes/));
       expect(global.window.location.pathname).toContain('/recipes');
     })
   });
