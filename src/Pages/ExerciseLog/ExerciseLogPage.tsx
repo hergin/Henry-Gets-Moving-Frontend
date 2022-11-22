@@ -10,6 +10,7 @@ import Grass from "../../Components/Grass";
 import BackArrow from "../../Components/BackArrow/BackArrow";
 import {useNavigate} from "react-router-dom";
 import {ExerciseLog} from "../../Structs/DataTypes";
+import {API_URL} from "../../API";
 
 const ExerciseLogPage = () => {
     const [child, setChild] = useState("");
@@ -30,7 +31,7 @@ const ExerciseLogPage = () => {
         formData.append("intensity", intensity)
         formData.append("duration", duration)
         formData.append("type", exercise)
-        return fetch(`http://127.0.0.1:3333/exerciseLogs`, {
+        return fetch(`${API_URL}/exerciseLogs`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
