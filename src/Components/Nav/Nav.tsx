@@ -1,11 +1,12 @@
 import './Nav.scss'
 import Hamburger from "../Hamburger/Hamburger";
 import {useState} from "react";
+import {Link} from "react-router-dom";
 
 export default function Nav() {
     const [open, setOpen] = useState(false);
 
-    const toggleMenu =()=>{
+    const toggleMenu = () => {
         setOpen(!open)
     }
 
@@ -13,11 +14,11 @@ export default function Nav() {
         <div className='menu-nav'>
             <div className='navigation'>
                 <ul className={open ? 'open' : 'closed'}>
-                    <li>Get Moving</li>
-                    <li>Recipes</li>
-                    <li>Learn More</li>
-                    <li>About</li>
-                    <li>Login</li>
+                    <li><Link to={'/get-moving'}>Get Moving</Link></li>
+                    <li><Link to={'/recipes'}>Recipes</Link></li>
+                    <li><Link to={'/learn-more'}>Learn More</Link></li>
+                    <li><Link to={'/about'}>About</Link></li>
+                    <li><Link to={'/login'}>Login</Link></li>
                 </ul>
                 <div className='hamburger' onClick={toggleMenu}>
                     <Hamburger isOpen={open}/>
