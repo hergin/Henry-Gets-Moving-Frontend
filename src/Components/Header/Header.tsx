@@ -2,6 +2,7 @@ import './Header.scss';
 import {Link, useLocation} from "react-router-dom";
 import API from "../../API";
 import squirm from '../../Assets/worm.png'
+import Nav from "../Nav/Nav";
 
 const Header = () => {
     let location = useLocation()
@@ -37,6 +38,9 @@ const Header = () => {
                 <Link to={'/about'}>About</Link>
                 {headerLogIn()}
             </nav>
+            <div className='hamburger-menu'>
+                <Nav/>
+            </div>
         </div>
 
     )
