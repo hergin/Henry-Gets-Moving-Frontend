@@ -6,6 +6,7 @@ import Weather from "../../Components/Weather";
 import Grass from "../../Components/Grass";
 import BackArrow from "../../Components/BackArrow/BackArrow";
 import {useNavigate} from "react-router-dom";
+import {API_URL} from "../../API";
 
 const Register = () => {
     const [email, setEmail] = useState("");
@@ -18,10 +19,10 @@ const Register = () => {
 
     function handleSubmit(e: { preventDefault: () => void; }) {
         e.preventDefault();
-        return fetch(`http://127.0.0.1:3333/users`, {
+        return fetch(`${API_URL}/users`, {
             method: "POST",
             headers: {
-                "Access-Control-Allow-Origin": "http://127.0.0.1:3333",
+                "Access-Control-Allow-Origin": `${API_URL}`,
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
