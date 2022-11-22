@@ -5,6 +5,7 @@ import swings from "../../Assets/Swings.png";
 import React, {useEffect, useState} from "react";
 import {Exercise, ExerciseCategory, Recipe, RecipeCategory} from "../../Structs/DataTypes";
 import API from "../../API";
+import {API_URL} from "../../API";
 
 const Admin = () => {
 
@@ -50,7 +51,7 @@ const Admin = () => {
             formData.append("is_featured", String(false))
         }
         if (exercise.id) {
-            await fetch(`http://127.0.0.1:3333/exercises/${exercise.id}`, {
+            await fetch(`${API_URL}/exercises/${exercise.id}`, {
                 method: 'PUT',
                 body: formData,
             }).then((response) => {
@@ -64,7 +65,7 @@ const Admin = () => {
                 }
             })
         } else {
-            await fetch(`http://127.0.0.1:3333/exercises`, {
+            await fetch(`${API_URL}/exercises`, {
                 method: 'POST',
                 body: formData,
             }).then((response) => {
@@ -84,7 +85,7 @@ const Admin = () => {
         e.preventDefault()
         const confirm = window.confirm("Are you sure you want to delete?")
         if (confirm) {
-            await fetch(`http://127.0.0.1:3333/exercises/${exercise.id}`, {
+            await fetch(`${API_URL}/exercises/${exercise.id}`, {
                 method: 'DELETE',
             }).then((res) => {
                 if (res.status >= 400 && res.status < 600) {
@@ -124,7 +125,7 @@ const Admin = () => {
             formData.append("is_featured", String(false))
         }
         if (recipe.id) {
-            await fetch(`http://127.0.0.1:3333/recipes/${recipe.id}`, {
+            await fetch(`${API_URL}/recipes/${recipe.id}`, {
                 method: 'PUT',
                 body: formData,
             }).then((response) => {
@@ -138,7 +139,7 @@ const Admin = () => {
                 }
             })
         } else {
-            await fetch(`http://127.0.0.1:3333/recipes`, {
+            await fetch(`${API_URL}/recipes`, {
                 method: 'POST',
                 body: formData,
             }).then((response) => {
@@ -157,7 +158,7 @@ const Admin = () => {
         e.preventDefault()
         const confirm = window.confirm("Are you sure you want to delete?")
         if (confirm) {
-            await fetch(`http://127.0.0.1:3333/recipes/${recipe.id}`, {
+            await fetch(`${API_URL}/recipes/${recipe.id}`, {
                 method: 'DELETE',
             }).then((res) => {
                 if (res.status >= 400 && res.status < 600) {
