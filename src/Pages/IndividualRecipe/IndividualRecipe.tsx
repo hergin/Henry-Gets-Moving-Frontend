@@ -7,14 +7,14 @@ import Grass from "../../Components/Grass";
 import BackArrow from "../../Components/BackArrow/BackArrow";
 import {Recipe} from "../../Structs/DataTypes";
 import {useParams} from "react-router-dom";
-
+import {API_URL} from "../../API";
 
 const IndividualRecipe = () => {
     const [recipe, setRecipe] = useState<Recipe>()
     const id = useParams();
     useEffect( () => {
         const getRecipe = async () => {
-            const recipe =  await fetch(`http://127.0.0.1:3333/recipes/${id.id}`)
+            const recipe =  await fetch(`${API_URL}/recipes/${id.id}`)
                 .then((response) => {
                     if (response.ok) return response.json();
                     return {
