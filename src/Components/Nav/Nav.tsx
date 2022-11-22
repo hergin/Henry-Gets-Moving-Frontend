@@ -1,4 +1,5 @@
 import './Nav.scss'
+import Hamburger from "../Hamburger/Hamburger";
 
 export default function Nav() {
     return (
@@ -11,6 +12,9 @@ export default function Nav() {
                     <li>About</li>
                     <li>Login</li>
                 </ul>
+                <div className='hamburger'>
+                    <Hamburger/>
+                </div>
             </div>
         </div>
     )
