@@ -24,15 +24,22 @@ const Header = () => {
             <div className='header-home'>
                 <Link to={'/'}>Home</Link>
             </div>
+
             <nav className='header-links'>
                 <Link to={'/get-moving'}>Get Moving</Link>
-                {/*//TODO Make eat healthy an on hover dropdown linking to recipes and learn-more*/}
-                <Link to={'/recipes'}>Eat Healthy</Link>
+                <div className="dropdown">
+                    <button className="dropbtn">Dropdown</button>
+                    <div className="dropdown-content">
+                        <Link to={'/recipes'}>Eat Healthy</Link>
+                        <Link to={'/learn-more'}>Learn More</Link>
+                    </div>
+                </div>
                 <Link to={'/games'}>Games</Link>
                 <Link to={'/about'}>About</Link>
                 {headerLogIn()}
             </nav>
         </div>
+
     )
 }
 
