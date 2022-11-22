@@ -249,6 +249,41 @@ const Admin = () => {
                                 </div>
                             </form>
                         </div>
+                        <div>
+                            <form className='demo-form'>
+                                <div className='add-edit'>
+                                    <h2>Add Demonstration</h2>
+                                    <div className='edit-select'>
+                                        <label>Edit Demo</label>
+                                        <select>
+                                            <option value="select">Select Demo</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div className='field'>
+                                    <label>Name</label>
+                                    <input/>
+                                </div>
+                                <div className='field'>
+                                    <label>Thumbnail Link</label>
+                                    <input/>
+                                </div>
+                                <div className='field'>
+                                    <label>Embed Video Link</label>
+                                    <input/>
+                                </div>
+                                <div className='field'>
+                                    <label>Category</label>
+                                    <select>
+                                        <option value="" disabled>Select Category</option>
+                                    </select>
+                                </div>
+                                <div className='buttons'>
+                                    <button className='delete'>Delete Demo</button>
+                                    <button className='save'>Save Demo</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                     <hr/>
                     <div className="form-div">
