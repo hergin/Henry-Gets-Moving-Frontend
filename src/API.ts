@@ -1,7 +1,9 @@
 import {Recipe, Exercise, RecipeCategory, ExerciseCategory} from "./Structs/DataTypes";
 
+export const API_URL = "http://127.0.0.1:3333";
+
 const getRecipes = async (): Promise<Recipe[]> => {
-    return await fetch('http://127.0.0.1:3333/recipes')
+    return await fetch(`${API_URL}/recipes`)
         .then((response) => {
         if (response.ok) return response.json();
         return {
@@ -18,7 +20,7 @@ const getRecipes = async (): Promise<Recipe[]> => {
 }
 
 const getExercises = async (): Promise<Exercise[]> => {
-    return await fetch('http://127.0.0.1:3333/exercises')
+    return await fetch(`${API_URL}/exercises`)
         .then((response) => {
             if (response.ok) return response.json();
             return {
@@ -35,7 +37,7 @@ const getExercises = async (): Promise<Exercise[]> => {
 }
 
 const getExerciseCategories = async (): Promise<ExerciseCategory[]> => {
-    return await fetch('http://127.0.0.1:3333/exerciseCategories')
+    return await fetch(`${API_URL}/exerciseCategories`)
         .then((response) => {
             if (response.ok) return response.json();
             return {
@@ -52,7 +54,7 @@ const getExerciseCategories = async (): Promise<ExerciseCategory[]> => {
 }
 
 const getRecipeCategories = async (): Promise<RecipeCategory[]> => {
-    return await fetch('http://127.0.0.1:3333/recipeCategories')
+    return await fetch(`${API_URL}/recipeCategories`)
         .then((response) => {
             if (response.ok) return response.json();
             return {
@@ -69,7 +71,7 @@ const getRecipeCategories = async (): Promise<RecipeCategory[]> => {
 }
 
 const getFeaturedRecipe = async (): Promise<Recipe> => {
-    return await fetch('http://127.0.0.1:3333/featuredRecipe')
+    return await fetch(`${API_URL}/featuredRecipe`)
         .then((response) => {
             if (response.ok) return response.json();
             return {
@@ -82,7 +84,7 @@ const getFeaturedRecipe = async (): Promise<Recipe> => {
 }
 
 const getFeaturedExercise = async (): Promise<Exercise> => {
-    return await fetch('http://127.0.0.1:3333/featuredExercise')
+    return await fetch(`${API_URL}/featuredExercise`)
         .then((response) => {
             if (response.ok) return response.json();
             return {
@@ -106,7 +108,7 @@ const API ={
     getFeaturedRecipe,
     getFeaturedExercise,
     isLoggedIn,
-
+    API_URL,
 }
 
 export default API;
