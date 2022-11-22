@@ -33,8 +33,15 @@
     }
   }
 
+  .hamburger-menu{
+    display: flex;
+  }
+
   //Desktop Styling
   @media (min-width: 1050px) {
+    .hamburger-menu{
+      display: none;
+    }
     .dropbtn {
       font-size: 24px;
       color: #000000;
