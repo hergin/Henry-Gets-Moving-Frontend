@@ -1,4 +1,4 @@
-import {Recipe, Exercise, RecipeCategory, ExerciseCategory} from "./Structs/DataTypes";
+import {Recipe, Exercise, RecipeCategory, ExerciseCategory, ExerciseLog} from "./Structs/DataTypes";
 
 export const API_URL = "http://127.0.0.1:3333";
 
@@ -96,6 +96,19 @@ const getFeaturedExercise = async (): Promise<Exercise> => {
         });
 }
 
+const getExerciseLogs = async (): Promise<ExerciseLog> => {
+    return await fetch(`${API_URL}/exerciseLogs`)
+    .then((response) => {
+        if (response.ok) return response.json();
+        return {
+            errorCode: response.status,
+            error: response.statusText,
+        }
+    }).then((response) => {
+        return response;
+    });
+}
+
 const isLoggedIn = (): boolean => {
     return sessionStorage.getItem('session_key') != null;
 }
@@ -109,6 +122,7 @@ const API ={
     getFeaturedExercise,
     isLoggedIn,
     API_URL,
+    getExerciseLogs
 }
 
 export default API;
