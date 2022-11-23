@@ -118,6 +118,25 @@ const recipe_categories = [
     }
 ];
 
+const exercises = [
+    {
+        id: 1,
+        name: "Burpees",
+        thumbnail_link: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.verywellfit.com%2Fthmb%2FFA7LqmnXM77quHgCLvVZIYWkeFA%3D%2F2125x1416%2Ffilters%3Afill(FFDB5D%2C1)%2FGettyImages-598308041-5707ef713df78c7d9ea4f5ee.jpg",
+        video_link: "https://www.youtube.com/embed/K6fCnO9TjG0",
+        is_featured: true,
+        category_id: 1
+    },
+    {
+        id: 2,
+        name: "Running",
+        thumbnail_link: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.verywellfit.com%2Fthmb%2FFA7LqmnXM77quHgCLvVZIYWkeFA%3D%2F2125x1416%2Ffilters%3Afill(FFDB5D%2C1)%2FGettyImages-598308041-5707ef713df78c7d9ea4f5ee.jpg",
+        video_link: "https://www.youtube.com/embed/K6fCnO9TjG0",
+        is_featured: false,
+        category_id: 1
+    }
+];
+
 export function getExerciseLogs(member: FamilyMember) {
     let logs = [];
     for (let i = 0; i < 3; i++) {
@@ -140,10 +159,29 @@ export function getRecipes() {
     return Promise.resolve(recipes);
 }
 
+export function isLoggedIn() {
+    return Promise.resolve(true);
+}
+
+export function getFeaturedExercise() {
+    for (let i = 0; i < 4; i++) {
+        if (exercises[i].is_featured)
+            return Promise.resolve(exercises[i]);
+    }
+}
+export function getFeaturedRecipe() {
+    for (let i = 0; i < 4; i++) {
+        if (recipes[i].is_featured)
+            return Promise.resolve(recipes[i]);
+    }
+}
 const TestAPI = {
     getExerciseLogs,
     getFamilyMembers,
-    getRecipes
+    getRecipes,
+    isLoggedIn,
+    getFeaturedExercise,
+    getFeaturedRecipe
 };
 
 export default TestAPI;
