@@ -32,24 +32,22 @@ const ExerciseLogPage = () => {
         formData.append("type", exercise)
         return fetch(`http://127.0.0.1:3333/exerciseLogs`, {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
             body: formData,
 
         })
             .then(response => {
                 if(response.ok) {
+                    window.alert("Exercise log submitted!");
                     return response.json();
                 }
                 throw new Error("Invalid email");
             })
             .then(response => {
-                // sessionStorage.setItem("session_key", response.token);
+                sessionStorage.setItem("session_key", response.token);
                 navigate("/login");
             })
             .catch(err => {
-                // sessionStorage.clear();
+                sessionStorage.clear();
                 window.alert(err);
             })
     }
@@ -68,9 +66,10 @@ const ExerciseLogPage = () => {
                 <div className='log-input'>
                     <div className='label-input'>
                         <label>Child's Name</label>
-                        <input value={exerciseLog?.family_member_name ? String(exerciseLog?.family_member_name) : ""} onChange={(e) => {
+                        <input value={exerciseLog?.family_member_name ? String(exerciseLog?.family_member_name) : ''} onChange={(e) => {
                             setExerciseLog((exerciseLog) => {
-                                return {...exerciseLog, child: e.target.value} as ExerciseLog
+                                setChild(e.target.value);
+                                return {...exerciseLog, family_member_name: e.target.value} as ExerciseLog
                             });
                         }}/>
                     </div>
@@ -78,6 +77,7 @@ const ExerciseLogPage = () => {
                         <label>Exercise Type</label>
                         <input value={exerciseLog?.type ? String(exerciseLog?.type) : ''} onChange={(e) => {
                             setExerciseLog((exerciseLog) => {
+                                setExercise(e.target.value);
                                 return {...exerciseLog, type: e.target.value}
                             });
                         }}/>
@@ -101,8 +101,9 @@ const ExerciseLogPage = () => {
                     </div>
                     <div className='label-input'>
                         <label>Duration</label>
-                        <input placeholder="# of Minutes" value={duration} onChange={(e) => {
+                        <input placeholder="# of Minutes" value={exerciseLog?.duration ? String(exerciseLog?.duration) : ''} onChange={(e) => {
                             setExerciseLog((exerciseLog) => {
+                                setDuration(e.target.value);
                                 return {...exerciseLog, duration: e.target.value}
                             });
                         }}/>
