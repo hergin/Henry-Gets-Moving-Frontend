@@ -30,14 +30,16 @@ export type ExerciseCategory = {
 
 export type User = {
     id: number,
-    email: string
+    email: string,
+    familyMembers?: [FamilyMember]
 }
 
 export type FamilyMember = {
     id: number,
     name: string,
     user_id: number,
-    User?: User
+    User?: User,
+    exerciseLogs?: [ExerciseLog]
 }
 
 export type ExerciseLog = {
