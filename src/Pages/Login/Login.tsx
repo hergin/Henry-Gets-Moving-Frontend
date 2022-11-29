@@ -33,7 +33,6 @@ const Login = () => {
             })
             .then(response => {
                 sessionStorage.setItem("session_key", response.token);
-                sessionStorage.setItem("user_id", response.user_id);
                 navigate("/");
             })
             .catch(err => {
