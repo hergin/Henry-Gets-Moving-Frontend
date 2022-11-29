@@ -1,7 +1,6 @@
-import {fireEvent,getByText,render,screen} from '@testing-library/react';
+import {fireEvent,render,screen} from '@testing-library/react';
 import ExerciseLogPage from '../Pages/ExerciseLog/ExerciseLogPage';
-import {BrowserRouter as Router, useNavigate} from 'react-router-dom';
-import App from '../App';
+import {BrowserRouter as Router} from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
 
 describe('intensity labels',()=>{
