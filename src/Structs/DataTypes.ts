@@ -28,6 +28,19 @@ export type ExerciseCategory = {
     name: string
 }
 
+export type Demonstration = {
+    id: number,
+    name: string,
+    thumbnail_link: string,
+    video_link: string,
+    demonstrationCategory?: DemonstrationCategory
+}
+
+export type DemonstrationCategory = {
+    id: number,
+    name: string
+}
+
 export type User = {
     id: number,
     email: string
