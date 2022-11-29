@@ -25,15 +25,19 @@ const ExerciseLogPage = () => {
 
     function handleSubmit(e: { preventDefault: () => void; }) {
         e.preventDefault();
-        const formData = new FormData();
-        formData.append("family_member_name", child)
-        formData.append("intensity", intensity)
-        formData.append("duration", duration)
-        formData.append("type", exercise)
+        console.log("userid: " + sessionStorage.getItem('user_id'))
         return fetch(`http://127.0.0.1:3333/exerciseLogs`, {
             method: "POST",
-            body: formData,
-
+            body: JSON.stringify({
+                name: child,
+                intensity: intensity,
+                duration: duration,
+                type: exercise,
+                user_id: sessionStorage.getItem('session_key')
+            }),
+            headers: {
+                "Content-Type": "application/json"
+            }
         })
             .then(response => {
                 if(response.ok) {
