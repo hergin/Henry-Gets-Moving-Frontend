@@ -39,38 +39,40 @@ describe('updates database',()=>{
         fireEvent.click(screen.getByText('Save Exercise'));
         expect(fetch).toHaveBeenCalled();
     });
-    test('exercise adder/deleter',()=>{
-        window.confirm = jest.fn().mockReturnValue(true);
-        render(<Admin/>);
-        const name = screen.getAllByRole('textbox')[0];
-        const video = screen.getAllByRole('textbox')[1];
-        const category = screen.getAllByRole('textbox')[2];
-        render(<Admin/>);
-        fireEvent.click(name);
-        userEvent.type(name, 'Test Exercise');
-        fireEvent.click(video);
-        userEvent.type(video, 'https://www.youtube.com/watch?v=dQw4w9WgXcQ');
-        fireEvent.click(category);
-        userEvent.type(category, 'Yoga');
-        fireEvent.click(screen.getAllByText('Delete Exercise')[0]);
-        expect(fetch).toHaveBeenCalled();
-    });
-    test('exercise is not deleted if confirm is not clicked',()=>{
-        window.confirm = jest.fn().mockReturnValue(false);
-        render(<Admin/>);
-        const name = screen.getAllByRole('textbox')[0];
-        const video = screen.getAllByRole('textbox')[1];
-        const category = screen.getAllByRole('textbox')[2];
-        render(<Admin/>);
-        fireEvent.click(name);
-        userEvent.type(name, 'Test Exercise');
-        fireEvent.click(video);
-        userEvent.type(video, 'https://www.youtube.com/watch?v=dQw4w9WgXcQ');
-        fireEvent.click(category);
-        userEvent.type(category, 'Yoga');
-        fireEvent.click(screen.getAllByText('Delete Exercise')[0]);
-        expect(fetch).not.toHaveBeenCalled();
-    });
+    describe('exercise adder/deleter',()=>{
+        test('sends request on confirm',()=>{
+            window.confirm = jest.fn().mockReturnValue(true);
+            render(<Admin/>);
+            const name = screen.getAllByRole('textbox')[0];
+            const video = screen.getAllByRole('textbox')[1];
+            const category = screen.getAllByRole('textbox')[2];
+            render(<Admin/>);
+            fireEvent.click(name);
+            userEvent.type(name, 'Test Exercise');
+            fireEvent.click(video);
+            userEvent.type(video, 'https://www.youtube.com/watch?v=dQw4w9WgXcQ');
+            fireEvent.click(category);
+            userEvent.type(category, 'Yoga');
+            fireEvent.click(screen.getAllByText('Delete Exercise')[0]);
+            expect(fetch).toHaveBeenCalled();
+        });
+        test('exercise is not deleted if confirm is not clicked',()=>{
+            window.confirm = jest.fn().mockReturnValue(false);
+            render(<Admin/>);
+            const name = screen.getAllByRole('textbox')[0];
+            const video = screen.getAllByRole('textbox')[1];
+            const category = screen.getAllByRole('textbox')[2];
+            render(<Admin/>);
+            fireEvent.click(name);
+            userEvent.type(name, 'Test Exercise');
+            fireEvent.click(video);
+            userEvent.type(video, 'https://www.youtube.com/watch?v=dQw4w9WgXcQ');
+            fireEvent.click(category);
+            userEvent.type(category, 'Yoga');
+            fireEvent.click(screen.getAllByText('Delete Exercise')[0]);
+            expect(fetch).not.toHaveBeenCalled();
+        });
+    })
     test.skip('recipe adder/remover',()=>{
         render(<Admin/>);
         const name = screen.getAllByRole('textbox')[3];
