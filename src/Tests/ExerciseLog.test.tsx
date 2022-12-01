@@ -1,12 +1,13 @@
 import {fireEvent,render,screen} from '@testing-library/react';
 import ExerciseLogPage from '../Pages/ExerciseLog/ExerciseLogPage';
-import {BrowserRouter as Router} from 'react-router-dom';
+import {BrowserRouter} from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
+import React from 'react';
 
 describe('intensity labels',()=>{
     describe('exist',()=>{
         test('light',()=>{
-            render(<Router><ExerciseLogPage/></Router>);
+            render(<BrowserRouter><ExerciseLogPage/></BrowserRouter>);
             expect(screen.getByText('Light')).toBeInTheDocument();
         });
         test('moderate',()=>{
@@ -16,6 +17,25 @@ describe('intensity labels',()=>{
         test('vigorous',()=>{
             render(<Router><ExerciseLogPage/></Router>);
             expect(screen.getByText('Vigorous')).toBeInTheDocument();
+        });
+    });
+
+    describe('to set the intensity',()=>{
+        test('light',()=>{
+            const mockSetIntensity = jest.fn();
+            const mockUseState: any = (useState: any) => [useState, mockSetIntensity];
+            jest.spyOn(React, 'useState').mockImplementation(mockUseState);
+            render(<Router><ExerciseLogPage/></Router>);
+            fireEvent.click(screen.getByText('Light'));
+            expect(mockSetIntensity).toHaveBeenCalled();
+        });
+    })
+
+    describe('change their styling when selected',()=>{
+        test('light',()=>{
+            render(<Router><ExerciseLogPage/></Router>);
+            fireEvent.click(screen.getByText('Light'));
+            expect(screen.get)
         });
     });
 });
