@@ -7,13 +7,25 @@ import recipeLayout from '../../Components/recipeLayout'
 import Weather from "../../Components/Weather";
 import Grass from "../../Components/Grass";
 import API from "../../API";
-import {Recipe} from "../../Structs/DataTypes";
+import {Exercise, Recipe, RecipeCategory} from "../../Structs/DataTypes";
 
 const RecipePage = () => {
     const [recipes, setRecipes] = useState([] as Recipe[])
+    const [recipeCategory, setRecipeCategory] = useState([] as RecipeCategory[])
+
     useEffect(() => {
         API.getRecipes().then((recipes) => setRecipes(recipes));
+        API.getRecipeCategories().then((category) => setRecipeCategory(category));
     }, [])
+
+    const categoryLayout = (category: RecipeCategory[]) => {
+        return category.map((category) => {
+                return (
+                    <option value={category.id}>{category.name}</option>
+                )
+            }
+        )
+    }
 
     return (
         <div className="recipe">
@@ -36,11 +48,7 @@ const RecipePage = () => {
                 <div className='select-search'>
                     <select>
                         <option value="" hidden={true}>Category Selection</option>
-                        <option value="All">All</option>
-                        <option value="Vegetarian">Vegetarian</option>
-                        <option value="Nut-Free">Nut-Free</option>
-                        <option value="Vegan">Vegan</option>
-                        <option value="Gluten Free">Gluten Free</option>
+                        {categoryLayout(recipeCategory)}
                     </select>
                     <input id='search' placeholder="Search"/>
                 </div>
