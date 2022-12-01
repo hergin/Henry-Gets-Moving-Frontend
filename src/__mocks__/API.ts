@@ -1,5 +1,4 @@
-import { FamilyMember, User } from "../Structs/DataTypes";
-
+import { FamilyMember, Recipe, User } from "../Structs/DataTypes";
 let users = [
     {
         id: 1,
@@ -64,7 +63,7 @@ let exercise_logs = [
     }
 ];
 
-const recipes = [
+const recipes: Recipe[] = [
     {
         id: 1,
         name: "Banana Bread",
@@ -155,27 +154,31 @@ export function getFamilyMembers(user: User) {
     return Promise.resolve(members);
 }
 
-export function getRecipes() {
-    return Promise.resolve(recipes);
+const getRecipes = async (): Promise<Recipe[]> => {
+    return await recipes.map((recipe: any) => {
+        return {
+            ...recipe
+        } as Recipe
+    });
 }
 
-export function isLoggedIn() {
+function isLoggedIn() {
     return Promise.resolve(true);
 }
 
-export function getFeaturedExercise() {
+function getFeaturedExercise() {
     for (let i = 0; i < 4; i++) {
         if (exercises[i].is_featured)
             return Promise.resolve(exercises[i]);
     }
 }
-export function getFeaturedRecipe() {
+function getFeaturedRecipe() {
     for (let i = 0; i < 4; i++) {
         if (recipes[i].is_featured)
             return Promise.resolve(recipes[i]);
     }
 }
-const TestAPI = {
+const API = {
     getExerciseLogs,
     getFamilyMembers,
     getRecipes,
@@ -184,4 +187,4 @@ const TestAPI = {
     getFeaturedRecipe
 };
 
-export default TestAPI;
+module.exports = API;
