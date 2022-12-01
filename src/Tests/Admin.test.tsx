@@ -5,6 +5,9 @@ import App from '../App';
 import {BrowserRouter as Router} from 'react-router-dom';
 
 jest.mock('../API');
+beforeEach(function() {
+    global.fetch = jest.fn().mockResolvedValue({ok: true});
+});
 
 describe('sections',()=>{
     test('exercise section exists',()=>{
@@ -23,7 +26,6 @@ describe('sections',()=>{
 
 describe('updates database',()=>{
     test('exercise editor',()=>{
-        global.fetch = jest.fn().mockResolvedValue({ok: true});
         render(<Admin/>);
         const name = screen.getAllByRole('textbox')[0];
         const video = screen.getAllByRole('textbox')[1];
@@ -42,18 +44,6 @@ describe('updates database',()=>{
         const name = screen.getAllByRole('textbox')[0];
         const video = screen.getAllByRole('textbox')[1];
         const category = screen.getAllByRole('textbox')[2];
-        fireEvent.click(name);
-        userEvent.type(name, 'Test Exercise');
-        fireEvent.click(video);
-        userEvent.type(video, 'https://www.youtube.com/watch?v=dQw4w9WgXcQ');
-        fireEvent.click(category);
-        userEvent.type(category, 'Yoga');
-        fireEvent.click(screen.getByText('Save Exercise'));
-        // check the exercise exists
-        render(<Router><App/></Router>);
-        fireEvent.click(screen.getByText('Get Moving'));
-        expect(screen.getByText('Test Exercise')).toBeInTheDocument();
-        // delete the test exercise
         render(<Admin/>);
         fireEvent.click(name);
         userEvent.type(name, 'Test Exercise');
