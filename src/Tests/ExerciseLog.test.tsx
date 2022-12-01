@@ -25,7 +25,7 @@ test('back arrow component exists',()=>{
 });
 
 test('creates new exercise log',()=>{
-    fetch = jest.fn().mockResolvedValue({ok: true});
+    global.fetch = jest.fn().mockResolvedValue({ok: true});
     window.alert = jest.fn();
     render(<Router><ExerciseLogPage/></Router>);
     fireEvent.click(screen.getByAltText('Light Intensity'));
