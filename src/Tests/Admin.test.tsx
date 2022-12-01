@@ -91,6 +91,22 @@ describe('updates database',()=>{
             fireEvent.click(screen.getAllByText('Delete Recipe')[0]);
             expect(fetch).toHaveBeenCalled();
         });
+        test('rejects if not confirmed',()=>{
+            window.confirm = jest.fn().mockReturnValue(false);
+            render(<Admin/>);
+            const name = screen.getAllByRole('textbox')[3];
+            const thumbnail = screen.getAllByRole('textbox')[4];
+            const category = screen.getAllByRole('textbox')[5];
+            render(<Admin/>);
+            fireEvent.click(name);
+            userEvent.type(name, 'Test Recipe');
+            fireEvent.click(thumbnail);
+            userEvent.type(thumbnail, 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpngimg.com%2Fuploads%2Fpokemon%2Fpokemon_PNG14.png');
+            fireEvent.click(category);
+            userEvent.type(category, 'Food');
+            fireEvent.click(screen.getAllByText('Delete Recipe')[0]);
+            expect(fetch).not.toHaveBeenCalled();
+        });
     })
     
     test.skip('recipe editor',()=>{
