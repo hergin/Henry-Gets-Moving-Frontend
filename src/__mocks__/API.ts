@@ -1,4 +1,4 @@
-import { FamilyMember, Recipe, User } from "../Structs/DataTypes";
+import { Exercise, FamilyMember, Recipe, User } from "../Structs/DataTypes";
 let users = [
     {
         id: 1,
@@ -154,6 +154,14 @@ export function getFamilyMembers(user: User) {
     return Promise.resolve(members);
 }
 
+const getExercises = async (): Promise<Exercise[]> => {
+    return await exercises.map((exercise: any) => {
+        return {
+            ...exercise
+        } as Exercise
+    });
+}
+
 const getRecipes = async (): Promise<Recipe[]> => {
     return await recipes.map((recipe: any) => {
         return {
@@ -184,7 +192,8 @@ const API = {
     getRecipes,
     isLoggedIn,
     getFeaturedExercise,
-    getFeaturedRecipe
+    getFeaturedRecipe,
+    getExercises,
 };
 
 module.exports = API;
