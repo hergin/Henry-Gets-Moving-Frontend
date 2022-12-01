@@ -51,7 +51,7 @@ const RecipePage = () => {
             <div className='recipe-content'>
                 <div className='select-search'>
                     <select onChange={onCategoryChange}>
-                        <option value="" hidden={true}>Category Selection</option>
+                        <option value="">All</option>
                         {categoryLayout(recipeCategory)}
                     </select>
                     <input id='search' placeholder="Search"/>
