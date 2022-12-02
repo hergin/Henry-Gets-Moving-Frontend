@@ -53,6 +53,41 @@ const Admin = () => {
         })
     }
 
+    const saveDiagram = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault()
+        const formData = new FormData()
+        formData.append("thumbnail_link", demo.thumbnail_link)
+        if (diagram.id) {
+            await fetch(`${API_URL}/diagrams/${diagram.id}`, {
+                method: 'PUT',
+                body: formData,
+            }).then((response) => {
+                if (response.status >= 400 && response.status < 600) {
+                    console.log(response);
+                    alert("Bad response from server")
+                } else {
+                    window.alert("Diagram submitted!")
+                    window.location.reload()
+                    return response.json()
+                }
+            })
+        } else {
+            await fetch(`${API_URL}/diagrams`, {
+                method: 'POST',
+                body: formData,
+            }).then((response) => {
+                if (response.status >= 400 && response.status < 600) {
+                    console.log(response);
+                    alert("Bad response from server")
+                } else {
+                    window.alert("Diagram submitted!")
+                    window.location.reload()
+                    return response.json()
+                }
+            })
+        }
+    }
+
     const loadDemonstration = (event: React.FormEvent<HTMLSelectElement>) => {
         event.preventDefault()
         console.log(event.currentTarget.value)
