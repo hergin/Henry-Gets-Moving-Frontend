@@ -6,52 +6,9 @@ import {Helmet, HelmetProvider} from "react-helmet-async";
 import grassDesktop from "../../Assets/grassDesktop.svg";
 import Grass from "../../Components/Grass";
 import Weather from "../../Components/Weather";
-
-type Demonstration = {
-    [key: string]: any;
-    thumbnail: string;
-    name: string;
-    category: string;
-}
-
-type Diagram = {
-    [key: string]: any;
-    diagram: string;
-}
+import {Demonstration, Diagram} from "../../Structs/DataTypes";
 
 const LearnMore = () => {
-    const demonstration_list = [
-        {
-            thumbnail: 'https://miro.medium.com/max/1024/1*fHAtQWD_4n2eH3zNSRpZPA.jpeg',
-            name: "Some name",
-            category: "Healthy",
-        },
-        {
-            thumbnail: 'https://miro.medium.com/max/1024/1*fHAtQWD_4n2eH3zNSRpZPA.jpeg',
-            name: "Some name",
-            category: "Food",
-        },
-        {
-            thumbnail: 'https://miro.medium.com/max/1024/1*fHAtQWD_4n2eH3zNSRpZPA.jpeg',
-            name: "Some name",
-            category: "Sugar",
-        },
-        {
-            thumbnail: 'https://miro.medium.com/max/1024/1*fHAtQWD_4n2eH3zNSRpZPA.jpeg',
-            name: "Some name",
-            category: "Science",
-        },
-    ]
-
-    const diagram_list = [
-        {
-            diagram: 'https://myplate-prod.azureedge.us/sites/default/files/styles/medium/public/2020-11/myplate-brand--labelled.png?itok=7VtFXcBC',
-        },
-        {
-            diagram: 'https://www.ncagr.gov/agscool/images/pyramid.gif',
-        },
-    ]
-
     const [selectedDemo, setSelectedDemo] = useState<null | Demonstration>(null);
 
     const demoLayout = (individualDemo: Demonstration[]) => {
