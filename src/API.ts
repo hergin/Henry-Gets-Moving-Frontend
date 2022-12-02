@@ -1,4 +1,4 @@
-import {Recipe, Exercise, RecipeCategory, ExerciseCategory} from "./Structs/DataTypes";
+import {Recipe, Exercise, RecipeCategory, ExerciseCategory, Demonstration} from "./Structs/DataTypes";
 
 export const API_URL = "http://127.0.0.1:3333";
 
@@ -32,6 +32,23 @@ const getExercises = async (): Promise<Exercise[]> => {
                 return {
                     ...exercise
                 } as Exercise
+            });
+        });
+}
+
+const getDemonstrations = async (): Promise<Demonstration[]> => {
+    return await fetch(`${API_URL}/demos`)
+        .then((response) => {
+            if (response.ok) return response.json();
+            return {
+                errorCode: response.status,
+                error: response.statusText,
+            }
+        }).then((response) => {
+            return response.map((demos: any) => {
+                return {
+                    ...demos
+                } as Demonstration
             });
         });
 }
@@ -104,6 +121,7 @@ const API ={
     getRecipes,
     getExercises,
     getRecipeCategories,
+    getDemonstrations,
     getExerciseCategories,
     getFeaturedRecipe,
     getFeaturedExercise,
