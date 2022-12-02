@@ -20,7 +20,7 @@ describe('month',()=>{
         const days = new Date().toLocaleDateString().split('/');
         fireEvent.click(screen.getByText('›'));
         fireEvent.click(screen.getByText("22"));
-        expect(screen.getByText(new RegExp(`.*${parseInt(days[0])+1===13?parseInt(days[0])-1:parseInt(days[0]+1)}/22/${days[2]}.*`))).toBeInTheDocument();
+        expect(screen.getByText(new RegExp(`.*${parseInt(days[0])+1===13?1:parseInt(days[0]+1)}/22/${parseInt(days[0])===12?parseInt(days[2])+1:days[2]}.*`))).toBeInTheDocument();
     });
 
     test('can be changed via menu',()=>{
