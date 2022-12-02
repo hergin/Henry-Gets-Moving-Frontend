@@ -60,7 +60,7 @@ const Admin = () => {
         formData.append("name", demo.name)
         formData.append("video_link", demo.video_link)
         formData.append("thumbnail_link", demo.thumbnail_link)
-        formData.append("category_id", String(demo.demonstrationCategory?.id))
+        formData.append("demonstration_category_id", String(demo.demonstrationCategory?.id))
         if (demo.id) {
             await fetch(`${API_URL}/demos/${demo.id}`, {
                 method: 'PUT',
@@ -70,7 +70,7 @@ const Admin = () => {
                     console.log(response);
                     alert("Bad response from server")
                 } else {
-                    window.alert("Exercise submitted!")
+                    window.alert("Demonstration submitted!")
                     window.location.reload()
                     return response.json()
                 }
@@ -84,7 +84,7 @@ const Admin = () => {
                     console.log(response);
                     alert("Bad response from server")
                 } else {
-                    window.alert("Exercise submitted!")
+                    window.alert("Demonstration submitted!")
                     window.location.reload()
                     return response.json()
                 }
