@@ -284,7 +284,7 @@ const Admin = () => {
                                 <h2>Add Demonstration</h2>
                                 <div className='edit-select'>
                                     <label>Edit Demo</label>
-                                    <select onChange={loadExercise}>
+                                    <select onChange={loadDemonstration}>
                                         <option value="select">Select Demo</option>
                                         {demos && demos.map((demo, index: number) => (
                                             <option value={index}>{demo.name}</option>
