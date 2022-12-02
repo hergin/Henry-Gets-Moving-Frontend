@@ -20,6 +20,7 @@ const Admin = () => {
     const [recipes, setRecipes] = useState([] as Recipe[]);
     const [exercises, setExercises] = useState([] as Exercise[])
     const [diagrams, setDiagrams] = useState([] as Diagram[])
+    const [diagram, setDiagram] = useState({} as Diagram)
     const [demos, setDemos] = useState([] as Demonstration[])
     const [demo, setDemo] = useState({} as Demonstration)
     const [recipe, setRecipe] = useState({} as Recipe)
@@ -40,6 +41,17 @@ const Admin = () => {
         API.getRecipeCategories().then((recipeCategories) => setRecipeCategories(recipeCategories))
         API.getDemonstrationCategories().then((demonstrationCategories) => setDemonstrationCategories(demonstrationCategories))
     }, [])
+
+    const loadDiagram = (event: React.FormEvent<HTMLSelectElement>) => {
+        event.preventDefault()
+        console.log(event.currentTarget.value)
+        const index: number = parseInt(event.currentTarget.value, 10)
+        console.log(diagrams[index])
+
+        setDiagram(diagram => {
+            return {...(diagrams[index] as Diagram)}
+        })
+    }
 
     const loadDemonstration = (event: React.FormEvent<HTMLSelectElement>) => {
         event.preventDefault()
@@ -520,9 +532,11 @@ const Admin = () => {
                                 <h2>Add Diagram</h2>
                                 <div className='edit-select'>
                                     <label>Edit Diagram</label>
-                                    <select>
+                                    <select onChange={loadDiagram}>
                                         <option value="select">Select Diagram</option>
-                                    </select>
+                                        {diagrams && diagrams.map((diagram, index: number) => (
+                                            <option value={index}>{diagram.id}</option>
+                                        ))}</select>
                                 </div>
                             </div>
                             <div className='field'>
