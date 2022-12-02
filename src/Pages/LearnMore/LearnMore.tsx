@@ -18,7 +18,7 @@ const LearnMore = () => {
 
     useEffect(() => {
         API.getDemonstrations().then((demos) => setDemos(demos));
-        API.getExerciseCategories().then((category) => setDemoCategory(category));
+        API.getDemonstrationCategories().then((category) => setDemoCategory(category));
         API.getDiagrams().then((diagrams) => setDiagrams(diagrams));
     }, [])
 
@@ -42,7 +42,7 @@ const LearnMore = () => {
         }).map((demo) => {
                 return (
                     <div className='grid-content'>
-                       <img src={demo.thumbnail_link} onClick={e => (setSelectedDemo(demo))} alt={demo.name + "Thumbnail"}/>
+                       <img src={demo.thumbnailLink} onClick={e => (setSelectedDemo(demo))} alt={demo.name + " Thumbnail"}/>
                         <p className='name'>{demo.name}</p>
                         <p className='category'>{demo.demonstrationCategory?.name}</p>
                     </div>
@@ -97,14 +97,11 @@ const LearnMore = () => {
                         <div className='episode-player'>
                             <div className='video-player'>
                                 <iframe
-                                    src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+                                    src={selectedDemo.videoLink}
                                     frameBorder="0" allow="autoplay; fullscreen; picture-in-picture"
                                     allowFullScreen
                                 />
                             </div>
-                        </div>
-                        <div>
-                            {/*TODO Add picture of henry here*/}
                         </div>
                         <img src={footerImage} className='footer' alt={"Grass"}/>
                         <img src={grassDesktop} className='footer-desktop' alt={"Grass"}/>
