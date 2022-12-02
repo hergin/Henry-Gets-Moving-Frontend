@@ -1,15 +1,24 @@
 import './LearnMore.scss';
 import footerImage from "../../Assets/grass.svg";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import exit from "../../Assets/Exit.svg";
 import {Helmet, HelmetProvider} from "react-helmet-async";
 import grassDesktop from "../../Assets/grassDesktop.svg";
 import Grass from "../../Components/Grass";
 import Weather from "../../Components/Weather";
-import {Demonstration, Diagram} from "../../Structs/DataTypes";
+import {Demonstration, DemonstrationCategory, Diagram} from "../../Structs/DataTypes";
+import API from "../../API";
 
 const LearnMore = () => {
     const [selectedDemo, setSelectedDemo] = useState<null | Demonstration>(null);
+    const [demos, setDemos] = useState([] as Demonstration[])
+    const [demoCategory, setDemoCategory] = useState([] as DemonstrationCategory[])
+    const [selectedCategory, setSelectedCategory] = useState("");
+
+    useEffect(() => {
+        API.getDemonstrations().then((demos) => setDemos(demos));
+        API.getExerciseCategories().then((category) => setDemoCategory(category));
+    }, [])
 
     const demoLayout = (individualDemo: Demonstration[]) => {
         return individualDemo.map((demo) => {
