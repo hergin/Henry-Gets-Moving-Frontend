@@ -88,6 +88,23 @@ const Admin = () => {
         }
     }
 
+    const deleteDiagram = async (e: { preventDefault: () => void; }) => {
+        e.preventDefault()
+        const confirm = window.confirm("Are you sure you want to delete?")
+        if (confirm) {
+            await fetch(`${API_URL}/diagrams/${diagram.id}`, {
+                method: 'DELETE',
+            }).then((res) => {
+                if (res.status >= 400 && res.status < 600) {
+                    alert("Bad response from server")
+                } else {
+                    window.location.reload()
+                    return res.json()
+                }
+            })
+        }
+    }
+
     const loadDemonstration = (event: React.FormEvent<HTMLSelectElement>) => {
         event.preventDefault()
         console.log(event.currentTarget.value)
@@ -585,7 +602,7 @@ const Admin = () => {
                                        }}/>
                             </div>
                             <div className='buttons'>
-                                <button className='delete'>Delete Diagram</button>
+                                <button className='delete' onClick={deleteDiagram}>Delete Diagram</button>
                                 <button className='save'>Save Diagram</button>
                             </div>
                         </form>
