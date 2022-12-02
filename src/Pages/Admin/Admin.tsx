@@ -56,7 +56,7 @@ const Admin = () => {
     const saveDiagram = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
         const formData = new FormData()
-        formData.append("thumbnail_link", demo.thumbnail_link)
+        formData.append("thumbnail_link", diagram.thumbnail_link)
         if (diagram.id) {
             await fetch(`${API_URL}/diagrams/${diagram.id}`, {
                 method: 'PUT',
@@ -593,12 +593,13 @@ const Admin = () => {
                             </div>
                             <div className='field'>
                                 <label>Thumbnail Link</label>
-                                <input title={diagram?.thumbnail_link}
+                                <input title={diagram.thumbnail_link}
                                        value={diagram?.thumbnail_link ? String(diagram?.thumbnail_link) : ""}
                                        onChange={event => {
                                            setDiagram((diagram) => {
-                                               return {...diagram, thumbnail: event.target.value} as Diagram
+                                               return {...diagram, thumbnail_link: event.target.value} as Diagram
                                            });
+
                                        }}/>
                             </div>
                             <div className='buttons'>
