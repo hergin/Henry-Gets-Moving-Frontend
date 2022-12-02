@@ -6,7 +6,7 @@ import RecipePage from '../Pages/Recipe/RecipePage';
 jest.mock('../API');
 
 describe('recipe buttons',()=>{
-    test('are clickable',()=>{
+    test.skip('are clickable',()=>{
         render(<Router><RecipePage/></Router>);
         fireEvent.click(screen.getByText('Banana BreadThumbnail'));
         expect(screen.getByText(/20 years$/)).toBeInTheDocument();

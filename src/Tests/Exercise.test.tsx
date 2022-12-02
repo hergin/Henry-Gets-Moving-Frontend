@@ -30,14 +30,14 @@ describe('trophy',()=>{
 
 test('log exercise button takes to login page if not logged in',()=>{
     render(<Router><App/></Router>);
-    fireEvent.click(screen.getByText("Get Moving"));
+    fireEvent.click(screen.getAllByText("Get Moving")[0]);
     fireEvent.click(screen.getByText('Log Exercise'));
     expect(global.window.location.pathname).toContain('/login');
 });
 
 test('all logs button takes to login page if user not logged in',()=>{
     render(<Router><App/></Router>);
-    fireEvent.click(screen.getByText('Get Moving'));
+    fireEvent.click(screen.getAllByText('Get Moving')[0]);
     fireEvent.click(screen.getByText(/(All Logs)$/));
     expect(global.window.location.pathname).toContain('/login');
 });

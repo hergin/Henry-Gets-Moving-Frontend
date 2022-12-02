@@ -198,7 +198,7 @@ const getRecipes = async (): Promise<Recipe[]> => {
 }
 
 function isLoggedIn() {
-    return Promise.resolve(true);
+    return false;
 }
 
 function getFeaturedExercise() {
