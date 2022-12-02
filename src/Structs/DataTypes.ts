@@ -36,6 +36,11 @@ export type Demonstration = {
     demonstrationCategory?: DemonstrationCategory
 }
 
+export type Diagram = {
+    id: number,
+    thumbnail_link: string
+}
+
 export type DemonstrationCategory = {
     id: number,
     name: string
