@@ -14,10 +14,12 @@ const LearnMore = () => {
     const [demos, setDemos] = useState([] as Demonstration[])
     const [demoCategory, setDemoCategory] = useState([] as DemonstrationCategory[])
     const [selectedCategory, setSelectedCategory] = useState("");
+    const [diagrams, setDiagrams] = useState([] as Diagram[])
 
     useEffect(() => {
         API.getDemonstrations().then((demos) => setDemos(demos));
         API.getExerciseCategories().then((category) => setDemoCategory(category));
+        API.getDiagrams().then((diagrams) => setDiagrams(diagrams));
     }, [])
 
     const onCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -70,7 +72,7 @@ const LearnMore = () => {
             <div className='diagrams'>
                 <h2>Diagrams</h2>
                 <div className='diagram-grid'>
-                    {diagramLayout(diagram_list)}
+                    {diagramLayout(diagrams)}
                 </div>
             </div>
             <div className='demo-content'>
