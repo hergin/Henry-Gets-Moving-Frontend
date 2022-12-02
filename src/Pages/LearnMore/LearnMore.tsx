@@ -76,8 +76,9 @@ const LearnMore = () => {
             <div className='demo-content'>
                 <h2>Demonstrations</h2>
                 <div className='select-search'>
-                    <select>
-                        <option value="" hidden={true}>Category Selection</option>
+                    <select onChange={onCategoryChange}>
+                        <option value="" >All</option>
+                        {categoryLayout(demoCategory)}
                     </select>
                     <input id='search' placeholder="Search"/>
                 </div>
