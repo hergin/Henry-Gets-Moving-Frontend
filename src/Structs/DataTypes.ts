@@ -31,8 +31,8 @@ export type ExerciseCategory = {
 export type Demonstration = {
     id: number,
     name: string,
-    thumbnail_link: string,
-    video_link: string,
+    thumbnailLink: string,
+    videoLink: string,
     demonstrationCategory?: DemonstrationCategory
 }
 
