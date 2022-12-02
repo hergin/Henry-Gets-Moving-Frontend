@@ -14,12 +14,17 @@ const ExercisePage = () => {
     const [selectedExercise, setSelectedExercise] = useState<null | Exercise>(null);
     const [exercises, setExercises] = useState([] as Exercise[])
     const [exerciseCategory, setExerciseCategory] = useState([] as ExerciseCategory[])
+    const [selectedCategory, setSelectedCategory] = useState("");
 
     useEffect(() => {
         API.getExercises().then((exercises) => setExercises(exercises));
         API.getExerciseCategories().then((category) => setExerciseCategory(category));
     }, [])
     const navigate = useNavigate();
+
+    const onCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        setSelectedCategory(event.target.value);
+    }
 
     const categoryLayout = (category: ExerciseCategory[]) => {
         return category.map((category) => {
@@ -30,8 +35,11 @@ const ExercisePage = () => {
         )
     }
 
-    const exerciseLayout = (individualExercise: Exercise[]) => {
-        return individualExercise.map((exercise) => {
+    const exerciseLayout = (individualExercise: Exercise[], filter: string) => {
+        return  individualExercise.filter((exercise) => {
+            if (filter === "") return true;
+            return exercise.category_id.toString() === filter;
+        }).map((exercise) => {
                 return (
                     <>
                         <div className='grid-content'>
@@ -82,8 +90,8 @@ const ExercisePage = () => {
             </div>
             <div className='exercise-content'>
                 <div className='select-link'>
-                    <select>
-                        <option value="" hidden={true}>Category Selection</option>
+                    <select onChange={onCategoryChange}>
+                        <option value="" >All</option>
                         {categoryLayout(exerciseCategory)}
                     </select>
                     <button onClick={() => {
@@ -92,7 +100,7 @@ const ExercisePage = () => {
                     </button>
                 </div>
                 <div className='exercise-grid'>
-                    {exerciseLayout(exercises)}
+                    {exerciseLayout(exercises, selectedCategory)}
                 </div>
                 {selectedExercise &&
                 <div className='dialog-box'>
