@@ -3,7 +3,7 @@ import Weather from "../../Components/Weather";
 import Grass from "../../Components/Grass";
 import swings from "../../Assets/Swings.png";
 import React, {useEffect, useState} from "react";
-import {Exercise, ExerciseCategory, Recipe, RecipeCategory} from "../../Structs/DataTypes";
+import {Demonstration, Diagram, Exercise, ExerciseCategory, Recipe, RecipeCategory} from "../../Structs/DataTypes";
 import API from "../../API";
 import {API_URL} from "../../API";
 
@@ -11,6 +11,8 @@ const Admin = () => {
 
     const [recipes, setRecipes] = useState([] as Recipe[]);
     const [exercises, setExercises] = useState([] as Exercise[])
+    const [diagrams, setDiagrams] = useState([] as Diagram[])
+    const [demos, setDemos] = useState([] as Demonstration[])
     const [recipe, setRecipe] = useState({} as Recipe)
     const [exercise, setExercise] = useState({} as Exercise)
     const [exerciseCategory, setExerciseCategory] = useState({} as ExerciseCategory)
@@ -21,6 +23,8 @@ const Admin = () => {
     useEffect(() => {
         API.getRecipes().then((recipes) => setRecipes(recipes));
         API.getExercises().then((exercises) => setExercises(exercises))
+        API.getDiagrams().then((diagrams) => setDiagrams(diagrams))
+        API.getDemonstrations().then((demos) => setDemos(demos))
         API.getExerciseCategories().then((exerciseCategories) => setExerciseCategories(exerciseCategories))
         API.getRecipeCategories().then((recipeCategories) => setRecipeCategories(recipeCategories))
     }, [])
@@ -401,7 +405,7 @@ const Admin = () => {
                                 <div className='edit-select'>
                                     <label>Edit Diagram</label>
                                     <select>
-                                        <option value="select">Select Demo</option>
+                                        <option value="select">Select Diagram</option>
                                     </select>
                                 </div>
                             </div>
