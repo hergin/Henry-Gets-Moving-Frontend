@@ -15,9 +15,9 @@ const LearnMore = () => {
         return individualDemo.map((demo) => {
                 return (
                     <div className='grid-content'>
-                       <img src={demo.thumbnail} onClick={e => (setSelectedDemo(demo))} alt={demo.name + "Thumbnail"}/>
+                       <img src={demo.thumbnail_link} onClick={e => (setSelectedDemo(demo))} alt={demo.name + "Thumbnail"}/>
                         <p className='name'>{demo.name}</p>
-                        <p className='category'>{demo.category}</p>
+                        <p className='category'>{demo.demonstrationCategory?.name}</p>
                     </div>
                 )
             }
@@ -28,7 +28,7 @@ const LearnMore = () => {
         return individualDiagram.map((diagram) => {
                 return (
                     <div className='content'>
-                        <img src={diagram.diagram} alt={"Diagram"}/>
+                        <img src={diagram.thumbnail_link} alt={"Diagram"}/>
                     </div>
                 )
             }
