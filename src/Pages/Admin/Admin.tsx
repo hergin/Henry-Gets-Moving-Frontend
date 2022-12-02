@@ -21,6 +21,7 @@ const Admin = () => {
     const [exercises, setExercises] = useState([] as Exercise[])
     const [diagrams, setDiagrams] = useState([] as Diagram[])
     const [demos, setDemos] = useState([] as Demonstration[])
+    const [demo, setDemo] = useState({} as Demonstration)
     const [recipe, setRecipe] = useState({} as Recipe)
     const [exercise, setExercise] = useState({} as Exercise)
     const [exerciseCategory, setExerciseCategory] = useState({} as ExerciseCategory)
@@ -39,6 +40,19 @@ const Admin = () => {
         API.getRecipeCategories().then((recipeCategories) => setRecipeCategories(recipeCategories))
         API.getDemonstrationCategories().then((demonstrationCategories) => setDemonstrationCategories(demonstrationCategories))
     }, [])
+
+    const loadDemonstration = (event: React.FormEvent<HTMLSelectElement>) => {
+        event.preventDefault()
+        console.log(event.currentTarget.value)
+        const index: number = parseInt(event.currentTarget.value, 10)
+        console.log(demos[index])
+
+        setDemo(demo => {
+            return {...(demos[index] as Demonstration)}
+
+        })
+        setDemonstrationCategory((demos[index].demonstrationCategory as DemonstrationCategory))
+    }
 
     const loadExercise = (event: React.FormEvent<HTMLSelectElement>) => {
         event.preventDefault()
@@ -270,9 +284,11 @@ const Admin = () => {
                                 <h2>Add Demonstration</h2>
                                 <div className='edit-select'>
                                     <label>Edit Demo</label>
-                                    <select>
+                                    <select onChange={loadExercise}>
                                         <option value="select">Select Demo</option>
-                                    </select>
+                                        {demos && demos.map((demo, index: number) => (
+                                            <option value={index}>{demo.name}</option>
+                                        ))}</select>
                                 </div>
                             </div>
                             <div className='field'>
