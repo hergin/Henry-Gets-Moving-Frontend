@@ -576,7 +576,13 @@ const Admin = () => {
                             </div>
                             <div className='field'>
                                 <label>Thumbnail Link</label>
-                                <input/>
+                                <input title={diagram?.thumbnail_link}
+                                       value={diagram?.thumbnail_link ? String(diagram?.thumbnail_link) : ""}
+                                       onChange={event => {
+                                           setDiagram((diagram) => {
+                                               return {...diagram, thumbnail: event.target.value} as Diagram
+                                           });
+                                       }}/>
                             </div>
                             <div className='buttons'>
                                 <button className='delete'>Delete Diagram</button>
