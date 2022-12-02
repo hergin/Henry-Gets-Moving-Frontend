@@ -83,7 +83,7 @@ const LearnMore = () => {
                     <input id='search' placeholder="Search"/>
                 </div>
                 <div className='demo-grid'>
-                    {demoLayout(demonstration_list)}
+                    {demoLayout(demos, selectedCategory)}
                 </div>
                 {selectedDemo &&
                 <div className='dialog-box'>
