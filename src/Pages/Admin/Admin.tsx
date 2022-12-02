@@ -293,7 +293,13 @@ const Admin = () => {
                             </div>
                             <div className='field'>
                                 <label>Name</label>
-                                <input/>
+                                <input title={demo?.name} value={demo?.name ? String(demo?.name) : ""}
+                                       onChange={event => {
+                                           setDemo((demo) => {
+                                               return {...demo, name: event.target.value} as Demonstration
+                                           });
+
+                                       }}/>
                             </div>
                             <div className='field'>
                                 <label>Thumbnail Link</label>
