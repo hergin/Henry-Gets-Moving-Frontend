@@ -54,6 +54,44 @@ const Admin = () => {
         setDemonstrationCategory((demos[index].demonstrationCategory as DemonstrationCategory))
     }
 
+    const saveDemonstration = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault()
+        const formData = new FormData()
+        formData.append("name", demo.name)
+        formData.append("video_link", demo.video_link)
+        formData.append("thumbnail_link", demo.thumbnail_link)
+        formData.append("category_id", String(demo.demonstrationCategory?.id))
+        if (demo.id) {
+            await fetch(`${API_URL}/demos/${demo.id}`, {
+                method: 'PUT',
+                body: formData,
+            }).then((response) => {
+                if (response.status >= 400 && response.status < 600) {
+                    console.log(response);
+                    alert("Bad response from server")
+                } else {
+                    window.alert("Exercise submitted!")
+                    window.location.reload()
+                    return response.json()
+                }
+            })
+        } else {
+            await fetch(`${API_URL}/demos`, {
+                method: 'POST',
+                body: formData,
+            }).then((response) => {
+                if (response.status >= 400 && response.status < 600) {
+                    console.log(response);
+                    alert("Bad response from server")
+                } else {
+                    window.alert("Exercise submitted!")
+                    window.location.reload()
+                    return response.json()
+                }
+            })
+        }
+    }
+
     const loadExercise = (event: React.FormEvent<HTMLSelectElement>) => {
         event.preventDefault()
         console.log(event.currentTarget.value)
@@ -279,7 +317,7 @@ const Admin = () => {
                         </form>
                     </div>
                     <div>
-                        <form className='demo-form form'>
+                        <form className='demo-form form' onSubmit={saveDemonstration}>
                             <div className='add-edit'>
                                 <h2>Add Demonstration</h2>
                                 <div className='edit-select'>
