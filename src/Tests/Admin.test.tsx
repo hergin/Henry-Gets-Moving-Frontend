@@ -109,51 +109,14 @@ describe('updates database',()=>{
         });
     })
     
-    test.skip('recipe editor',()=>{
+    test('recipe editor auto-fills recipe details',()=>{
         render(<Admin/>);
         const name = screen.getAllByRole('textbox')[3];
-        const thumbnail = screen.getAllByRole('textbox')[4];
-        const category = screen.getAllByRole('textbox')[5];
-        const time = screen.getAllByRole('textbox')[6];
-        const ingredients = screen.getByPlaceholderText(/.*Ingredient.*/);
-        const steps = screen.getByPlaceholderText(/.*Step.*/);
-        
-        fireEvent.click(name);
-        userEvent.type(name, 'Test Recipe');
-        fireEvent.click(thumbnail);
-        userEvent.type(thumbnail, 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpngimg.com%2Fuploads%2Fpokemon%2Fpokemon_PNG14.png');
-        fireEvent.click(category);
-        userEvent.type(category, 'Food');
-        fireEvent.click(time);
-        userEvent.type(time, '1 hour');
-        fireEvent.click(ingredients);
-        userEvent.type(ingredients, 'Pants, Microphone');
-        fireEvent.click(steps);
-        userEvent.type(steps, '1. cook 2. eat');
-        fireEvent.click(screen.getByText('Save Recipe'));
-
-        userEvent.selectOptions(screen.getAllByRole('combobox')[2], 'Test Recipe');
-        fireEvent.click(screen.getByText('Test Recipe'));
-        fireEvent.click(name);
-        userEvent.type(name, 'Test Recipe Edited');
-        fireEvent.click(thumbnail);
-        userEvent.type(thumbnail, 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpngimg.com%2Fuploads%2Fpokemon%2Fpokemon_PNG14.png');
-        fireEvent.click(category);
-        userEvent.type(category, 'Food');
-        fireEvent.click(time);
-        userEvent.type(time, '1 hour');
-        fireEvent.click(ingredients);
-        userEvent.type(ingredients, 'Pants, Microphone');
-        fireEvent.click(steps);
-        userEvent.type(steps, '1. cook 2. eat');
-        fireEvent.click(screen.getByText('Save Recipe'));
-        render(<Router><App/></Router>);
-        fireEvent.click(screen.getByText('Eat Healthy'));
-        expect(screen.getByText('Test Recipe Edited')).toBeInTheDocument();
+        userEvent.selectOptions(screen.getAllByRole('combobox')[4], 'Banana Bread');
+        expect(name).toHaveValue('Banana Bread');
     });
     test('of the day',()=>{
         render(<Admin/>);
-        // add exercise to make sure there is one there in existence
         const name = screen.getAllByRole('textbox')[3];
         const thumbnail = screen.getAllByRole('textbox')[4];
         const category = screen.getAllByRole('textbox')[5];
