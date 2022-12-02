@@ -4,7 +4,8 @@ import {
     RecipeCategory,
     ExerciseCategory,
     Demonstration,
-    DemonstrationCategory
+    DemonstrationCategory,
+    Diagram
 } from "./Structs/DataTypes";
 
 export const API_URL = "http://127.0.0.1:3333";
@@ -56,6 +57,23 @@ const getDemonstrations = async (): Promise<Demonstration[]> => {
                 return {
                     ...demos
                 } as Demonstration
+            });
+        });
+}
+
+const getDiagrams = async (): Promise<Diagram[]> => {
+    return await fetch(`${API_URL}/diagrams`)
+        .then((response) => {
+            if (response.ok) return response.json();
+            return {
+                errorCode: response.status,
+                error: response.statusText,
+            }
+        }).then((response) => {
+            return response.map((diagram: any) => {
+                return {
+                    ...diagram
+                } as Diagram
             });
         });
 }
@@ -149,6 +167,7 @@ const API ={
     getExerciseCategories,
     getFeaturedRecipe,
     getFeaturedExercise,
+    getDiagrams,
     isLoggedIn,
     API_URL,
 }
