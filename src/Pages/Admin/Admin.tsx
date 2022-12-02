@@ -325,8 +325,22 @@ const Admin = () => {
                             </div>
                             <div className='field'>
                                 <label>Category</label>
-                                <select>
+                                <select
+                                    defaultValue={""}
+                                    onChange={event => {
+                                        event.preventDefault()
+                                        setDemo(demo => {
+                                            return {
+                                                ...demo,
+                                                category_id: parseInt(event.target.value)
+                                            } as Demonstration
+                                        })
+                                    }}>
                                     <option value="" disabled>Select Category</option>
+                                    {demonstrationCategories && demonstrationCategories.map((category) => (
+                                        <option selected={category.id == demo.demonstrationCategory?.id}
+                                                value={category.id}>{category?.name}</option>
+                                    ))}
                                 </select>
                             </div>
                             <div className='buttons'>
