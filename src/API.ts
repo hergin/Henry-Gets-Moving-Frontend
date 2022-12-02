@@ -1,4 +1,12 @@
-import {Recipe, Exercise, RecipeCategory, ExerciseCategory} from "./Structs/DataTypes";
+import {
+    Recipe,
+    Exercise,
+    RecipeCategory,
+    ExerciseCategory,
+    Demonstration,
+    DemonstrationCategory,
+    Diagram
+} from "./Structs/DataTypes";
 
 export const API_URL = "http://127.0.0.1:3333";
 
@@ -36,6 +44,40 @@ const getExercises = async (): Promise<Exercise[]> => {
         });
 }
 
+const getDemonstrations = async (): Promise<Demonstration[]> => {
+    return await fetch(`${API_URL}/demos`)
+        .then((response) => {
+            if (response.ok) return response.json();
+            return {
+                errorCode: response.status,
+                error: response.statusText,
+            }
+        }).then((response) => {
+            return response.map((demos: any) => {
+                return {
+                    ...demos
+                } as Demonstration
+            });
+        });
+}
+
+const getDiagrams = async (): Promise<Diagram[]> => {
+    return await fetch(`${API_URL}/diagrams`)
+        .then((response) => {
+            if (response.ok) return response.json();
+            return {
+                errorCode: response.status,
+                error: response.statusText,
+            }
+        }).then((response) => {
+            return response.map((diagram: any) => {
+                return {
+                    ...diagram
+                } as Diagram
+            });
+        });
+}
+
 const getExerciseCategories = async (): Promise<ExerciseCategory[]> => {
     return await fetch(`${API_URL}/exerciseCategories`)
         .then((response) => {
@@ -66,6 +108,22 @@ const getRecipeCategories = async (): Promise<RecipeCategory[]> => {
                 return {
                     ...recipeCategory
                 } as RecipeCategory
+            });
+        });
+}
+const getDemonstrationCategories = async (): Promise<DemonstrationCategory[]> => {
+    return await fetch(`${API_URL}/demoCategories`)
+        .then((response) => {
+            if (response.ok) return response.json();
+            return {
+                errorCode: response.status,
+                error: response.statusText,
+            }
+        }).then((response) => {
+            return response.map((demoCategory: any) => {
+                return {
+                    ...demoCategory
+                } as DemonstrationCategory
             });
         });
 }
@@ -104,9 +162,12 @@ const API ={
     getRecipes,
     getExercises,
     getRecipeCategories,
+    getDemonstrations,
+    getDemonstrationCategories,
     getExerciseCategories,
     getFeaturedRecipe,
     getFeaturedExercise,
+    getDiagrams,
     isLoggedIn,
     API_URL,
 }

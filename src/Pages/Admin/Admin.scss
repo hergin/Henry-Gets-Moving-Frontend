@@ -68,12 +68,12 @@
     }
   }
 
-  .otd {
+  .form{
     margin-bottom: 20px;
   }
 
-  .exercise-form {
-    margin-bottom: 20px;
+  .otd-form{
+    margin-top: 20px;
   }
 
   .field {
@@ -126,11 +126,13 @@
   .save {
     border: 1px solid #1BC7D7;
     background-color: #1BC7D7;
+    cursor: pointer;
   }
 
   .delete {
     border: 1px solid #EC2B23;
     background-color: #EC2B23;
+    cursor: pointer;
   }
 
   button {

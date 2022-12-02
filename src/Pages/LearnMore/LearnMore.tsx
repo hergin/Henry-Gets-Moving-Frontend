@@ -1,66 +1,50 @@
 import './LearnMore.scss';
 import footerImage from "../../Assets/grass.svg";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import exit from "../../Assets/Exit.svg";
 import {Helmet, HelmetProvider} from "react-helmet-async";
 import grassDesktop from "../../Assets/grassDesktop.svg";
 import Grass from "../../Components/Grass";
 import Weather from "../../Components/Weather";
-
-type Demonstration = {
-    [key: string]: any;
-    thumbnail: string;
-    name: string;
-    category: string;
-}
-
-type Diagram = {
-    [key: string]: any;
-    diagram: string;
-}
+import {Demonstration, DemonstrationCategory, Diagram, ExerciseCategory} from "../../Structs/DataTypes";
+import API from "../../API";
 
 const LearnMore = () => {
-    const demonstration_list = [
-        {
-            thumbnail: 'https://miro.medium.com/max/1024/1*fHAtQWD_4n2eH3zNSRpZPA.jpeg',
-            name: "Some name",
-            category: "Healthy",
-        },
-        {
-            thumbnail: 'https://miro.medium.com/max/1024/1*fHAtQWD_4n2eH3zNSRpZPA.jpeg',
-            name: "Some name",
-            category: "Food",
-        },
-        {
-            thumbnail: 'https://miro.medium.com/max/1024/1*fHAtQWD_4n2eH3zNSRpZPA.jpeg',
-            name: "Some name",
-            category: "Sugar",
-        },
-        {
-            thumbnail: 'https://miro.medium.com/max/1024/1*fHAtQWD_4n2eH3zNSRpZPA.jpeg',
-            name: "Some name",
-            category: "Science",
-        },
-    ]
-
-    const diagram_list = [
-        {
-            diagram: 'https://myplate-prod.azureedge.us/sites/default/files/styles/medium/public/2020-11/myplate-brand--labelled.png?itok=7VtFXcBC',
-        },
-        {
-            diagram: 'https://www.ncagr.gov/agscool/images/pyramid.gif',
-        },
-    ]
-
     const [selectedDemo, setSelectedDemo] = useState<null | Demonstration>(null);
+    const [demos, setDemos] = useState([] as Demonstration[])
+    const [demoCategory, setDemoCategory] = useState([] as DemonstrationCategory[])
+    const [selectedCategory, setSelectedCategory] = useState("");
+    const [diagrams, setDiagrams] = useState([] as Diagram[])
 
-    const demoLayout = (individualDemo: Demonstration[]) => {
-        return individualDemo.map((demo) => {
+    useEffect(() => {
+        API.getDemonstrations().then((demos) => setDemos(demos));
+        API.getDemonstrationCategories().then((category) => setDemoCategory(category));
+        API.getDiagrams().then((diagrams) => setDiagrams(diagrams));
+    }, [])
+
+    const onCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        setSelectedCategory(event.target.value);
+    }
+
+    const categoryLayout = (category: ExerciseCategory[]) => {
+        return category.map((category) => {
+                return (
+                    <option value={category.id}>{category.name}</option>
+                )
+            }
+        )
+    }
+
+    const demoLayout = (individualDemo: Demonstration[], filter: string) => {
+        return individualDemo.filter((demo) => {
+            if (filter === "") return true;
+            return demo.demonstrationCategory?.id.toString() === filter;
+        }).map((demo) => {
                 return (
                     <div className='grid-content'>
-                       <img src={demo.thumbnail} onClick={e => (setSelectedDemo(demo))} alt={demo.name + "Thumbnail"}/>
+                       <img src={demo.thumbnail_link} onClick={e => (setSelectedDemo(demo))} alt={demo.name + " Thumbnail"}/>
                         <p className='name'>{demo.name}</p>
-                        <p className='category'>{demo.category}</p>
+                        <p className='category'>{demo.demonstrationCategory?.name}</p>
                     </div>
                 )
             }
@@ -71,7 +55,7 @@ const LearnMore = () => {
         return individualDiagram.map((diagram) => {
                 return (
                     <div className='content'>
-                        <img src={diagram.diagram} alt={"Diagram"}/>
+                        <img src={diagram.thumbnail_link} alt={"Diagram"}/>
                     </div>
                 )
             }
@@ -88,19 +72,20 @@ const LearnMore = () => {
             <div className='diagrams'>
                 <h2>Diagrams</h2>
                 <div className='diagram-grid'>
-                    {diagramLayout(diagram_list)}
+                    {diagramLayout(diagrams)}
                 </div>
             </div>
             <div className='demo-content'>
                 <h2>Demonstrations</h2>
                 <div className='select-search'>
-                    <select>
-                        <option value="" hidden={true}>Category Selection</option>
+                    <select onChange={onCategoryChange}>
+                        <option value="" >All</option>
+                        {categoryLayout(demoCategory)}
                     </select>
                     <input id='search' placeholder="Search"/>
                 </div>
                 <div className='demo-grid'>
-                    {demoLayout(demonstration_list)}
+                    {demoLayout(demos, selectedCategory)}
                 </div>
                 {selectedDemo &&
                 <div className='dialog-box'>
@@ -112,14 +97,11 @@ const LearnMore = () => {
                         <div className='episode-player'>
                             <div className='video-player'>
                                 <iframe
-                                    src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+                                    src={selectedDemo.video_link}
                                     frameBorder="0" allow="autoplay; fullscreen; picture-in-picture"
                                     allowFullScreen
                                 />
                             </div>
-                        </div>
-                        <div>
-                            {/*TODO Add picture of henry here*/}
                         </div>
                         <img src={footerImage} className='footer' alt={"Grass"}/>
                         <img src={grassDesktop} className='footer-desktop' alt={"Grass"}/>

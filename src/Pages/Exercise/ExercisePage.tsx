@@ -8,17 +8,38 @@ import {Helmet, HelmetProvider} from "react-helmet-async";
 import Grass from "../../Components/Grass";
 import Weather from "../../Components/Weather";
 import API from '../../API';
-import {Exercise} from "../../Structs/DataTypes";
+import {Exercise, ExerciseCategory} from "../../Structs/DataTypes";
 
 const ExercisePage = () => {
     const [selectedExercise, setSelectedExercise] = useState<null | Exercise>(null);
     const [exercises, setExercises] = useState([] as Exercise[])
+    const [exerciseCategory, setExerciseCategory] = useState([] as ExerciseCategory[])
+    const [selectedCategory, setSelectedCategory] = useState("");
+
     useEffect(() => {
-        API.getExercises().then((exercises) => setExercises(exercises))
+        API.getExercises().then((exercises) => setExercises(exercises));
+        API.getExerciseCategories().then((category) => setExerciseCategory(category));
     }, [])
     const navigate = useNavigate();
-    const exerciseLayout = (individualExercise: Exercise[]) => {
-        return individualExercise.map((exercise) => {
+
+    const onCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        setSelectedCategory(event.target.value);
+    }
+
+    const categoryLayout = (category: ExerciseCategory[]) => {
+        return category.map((category) => {
+                return (
+                    <option value={category.id}>{category.name}</option>
+                )
+            }
+        )
+    }
+
+    const exerciseLayout = (individualExercise: Exercise[], filter: string) => {
+        return  individualExercise.filter((exercise) => {
+            if (filter === "") return true;
+            return exercise.category_id.toString() === filter;
+        }).map((exercise) => {
                 return (
                     <>
                         <div className='grid-content'>
@@ -40,7 +61,7 @@ const ExercisePage = () => {
                     <title>Get Moving</title>
                 </Helmet>
             </HelmetProvider>
-           <Weather/>
+            <Weather/>
             <div className='otd-div'>
                 <div className='otd-image'>
                     <img src={exerciseStock} alt={"OTD Thumbnail"}/>
@@ -62,26 +83,29 @@ const ExercisePage = () => {
                 </div>
             </div>
             <div className='exercise-log-exercise'>
-                <button onClick={()=>{navigate(API.isLoggedIn()?'/exercise-log':'/login');}} className='red-button'>Log Exercise</button>
+                <button onClick={() => {
+                    navigate(API.isLoggedIn() ? '/exercise-log' : '/login');
+                }} className='red-button'>Log Exercise
+                </button>
             </div>
             <div className='exercise-content'>
                 <div className='select-link'>
-                    <select>
-                        <option value="" hidden={true}>Category Selection</option>
-                        <option value="All">All</option>
-                        <option value="Cardio">Cardio</option>
-                        <option value="Yoga">Yoga</option>
-                        <option value="Stretching">Stretching</option>
+                    <select onChange={onCategoryChange}>
+                        <option value="" >All</option>
+                        {categoryLayout(exerciseCategory)}
                     </select>
-                    <button onClick={()=>{navigate(API.isLoggedIn()?'/all-logs':'/login');}} className='red-button'>View All Logs</button>
+                    <button onClick={() => {
+                        navigate(API.isLoggedIn() ? '/all-logs' : '/login');
+                    }} className='red-button'>View All Logs
+                    </button>
                 </div>
                 <div className='exercise-grid'>
-                    {exerciseLayout(exercises)}
+                    {exerciseLayout(exercises, selectedCategory)}
                 </div>
                 {selectedExercise &&
                 <div className='dialog-box'>
                     <div className='background-color'>
-                       <Weather/>
+                        <Weather/>
                         <div className='exit-button'>
                             <img src={exit} alt='Exit' onClick={e => (setSelectedExercise(null))}/>
                         </div>
@@ -103,7 +127,7 @@ const ExercisePage = () => {
                         <div>
                             {/*TODO Add picture of henry here*/}
                         </div>
-                      <Grass/>
+                        <Grass/>
                     </div>
                     <div className='background'/>
                 </div>

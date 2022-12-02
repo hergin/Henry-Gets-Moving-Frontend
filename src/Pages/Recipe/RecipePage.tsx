@@ -1,19 +1,35 @@
 import './Recipe.scss';
 import recipeStock from "../../Assets/recipeStock.jpg";
-import {Link} from "react-router-dom";
 import React, {useEffect, useState} from "react";
 import {Helmet, HelmetProvider} from "react-helmet-async";
 import recipeLayout from '../../Components/recipeLayout'
 import Weather from "../../Components/Weather";
 import Grass from "../../Components/Grass";
 import API from "../../API";
-import {Recipe} from "../../Structs/DataTypes";
+import {Recipe, RecipeCategory} from "../../Structs/DataTypes";
 
 const RecipePage = () => {
     const [recipes, setRecipes] = useState([] as Recipe[])
+    const [recipeCategory, setRecipeCategory] = useState([] as RecipeCategory[])
+    const [selectedCategory, setSelectedCategory] = useState("");
+
     useEffect(() => {
         API.getRecipes().then((recipes) => setRecipes(recipes));
+        API.getRecipeCategories().then((category) => setRecipeCategory(category));
     }, [])
+
+    const onCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        setSelectedCategory(event.target.value);
+    }
+
+    const categoryLayout = (category: RecipeCategory[]) => {
+        return category.map((category) => {
+                return (
+                    <option value={category.id}>{category.name}</option>
+                )
+            }
+        )
+    }
 
     return (
         <div className="recipe">
@@ -34,27 +50,22 @@ const RecipePage = () => {
             </div>
             <div className='recipe-content'>
                 <div className='select-search'>
-                    <select>
-                        <option value="" hidden={true}>Category Selection</option>
-                        <option value="All">All</option>
-                        <option value="Vegetarian">Vegetarian</option>
-                        <option value="Nut-Free">Nut-Free</option>
-                        <option value="Vegan">Vegan</option>
-                        <option value="Gluten Free">Gluten Free</option>
+                    <select onChange={onCategoryChange}>
+                        <option value="">All</option>
+                        {categoryLayout(recipeCategory)}
                     </select>
                     <input id='search' placeholder="Search"/>
                 </div>
                 <div className='recipe-grid'>
-                    {recipeLayout(recipes)}
+                    {recipeLayout(recipes, selectedCategory)}
                 </div>
                 <div className='see-more'>
                     <button className='red-button'>See More</button>
                 </div>
             </div>
-           <Grass/>
+            <Grass/>
         </div>
     )
 }
 
-// @ts-ignore
-export default RecipePage
+export default RecipePage;
