@@ -562,7 +562,7 @@ const Admin = () => {
                         </form>
                     </div>
                     <div>
-                        <form className='diagram-form'>
+                        <form className='diagram-form' onSubmit={saveDiagram}>
                             <div className='add-edit'>
                                 <h2>Add Diagram</h2>
                                 <div className='edit-select'>
