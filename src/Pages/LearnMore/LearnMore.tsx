@@ -6,7 +6,7 @@ import {Helmet, HelmetProvider} from "react-helmet-async";
 import grassDesktop from "../../Assets/grassDesktop.svg";
 import Grass from "../../Components/Grass";
 import Weather from "../../Components/Weather";
-import {Demonstration, DemonstrationCategory, Diagram} from "../../Structs/DataTypes";
+import {Demonstration, DemonstrationCategory, Diagram, ExerciseCategory} from "../../Structs/DataTypes";
 import API from "../../API";
 
 const LearnMore = () => {
@@ -19,6 +19,19 @@ const LearnMore = () => {
         API.getDemonstrations().then((demos) => setDemos(demos));
         API.getExerciseCategories().then((category) => setDemoCategory(category));
     }, [])
+
+    const onCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        setSelectedCategory(event.target.value);
+    }
+
+    const categoryLayout = (category: ExerciseCategory[]) => {
+        return category.map((category) => {
+                return (
+                    <option value={category.id}>{category.name}</option>
+                )
+            }
+        )
+    }
 
     const demoLayout = (individualDemo: Demonstration[]) => {
         return individualDemo.map((demo) => {
