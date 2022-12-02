@@ -3,7 +3,15 @@ import Weather from "../../Components/Weather";
 import Grass from "../../Components/Grass";
 import swings from "../../Assets/Swings.png";
 import React, {useEffect, useState} from "react";
-import {Demonstration, Diagram, Exercise, ExerciseCategory, Recipe, RecipeCategory} from "../../Structs/DataTypes";
+import {
+    Demonstration,
+    DemonstrationCategory,
+    Diagram,
+    Exercise,
+    ExerciseCategory,
+    Recipe,
+    RecipeCategory
+} from "../../Structs/DataTypes";
 import API from "../../API";
 import {API_URL} from "../../API";
 
@@ -19,6 +27,8 @@ const Admin = () => {
     const [exerciseCategories, setExerciseCategories] = useState([] as ExerciseCategory[])
     const [recipeCategory, setRecipeCategory] = useState({} as RecipeCategory)
     const [recipeCategories, setRecipeCategories] = useState([] as RecipeCategory[])
+    const [demonstrationCategory, setDemonstrationCategory] = useState({} as DemonstrationCategory)
+    const [demonstrationCategories, setDemonstrationCategories] = useState([] as DemonstrationCategory[])
 
     useEffect(() => {
         API.getRecipes().then((recipes) => setRecipes(recipes));
@@ -27,6 +37,7 @@ const Admin = () => {
         API.getDemonstrations().then((demos) => setDemos(demos))
         API.getExerciseCategories().then((exerciseCategories) => setExerciseCategories(exerciseCategories))
         API.getRecipeCategories().then((recipeCategories) => setRecipeCategories(recipeCategories))
+        API.getDemonstrationCategories().then((demonstrationCategories) => setDemonstrationCategories(demonstrationCategories))
     }, [])
 
     const loadExercise = (event: React.FormEvent<HTMLSelectElement>) => {
