@@ -42,7 +42,7 @@ const LearnMore = () => {
         }).map((demo) => {
                 return (
                     <div className='grid-content'>
-                       <img src={demo.thumbnailLink} onClick={e => (setSelectedDemo(demo))} alt={demo.name + " Thumbnail"}/>
+                       <img src={demo.thumbnail_link} onClick={e => (setSelectedDemo(demo))} alt={demo.name + " Thumbnail"}/>
                         <p className='name'>{demo.name}</p>
                         <p className='category'>{demo.demonstrationCategory?.name}</p>
                     </div>
@@ -97,7 +97,7 @@ const LearnMore = () => {
                         <div className='episode-player'>
                             <div className='video-player'>
                                 <iframe
-                                    src={selectedDemo.videoLink}
+                                    src={selectedDemo.video_link}
                                     frameBorder="0" allow="autoplay; fullscreen; picture-in-picture"
                                     allowFullScreen
                                 />
