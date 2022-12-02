@@ -303,7 +303,14 @@ const Admin = () => {
                             </div>
                             <div className='field'>
                                 <label>Thumbnail Link</label>
-                                <input/>
+                                <input title={demo.thumbnail_link}
+                                       value={demo?.thumbnail_link ? String(demo?.thumbnail_link) : ""}
+                                       onChange={event => {
+                                           setDemo((demo) => {
+                                               return {...demo, thumbnail_link: event.target.value} as Demonstration
+                                           });
+
+                                       }}/>
                             </div>
                             <div className='field'>
                                 <label>Embed Video Link</label>
