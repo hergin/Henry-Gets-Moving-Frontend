@@ -92,6 +92,23 @@ const Admin = () => {
         }
     }
 
+    const deleteDemonstration = async (e: { preventDefault: () => void; }) => {
+        e.preventDefault()
+        const confirm = window.confirm("Are you sure you want to delete?")
+        if (confirm) {
+            await fetch(`${API_URL}/demos/${demo.id}`, {
+                method: 'DELETE',
+            }).then((res) => {
+                if (res.status >= 400 && res.status < 600) {
+                    alert("Bad response from server")
+                } else {
+                    window.location.reload()
+                    return res.json()
+                }
+            })
+        }
+    }
+
     const loadExercise = (event: React.FormEvent<HTMLSelectElement>) => {
         event.preventDefault()
         console.log(event.currentTarget.value)
@@ -382,7 +399,7 @@ const Admin = () => {
                                 </select>
                             </div>
                             <div className='buttons'>
-                                <button className='delete'>Delete Demo</button>
+                                <button className='delete' onClick={deleteDemonstration}>Delete Demo</button>
                                 <button className='save'>Save Demo</button>
                             </div>
                         </form>
