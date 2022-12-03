@@ -38,6 +38,7 @@ export type Demonstration = {
 
 export type Diagram = {
     id: number,
+    name: string,
     thumbnail_link: string
 }
 
