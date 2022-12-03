@@ -13,144 +13,153 @@ export const API_URL = "http://127.0.0.1:3333";
 const getRecipes = async (): Promise<Recipe[]> => {
     return await fetch(`${API_URL}/recipes`)
         .then((response) => {
-        if (response.ok) return response.json();
-        return {
-            errorCode: response.status,
-            error: response.statusText,
-        }
+        return response.json();
     }).then((response) => {
         return response.map((recipe: any) => {
             return {
                 ...recipe
             } as Recipe
         });
-    });
+    }).catch((response) => {
+            return {
+                errorCode: response.status,
+                error: response.statusText,
+            }
+        });
 }
 
 const getExercises = async (): Promise<Exercise[]> => {
     return await fetch(`${API_URL}/exercises`)
         .then((response) => {
-            if (response.ok) return response.json();
-            return {
-                errorCode: response.status,
-                error: response.statusText,
-            }
+            return response.json();
         }).then((response) => {
             return response.map((exercise: any) => {
                 return {
                     ...exercise
                 } as Exercise
             });
+        }).catch((response) => {
+            return {
+                errorCode: response.status,
+                error: response.statusText,
+            }
         });
 }
 
 const getDemonstrations = async (): Promise<Demonstration[]> => {
     return await fetch(`${API_URL}/demos`)
         .then((response) => {
-            if (response.ok) return response.json();
-            return {
-                errorCode: response.status,
-                error: response.statusText,
-            }
+            return response.json();
         }).then((response) => {
             return response.map((demos: any) => {
                 return {
                     ...demos
                 } as Demonstration
             });
+        }).catch((response) => {
+            return {
+                errorCode: response.status,
+                error: response.statusText,
+            }
         });
 }
 
 const getDiagrams = async (): Promise<Diagram[]> => {
     return await fetch(`${API_URL}/diagrams`)
         .then((response) => {
-            if (response.ok) return response.json();
-            return {
-                errorCode: response.status,
-                error: response.statusText,
-            }
+            return response.json();
         }).then((response) => {
             return response.map((diagram: any) => {
                 return {
                     ...diagram
                 } as Diagram
             });
+        }).catch((response) => {
+            return {
+                errorCode: response.status,
+                error: response.statusText,
+            }
         });
 }
 
 const getExerciseCategories = async (): Promise<ExerciseCategory[]> => {
     return await fetch(`${API_URL}/exerciseCategories`)
         .then((response) => {
-            if (response.ok) return response.json();
-            return {
-                errorCode: response.status,
-                error: response.statusText,
-            }
+            return response.json();
         }).then((response) => {
             return response.map((exerciseCategory: any) => {
                 return {
                     ...exerciseCategory
                 } as ExerciseCategory
             });
+        }).catch((response) => {
+            return {
+                errorCode: response.status,
+                error: response.statusText,
+            }
         });
 }
 
 const getRecipeCategories = async (): Promise<RecipeCategory[]> => {
     return await fetch(`${API_URL}/recipeCategories`)
         .then((response) => {
-            if (response.ok) return response.json();
-            return {
-                errorCode: response.status,
-                error: response.statusText,
-            }
+            return response.json();
         }).then((response) => {
             return response.map((recipeCategory: any) => {
                 return {
                     ...recipeCategory
                 } as RecipeCategory
             });
+        }).catch((response) => {
+            return {
+                errorCode: response.status,
+                error: response.statusText,
+            }
         });
 }
 const getDemonstrationCategories = async (): Promise<DemonstrationCategory[]> => {
     return await fetch(`${API_URL}/demoCategories`)
         .then((response) => {
-            if (response.ok) return response.json();
-            return {
-                errorCode: response.status,
-                error: response.statusText,
-            }
+            return response.json();
         }).then((response) => {
             return response.map((demoCategory: any) => {
                 return {
                     ...demoCategory
                 } as DemonstrationCategory
             });
+        }).catch((response) => {
+            return {
+                errorCode: response.status,
+                error: response.statusText,
+            }
         });
 }
 
 const getFeaturedRecipe = async (): Promise<Recipe> => {
     return await fetch(`${API_URL}/featuredRecipe`)
         .then((response) => {
-            if (response.ok) return response.json();
+            return response.json();
+        }).then((response) => {
+            return response;
+        }).catch((response) => {
             return {
                 errorCode: response.status,
                 error: response.statusText,
             }
-        }).then((response) => {
-            return response;
         });
 }
 
 const getFeaturedExercise = async (): Promise<Exercise> => {
     return await fetch(`${API_URL}/featuredExercise`)
         .then((response) => {
-            if (response.ok) return response.json();
+            return response.json();
+        }).then((response) => {
+            return response;
+        }).catch((response) => {
             return {
                 errorCode: response.status,
                 error: response.statusText,
             }
-        }).then((response) => {
-            return response;
         });
 }
 
