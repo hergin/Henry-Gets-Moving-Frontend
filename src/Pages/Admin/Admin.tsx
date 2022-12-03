@@ -44,10 +44,7 @@ const Admin = () => {
 
     const loadDiagram = (event: React.FormEvent<HTMLSelectElement>) => {
         event.preventDefault()
-        console.log(event.currentTarget.value)
         const index: number = parseInt(event.currentTarget.value, 10)
-        console.log(diagrams[index])
-
         setDiagram(diagram => {
             return {...(diagrams[index] as Diagram)}
         })
@@ -57,13 +54,13 @@ const Admin = () => {
         event.preventDefault()
         const formData = new FormData()
         formData.append("thumbnail_link", diagram.thumbnail_link)
+        formData.append("name", diagram.name)
         if (diagram.id) {
             await fetch(`${API_URL}/diagrams/${diagram.id}`, {
                 method: 'PUT',
                 body: formData,
             }).then((response) => {
                 if (response.status >= 400 && response.status < 600) {
-                    console.log(response);
                     alert("Bad response from server")
                 } else {
                     window.alert("Diagram submitted!")
@@ -77,7 +74,6 @@ const Admin = () => {
                 body: formData,
             }).then((response) => {
                 if (response.status >= 400 && response.status < 600) {
-                    console.log(response);
                     alert("Bad response from server")
                 } else {
                     window.alert("Diagram submitted!")
@@ -107,10 +103,7 @@ const Admin = () => {
 
     const loadDemonstration = (event: React.FormEvent<HTMLSelectElement>) => {
         event.preventDefault()
-        console.log(event.currentTarget.value)
         const index: number = parseInt(event.currentTarget.value, 10)
-        console.log(demos[index])
-
         setDemo(demo => {
             return {...(demos[index] as Demonstration)}
 
@@ -131,7 +124,6 @@ const Admin = () => {
                 body: formData,
             }).then((response) => {
                 if (response.status >= 400 && response.status < 600) {
-                    console.log(response);
                     alert("Bad response from server")
                 } else {
                     window.alert("Demonstration submitted!")
@@ -145,7 +137,6 @@ const Admin = () => {
                 body: formData,
             }).then((response) => {
                 if (response.status >= 400 && response.status < 600) {
-                    console.log(response);
                     alert("Bad response from server")
                 } else {
                     window.alert("Demonstration submitted!")
@@ -175,10 +166,7 @@ const Admin = () => {
 
     const loadExercise = (event: React.FormEvent<HTMLSelectElement>) => {
         event.preventDefault()
-        console.log(event.currentTarget.value)
         const index: number = parseInt(event.currentTarget.value, 10)
-        console.log(exercises[index])
-
         setExercise(exercise => {
             return {...(exercises[index] as Exercise)}
 
@@ -204,7 +192,6 @@ const Admin = () => {
                 body: formData,
             }).then((response) => {
                 if (response.status >= 400 && response.status < 600) {
-                    console.log(response);
                     alert("Bad response from server")
                 } else {
                     window.alert("Exercise submitted!")
@@ -218,7 +205,6 @@ const Admin = () => {
                 body: formData,
             }).then((response) => {
                 if (response.status >= 400 && response.status < 600) {
-                    console.log(response);
                     alert("Bad response from server")
                 } else {
                     window.alert("Exercise submitted!")
@@ -248,9 +234,7 @@ const Admin = () => {
 
     const loadRecipe = (event: React.FormEvent<HTMLSelectElement>) => {
         event.preventDefault()
-        console.log(event.currentTarget.value)
         const index: number = parseInt(event.currentTarget.value, 10)
-        console.log(recipes[index])
 
         setRecipe(recipe => {
             return {...(recipes[index] as Recipe)}
@@ -278,7 +262,6 @@ const Admin = () => {
                 body: formData,
             }).then((response) => {
                 if (response.status >= 400 && response.status < 600) {
-                    console.log(response);
                     alert("Bad response from server")
                 } else {
                     window.alert("Recipe submitted!")
@@ -292,7 +275,6 @@ const Admin = () => {
                 body: formData,
             }).then((response) => {
                 if (response.status >= 400 && response.status < 600) {
-                    console.log(response);
                     alert("Bad response from server")
                 } else {
                     window.alert("Exercise submitted!")
@@ -587,9 +569,19 @@ const Admin = () => {
                                     <select onChange={loadDiagram}>
                                         <option value="select">Select Diagram</option>
                                         {diagrams && diagrams.map((diagram, index: number) => (
-                                            <option value={index}>{diagram.id}</option>
+                                            <option value={index}>{diagram.name}</option>
                                         ))}</select>
                                 </div>
+                            </div>
+                            <div className='field'>
+                                <label>Diagram Name</label>
+                                <input title={diagram.name}
+                                       value={diagram?.name ? diagram.name : ""}
+                                       onChange={event => {
+                                           setDiagram((diagram) => {
+                                               return {...diagram, name: event.target.value} as Diagram
+                                           })
+                                       }} />
                             </div>
                             <div className='field'>
                                 <label>Thumbnail Link</label>
