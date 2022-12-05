@@ -14,9 +14,10 @@ import {
 } from "../../Structs/DataTypes";
 import API from "../../API";
 import {API_URL} from "../../API";
+import {Link} from "react-router-dom";
+import BackArrow from "../../Components/BackArrow/BackArrow";
 
 const Admin = () => {
-
     const [recipes, setRecipes] = useState([] as Recipe[]);
     const [exercises, setExercises] = useState([] as Exercise[])
     const [diagrams, setDiagrams] = useState([] as Diagram[])
@@ -305,6 +306,7 @@ const Admin = () => {
     return (
         <div className='admin'>
             <Weather/>
+            <BackArrow route="/"/>
             <h1>Admin Panel</h1>
             <div className='content'>
                 <div className="form-div">
