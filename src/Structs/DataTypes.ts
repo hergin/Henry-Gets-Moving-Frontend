@@ -33,6 +33,7 @@ export type Demonstration = {
     name: string,
     thumbnail_link: string,
     video_link: string,
+    demonstration_category_id: number
     demonstrationCategory?: DemonstrationCategory
 }
 

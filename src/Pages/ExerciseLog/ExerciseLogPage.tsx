@@ -27,30 +27,27 @@ const ExerciseLogPage = () => {
     function handleSubmit(e: { preventDefault: () => void; }) {
         e.preventDefault();
         const formData = new FormData();
-        formData.append("family_member_name", child)
+        formData.append("name", child)
         formData.append("intensity", intensity)
         formData.append("duration", duration)
         formData.append("type", exercise)
         return fetch(`${API_URL}/exerciseLogs`, {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                Authorization: `Bearer ${sessionStorage.getItem("session_key")}`
             },
             body: formData,
 
         })
             .then(response => {
-                if(response.ok) {
-                    return response.json();
-                }
-                throw new Error("Invalid email");
+                console.log(sessionStorage.getItem("session_key"))
+                return response.json();
             })
             .then(response => {
-                // sessionStorage.setItem("session_key", response.token);
-                navigate("/login");
+                navigate("/exercise-log");
             })
             .catch(err => {
-                // sessionStorage.clear();
+                console.log(sessionStorage.getItem("session_key"))
                 window.alert(err);
             })
     }

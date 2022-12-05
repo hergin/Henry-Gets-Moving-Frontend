@@ -117,7 +117,7 @@ const Admin = () => {
         formData.append("name", demo.name)
         formData.append("video_link", demo.video_link)
         formData.append("thumbnail_link", demo.thumbnail_link)
-        formData.append("demonstration_category_id", String(demo.demonstrationCategory?.id))
+        formData.append("demonstration_category_id", String(demo.demonstration_category_id))
         if (demo.id) {
             await fetch(`${API_URL}/demos/${demo.id}`, {
                 method: 'PUT',
@@ -433,13 +433,13 @@ const Admin = () => {
                                         setDemo(demo => {
                                             return {
                                                 ...demo,
-                                                category_id: parseInt(event.target.value)
+                                                demonstration_category_id: parseInt(event.target.value)
                                             } as Demonstration
                                         })
                                     }}>
                                     <option value="" disabled>Select Category</option>
                                     {demonstrationCategories && demonstrationCategories.map((category) => (
-                                        <option selected={category.id == demo.demonstrationCategory?.id}
+                                        <option selected={category.id == demo.demonstration_category_id}
                                                 value={category.id}>{category?.name}</option>
                                     ))}
                                 </select>
