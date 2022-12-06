@@ -44,8 +44,8 @@ const Calendar = () => {
             </HelmetProvider>
             <ReactCalendar onChange={selectDay} value={selectedDate} minDate={new Date(2022, 9, 20)} className="date-picker"/>
             <br/>
-            <h2>On {selectedDate.toLocaleDateString()}…</h2>
-            <div>
+            <h1>On {selectedDate.toLocaleDateString()}…</h1>
+            <div className='logText'>
                 {familyMembersLayout().length > 0 ? familyMembersLayout() : "No one logged any activity on this day, but there's still time to log some for today!"}
             </div>
         </div>
