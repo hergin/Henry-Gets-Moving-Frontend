@@ -57,7 +57,8 @@ export type FamilyMember = {
     id: number,
     name: string,
     user_id: number,
-    User?: User
+    User?: User,
+    exerciseLog: ExerciseLog[]
 }
 
 export type ExerciseLog = {
