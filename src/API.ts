@@ -5,7 +5,8 @@ import {
     ExerciseCategory,
     Demonstration,
     DemonstrationCategory,
-    Diagram
+    Diagram,
+    ExerciseLog
 } from "./Structs/DataTypes";
 
 export const API_URL = "http://127.0.0.1:3333";
