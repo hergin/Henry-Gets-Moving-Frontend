@@ -15,25 +15,22 @@ const Calendar = () => {
     const familyMembersLayout = () => {
         let familyMemberNames: string[] = [];
         let totalDurations: string[] = [];
-        let counter = 0;
         members.forEach(function (member) {
             member.exerciseLog.forEach(function (log) {
-                if (log.createdAt == new Date()) {
-                    if (familyMemberNames[counter]) {
-                        totalDurations[counter] = `${parseInt(totalDurations[counter]) + parseInt(log.duration)}`;
-                        counter++;
+                if (new Date(log.created_at).toLocaleDateString() == selectedDate.toLocaleDateString()) {
+                    if (familyMemberNames.includes(log.name)) {
+                        totalDurations[familyMemberNames.indexOf(log.name)] = `${parseInt(totalDurations[familyMemberNames.indexOf(log.name)]) + parseInt(log.duration)}`;
                     } else {
-                        familyMemberNames[counter] = log.family_member_name;
-                        totalDurations[counter] = log.duration;
-                        counter++;
+                        familyMemberNames.push(log.name);
+                        totalDurations[familyMemberNames.indexOf(log.name)] = log.duration;
                     }
                 }
             });
     });
-        return members.map((member)=>{
+        return familyMemberNames.map((member)=>{
             return (
                 <div className='logs'>
-                    <p>{member + " logged "+ totalDurations[members.indexOf(member)] +" minutes of activity!"}</p>
+                    <p>{member + " logged "+ totalDurations[familyMemberNames.indexOf(member)] +" minutes of activity! " + (parseInt(totalDurations[familyMemberNames.indexOf(member)]) > 59 ? "Great job!" : "There's still time to hit 60 minutes today!")}</p>
                 </div>
             )
         });
