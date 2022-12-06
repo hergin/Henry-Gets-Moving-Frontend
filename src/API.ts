@@ -28,7 +28,7 @@ const getRecipes = async (): Promise<Recipe[]> => {
         });
 }
 const getPaginatedRecipes = async (page: String) => {
-    return await fetch(`${API_URL}/paginatedRecipes`)
+    return await fetch(`${API_URL}/paginatedRecipes/?page=${page}`)
         .then((response) => {
             return response.json();
         }).catch((response) => {
