@@ -13,9 +13,16 @@ const RecipePage = () => {
     const [recipeCategory, setRecipeCategory] = useState([] as RecipeCategory[])
     const [selectedCategory, setSelectedCategory] = useState("");
     const [searchText, setSearchText] = useState("")
+    const [noMoreRecipes, setNoMoreRecipes] = useState(false)
+    const [page, setPage] = useState(2)
 
     useEffect(() => {
-        API.getRecipes().then((recipes) => setRecipes(recipes));
+        API.getPaginatedExercises(String(1)).then((response) => setRecipes(response.data));
+        API.getPaginatedExercises(String(page)).then((response) => {
+            if(response.data.length == 0){
+                setNoMoreRecipes(true)
+            }
+        })
         API.getRecipeCategories().then((category) => setRecipeCategory(category));
     }, [])
 
