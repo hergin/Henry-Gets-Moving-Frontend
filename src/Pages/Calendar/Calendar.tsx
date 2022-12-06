@@ -17,7 +17,7 @@ const Calendar = () => {
         let totalDurations: string[] = [];
         members.forEach(function (member) {
             member.exerciseLog.forEach(function (log) {
-                if (new Date(log.created_at).toLocaleDateString() == selectedDate.toLocaleDateString()) {
+                if (new Date(log.created_at).toLocaleDateString() === selectedDate.toLocaleDateString()) {
                     if (familyMemberNames.includes(log.name)) {
                         totalDurations[familyMemberNames.indexOf(log.name)] = `${parseInt(totalDurations[familyMemberNames.indexOf(log.name)]) + parseInt(log.duration)}`;
                     } else {
