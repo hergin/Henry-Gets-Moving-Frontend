@@ -3,10 +3,12 @@ import React from "react";
 import {Recipe} from "../Structs/DataTypes";
 import individualRecipe from "../Pages/IndividualRecipe/IndividualRecipe";
 
-const recipeLayout = (individualRecipe: Recipe[], filter: string) => {
+const recipeLayout = (individualRecipe: Recipe[], filter: string, searchText: string) => {
     return individualRecipe.filter((recipe) => {
-        if (filter === "") return true;
-        return recipe.category_id.toString() === filter;
+        return (recipe.category_id.toString() === filter || (filter === "")) && ((recipe?.name
+            .toLowerCase()
+            .includes(searchText.toLowerCase()) || !searchText) || ((recipe.recipeCategory?.name!).toLowerCase()
+            .includes(searchText.toLowerCase())));
     }).map((recipe) => {
             return (
                 <div className='grid-content'>
