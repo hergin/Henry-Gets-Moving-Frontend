@@ -12,7 +12,7 @@ const Calendar = () => {
     useEffect(() => {
         API.getFamilyMembers().then((members) => setFamilyMembers(members));
     }, []);
-    
+
     return (
         <div className="calendar">
             <HelmetProvider>
