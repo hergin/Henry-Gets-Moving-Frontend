@@ -1,4 +1,14 @@
-.calendar{
+.calendar {
+  .logText {
+    font-size: 1.5rem;
+    margin-top: 2em;
+    text-indent: 2.5em;
+    font-weight: 550;
+  }
+  .logs {
+    margin-top: 1.5em;
+  }
+
   //Desktop Styling
   @media (min-width: 1050px) {
 
