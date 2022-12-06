@@ -6,7 +6,6 @@ import {
     Demonstration,
     DemonstrationCategory,
     Diagram,
-    ExerciseLog,
     FamilyMember
 } from "./Structs/DataTypes";
 
