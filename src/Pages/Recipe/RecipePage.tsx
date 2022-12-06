@@ -17,8 +17,8 @@ const RecipePage = () => {
     const [page, setPage] = useState(2)
 
     useEffect(() => {
-        API.getPaginatedExercises(String(1)).then((response) => setRecipes(response.data));
-        API.getPaginatedExercises(String(page)).then((response) => {
+        API.getPaginatedRecipes(String(1)).then((response) => setRecipes(response.data));
+        API.getPaginatedRecipes(String(page)).then((response) => {
             if(response.data.length == 0){
                 setNoMoreRecipes(true)
             }
