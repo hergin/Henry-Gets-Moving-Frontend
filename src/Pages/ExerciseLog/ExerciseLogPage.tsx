@@ -24,13 +24,26 @@ const ExerciseLogPage = () => {
         return child.length > 0 && exercise.length > 0 && intensity.length > 0 && duration.length > 0;
     }
 
-    function handleSubmit(e: { preventDefault: () => void; }) {
+    async function handleSubmit(e: { preventDefault: () => void; }) {
         e.preventDefault();
         const formData = new FormData();
         formData.append("name", child)
         formData.append("intensity", intensity)
         formData.append("duration", duration)
         formData.append("type", exercise)
+        const childFormData = new FormData()
+        childFormData.append("name", child)
+        const familyMember = await fetch(`${API_URL}/checkFamilyMember`, {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${sessionStorage.getItem("session_key")}`
+            },
+            body: childFormData,
+        })
+            .then(response => {
+                return response.json();
+            })
+        await formData.append('family_member_id', familyMember.id)
         return fetch(`${API_URL}/exerciseLogs`, {
             method: "POST",
             headers: {
@@ -40,14 +53,13 @@ const ExerciseLogPage = () => {
 
         })
             .then(response => {
-                console.log(sessionStorage.getItem("session_key"))
                 return response.json();
             })
             .then(response => {
-                navigate("/exercise-log");
+                window.alert("Your exercise log has been submitted!")
+                navigate('/get-moving')
             })
             .catch(err => {
-                console.log(sessionStorage.getItem("session_key"))
                 window.alert(err);
             })
     }

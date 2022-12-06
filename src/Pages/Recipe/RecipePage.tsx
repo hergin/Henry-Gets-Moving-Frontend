@@ -12,6 +12,7 @@ const RecipePage = () => {
     const [recipes, setRecipes] = useState([] as Recipe[])
     const [recipeCategory, setRecipeCategory] = useState([] as RecipeCategory[])
     const [selectedCategory, setSelectedCategory] = useState("");
+    const [searchText, setSearchText] = useState("")
 
     useEffect(() => {
         API.getRecipes().then((recipes) => setRecipes(recipes));
@@ -54,10 +55,10 @@ const RecipePage = () => {
                         <option value="">All</option>
                         {categoryLayout(recipeCategory)}
                     </select>
-                    <input id='search' placeholder="Search"/>
+                    <input id='search' placeholder="Search" onChange={(event) => {setSearchText(event.target.value)}}/>
                 </div>
                 <div className='recipe-grid'>
-                    {recipeLayout(recipes, selectedCategory)}
+                    {recipeLayout(recipes, selectedCategory, searchText)}
                 </div>
                 <div className='see-more'>
                     <button className='red-button'>See More</button>

@@ -15,15 +15,33 @@ const ExercisePage = () => {
     const [exercises, setExercises] = useState([] as Exercise[])
     const [exerciseCategory, setExerciseCategory] = useState([] as ExerciseCategory[])
     const [selectedCategory, setSelectedCategory] = useState("");
+    const [noMoreExercises, setNoMoreExercises] = useState(false)
+    const [page, setPage] = useState(2)
 
     useEffect(() => {
-        API.getExercises().then((exercises) => setExercises(exercises));
+        API.getPaginatedExercises(String(1)).then((response) => setExercises(response.data));
+        API.getPaginatedExercises(String(page)).then((response) => {
+            if(response.data.length == 0){
+                setNoMoreExercises(true)
+            }
+        })
         API.getExerciseCategories().then((category) => setExerciseCategory(category));
     }, [])
     const navigate = useNavigate();
 
     const onCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setSelectedCategory(event.target.value);
+    }
+
+    const getMoreExercises = () => {
+        API.getPaginatedExercises(String(page)).then((response) => setExercises(exercises.concat(response.data)));
+        API.getPaginatedExercises(String(page + 1)).then((response) => {
+            if(response.data.length == 0){
+                setNoMoreExercises(true)
+            }
+        })
+        console.log(exercises)
+        setPage(page + 1)
     }
 
     const categoryLayout = (category: ExerciseCategory[]) => {
@@ -132,9 +150,11 @@ const ExercisePage = () => {
                     <div className='background'/>
                 </div>
                 }
-                <div className='see-more'>
-                    <button className='red-button'>See More</button>
-                </div>
+                {!noMoreExercises &&
+                    <div className='see-more'>
+                        <button className='red-button' onClick={getMoreExercises}>See More</button>
+                    </div>
+                }
             </div>
             <Grass/>
         </div>
