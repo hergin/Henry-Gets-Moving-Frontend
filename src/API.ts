@@ -6,7 +6,8 @@ import {
     Demonstration,
     DemonstrationCategory,
     Diagram,
-    ExerciseLog
+    ExerciseLog,
+    FamilyMember
 } from "./Structs/DataTypes";
 
 export const API_URL = "http://127.0.0.1:3333";
@@ -186,8 +187,14 @@ const getFeaturedExercise = async (): Promise<Exercise> => {
         });
 }
 
-const getExerciseLogs = async (): Promise<ExerciseLog[]> => {
-    return await fetch(`${API_URL}/exerciseLogs`)
+const getFamilyMembers = async (): Promise<FamilyMember[]> => {
+    return await fetch(`${API_URL}/familyMembers`, {
+        method: "GET",
+            headers: {
+                Authorization: `Bearer ${sessionStorage.getItem("session_key")}`
+            }
+        }
+    )
         .then((response) => {
             if (response.ok) return response.json();
             return {
@@ -195,10 +202,10 @@ const getExerciseLogs = async (): Promise<ExerciseLog[]> => {
                 error: response.statusText,
             }
         }).then((response) => {
-            return response.map((exerciseLog: any) => {
+            return response.map((familyMember: any) => {
                 return {
-                    ...exerciseLog
-                } as ExerciseLog
+                    ...familyMember
+                } as FamilyMember
             });
         });
 }
@@ -221,7 +228,7 @@ const API ={
     getDiagrams,
     isLoggedIn,
     API_URL,
-    getExerciseLogs
+    getFamilyMembers
 }
 
 export default API;
