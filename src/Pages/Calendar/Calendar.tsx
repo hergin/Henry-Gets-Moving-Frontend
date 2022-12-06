@@ -43,7 +43,7 @@ const Calendar = () => {
                     <title>Calendar</title>
                 </Helmet>
             </HelmetProvider>
-            <ReactCalendar onChange={selectDay} value={selectedDate} minDate={new Date(2022, 9, 20)} className="date-picker"/>
+            <ReactCalendar onClickDay={updateLogText} onChange={selectDay} value={selectedDate} minDate={new Date(2022, 9, 20)} className="date-picker"/>
             <br/>
             <h2>On {selectedDate.toLocaleDateString()}…</h2>
             <div>
