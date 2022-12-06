@@ -12,7 +12,7 @@ const Calendar = () => {
     useEffect(() => {
         API.getExerciseLogs().then((logs) => setExerciseLogs(logs));
     }, []);
-    const familyMembersLayout = (exerciseLog: Promise<ExerciseLog[]>) => {
+    const familyMembersLayout = () => {
         const members: string[] = [];
         const totalDurations: string[] = [];
         let counter = 0;
@@ -47,7 +47,7 @@ const Calendar = () => {
             <br/>
             <h2>On {selectedDate.toLocaleDateString()}…</h2>
             <div>
-                {familyMembersLayout(API.getExerciseLogs())}
+                {familyMembersLayout()}
             </div>
         </div>
     )
