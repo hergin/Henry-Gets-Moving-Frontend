@@ -46,7 +46,7 @@ const Calendar = () => {
             <br/>
             <h2>On {selectedDate.toLocaleDateString()}…</h2>
             <div>
-                {familyMembersLayout()}
+                {familyMembersLayout().length > 0 ? familyMembersLayout() : "No one logged any activity on this day, but there's still time to log some for today!"}
             </div>
         </div>
     )
