@@ -78,9 +78,11 @@ const RecipePage = () => {
                 <div className='recipe-grid'>
                     {recipeLayout(recipes, selectedCategory, searchText)}
                 </div>
+                {!noMoreRecipes &&
                 <div className='see-more'>
-                    <button className='red-button'>See More</button>
+                    <button className='red-button' onClick={getMoreRecipes}>See More</button>
                 </div>
+                }
             </div>
             <Grass/>
         </div>
