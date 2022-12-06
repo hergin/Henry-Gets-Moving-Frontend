@@ -185,6 +185,19 @@ const getFeaturedExercise = async (): Promise<Exercise> => {
         });
 }
 
+const getExerciseLogs = async (): Promise<ExerciseLog> => {
+    return await fetch(`${API_URL}/exerciseLogs`)
+    .then((response) => {
+        if (response.ok) return response.json();
+        return {
+            errorCode: response.status,
+            error: response.statusText,
+        }
+    }).then((response) => {
+        return response;
+    });
+}
+
 const isLoggedIn = (): boolean => {
     return sessionStorage.getItem('session_key') != null;
 }
@@ -203,6 +216,7 @@ const API ={
     getDiagrams,
     isLoggedIn,
     API_URL,
+    getExerciseLogs
 }
 
 export default API;
