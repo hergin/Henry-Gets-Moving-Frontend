@@ -30,6 +30,17 @@ const RecipePage = () => {
         setSelectedCategory(event.target.value);
     }
 
+    const getMoreRecipes = () => {
+        API.getPaginatedRecipes(String(page)).then((response) => setRecipes(recipes.concat(response.data)));
+        API.getPaginatedRecipes(String(page + 1)).then((response) => {
+            if(response.data.length == 0){
+                setNoMoreRecipes(true)
+            }
+        })
+        console.log(recipes)
+        setPage(page + 1)
+    }
+
     const categoryLayout = (category: RecipeCategory[]) => {
         return category.map((category) => {
                 return (
