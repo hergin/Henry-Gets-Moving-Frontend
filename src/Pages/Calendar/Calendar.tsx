@@ -23,6 +23,7 @@ const Calendar = () => {
                         totalDurations[counter] = `${parseInt(totalDurations[counter]) + parseInt(log.duration)}`;
                         counter++;
                     } else {
+                        familyMemberNames[counter] = log.family_member_name;
                         totalDurations[counter] = log.duration;
                         counter++;
                     }
