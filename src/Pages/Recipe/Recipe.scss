@@ -71,6 +71,7 @@
     margin: auto;
     width: 90%;
     justify-content: center;
+    padding-bottom: 2em;
 
     img {
       width: 100%;
@@ -117,6 +118,9 @@
 
     .select-search{
       width: 85%;
+    }
+    .recipe-grid{
+      padding-bottom: 4em;
     }
   }
   //Phone Styling

@@ -77,7 +77,7 @@
     margin: auto;
     width: 90%;
     justify-content: center;
-    padding-bottom: 4em;
+    padding-bottom: 2em;
 
     img {
       width: 100%;
@@ -139,10 +139,6 @@
       display: flex;
     }
 
-    .see-more{
-      margin-top: 1em;
-    }
-
     .exercise-text{
       display: flex;
       flex-direction: column;
@@ -158,6 +154,9 @@
     }
     .select-link{
       width: 85%;
+    }
+    .exercise-grid{
+      padding-bottom: 4em;
     }
   }
   //Phone Styling
@@ -203,6 +202,7 @@
 
     .name{
       font-size: 1.2rem;
+      text-align: center;
     }
 
     .category{
