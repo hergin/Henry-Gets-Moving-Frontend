@@ -82,7 +82,7 @@ const ExerciseLogPage = () => {
                     </div>
                     <div className='label-input'>
                         <label>Exercise Type</label>
-                        <input value={exerciseLog?.type ? String(exerciseLog?.type) : ''} onChange={(e) => {
+                        <input onChange={(e) => {
                             setExercise(e.target.value)
                         }}/>
                     </div>
