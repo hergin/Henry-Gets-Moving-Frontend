@@ -3,31 +3,32 @@ import {Helmet, HelmetProvider} from "react-helmet-async";
 import React, { useEffect, useState } from "react";
 import {Calendar as ReactCalendar} from "react-calendar";
 import API from '../../API';
-import { ExerciseLog } from '../../Structs/DataTypes';
+import { FamilyMember } from '../../Structs/DataTypes';
 
 
 const Calendar = () => {
     const [selectedDate, selectDay] = useState(new Date());
-    const [logs, setExerciseLogs] = useState([] as ExerciseLog[]);
+    const [members, setFamilyMembers] = useState([] as FamilyMember[]);
     useEffect(() => {
-        API.getExerciseLogs().then((logs) => setExerciseLogs(logs));
+        API.getFamilyMembers().then((members) => setFamilyMembers(members));
     }, []);
     const familyMembersLayout = () => {
-        const members: string[] = [];
-        const totalDurations: string[] = [];
+        let familyMemberNames: string[] = [];
+        let totalDurations: string[] = [];
         let counter = 0;
-        logs.forEach(function (log) {
-            if (log.createdAt == new Date()) {
-                if (members[counter]) {
-                    totalDurations[counter] = `${parseInt(totalDurations[counter]) + parseInt(log.duration)}`;
-                    counter++;
-                } else {
-                    members[counter] = String(log.FamilyMember?.name);
-                    totalDurations[counter] = log.duration;
-                    counter++;
+        members.forEach(function (member) {
+            member.exerciseLog.forEach(function (log) {
+                if (log.createdAt == new Date()) {
+                    if (familyMemberNames[counter]) {
+                        totalDurations[counter] = `${parseInt(totalDurations[counter]) + parseInt(log.duration)}`;
+                        counter++;
+                    } else {
+                        totalDurations[counter] = log.duration;
+                        counter++;
+                    }
                 }
-            }
-        });
+            });
+    });
         return members.map((member)=>{
             return (
                 <div className='logs'>
