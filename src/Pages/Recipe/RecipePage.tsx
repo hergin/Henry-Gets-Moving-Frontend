@@ -13,14 +13,32 @@ const RecipePage = () => {
     const [recipeCategory, setRecipeCategory] = useState([] as RecipeCategory[])
     const [selectedCategory, setSelectedCategory] = useState("");
     const [searchText, setSearchText] = useState("")
+    const [noMoreRecipes, setNoMoreRecipes] = useState(false)
+    const [page, setPage] = useState(2)
 
     useEffect(() => {
-        API.getRecipes().then((recipes) => setRecipes(recipes));
+        API.getPaginatedRecipes(String(1)).then((response) => setRecipes(response.data));
+        API.getPaginatedRecipes(String(page)).then((response) => {
+            if(response.data.length == 0){
+                setNoMoreRecipes(true)
+            }
+        })
         API.getRecipeCategories().then((category) => setRecipeCategory(category));
     }, [])
 
     const onCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setSelectedCategory(event.target.value);
+    }
+
+    const getMoreRecipes = () => {
+        API.getPaginatedRecipes(String(page)).then((response) => setRecipes(recipes.concat(response.data)));
+        API.getPaginatedRecipes(String(page + 1)).then((response) => {
+            if(response.data.length == 0){
+                setNoMoreRecipes(true)
+            }
+        })
+        console.log(recipes)
+        setPage(page + 1)
     }
 
     const categoryLayout = (category: RecipeCategory[]) => {
@@ -60,9 +78,11 @@ const RecipePage = () => {
                 <div className='recipe-grid'>
                     {recipeLayout(recipes, selectedCategory, searchText)}
                 </div>
+                {!noMoreRecipes &&
                 <div className='see-more'>
-                    <button className='red-button'>See More</button>
+                    <button className='red-button' onClick={getMoreRecipes}>See More</button>
                 </div>
+                }
             </div>
             <Grass/>
         </div>

@@ -3,13 +3,13 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import App from '../App';
 import RecipePage from '../Pages/Recipe/RecipePage';
 
+jest.mock('../API');
+
 describe('recipe buttons',()=>{
     test.skip('are clickable',()=>{
-        // TODO: update when recipes can pull from database
-        render(<Router><App/></Router>);
-        fireEvent.click(screen.getByText('Eat Healthy'));
-        fireEvent.click(screen.getAllByAltText('Some nameThumbnail')[0]);
-        expect(global.window.location.pathname).toContain('/individual-recipe');
+        render(<Router><RecipePage/></Router>);
+        fireEvent.click(screen.getByText('Banana BreadThumbnail'));
+        expect(screen.getByText(/20 years$/)).toBeInTheDocument();
     });
     it('exist',()=>{
         render(<Router><RecipePage/></Router>);

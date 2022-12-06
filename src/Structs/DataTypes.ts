@@ -50,7 +50,8 @@ export type DemonstrationCategory = {
 
 export type User = {
     id: number,
-    email: string
+    email: string,
+    familyMembers?: [FamilyMember]
 }
 
 export type FamilyMember = {
@@ -58,7 +59,7 @@ export type FamilyMember = {
     name: string,
     user_id: number,
     User?: User,
-    exerciseLog: ExerciseLog[]
+    exerciseLogs?: [ExerciseLog]
 }
 
 export type ExerciseLog = {
@@ -66,7 +67,6 @@ export type ExerciseLog = {
     type: string,
     intensity: string,
     duration: string,
-    name: string,
-    FamilyMember?: FamilyMember,
-    created_at: string
+    family_member_name: string,
+    FamilyMember?: FamilyMember
 }

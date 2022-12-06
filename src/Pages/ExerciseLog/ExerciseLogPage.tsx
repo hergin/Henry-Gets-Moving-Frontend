@@ -18,7 +18,7 @@ const ExerciseLogPage = () => {
     const [intensity, setIntensity] = useState("");
     const [duration, setDuration] = useState("");
     const navigate = useNavigate();
-    const [exerciseLog, setExerciseLog] = useState<ExerciseLog>()
+    const [exerciseLog, setExerciseLog] = useState<ExerciseLog>({} as ExerciseLog);
 
     function checkAllFormsFilled() {
         return child.length > 0 && exercise.length > 0 && intensity.length > 0 && duration.length > 0;
@@ -82,7 +82,11 @@ const ExerciseLogPage = () => {
                     </div>
                     <div className='label-input'>
                         <label>Exercise Type</label>
-                        <input value={exercise} onChange={(e) => setExercise(e.target.value)}/>
+                        <input value={exerciseLog?.type ? String(exerciseLog?.type) : ''} onChange={(e) => {
+                            setExerciseLog((exerciseLog) => {
+                                return {...exerciseLog, type: e.target.value}
+                            });
+                        }}/>
                     </div>
                     <div className='intensity label-input'>
                         <label>Intensity</label>
@@ -103,7 +107,11 @@ const ExerciseLogPage = () => {
                     </div>
                     <div className='label-input'>
                         <label>Duration</label>
-                        <input placeholder="# of Minutes" value={duration} onChange={(e) => setDuration(e.target.value)}/>
+                        <input placeholder="# of Minutes" value={duration} onChange={(e) => {
+                            setExerciseLog((exerciseLog) => {
+                                return {...exerciseLog, duration: e.target.value}
+                            });
+                        }}/>
                     </div>
                 </div>
                 <div className='buttons'>
