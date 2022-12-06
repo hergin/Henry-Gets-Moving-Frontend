@@ -24,33 +24,42 @@ const ExerciseLogPage = () => {
         return child.length > 0 && exercise.length > 0 && intensity.length > 0 && duration.length > 0;
     }
 
-    function handleSubmit(e: { preventDefault: () => void; }) {
+    async function handleSubmit(e: { preventDefault: () => void; }) {
         e.preventDefault();
         const formData = new FormData();
-        formData.append("family_member_name", child)
+        formData.append("name", child)
         formData.append("intensity", intensity)
         formData.append("duration", duration)
         formData.append("type", exercise)
+        const childFormData = new FormData()
+        childFormData.append("name", child)
+        const familyMember = await fetch(`${API_URL}/checkFamilyMember`, {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${sessionStorage.getItem("session_key")}`
+            },
+            body: childFormData,
+        })
+            .then(response => {
+                return response.json();
+            })
+        await formData.append('family_member_id', familyMember.id)
         return fetch(`${API_URL}/exerciseLogs`, {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                Authorization: `Bearer ${sessionStorage.getItem("session_key")}`
             },
             body: formData,
 
         })
             .then(response => {
-                if(response.ok) {
-                    return response.json();
-                }
-                throw new Error("Invalid email");
+                return response.json();
             })
             .then(response => {
-                // sessionStorage.setItem("session_key", response.token);
-                navigate("/login");
+                window.alert("Your exercise log has been submitted!")
+                navigate('/get-moving')
             })
             .catch(err => {
-                // sessionStorage.clear();
                 window.alert(err);
             })
     }
