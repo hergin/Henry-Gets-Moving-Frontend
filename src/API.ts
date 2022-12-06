@@ -27,6 +27,17 @@ const getRecipes = async (): Promise<Recipe[]> => {
             }
         });
 }
+const getPaginatedRecipes = async () => {
+    return await fetch(`${API_URL}/paginatedRecipes`)
+        .then((response) => {
+            return response.json();
+        }).catch((response) => {
+            return {
+                errorCode: response.status,
+                error: response.statusText,
+            }
+        });
+}
 
 const getExercises = async (): Promise<Exercise[]> => {
     return await fetch(`${API_URL}/exercises`)
@@ -38,6 +49,17 @@ const getExercises = async (): Promise<Exercise[]> => {
                     ...exercise
                 } as Exercise
             });
+        }).catch((response) => {
+            return {
+                errorCode: response.status,
+                error: response.statusText,
+            }
+        });
+}
+const getPaginatedExercises = async (page: String) => {
+    return await fetch(`${API_URL}/paginatedExercises/?page=${page}`)
+        .then((response) => {
+            return response.json();
         }).catch((response) => {
             return {
                 errorCode: response.status,
@@ -170,6 +192,8 @@ const isLoggedIn = (): boolean => {
 const API ={
     getRecipes,
     getExercises,
+    getPaginatedExercises,
+    getPaginatedRecipes,
     getRecipeCategories,
     getDemonstrations,
     getDemonstrationCategories,
