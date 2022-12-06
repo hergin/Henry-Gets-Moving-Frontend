@@ -1,53 +1,37 @@
-import {fireEvent,getByText,render,screen} from '@testing-library/react';
+import {fireEvent,render,screen} from '@testing-library/react';
 import ExerciseLogPage from '../Pages/ExerciseLog/ExerciseLogPage';
-import {BrowserRouter as Router} from 'react-router-dom';
-import App from '../App';
+import {BrowserRouter} from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
 
 describe('intensity labels',()=>{
     describe('exist',()=>{
         test('light',()=>{
-            render(<Router><ExerciseLogPage/></Router>);
+            render(<BrowserRouter><ExerciseLogPage/></BrowserRouter>);
             expect(screen.getByText('Light')).toBeInTheDocument();
         });
         test('moderate',()=>{
-            render(<Router><ExerciseLogPage/></Router>);
+            render(<BrowserRouter><ExerciseLogPage/></BrowserRouter>);
             expect(screen.getByText('Moderate')).toBeInTheDocument();
         });
         test('vigorous',()=>{
-            render(<Router><ExerciseLogPage/></Router>);
+            render(<BrowserRouter><ExerciseLogPage/></BrowserRouter>);
             expect(screen.getByText('Vigorous')).toBeInTheDocument();
         });
     });
 });
-test.skip('back arrow goes back',()=>{
-    render(<Router><App/></Router>);
-    fireEvent.click(screen.getByText('Get Moving'));
-    fireEvent.click(screen.getByText('Log Exercise'));
-    fireEvent.click(screen.getByAltText('Back'));
-    expect(global.window.location.pathname).toContain('/get-moving');
+test('back arrow component exists',()=>{
+    render(<BrowserRouter><ExerciseLogPage/></BrowserRouter>);
+    expect(screen.getByAltText('Back')).toBeInTheDocument();
 });
 
-test.skip('creates new exercise log',()=>{
-    render(<Router><App/></Router>);
-    fireEvent.click(screen.getByText('Get Moving'));
-    fireEvent.click(screen.getByText('Log Exercise'));
+test('creates new exercise log',()=>{
+    global.fetch = jest.fn().mockResolvedValue({ok: true});
+    window.alert = jest.fn();
+    render(<BrowserRouter><ExerciseLogPage/></BrowserRouter>);
     fireEvent.click(screen.getByAltText('Light Intensity'));
     userEvent.type(screen.getByPlaceholderText('# of Minutes'), '40');
     userEvent.type(screen.getAllByRole('textbox')[0], 'Test Child');
     userEvent.type(screen.getAllByRole('textbox')[1], 'Test Exercise');
     fireEvent.click(screen.getByText('Log Exercise'));
-    // TODO query database
-});
-test.skip('adds to total exercise for current date',()=>{
-    render(<Router><App/></Router>);
-    fireEvent.click(screen.getByText('Get Moving'));
-    fireEvent.click(screen.getByText('Log Exercise'));
-    fireEvent.click(screen.getByAltText('Light Intensity'));
-    userEvent.type(screen.getByPlaceholderText('# of Minutes'), '40');
-    userEvent.type(screen.getAllByRole('textbox')[0], 'Test Child');
-    userEvent.type(screen.getAllByRole('textbox')[1], 'Test Exercise');
-    fireEvent.click(screen.getByText('Log Exercise'));
-    fireEvent.click(screen.getByAltText('Back'));
-    expect(screen.getByText('40 Minutes')).toBeInTheDocument();
+    expect(fetch).toHaveBeenCalled();
 });

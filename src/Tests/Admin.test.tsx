@@ -4,6 +4,11 @@ import Admin from "../Pages/Admin/Admin";
 import App from '../App';
 import {BrowserRouter as Router} from 'react-router-dom';
 
+jest.mock('../API');
+beforeEach(function() {
+    global.fetch = jest.fn().mockResolvedValue({ok: true});
+});
+
 describe('sections',()=>{
     test('exercise section exists',()=>{
         render(<Admin/>);
@@ -20,20 +25,11 @@ describe('sections',()=>{
 });
 
 describe('updates database',()=>{
-    test.skip('exercise editor',()=>{
+    test('exercise editor',()=>{
         render(<Admin/>);
         const name = screen.getAllByRole('textbox')[0];
         const video = screen.getAllByRole('textbox')[1];
         const category = screen.getAllByRole('textbox')[2];
-        fireEvent.click(name);
-        userEvent.type(name, 'Test Exercise');
-        fireEvent.click(video);
-        userEvent.type(video, 'https://www.youtube.com/watch?v=dQw4w9WgXcQ');
-        fireEvent.click(category);
-        userEvent.type(category, 'Yoga');
-        fireEvent.click(screen.getByText('Save Exercise'));
-        fireEvent.click(screen.getAllByRole('select')[0]);
-        fireEvent.click(screen.getByText('Test Exercise'));
         fireEvent.click(name);
         userEvent.type(name, 'Test Exercise Edited');
         fireEvent.click(video);
@@ -41,124 +37,86 @@ describe('updates database',()=>{
         fireEvent.click(category);
         userEvent.type(category, 'Yoga');
         fireEvent.click(screen.getByText('Save Exercise'));
-        render(<Router><App/></Router>);
-        fireEvent.click(screen.getByText('Get Moving'));
-        expect(screen.getByText('Test Exercise Edited')).toBeInTheDocument();
+        expect(fetch).toHaveBeenCalled();
     });
-    test.skip('exercise adder/deleter',()=>{
-        render(<Admin/>);
-        const name = screen.getAllByRole('textbox')[0];
-        const video = screen.getAllByRole('textbox')[1];
-        const category = screen.getAllByRole('textbox')[2];
-        fireEvent.click(name);
-        userEvent.type(name, 'Test Exercise');
-        fireEvent.click(video);
-        userEvent.type(video, 'https://www.youtube.com/watch?v=dQw4w9WgXcQ');
-        fireEvent.click(category);
-        userEvent.type(category, 'Yoga');
-        fireEvent.click(screen.getByText('Save Exercise'));
-        // check the exercise exists
-        render(<Router><App/></Router>);
-        fireEvent.click(screen.getByText('Get Moving'));
-        expect(screen.getByText('Test Exercise')).toBeInTheDocument();
-        // delete the test exercise
-        render(<Admin/>);
-        fireEvent.click(name);
-        userEvent.type(name, 'Test Exercise');
-        fireEvent.click(video);
-        userEvent.type(video, 'https://www.youtube.com/watch?v=dQw4w9WgXcQ');
-        fireEvent.click(category);
-        userEvent.type(category, 'Yoga');
-        fireEvent.click(screen.getByText('Delete Exercise'));
-        render(<Router><App/></Router>);
-        // make sure it's not there anymore
-        fireEvent.click(screen.getByText('Get Moving'));
-        expect(screen.queryByText('Test Exercise')).not.toBeInTheDocument();
-    });
-    test.skip('recipe adder/remover',()=>{
-        render(<Admin/>);
-        const name = screen.getAllByRole('textbox')[3];
-        const thumbnail = screen.getAllByRole('textbox')[4];
-        const category = screen.getAllByRole('textbox')[5];
-        const time = screen.getAllByRole('textbox')[6];
-        const ingredients = screen.getAllByRole('textbox')[7];
-        const steps = screen.getAllByRole('textbox')[8];
-        fireEvent.click(name);
-        userEvent.type(name, 'Test Recipe');
-        fireEvent.click(thumbnail);
-        userEvent.type(thumbnail, 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpngimg.com%2Fuploads%2Fpokemon%2Fpokemon_PNG14.png');
-        fireEvent.click(category);
-        userEvent.type(category, 'Food');
-        fireEvent.click(time);
-        userEvent.type(time, '1 hour');
-        fireEvent.click(ingredients);
-        userEvent.type(ingredients, 'Pants, Microphone');
-        fireEvent.click(steps);
-        userEvent.type(steps, '1. cook 2. eat');
-        fireEvent.click(screen.getByText('Save Recipe'));
-        // check the exercise exists
-        render(<Router><App/></Router>);
-        fireEvent.click(screen.getByText('Eat Healthy'));
-        expect(screen.getByText('Test Recipe')).toBeInTheDocument();
-        // delete the test exercise
-        render(<Admin/>);
-        fireEvent.click(name);
-        userEvent.type(name, 'Test Recipe');
-        fireEvent.click(thumbnail);
-        userEvent.type(thumbnail, 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpngimg.com%2Fuploads%2Fpokemon%2Fpokemon_PNG14.png');
-        fireEvent.click(category);
-        userEvent.type(category, 'Food');
-        fireEvent.click(screen.getByText('Delete Recipe'));
-        render(<Router><App/></Router>);
-        // make sure it's not there anymore
-        fireEvent.click(screen.getByText('Eat Healthy'));
-        expect(screen.queryByText('Test Recipe')).not.toBeInTheDocument();
-    });
-    test.skip('recipe editor',()=>{
-        render(<Admin/>);
-        const name = screen.getAllByRole('textbox')[3];
-        const thumbnail = screen.getAllByRole('textbox')[4];
-        const category = screen.getAllByRole('textbox')[5];
-        const time = screen.getAllByRole('textbox')[6];
-        const ingredients = screen.getByPlaceholderText(/.*Ingredient.*/);
-        const steps = screen.getByPlaceholderText(/.*Step.*/);
-        
-        fireEvent.click(name);
-        userEvent.type(name, 'Test Recipe');
-        fireEvent.click(thumbnail);
-        userEvent.type(thumbnail, 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpngimg.com%2Fuploads%2Fpokemon%2Fpokemon_PNG14.png');
-        fireEvent.click(category);
-        userEvent.type(category, 'Food');
-        fireEvent.click(time);
-        userEvent.type(time, '1 hour');
-        fireEvent.click(ingredients);
-        userEvent.type(ingredients, 'Pants, Microphone');
-        fireEvent.click(steps);
-        userEvent.type(steps, '1. cook 2. eat');
-        fireEvent.click(screen.getByText('Save Recipe'));
+    describe('exercise adder/deleter',()=>{
+        test('sends request on confirm',()=>{
+            window.confirm = jest.fn().mockReturnValue(true);
+            render(<Admin/>);
+            const name = screen.getAllByRole('textbox')[0];
+            const video = screen.getAllByRole('textbox')[1];
+            const category = screen.getAllByRole('textbox')[2];
+            render(<Admin/>);
+            fireEvent.click(name);
+            userEvent.type(name, 'Test Exercise');
+            fireEvent.click(video);
+            userEvent.type(video, 'https://www.youtube.com/watch?v=dQw4w9WgXcQ');
+            fireEvent.click(category);
+            userEvent.type(category, 'Yoga');
+            fireEvent.click(screen.getAllByText('Delete Exercise')[0]);
+            expect(fetch).toHaveBeenCalled();
+        });
+        test('exercise is not deleted if confirm is not clicked',()=>{
+            window.confirm = jest.fn().mockReturnValue(false);
+            render(<Admin/>);
+            const name = screen.getAllByRole('textbox')[0];
+            const video = screen.getAllByRole('textbox')[1];
+            const category = screen.getAllByRole('textbox')[2];
+            render(<Admin/>);
+            fireEvent.click(name);
+            userEvent.type(name, 'Test Exercise');
+            fireEvent.click(video);
+            userEvent.type(video, 'https://www.youtube.com/watch?v=dQw4w9WgXcQ');
+            fireEvent.click(category);
+            userEvent.type(category, 'Yoga');
+            fireEvent.click(screen.getAllByText('Delete Exercise')[0]);
+            expect(fetch).not.toHaveBeenCalled();
+        });
+    })
 
-        userEvent.selectOptions(screen.getAllByRole('combobox')[2], 'Test Recipe');
-        fireEvent.click(screen.getByText('Test Recipe'));
-        fireEvent.click(name);
-        userEvent.type(name, 'Test Recipe Edited');
-        fireEvent.click(thumbnail);
-        userEvent.type(thumbnail, 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpngimg.com%2Fuploads%2Fpokemon%2Fpokemon_PNG14.png');
-        fireEvent.click(category);
-        userEvent.type(category, 'Food');
-        fireEvent.click(time);
-        userEvent.type(time, '1 hour');
-        fireEvent.click(ingredients);
-        userEvent.type(ingredients, 'Pants, Microphone');
-        fireEvent.click(steps);
-        userEvent.type(steps, '1. cook 2. eat');
-        fireEvent.click(screen.getByText('Save Recipe'));
-        render(<Router><App/></Router>);
-        fireEvent.click(screen.getByText('Eat Healthy'));
-        expect(screen.getByText('Test Recipe Edited')).toBeInTheDocument();
+    describe('recipe deleter',()=>{
+        test('works if confirmed',()=>{
+            window.confirm = jest.fn().mockReturnValue(true);
+            render(<Admin/>);
+            const name = screen.getAllByRole('textbox')[3];
+            const thumbnail = screen.getAllByRole('textbox')[4];
+            const category = screen.getAllByRole('textbox')[5];
+            render(<Admin/>);
+            fireEvent.click(name);
+            userEvent.type(name, 'Test Recipe');
+            fireEvent.click(thumbnail);
+            userEvent.type(thumbnail, 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpngimg.com%2Fuploads%2Fpokemon%2Fpokemon_PNG14.png');
+            fireEvent.click(category);
+            userEvent.type(category, 'Food');
+            fireEvent.click(screen.getAllByText('Delete Recipe')[0]);
+            expect(fetch).toHaveBeenCalled();
+        });
+        test('rejects if not confirmed',()=>{
+            window.confirm = jest.fn().mockReturnValue(false);
+            render(<Admin/>);
+            const name = screen.getAllByRole('textbox')[3];
+            const thumbnail = screen.getAllByRole('textbox')[4];
+            const category = screen.getAllByRole('textbox')[5];
+            render(<Admin/>);
+            fireEvent.click(name);
+            userEvent.type(name, 'Test Recipe');
+            fireEvent.click(thumbnail);
+            userEvent.type(thumbnail, 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpngimg.com%2Fuploads%2Fpokemon%2Fpokemon_PNG14.png');
+            fireEvent.click(category);
+            userEvent.type(category, 'Food');
+            fireEvent.click(screen.getAllByText('Delete Recipe')[0]);
+            expect(fetch).not.toHaveBeenCalled();
+        });
+    });
+    
+    test.skip('recipe editor auto-fills recipe details',()=>{
+        render(<Admin/>);
+        const name = screen.getAllByRole('textbox')[3];
+        userEvent.selectOptions(screen.getAllByRole('combobox')[4], 'Banana Bread');
+        expect(name).toHaveValue('Banana Bread');
     });
     test('of the day',()=>{
         render(<Admin/>);
-        // add exercise to make sure there is one there in existence
         const name = screen.getAllByRole('textbox')[3];
         const thumbnail = screen.getAllByRole('textbox')[4];
         const category = screen.getAllByRole('textbox')[5];
