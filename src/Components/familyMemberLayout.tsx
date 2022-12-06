@@ -4,13 +4,13 @@ const familyMemberLayout = (members: FamilyMember[], selectedDate: Date) => {
     let familyMemberNames: string[] = [];
     let totalDurations: string[] = [];
     members.forEach(function (member) {
-        member.exerciseLog.forEach(function (log) {
+        (member?.exerciseLog!).forEach(function (log) {
             if (new Date(log.created_at).toLocaleDateString() === selectedDate.toLocaleDateString()) {
-                if (familyMemberNames.includes(log.name)) {
-                    totalDurations[familyMemberNames.indexOf(log.name)] = `${parseInt(totalDurations[familyMemberNames.indexOf(log.name)]) + parseInt(log.duration)}`;
+                if (familyMemberNames.includes(log.family_member_name)) {
+                    totalDurations[familyMemberNames.indexOf(log.family_member_name)] = `${parseInt(totalDurations[familyMemberNames.indexOf(log.family_member_name)]) + parseInt(log.duration)}`;
                 } else {
-                    familyMemberNames.push(log.name);
-                    totalDurations[familyMemberNames.indexOf(log.name)] = log.duration;
+                    familyMemberNames.push(log.family_member_name);
+                    totalDurations[familyMemberNames.indexOf(log.family_member_name)] = log.duration;
                 }
             }
         });
