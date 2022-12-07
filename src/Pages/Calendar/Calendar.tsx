@@ -3,7 +3,7 @@ import {Helmet, HelmetProvider} from "react-helmet-async";
 import React, {useEffect, useState} from "react";
 import {Calendar as ReactCalendar} from "react-calendar";
 import API from '../../API';
-import {ExerciseLog, FamilyMember} from '../../Structs/DataTypes';
+import {Exercise, ExerciseLog, FamilyMember} from '../../Structs/DataTypes';
 import Weather from "../../Components/Weather";
 import Grass from "../../Components/Grass";
 import BackArrow from "../../Components/BackArrow/BackArrow";
@@ -13,11 +13,17 @@ const Calendar = () => {
     const [selectedDate, selectDay] = useState(new Date());
     const [members, setFamilyMembers] = useState([] as FamilyMember[]);
     const [familyMember, setFamilyMember] = useState({} as FamilyMember)
+    const [exerciseLogs, setExerciseLogs] = useState([] as ExerciseLog[])
+    const [dailyTime, setDailyTime] = useState(0)
     useEffect(() => {
-        API.getFamilyMembers()
-            .then((members) => setFamilyMembers(members));
+        API.getFamilyMembers().then((members) => {
+                setFamilyMembers(members)
+                setFamilyMember(members[0])
+        });
+        API.getExerciseLogs().then((logs) => {
+            setExerciseLogs(logs)
+        })
     }, []);
-
 
     return (
         <div className="calendar">
@@ -28,17 +34,34 @@ const Calendar = () => {
             </HelmetProvider>
             <Weather/>
             <BackArrow route={'/get-moving'}/>
-            <ReactCalendar onChange={selectDay} value={selectedDate} minDate={new Date(2022, 9, 20)}
+            <ReactCalendar onClickDay={(date) => {
+                selectDay(date)
+            }} value={selectedDate} minDate={new Date(2022, 9, 20)}
                            className="date-picker"/>
-            <h1>On {selectedDate.toLocaleDateString()}…</h1>
+            <div className={"date-member-select"}>
+                <h1>On {selectedDate.toLocaleDateString()}…</h1>
+                <select onChange={(event) => {
+                    event.preventDefault()
+                    const index: number = parseInt(event.currentTarget.value, 10)
+                    setFamilyMember(familyMember => {
+                        return {...(members[index] as FamilyMember)}
+                    })
+                }}>
+                    {members && members.map((member, index ) => {
+                        return (
+                            <option value={index}>{member.name}</option>
+                        )
+                    })}
+                </select>
+            </div>
             <div className='exercise-logs-div'>
-                <select>
-                {members && members.map((member) => {
-                    return (
-                        <option value={member.id}>{member.name}</option>
+                {exerciseLogs && exerciseLogs.filter((log) => {
+                    return new Date(log.date).toDateString() == selectedDate.toDateString() && log.family_member_id == familyMember.id
+                }).map((log) => {
+                    return(
+                        <h4>{new Date(log.date).toLocaleDateString()} {log.name} {log.type} {log.intensity} {log.duration}</h4>
                     )
                 })}
-                </select>
             </div>
             <Grass/>
         </div>
