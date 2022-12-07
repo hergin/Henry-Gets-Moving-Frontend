@@ -147,6 +147,15 @@ const diagrams = [
     }
 ];
 
+const demos = [
+    {
+        name: "SODA!!!",
+        thumbnail_link: "https://i.ytimg.com/vi/XOTvKeJdjlg/hqdefault.jpg",
+        video_link: "https://www.youtube.com/embed/XOTvKeJdjlg",
+        demonstration_category_id: 1
+    }
+];
+
 export function getExerciseLogs(member: FamilyMember) {
     let logs = [];
     for (let i = 0; i < 3; i++) {
