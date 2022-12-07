@@ -44,15 +44,15 @@ const IndividualRecipe = () => {
                 </div>
                 <div className='recipe-cook-info'>
                     <h2>{recipe?.name}</h2>
-                    <p>{recipe?.cook_time}</p>
+                    <p><strong>Cook Time</strong>: {recipe?.cook_time}</p>
                 </div>
             </div>
             <div className='recipe-text'>
                 <p>
-                    Ingredients: {recipe?.ingredients}
+                    <strong>Ingredients</strong>: {recipe?.ingredients}
                 </p>
                 <p>
-                    Steps: {recipe?.recipe_steps}
+                    <strong>Steps</strong>: {recipe?.recipe_steps}
                 </p>
             </div>
             <Grass/>

@@ -12,7 +12,8 @@
   .recipe-div {
     display: flex;
     justify-content: center;
-    margin: 2em 0;
+    width: 90%;
+    margin: 1em auto;
 
     img {
       margin-right: 20px;
@@ -40,6 +41,7 @@
     align-items: center;
     justify-content: center;
     margin-left: 1em;
+    text-align: center;
   }
 
   .recipe-text {
@@ -71,6 +73,10 @@
     h2 {
       font-size: 2.2rem;
     }
+
+    .recipe-div {
+     width: 60%;
+    }
   }
   //Phone Styling
   @media (max-width: 750px) {
@@ -84,6 +90,12 @@
 
     .recipe-image {
       margin: auto;
+    }
+    .recipe-text {
+      text-align: center;
+      p {
+        padding-bottom: 1em;
+      }
     }
   }
 }
