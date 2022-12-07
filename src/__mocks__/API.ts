@@ -156,6 +156,13 @@ const demos = [
     }
 ];
 
+const demoCategories = [
+    {
+        name: "Not soda",
+        id: 1
+    }
+];
+
 export function getExerciseLogs(member: FamilyMember) {
     let logs = [];
     for (let i = 0; i < 3; i++) {
