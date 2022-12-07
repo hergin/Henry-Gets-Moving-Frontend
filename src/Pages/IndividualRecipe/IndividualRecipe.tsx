@@ -38,21 +38,21 @@ const IndividualRecipe = () => {
             </HelmetProvider>
             <Weather/>
             <BackArrow route="/recipes"/>
-            <div className='otd-div'>
-                <div className='otd-image'>
+            <div className='recipe-div'>
+                <div className='recipe-image'>
                     <img src={recipe?.thumbnail} alt='RecipePage Name'/>
                 </div>
-                <div className='otd-text'>
+                <div className='recipe-cook-info'>
                     <h2>{recipe?.name}</h2>
-                    <p>{recipe?.cook_time}</p>
+                    <p><strong>Cook Time</strong>: {recipe?.cook_time}</p>
                 </div>
             </div>
             <div className='recipe-text'>
                 <p>
-                    Ingredients: {recipe?.ingredients}
+                    <strong>Ingredients</strong>: {recipe?.ingredients}
                 </p>
                 <p>
-                    Steps: {recipe?.recipe_steps}
+                    <strong>Steps</strong>: {recipe?.recipe_steps}
                 </p>
             </div>
             <Grass/>

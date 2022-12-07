@@ -8,6 +8,14 @@
     padding-bottom: 3em;
   }
 
+  button:disabled{
+    background-color: #FDEE1F;
+  }
+
+  button:disabled:hover{
+    background-color: #EC2B23;
+  }
+
   .logs {
     margin-top: 1.5em;
   }
