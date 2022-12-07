@@ -26,7 +26,7 @@ const Calendar = () => {
             <ReactCalendar onChange={selectDay} value={selectedDate} minDate={new Date(2022, 9, 20)}
                            className="date-picker"/>
             <h1>On {selectedDate.toLocaleDateString()}…</h1>
-            <div className='logText'>
+            <div className='exercise-logs-div'>
                 {familyMemberLayout(members, selectedDate).length > 0 ? familyMemberLayout(members, selectedDate) : "No one logged any activity on this day, but there's still time to log some for today!"}
             </div>
             <Grass/>
