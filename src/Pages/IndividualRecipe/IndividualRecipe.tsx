@@ -44,6 +44,7 @@ const IndividualRecipe = () => {
                 </div>
                 <div className='recipe-cook-info'>
                     <h2>{recipe?.name}</h2>
+                    <p><strong>Prep Time</strong>: {recipe?.prep_time}</p>
                     <p><strong>Cook Time</strong>: {recipe?.cook_time}</p>
                 </div>
             </div>
