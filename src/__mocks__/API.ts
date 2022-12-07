@@ -29,8 +29,8 @@ let exercise_logs = [
         intensity: "Vigorous",
         duration: 20,
         family_member_id: 1,
-        family_member_name: "Bill",
-        createdAt: new Date(2022, 10, 30, 0,0,0,0)
+        name: "Bill",
+        date: new Date(2022, 10, 30, 0,0,0,0)
     },
     {
         id: 2,
@@ -38,8 +38,8 @@ let exercise_logs = [
         intensity: "Moderate",
         duration: 10,
         family_member_id: 1,
-        family_member_name: "Bill",
-        createdAt: new Date(2022, 10, 30, 0,0,0,0)
+        name: "Bill",
+        date: new Date(2022, 10, 30, 0,0,0,0)
     },
     {
         id: 3,
@@ -47,8 +47,8 @@ let exercise_logs = [
         intensity: "Light",
         duration: 40,
         family_member_id: 2,
-        family_member_name: "John",
-        createdAt: new Date(2022, 10, 30, 0,0,0,0)
+        name: "John",
+        date: new Date(2022, 10, 30, 0,0,0,0)
     }
 ];
 
