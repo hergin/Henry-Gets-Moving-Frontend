@@ -166,7 +166,7 @@ export function getFamilyMembers(user: User) {
 }
 
 const getExerciseCategories = async (): Promise<ExerciseCategory[]> => {
-    return await exercise_categories.map((exerciseCategory: any) => {
+    return exercise_categories.map((exerciseCategory: any) => {
         return {
             ...exerciseCategory
         } as ExerciseCategory
@@ -182,7 +182,7 @@ const getDiagrams = async (): Promise<Diagram[]> => {
 }
 
 const getRecipeCategories = async (): Promise<RecipeCategory[]> => {
-    return await recipe_categories.map((recipeCategory: any) => {
+    return recipe_categories.map((recipeCategory: any) => {
         return {
             ...recipeCategory
         } as RecipeCategory
@@ -190,7 +190,7 @@ const getRecipeCategories = async (): Promise<RecipeCategory[]> => {
 }
 
 const getExercises = async (): Promise<Exercise[]> => {
-    return await exercises.map((exercise: any) => {
+    return exercises.map((exercise: any) => {
         return {
             ...exercise
         } as Exercise
@@ -198,7 +198,7 @@ const getExercises = async (): Promise<Exercise[]> => {
 }
 
 const getRecipes = async (): Promise<Recipe[]> => {
-    return await recipes.map((recipe: any) => {
+    return recipes.map((recipe: any) => {
         return {
             ...recipe
         } as Recipe
