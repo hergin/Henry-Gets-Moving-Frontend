@@ -61,7 +61,8 @@ const recipes: Recipe[] = [
         ingredients: "Banana, Bread",
         recipe_steps: "Step 1: cook\nStep 2: eat",
         category_id: 1,
-        is_featured: true
+        is_featured: true,
+        prep_time: "200 years"
     },
     {
         id: 2,
@@ -71,7 +72,8 @@ const recipes: Recipe[] = [
         ingredients: "Bread, Bread",
         recipe_steps: "Step 1: cook\nStep 2: DON'T eat",
         category_id: 1,
-        is_featured: false
+        is_featured: false,
+        prep_time: "8000 years"
     },
     {
         id: 3,
@@ -81,7 +83,8 @@ const recipes: Recipe[] = [
         ingredients: "Superpowers, Bread",
         recipe_steps: "Step 1: create\nStep 2: LIVE",
         category_id: 2,
-        is_featured: false
+        is_featured: false,
+        prep_time: "12 seconds"
     },
     {
         id: 4,
@@ -91,7 +94,8 @@ const recipes: Recipe[] = [
         ingredients: "Air",
         recipe_steps: "Breathe",
         category_id: 2,
-        is_featured: false
+        is_featured: false,
+        prep_time: "Nothing"
     }
 ];
 
