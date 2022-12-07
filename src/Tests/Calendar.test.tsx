@@ -1,14 +1,15 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import Calendar from '../Pages/Calendar/Calendar';
+import {BrowserRouter as Router} from 'react-router-dom';
 
 describe('date',()=>{
     test('is today by default',()=>{
-        render(<Calendar/>);
+        render(<Router><Calendar/></Router>);
         expect(screen.getByText(new RegExp(`.*${new Date().toLocaleDateString()}.*`))).toBeInTheDocument();
     });
 
     test('can be changed with calendar buttons',()=>{
-        render(<Calendar/>);
+        render(<Router><Calendar/></Router>);
         fireEvent.click(screen.getByText('22'));
         expect(screen.getByText(new RegExp(`.*${new Date().getMonth()+1}/22/${new Date().toLocaleDateString().split('/')[2]}.*`))).toBeInTheDocument();
     });
@@ -16,7 +17,7 @@ describe('date',()=>{
 
 describe('month',()=>{
     test('can be changed with arrows',()=>{
-        render(<Calendar/>);
+        render(<Router><Calendar/></Router>);
         const days = new Date().toLocaleDateString().split('/');
         fireEvent.click(screen.getByText('›'));
         fireEvent.click(screen.getByText("22"));
@@ -24,7 +25,7 @@ describe('month',()=>{
     });
 
     test('can be changed via menu',()=>{
-        render(<Calendar/>);
+        render(<Router><Calendar/></Router>);
         const today = new Date();
         const days = today.toLocaleDateString().split('/');
         fireEvent.click(screen.getByText(today.toLocaleString('default',{month:'long'})+' '+today.getFullYear()));
@@ -36,7 +37,7 @@ describe('month',()=>{
 
 describe('disabled',()=>{
     test('can\'t choose day before October 20th, 2022',()=>{
-        render(<Calendar/>);
+        render(<Router><Calendar/></Router>);
         // make sure it's october 2022, if this test is being run in the far future
         const today = new Date();
         fireEvent.click(screen.getByText(today.toLocaleString('default',{month:'long'})+' '+today.getFullYear()));
@@ -48,7 +49,7 @@ describe('disabled',()=>{
     });
 
     test('can\'t choose month before october 2022',()=>{
-        render(<Calendar/>);
+        render(<Router><Calendar/></Router>);
         const today = new Date();
         fireEvent.click(screen.getByText(today.toLocaleString('default',{month:'long'})+' '+today.getFullYear()));
         fireEvent.click(screen.getByText(today.getFullYear()));
@@ -61,7 +62,7 @@ describe('disabled',()=>{
     });
 
     test('can\'t choose year before 2022',()=>{
-        render(<Calendar/>);
+        render(<Router><Calendar/></Router>);
         const today = new Date();
         fireEvent.click(screen.getByText(today.toLocaleString('default',{month:'long'})+' '+today.getFullYear()));
         fireEvent.click(screen.getByText(today.getFullYear()));
