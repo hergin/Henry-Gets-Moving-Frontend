@@ -59,7 +59,7 @@ const Calendar = () => {
                     return new Date(log.date).toDateString() == selectedDate.toDateString() && log.family_member_id == familyMember.id
                 }).map((log) => {
                     return(
-                        <h4>{new Date(log.date).toLocaleDateString()} {log.name} {log.type} {log.intensity} {log.duration}</h4>
+                        <h4>{log.name} - {log.type} - {log.intensity} - {log.duration} minutes</h4>
                     )
                 })}
             </div>
