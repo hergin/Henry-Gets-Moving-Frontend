@@ -237,6 +237,14 @@ const getRecipes = async (): Promise<Recipe[]> => {
     });
 }
 
+const getPaginatedRecipes = async (): Promise<Recipe[]> => {
+    return getRecipes();
+}
+
+const getPaginatedExercises = async (): Promise<Exercise[]> => {
+    return getExercises();
+}
+
 function isLoggedIn() {
     return false;
 }
@@ -265,7 +273,9 @@ const API = {
     getRecipeCategories,
     getDiagrams,
     getDemonstrations,
-    getDemonstrationCategories
+    getDemonstrationCategories,
+    getPaginatedRecipes,
+    getPaginatedExercises
 };
 
 module.exports = API;
