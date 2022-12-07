@@ -15,15 +15,31 @@ const LearnMore = () => {
     const [demoCategory, setDemoCategory] = useState([] as DemonstrationCategory[])
     const [selectedCategory, setSelectedCategory] = useState("");
     const [diagrams, setDiagrams] = useState([] as Diagram[])
+    const [page, setPage] = useState(2)
+    const [noMoreDemos, setNoMoreDemos] = useState(false)
 
     useEffect(() => {
-        API.getDemonstrations().then((demos) => setDemos(demos));
+        API.getPaginatedDemos('1').then((demos) => setDemos(demos.data));
+        API.getPaginatedDemos(String(page)).then((response) => {
+            if(response.data.length == 0){
+                setNoMoreDemos(true)
+            }
+        });
         API.getDemonstrationCategories().then((category) => setDemoCategory(category));
         API.getDiagrams().then((diagrams) => setDiagrams(diagrams));
     }, [])
 
     const onCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setSelectedCategory(event.target.value);
+    }
+    const getMoreDemos = () => {
+        API.getPaginatedDemos(String(page)).then((demonstrations) => setDemos(demos.concat(demonstrations.data)));
+        API.getPaginatedDemos(String(page+1)).then((response) => {
+            if(response.data.length == 0){
+                setNoMoreDemos(true)
+            }
+        });
+        setPage(page + 1)
     }
 
     const categoryLayout = (category: ExerciseCategory[]) => {
@@ -109,9 +125,12 @@ const LearnMore = () => {
                     <div className='background'/>
                 </div>
                 }
-                <div className='see-more'>
-                    <button className='red-button'>See More</button>
-                </div>
+                {!noMoreDemos &&
+                    <div className='see-more'>
+                        <button className='red-button' onClick={getMoreDemos}>See More</button>
+                    </div>
+                }
+
             </div>
           <Grass/>
         </div>

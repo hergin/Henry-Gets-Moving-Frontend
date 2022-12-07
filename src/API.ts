@@ -87,6 +87,8 @@ const getDemonstrations = async (): Promise<Demonstration[]> => {
         });
 }
 
+
+
 const getDiagrams = async (): Promise<Diagram[]> => {
     return await fetch(`${API_URL}/diagrams`)
         .then((response) => {
@@ -97,6 +99,18 @@ const getDiagrams = async (): Promise<Diagram[]> => {
                     ...diagram
                 } as Diagram
             });
+        }).catch((response) => {
+            return {
+                errorCode: response.status,
+                error: response.statusText,
+            }
+        });
+}
+
+const getPaginatedDemos = async (page:string) => {
+    return await fetch(`${API_URL}/paginatedDemos/?page=${page}`)
+        .then((response) => {
+            return response.json();
         }).catch((response) => {
             return {
                 errorCode: response.status,
@@ -250,7 +264,8 @@ const API ={
     isLoggedIn,
     API_URL,
     getFamilyMembers,
-    getExerciseLogs
+    getExerciseLogs,
+    getPaginatedDemos
 }
 
 export default API;
