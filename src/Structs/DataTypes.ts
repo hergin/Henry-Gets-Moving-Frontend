@@ -59,7 +59,6 @@ export type FamilyMember = {
     name: string,
     user_id: number,
     User?: User,
-    exerciseLog?: [ExerciseLog]
 }
 
 export type ExerciseLog = {

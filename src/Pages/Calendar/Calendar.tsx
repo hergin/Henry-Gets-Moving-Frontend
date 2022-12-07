@@ -3,18 +3,21 @@ import {Helmet, HelmetProvider} from "react-helmet-async";
 import React, {useEffect, useState} from "react";
 import {Calendar as ReactCalendar} from "react-calendar";
 import API from '../../API';
-import {FamilyMember} from '../../Structs/DataTypes';
-import familyMemberLayout from '../../Components/familyMemberLayout';
+import {ExerciseLog, FamilyMember} from '../../Structs/DataTypes';
 import Weather from "../../Components/Weather";
 import Grass from "../../Components/Grass";
 import BackArrow from "../../Components/BackArrow/BackArrow";
 
+
 const Calendar = () => {
     const [selectedDate, selectDay] = useState(new Date());
     const [members, setFamilyMembers] = useState([] as FamilyMember[]);
+    const [familyMember, setFamilyMember] = useState({} as FamilyMember)
     useEffect(() => {
-        API.getFamilyMembers().then((members) => setFamilyMembers(members));
+        API.getFamilyMembers()
+            .then((members) => setFamilyMembers(members));
     }, []);
+
 
     return (
         <div className="calendar">
@@ -29,7 +32,13 @@ const Calendar = () => {
                            className="date-picker"/>
             <h1>On {selectedDate.toLocaleDateString()}…</h1>
             <div className='exercise-logs-div'>
-                {familyMemberLayout(members, selectedDate).length > 0 ? familyMemberLayout(members, selectedDate) : "No one logged any activity on this day, but there's still time to log some for today!"}
+                <select>
+                {members && members.map((member) => {
+                    return (
+                        <option value={member.id}>{member.name}</option>
+                    )
+                })}
+                </select>
             </div>
             <Grass/>
         </div>
