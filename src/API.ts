@@ -222,7 +222,7 @@ const getFamilyMembers = async (): Promise<FamilyMember[]> => {
         });
 }
 
-const getExerciseLogs = async (familyMemberId: string): Promise<ExerciseLog[]> => {
+const getMemberExerciseLogs = async (familyMemberId: string): Promise<ExerciseLog[]> => {
     return await fetch(`${API_URL}/exerciseLogs/${familyMemberId}`, {
         method: "GET",
             headers: {
@@ -244,6 +244,31 @@ const getExerciseLogs = async (familyMemberId: string): Promise<ExerciseLog[]> =
             }
         });
 }
+const getExerciseLogs = async (): Promise<ExerciseLog[]> => {
+    return await fetch(`${API_URL}/exerciseLogs/`, {
+        method: "GET",
+        headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("session_key")}`
+        }
+    }).then((response) => {
+        return response.json();
+    }).then((response) => {
+        return response.map((exerciseLog: ExerciseLog) => {
+            return {
+                ...exerciseLog
+            } as ExerciseLog
+        });
+    }).catch((response) => {
+        return {
+            errorCode: response.status,
+            error: response.statusText,
+        }
+    });
+}
+
+
+
+
 
 const isLoggedIn = (): boolean => {
     return sessionStorage.getItem('session_key') != null;
@@ -264,8 +289,9 @@ const API ={
     isLoggedIn,
     API_URL,
     getFamilyMembers,
-    getExerciseLogs,
-    getPaginatedDemos
+    getMemberExerciseLogs,
+    getPaginatedDemos,
+    getExerciseLogs
 }
 
 export default API;
