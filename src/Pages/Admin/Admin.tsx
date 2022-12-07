@@ -303,7 +303,6 @@ const Admin = () => {
         }
     }
 
-
     return (
         <div className='admin'>
             <HelmetProvider>
@@ -528,10 +527,16 @@ const Admin = () => {
                                     ))}
                                 </select>
                             </div>
-                            {/*<div className='field'>*/}
-                            {/*    <label>Prep Time</label>*/}
-                            {/*    <input placeholder="000 Minutes"/>*/}
-                            {/*</div>*/}
+                            <div className='field'>
+                                <label>Prep Time</label>
+                                <input placeholder="000 Minutes" defaultValue={recipe?.prep_time}
+                                       value={recipe?.prep_time ? String(recipe?.prep_time) : ""} onChange={event => {
+                                    setRecipe((recipe) => {
+                                        return {...recipe, prep_time: event.target.value} as Recipe
+                                    });
+
+                                }}/>
+                            </div>
                             <div className='field'>
                                 <label>Cook Time</label>
                                 <input placeholder="000 Minutes" defaultValue={recipe?.cook_time}
