@@ -1,11 +1,11 @@
 .calendar {
   .exercise-logs-div {
     font-size: 1.5rem;
-    text-indent: 2.5em;
     font-weight: 550;
     width: 90%;
-    margin: auto;
+    margin: 1em auto auto;
     text-align: center;
+    padding-bottom: 3em;
   }
 
   .logs {
@@ -77,6 +77,8 @@
   }
   //Phone Styling
   @media (max-width: 750px) {
-
+    .react-calendar__navigation {
+      text-align: center;
+    }
   }
 }
