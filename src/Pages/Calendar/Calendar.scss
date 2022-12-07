@@ -3,19 +3,32 @@
     font-size: 1.5rem;
     font-weight: 550;
     width: 90%;
-    margin: 1em auto auto;
+    margin: auto;
     text-align: center;
-    padding-bottom: 3em;
-  }
-  .date-member-select{
-    display: flex;
+    background-color: #FDEE1F;
+    padding: 10px;
+    border-radius: 15px;
+    box-shadow: 0 6px 4px 0 rgba(0, 0, 0, 0.25);
+    border: 1px black solid;
   }
 
-  button:disabled{
+  .date-member-select {
+    display: flex;
+    width: 90%;
+    margin: auto;
+    justify-content: space-between;
+    align-items: center;
+
+    select {
+      height: 20%;
+    }
+  }
+
+  button:disabled {
     background-color: #FDEE1F;
   }
 
-  button:disabled:hover{
+  button:disabled:hover {
     background-color: #EC2B23;
   }
 
@@ -61,7 +74,7 @@
     padding: 5px 10px;
   }
 
-  .react-calendar__navigation__label__labelText{
+  .react-calendar__navigation__label__labelText {
     font-size: 1.4rem;
   }
 
@@ -77,9 +90,38 @@
     background-color: lightgray;
   }
 
-  h1 {
-    width: 90%;
+  .log {
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    box-shadow: 0 6px 4px 0 rgba(0, 0, 0, 0.25);
+    border: 1px black solid;
+    border-radius: 10px;
+  }
+
+  .data {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    p {
+      margin: 0;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  .legend {
+    display: flex;
+    justify-content: space-between;
+    width: 98%;
     margin: auto;
+
+    p {
+      margin: 10px 0;
+    }
   }
 
   //Desktop Styling
