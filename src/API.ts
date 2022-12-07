@@ -209,7 +209,12 @@ const getFamilyMembers = async (): Promise<FamilyMember[]> => {
 }
 
 const getExerciseLogs = async (familyMemberId: string): Promise<ExerciseLog[]> => {
-    return await fetch(`${API_URL}/exerciseLogs/${familyMemberId}`)
+    return await fetch(`${API_URL}/exerciseLogs/${familyMemberId}`, {
+        method: "GET",
+            headers: {
+                Authorization: `Bearer ${sessionStorage.getItem("session_key")}`
+            }
+    })
         .then((response) => {
             return response.json();
         }).then((response) => {
@@ -244,7 +249,8 @@ const API ={
     getDiagrams,
     isLoggedIn,
     API_URL,
-    getFamilyMembers
+    getFamilyMembers,
+    getExerciseLogs
 }
 
 export default API;
