@@ -11,22 +11,22 @@ beforeEach(function() {
 
 describe('sections',()=>{
     test('exercise section exists',()=>{
-        render(<Admin/>);
+        render(<Router><Admin/></Router>);
         expect(screen.getByText('Add Exercise')).toBeInTheDocument();
     });
     test('recipe section exists',()=>{
-        render(<Admin/>);
+        render(<Router><Admin/></Router>);
         expect(screen.getByText('Add Recipe')).toBeInTheDocument();
     });
     test('OTD form',()=>{
-        render(<Admin/>);
+        render(<Router><Admin/></Router>);
         expect(screen.getByText('Of the Day')).toBeInTheDocument();
     });
 });
 
 describe('updates database',()=>{
     test('exercise editor',()=>{
-        render(<Admin/>);
+        render(<Router><Admin/></Router>);
         const name = screen.getAllByRole('textbox')[0];
         const video = screen.getAllByRole('textbox')[1];
         const category = screen.getAllByRole('textbox')[2];
@@ -42,11 +42,11 @@ describe('updates database',()=>{
     describe('exercise adder/deleter',()=>{
         test('sends request on confirm',()=>{
             window.confirm = jest.fn().mockReturnValue(true);
-            render(<Admin/>);
+            render(<Router><Admin/></Router>);
             const name = screen.getAllByRole('textbox')[0];
             const video = screen.getAllByRole('textbox')[1];
             const category = screen.getAllByRole('textbox')[2];
-            render(<Admin/>);
+            render(<Router><Admin/></Router>);
             fireEvent.click(name);
             userEvent.type(name, 'Test Exercise');
             fireEvent.click(video);
@@ -58,11 +58,11 @@ describe('updates database',()=>{
         });
         test('exercise is not deleted if confirm is not clicked',()=>{
             window.confirm = jest.fn().mockReturnValue(false);
-            render(<Admin/>);
+            render(<Router><Admin/></Router>);
             const name = screen.getAllByRole('textbox')[0];
             const video = screen.getAllByRole('textbox')[1];
             const category = screen.getAllByRole('textbox')[2];
-            render(<Admin/>);
+            render(<Router><Admin/></Router>);
             fireEvent.click(name);
             userEvent.type(name, 'Test Exercise');
             fireEvent.click(video);
@@ -77,11 +77,11 @@ describe('updates database',()=>{
     describe('recipe deleter',()=>{
         test('works if confirmed',()=>{
             window.confirm = jest.fn().mockReturnValue(true);
-            render(<Admin/>);
+            render(<Router><Admin/></Router>);
             const name = screen.getAllByRole('textbox')[3];
             const thumbnail = screen.getAllByRole('textbox')[4];
             const category = screen.getAllByRole('textbox')[5];
-            render(<Admin/>);
+            render(<Router><Admin/></Router>);
             fireEvent.click(name);
             userEvent.type(name, 'Test Recipe');
             fireEvent.click(thumbnail);
@@ -93,11 +93,11 @@ describe('updates database',()=>{
         });
         test('rejects if not confirmed',()=>{
             window.confirm = jest.fn().mockReturnValue(false);
-            render(<Admin/>);
+            render(<Router><Admin/></Router>);
             const name = screen.getAllByRole('textbox')[3];
             const thumbnail = screen.getAllByRole('textbox')[4];
             const category = screen.getAllByRole('textbox')[5];
-            render(<Admin/>);
+            render(<Router><Admin/></Router>);
             fireEvent.click(name);
             userEvent.type(name, 'Test Recipe');
             fireEvent.click(thumbnail);
@@ -110,13 +110,13 @@ describe('updates database',()=>{
     });
     
     test.skip('recipe editor auto-fills recipe details',()=>{
-        render(<Admin/>);
+        render(<Router><Admin/></Router>);
         const name = screen.getAllByRole('textbox')[3];
         userEvent.selectOptions(screen.getAllByRole('combobox')[4], 'Banana Bread');
         expect(name).toHaveValue('Banana Bread');
     });
     test('of the day',()=>{
-        render(<Admin/>);
+        render(<Router><Admin/></Router>);
         const name = screen.getAllByRole('textbox')[3];
         const thumbnail = screen.getAllByRole('textbox')[4];
         const category = screen.getAllByRole('textbox')[5];
