@@ -1,4 +1,4 @@
-import { Diagram, Exercise, ExerciseCategory, FamilyMember, Recipe, RecipeCategory, User } from "../Structs/DataTypes";
+import { Demonstration, Diagram, Exercise, ExerciseCategory, FamilyMember, Recipe, RecipeCategory, User } from "../Structs/DataTypes";
 
 let family_members = [
     {
@@ -178,6 +178,14 @@ const getDiagrams = async (): Promise<Diagram[]> => {
         return {
             ...diagram
         } as Diagram
+    });
+}
+
+const getDemonstrations = async (): Promise<Demonstration[]> => {
+    return demos.map((demo: any) => {
+        return {
+            ...demo
+        } as Demonstration
     });
 }
 
