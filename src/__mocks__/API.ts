@@ -1,18 +1,4 @@
 import { Diagram, Exercise, ExerciseCategory, FamilyMember, Recipe, RecipeCategory, User } from "../Structs/DataTypes";
-let users = [
-    {
-        id: 1,
-        email: "whatever@bsu.edu",
-        remember_me_token: "test",
-        createdAt: new Date(2022, 10, 25, 0,0,0,0)
-    },
-    {
-        id: 2,
-        email: "other.email@bsu.edu",
-        remember_me_token: "whatever",
-        createdAt: new Date(2022, 10, 30, 0,0,0,0)
-    }
-];
 
 let family_members = [
     {
@@ -43,6 +29,7 @@ let exercise_logs = [
         intensity: "Vigorous",
         duration: 20,
         family_member_id: 1,
+        family_member_name: "Bill",
         createdAt: new Date(2022, 10, 30, 0,0,0,0)
     },
     {
@@ -51,6 +38,7 @@ let exercise_logs = [
         intensity: "Moderate",
         duration: 10,
         family_member_id: 1,
+        family_member_name: "Bill",
         createdAt: new Date(2022, 10, 30, 0,0,0,0)
     },
     {
@@ -59,6 +47,7 @@ let exercise_logs = [
         intensity: "Light",
         duration: 40,
         family_member_id: 2,
+        family_member_name: "John",
         createdAt: new Date(2022, 10, 30, 0,0,0,0)
     }
 ];
@@ -146,6 +135,12 @@ const exercises = [
         category_id: 1
     }
 ];
+
+const diagrams = [
+    {
+
+    }
+]
 
 export function getExerciseLogs(member: FamilyMember) {
     let logs = [];
