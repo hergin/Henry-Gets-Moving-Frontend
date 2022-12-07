@@ -325,7 +325,7 @@ const Admin = () => {
                             </div>
                             <div className='field'>
                                 <label>Name</label>
-                                <input title={exercise?.name} value={exercise?.name ? String(exercise?.name) : ""}
+                                <input placeholder="Exercise Name" title={exercise?.name} value={exercise?.name ? String(exercise?.name) : ""}
                                        onChange={event => {
                                            setExercise((exercise) => {
                                                return {...exercise, name: event.target.value} as Exercise
@@ -346,7 +346,7 @@ const Admin = () => {
                             </div>
                             <div className='field'>
                                 <label>Embed Video Link</label>
-                                <input title={exercise?.video_link}
+                                <input placeholder="https://www.youtube.com/embed/00000000" title={exercise?.video_link}
                                        value={exercise?.video_link ? String(exercise?.video_link) : ""}
                                        onChange={event => {
                                            setExercise((exercise) => {
@@ -396,7 +396,7 @@ const Admin = () => {
                             </div>
                             <div className='field'>
                                 <label>Name</label>
-                                <input title={demo?.name} value={demo?.name ? String(demo?.name) : ""}
+                                <input placeholder="Demonstration Name" title={demo?.name} value={demo?.name ? String(demo?.name) : ""}
                                        onChange={event => {
                                            setDemo((demo) => {
                                                return {...demo, name: event.target.value} as Demonstration
@@ -406,7 +406,7 @@ const Admin = () => {
                             </div>
                             <div className='field'>
                                 <label>Thumbnail Link</label>
-                                <input title={demo.thumbnail_link}
+                                <input placeholder="" title={demo.thumbnail_link}
                                        value={demo?.thumbnail_link ? String(demo?.thumbnail_link) : ""}
                                        onChange={event => {
                                            setDemo((demo) => {
@@ -417,7 +417,7 @@ const Admin = () => {
                             </div>
                             <div className='field'>
                                 <label>Embed Video Link</label>
-                                <input title={demo?.video_link}
+                                <input placeholder="https://www.youtube.com/embed/00000000" title={demo?.video_link}
                                        value={demo?.video_link ? String(demo?.video_link) : ""}
                                        onChange={event => {
                                            setDemo((demo) => {
@@ -486,7 +486,7 @@ const Admin = () => {
                             </div>
                             <div className='field'>
                                 <label>Name</label>
-                                <input title={recipe?.name} value={recipe?.name ? String(recipe?.name) : ""}
+                                <input placeholder="Recipe Name" title={recipe?.name} value={recipe?.name ? String(recipe?.name) : ""}
                                        onChange={event => {
                                            setRecipe((recipe) => {
                                                return {...recipe, name: event.target.value} as Recipe
@@ -522,9 +522,13 @@ const Admin = () => {
                                     ))}
                                 </select>
                             </div>
+                            {/*<div className='field'>*/}
+                            {/*    <label>Prep Time</label>*/}
+                            {/*    <input placeholder="000 Minutes"/>*/}
+                            {/*</div>*/}
                             <div className='field'>
                                 <label>Cook Time</label>
-                                <input defaultValue={recipe?.cook_time}
+                                <input placeholder="000 Minutes" defaultValue={recipe?.cook_time}
                                        value={recipe?.cook_time ? String(recipe?.cook_time) : ""} onChange={event => {
                                     setRecipe((recipe) => {
                                         return {...recipe, cook_time: event.target.value} as Recipe
@@ -576,8 +580,8 @@ const Admin = () => {
                                 </div>
                             </div>
                             <div className='field'>
-                                <label>Diagram Name</label>
-                                <input title={diagram.name}
+                                <label>Name</label>
+                                <input placeholder="Diagram Name" title={diagram.name}
                                        value={diagram?.name ? diagram.name : ""}
                                        onChange={event => {
                                            setDiagram((diagram) => {
