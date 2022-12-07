@@ -1,9 +1,9 @@
 import './ExerciseLog.scss';
 import swings from "../../Assets/Swings.png";
 import React, {useState} from "react";
-import light from '../../Assets/lightIntensityFace.svg';
-import medium from '../../Assets/mediumIntensityFace.svg';
-import hard from '../../Assets/intenseIntensityFace.svg';
+import light from '../../Assets/LightIntensity.svg';
+import medium from '../../Assets/ModerateIntensity.svg';
+import hard from '../../Assets/VigorousIntensity.svg';
 import {Helmet, HelmetProvider} from "react-helmet-async";
 import Weather from "../../Components/Weather";
 import Grass from "../../Components/Grass";
