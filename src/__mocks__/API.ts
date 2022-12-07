@@ -138,9 +138,14 @@ const exercises = [
 
 const diagrams = [
     {
-
+        name: "Food Pyramid",
+        thumbnail_link: "http://www.first1000days.ie/wp-content/uploads/2013/06/food_pyramid.jpg"
+    },
+    {
+        name: "myPlate",
+        thumbnail_link: "https://bloximages.chicago2.vip.townnews.com/columbustelegram.com/content/tncms/assets/v3/editorial/3/12/312ac717-16b8-53eb-8143-74d537644495/5db8b44826554.image.jpg"
     }
-]
+];
 
 export function getExerciseLogs(member: FamilyMember) {
     let logs = [];
