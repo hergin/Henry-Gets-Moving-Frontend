@@ -3,6 +3,7 @@ export type Recipe = {
     name: string,
     thumbnail: string,
     cook_time: string,
+    prep_time: string,
     ingredients: string,
     recipe_steps: string,
     category_id: number,
