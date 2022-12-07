@@ -6,7 +6,7 @@ import {
     Demonstration,
     DemonstrationCategory,
     Diagram,
-    FamilyMember
+    FamilyMember, ExerciseLog
 } from "./Structs/DataTypes";
 
 export const API_URL = "http://127.0.0.1:3333";
@@ -193,8 +193,7 @@ const getFamilyMembers = async (): Promise<FamilyMember[]> => {
                 Authorization: `Bearer ${sessionStorage.getItem("session_key")}`
             }
         }
-    )
-        .then((response) => {
+    ).then((response) => {
             if (response.ok) return response.json();
             return {
                 errorCode: response.status,
@@ -206,6 +205,24 @@ const getFamilyMembers = async (): Promise<FamilyMember[]> => {
                     ...familyMember
                 } as FamilyMember
             });
+        });
+}
+
+const getExerciseLogs = async (familyMemberId: string): Promise<ExerciseLog[]> => {
+    return await fetch(`${API_URL}/exerciseLogs/${familyMemberId}`)
+        .then((response) => {
+            return response.json();
+        }).then((response) => {
+            return response.map((exerciseLog: ExerciseLog) => {
+                return {
+                    ...exerciseLog
+                } as ExerciseLog
+            });
+        }).catch((response) => {
+            return {
+                errorCode: response.status,
+                error: response.statusText,
+            }
         });
 }
 
