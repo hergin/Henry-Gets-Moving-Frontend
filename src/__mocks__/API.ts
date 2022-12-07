@@ -1,4 +1,4 @@
-import { Exercise, ExerciseCategory, FamilyMember, Recipe, RecipeCategory, User } from "../Structs/DataTypes";
+import { Diagram, Exercise, ExerciseCategory, FamilyMember, Recipe, RecipeCategory, User } from "../Structs/DataTypes";
 let users = [
     {
         id: 1,
@@ -170,6 +170,14 @@ const getExerciseCategories = async (): Promise<ExerciseCategory[]> => {
         return {
             ...exerciseCategory
         } as ExerciseCategory
+    });
+}
+
+const getDiagrams = async (): Promise<Diagram[]> => {
+    return diagrams.map((diagram: any) => {
+        return {
+            ...diagram
+        } as Diagram
     });
 }
 
