@@ -7,6 +7,7 @@ import {FamilyMember} from '../../Structs/DataTypes';
 import familyMemberLayout from '../../Components/familyMemberLayout';
 import Weather from "../../Components/Weather";
 import Grass from "../../Components/Grass";
+import BackArrow from "../../Components/BackArrow/BackArrow";
 
 const Calendar = () => {
     const [selectedDate, selectDay] = useState(new Date());
@@ -23,6 +24,7 @@ const Calendar = () => {
                 </Helmet>
             </HelmetProvider>
             <Weather/>
+            <BackArrow route={'/get-moving'}/>
             <ReactCalendar onChange={selectDay} value={selectedDate} minDate={new Date(2022, 9, 20)}
                            className="date-picker"/>
             <h1>On {selectedDate.toLocaleDateString()}…</h1>
