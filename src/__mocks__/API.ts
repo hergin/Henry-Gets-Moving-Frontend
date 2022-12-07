@@ -249,7 +249,8 @@ const API = {
     getExerciseCategories,
     getRecipeCategories,
     getDiagrams,
-    getDemonstrations
+    getDemonstrations,
+    getDemonstrationCategories
 };
 
 module.exports = API;
