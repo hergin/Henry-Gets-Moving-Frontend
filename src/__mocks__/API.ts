@@ -1,18 +1,4 @@
-import { Exercise, ExerciseCategory, FamilyMember, Recipe, RecipeCategory, User } from "../Structs/DataTypes";
-let users = [
-    {
-        id: 1,
-        email: "whatever@bsu.edu",
-        remember_me_token: "test",
-        createdAt: new Date(2022, 10, 25, 0,0,0,0)
-    },
-    {
-        id: 2,
-        email: "other.email@bsu.edu",
-        remember_me_token: "whatever",
-        createdAt: new Date(2022, 10, 30, 0,0,0,0)
-    }
-];
+import { Demonstration, DemonstrationCategory, Diagram, Exercise, ExerciseCategory, FamilyMember, Recipe, RecipeCategory, User } from "../Structs/DataTypes";
 
 let family_members = [
     {
@@ -43,6 +29,7 @@ let exercise_logs = [
         intensity: "Vigorous",
         duration: 20,
         family_member_id: 1,
+        family_member_name: "Bill",
         createdAt: new Date(2022, 10, 30, 0,0,0,0)
     },
     {
@@ -51,6 +38,7 @@ let exercise_logs = [
         intensity: "Moderate",
         duration: 10,
         family_member_id: 1,
+        family_member_name: "Bill",
         createdAt: new Date(2022, 10, 30, 0,0,0,0)
     },
     {
@@ -59,6 +47,7 @@ let exercise_logs = [
         intensity: "Light",
         duration: 40,
         family_member_id: 2,
+        family_member_name: "John",
         createdAt: new Date(2022, 10, 30, 0,0,0,0)
     }
 ];
@@ -147,6 +136,33 @@ const exercises = [
     }
 ];
 
+const diagrams = [
+    {
+        name: "Food Pyramid",
+        thumbnail_link: "http://www.first1000days.ie/wp-content/uploads/2013/06/food_pyramid.jpg"
+    },
+    {
+        name: "myPlate",
+        thumbnail_link: "https://bloximages.chicago2.vip.townnews.com/columbustelegram.com/content/tncms/assets/v3/editorial/3/12/312ac717-16b8-53eb-8143-74d537644495/5db8b44826554.image.jpg"
+    }
+];
+
+const demos = [
+    {
+        name: "SODA!!!",
+        thumbnail_link: "https://i.ytimg.com/vi/XOTvKeJdjlg/hqdefault.jpg",
+        video_link: "https://www.youtube.com/embed/XOTvKeJdjlg",
+        demonstration_category_id: 1
+    }
+];
+
+const demoCategories = [
+    {
+        name: "Not soda",
+        id: 1
+    }
+];
+
 export function getExerciseLogs(member: FamilyMember) {
     let logs = [];
     for (let i = 0; i < 3; i++) {
@@ -166,15 +182,39 @@ export function getFamilyMembers(user: User) {
 }
 
 const getExerciseCategories = async (): Promise<ExerciseCategory[]> => {
-    return await exercise_categories.map((exerciseCategory: any) => {
+    return exercise_categories.map((exerciseCategory: any) => {
         return {
             ...exerciseCategory
         } as ExerciseCategory
     });
 }
 
+const getDiagrams = async (): Promise<Diagram[]> => {
+    return diagrams.map((diagram: any) => {
+        return {
+            ...diagram
+        } as Diagram
+    });
+}
+
+const getDemonstrations = async (): Promise<Demonstration[]> => {
+    return demos.map((demo: any) => {
+        return {
+            ...demo
+        } as Demonstration
+    });
+}
+
+const getDemonstrationCategories = async (): Promise<DemonstrationCategory[]> => {
+    return demoCategories.map((demoCat: any) => {
+        return {
+            ...demoCat
+        } as DemonstrationCategory
+    });
+}
+
 const getRecipeCategories = async (): Promise<RecipeCategory[]> => {
-    return await recipe_categories.map((recipeCategory: any) => {
+    return recipe_categories.map((recipeCategory: any) => {
         return {
             ...recipeCategory
         } as RecipeCategory
@@ -182,7 +222,7 @@ const getRecipeCategories = async (): Promise<RecipeCategory[]> => {
 }
 
 const getExercises = async (): Promise<Exercise[]> => {
-    return await exercises.map((exercise: any) => {
+    return exercises.map((exercise: any) => {
         return {
             ...exercise
         } as Exercise
@@ -190,11 +230,19 @@ const getExercises = async (): Promise<Exercise[]> => {
 }
 
 const getRecipes = async (): Promise<Recipe[]> => {
-    return await recipes.map((recipe: any) => {
+    return recipes.map((recipe: any) => {
         return {
             ...recipe
         } as Recipe
     });
+}
+
+const getPaginatedRecipes = async (): Promise<Recipe[]> => {
+    return getRecipes();
+}
+
+const getPaginatedExercises = async (): Promise<Exercise[]> => {
+    return getExercises();
 }
 
 function isLoggedIn() {
@@ -222,7 +270,12 @@ const API = {
     getFeaturedRecipe,
     getExercises,
     getExerciseCategories,
-    getRecipeCategories
+    getRecipeCategories,
+    getDiagrams,
+    getDemonstrations,
+    getDemonstrationCategories,
+    getPaginatedRecipes,
+    getPaginatedExercises
 };
 
 module.exports = API;

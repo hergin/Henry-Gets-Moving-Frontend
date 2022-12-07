@@ -44,7 +44,7 @@ test('all logs button takes to login page if user not logged in',()=>{
 
 test('category selector exists in document',()=>{
     render(<Router><ExercisePage/></Router>);
-    expect(screen.getByText('Category Selection')).toBeInTheDocument();
+    expect(screen.getByRole('combobox')).toBeInTheDocument();
 });
 
 describe('video player',()=>{

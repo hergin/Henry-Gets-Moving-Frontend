@@ -1,6 +1,5 @@
 import {render, screen, fireEvent} from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import App from '../App';
 import RecipePage from '../Pages/Recipe/RecipePage';
 
 jest.mock('../API');
