@@ -16,6 +16,7 @@ import API from "../../API";
 import {API_URL} from "../../API";
 import {Link} from "react-router-dom";
 import BackArrow from "../../Components/BackArrow/BackArrow";
+import {Helmet, HelmetProvider} from "react-helmet-async";
 
 const Admin = () => {
     const [recipes, setRecipes] = useState([] as Recipe[]);
@@ -305,6 +306,11 @@ const Admin = () => {
 
     return (
         <div className='admin'>
+            <HelmetProvider>
+                <Helmet>
+                    <title>Admin</title>
+                </Helmet>
+            </HelmetProvider>
             <Weather/>
             <BackArrow route="/"/>
             <h1>Admin Panel</h1>
