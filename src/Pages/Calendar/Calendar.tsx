@@ -7,7 +7,10 @@ import {Exercise, ExerciseLog, FamilyMember} from '../../Structs/DataTypes';
 import Weather from "../../Components/Weather";
 import Grass from "../../Components/Grass";
 import BackArrow from "../../Components/BackArrow/BackArrow";
-
+import swings from "../../Assets/Swings.png";
+import LightIntensity from '../../Assets/LightIntensity.svg'
+import ModerateIntensity from '../../Assets/ModerateIntensity.svg'
+import VigorousIntensity from '../../Assets/VigorousIntensity.svg'
 
 const Calendar = () => {
     const [selectedDate, selectDay] = useState(new Date());
@@ -17,8 +20,8 @@ const Calendar = () => {
     const [dailyTime, setDailyTime] = useState(0)
     useEffect(() => {
         API.getFamilyMembers().then((members) => {
-                setFamilyMembers(members)
-                setFamilyMember(members[0])
+            setFamilyMembers(members)
+            setFamilyMember(members[0])
         });
         API.getExerciseLogs().then((logs) => {
             setExerciseLogs(logs)
@@ -47,7 +50,7 @@ const Calendar = () => {
                         return {...(members[index] as FamilyMember)}
                     })
                 }}>
-                    {members && members.map((member, index ) => {
+                    {members && members.map((member, index) => {
                         return (
                             <option value={index}>{member.name}</option>
                         )
@@ -55,13 +58,35 @@ const Calendar = () => {
                 </select>
             </div>
             <div className='exercise-logs-div'>
+                <div className='legend'>
+                    <p>Name</p>
+                    <p>Exercise Type</p>
+                    <p>Duration</p>
+                    <p>Intensity</p>
+                </div>
                 {exerciseLogs && exerciseLogs.filter((log) => {
                     return new Date(log.date).toDateString() == selectedDate.toDateString() && log.family_member_id == familyMember.id
                 }).map((log) => {
-                    return(
-                        <h4>{log.name} - {log.type} - {log.intensity} - {log.duration} minutes</h4>
+                    return (
+                        <div className='log'>
+                            <p>{log.name}</p>
+                            <p>{log.type}</p>
+                            <p>{log.duration} minutes</p>
+                            {log.intensity === "Light" &&
+                            <img src={LightIntensity}/>
+                            }
+                            {log.intensity === "Moderate" &&
+                            <img src={ModerateIntensity}/>
+                            }
+                            {log.intensity === "Vigorous" &&
+                            <img src={VigorousIntensity}/>
+                            }
+                        </div>
                     )
                 })}
+            </div>
+            <div className='swings'>
+                <img src={swings} alt={"Henry and Jasmine on Swings"}/>
             </div>
             <Grass/>
         </div>
