@@ -31,6 +31,7 @@ const ExerciseLogPage = () => {
         formData.append("intensity", intensity)
         formData.append("duration", duration)
         formData.append("type", exercise)
+        formData.append("date", new Date().toString())
         const childFormData = new FormData()
         childFormData.append("name", child)
         const familyMember = await fetch(`${API_URL}/checkFamilyMember`, {

@@ -67,6 +67,6 @@ export type ExerciseLog = {
     intensity: string,
     duration: string,
     family_member_name: string,
-    created_at: string,
+    date: string
     FamilyMember?: FamilyMember
 }
