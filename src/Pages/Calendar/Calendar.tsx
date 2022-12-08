@@ -29,7 +29,7 @@ const Calendar = () => {
             setExerciseLogs(logs)
         })
     }, []);
-    if(!familyMember){
+    if(members.length == 0){
         return (
             <div className={"calendar"}>
                 <HelmetProvider>
