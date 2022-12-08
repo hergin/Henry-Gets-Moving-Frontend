@@ -67,8 +67,8 @@ const Calendar = () => {
                         <p>Intensity</p>
                     </div>}
                 {(!exerciseLogs || exerciseLogs.filter((log) => {return new Date(log.date).toDateString() == selectedDate.toDateString() && log.family_member_id == familyMember.id}).length == 0) &&
-                    <div>
-                        <h5>There are no exercise logs for {familyMember.name} on this day.</h5>
+                    <div className='no-logs'>
+                        <p>There are no exercise logs for {familyMember.name} on this day.</p>
                         <Link className={'red-button'} to={'/exercise-log'}>Get Moving!</Link>
                     </div>}
                 {exerciseLogs && exerciseLogs.filter((log) => {
