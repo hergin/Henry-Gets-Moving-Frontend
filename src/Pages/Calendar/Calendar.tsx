@@ -59,12 +59,13 @@ const Calendar = () => {
                 </select>
             </div>
             <div className='exercise-logs-div'>
-                <div className='legend'>
-                    <p>Name</p>
-                    <p>Exercise Type</p>
-                    <p>Duration</p>
-                    <p>Intensity</p>
-                </div>
+                {(exerciseLogs && exerciseLogs.filter((log) => {return new Date(log.date).toDateString() == selectedDate.toDateString() && log.family_member_id == familyMember.id}).length != 0) &&
+                    <div className='legend'>
+                        <p>Name</p>
+                        <p>Exercise Type</p>
+                        <p>Duration</p>
+                        <p>Intensity</p>
+                    </div>}
                 {(!exerciseLogs || exerciseLogs.filter((log) => {return new Date(log.date).toDateString() == selectedDate.toDateString() && log.family_member_id == familyMember.id}).length == 0) &&
                     <div>
                         <h5>There are no exercise logs for {familyMember.name} on this day.</h5>
