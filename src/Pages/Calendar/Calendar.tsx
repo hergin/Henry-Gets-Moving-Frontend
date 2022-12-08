@@ -11,6 +11,7 @@ import swings from "../../Assets/Swings.png";
 import LightIntensity from '../../Assets/LightIntensity.svg'
 import ModerateIntensity from '../../Assets/ModerateIntensity.svg'
 import VigorousIntensity from '../../Assets/VigorousIntensity.svg'
+import {Link} from "react-router-dom";
 
 const Calendar = () => {
     const [selectedDate, selectDay] = useState(new Date());
@@ -64,6 +65,11 @@ const Calendar = () => {
                     <p>Duration</p>
                     <p>Intensity</p>
                 </div>
+                {(!exerciseLogs || exerciseLogs.filter((log) => {return new Date(log.date).toDateString() == selectedDate.toDateString() && log.family_member_id == familyMember.id}).length == 0) &&
+                    <div>
+                        <h5>There are no exercise logs for {familyMember.name} on this day.</h5>
+                        <Link className={'red-button'} to={'/exercise-log'}>Get Moving!</Link>
+                    </div>}
                 {exerciseLogs && exerciseLogs.filter((log) => {
                     return new Date(log.date).toDateString() == selectedDate.toDateString() && log.family_member_id == familyMember.id
                 }).map((log) => {
