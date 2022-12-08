@@ -39,8 +39,14 @@ const Calendar = () => {
                 </HelmetProvider>
                 <Weather/>
                 <BackArrow route={'/get-moving'}/>
-                <h4>You have never submitted an exercise log before! To view the calendar, get moving and submit your first log!</h4>
-                <Link className={'red-button'} to={'/exercise-log'}>Get Moving!</Link>
+                <div className='no-submits'>
+                    <p>You have never submitted an exercise log before! To view the calendar, get moving and submit your first log!</p>
+                    <Link className={'red-button'} to={'/exercise-log'}>Get Moving!</Link>
+                </div>
+                <div className='swings'>
+                    <img src={swings} alt={"Henry and Jasmine on Swings"}/>
+                </div>
+                <Grass/>
             </div>
         )
     }
@@ -83,8 +89,8 @@ const Calendar = () => {
                             <p>Intensity</p>
                         </div>}
                     {(!exerciseLogs || exerciseLogs.filter((log) => {return new Date(log.date).toDateString() == selectedDate.toDateString() && log.family_member_id == familyMember.id}).length == 0) &&
-                        <div>
-                            <h5>There are no exercise logs for {familyMember.name} on this day.</h5>
+                        <div className='no-logs'>
+                            <p>There are no exercise logs for {familyMember.name} on this day.</p>
                             <Link className={'red-button'} to={'/exercise-log'}>Get Moving!</Link>
                         </div>}
                     {exerciseLogs && exerciseLogs.filter((log) => {

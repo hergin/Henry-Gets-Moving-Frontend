@@ -100,6 +100,7 @@
     border: 1px black solid;
     border-radius: 10px;
     margin: 10px auto;
+
     p {
       display: flex;
       margin: 0;
@@ -110,12 +111,22 @@
     }
   }
 
- .no-logs{
-   padding-bottom: 1em;
-  p{
+  .no-logs {
+    padding-bottom: 1em;
+
+    p {
+      font-size: 1.6rem;
+    }
+  }
+
+  .no-submits {
+    width: 70%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
     font-size: 1.6rem;
   }
- }
 
   .legend {
     display: flex;
@@ -132,8 +143,20 @@
 
   //Desktop Styling
   @media (min-width: 1050px) {
-    .legend{
+    .legend {
       width: 100%;
+    }
+
+    .no-submits{
+      p{
+        font-size: 2rem;
+        font-weight: 600;
+      }
+    }
+
+    .red-button{
+      width: 50%;
+      margin: auto;
     }
   }
   //Phone Styling
