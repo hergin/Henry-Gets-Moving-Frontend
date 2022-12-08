@@ -1,7 +1,5 @@
 .calendar {
   .exercise-logs-div {
-    font-size: 1.5rem;
-    font-weight: 550;
     width: 90%;
     margin: auto;
     text-align: center;
@@ -101,20 +99,22 @@
     box-shadow: 0 6px 4px 0 rgba(0, 0, 0, 0.25);
     border: 1px black solid;
     border-radius: 10px;
-  }
-
-  .data {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
     p {
+      display: flex;
       margin: 0;
       align-items: center;
       justify-content: center;
+      font-weight: 600;
+      font-size: 1.6rem;
     }
   }
+
+ .no-logs{
+   padding-bottom: 1em;
+  p{
+    font-size: 1.6rem;
+  }
+ }
 
   .legend {
     display: flex;
@@ -124,12 +124,16 @@
 
     p {
       margin: 10px 0;
+      font-size: 1.6rem;
+      font-weight: 600;
     }
   }
 
   //Desktop Styling
   @media (min-width: 1050px) {
-
+    .legend{
+      width: 100%;
+    }
   }
   //Phone Styling
   @media (max-width: 750px) {
