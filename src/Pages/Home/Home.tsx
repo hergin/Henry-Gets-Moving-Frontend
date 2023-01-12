@@ -42,7 +42,7 @@ const Home = () => {
                    </div>
                    <div className='of-the-day'>
                        <p>Recipe of the Day</p>
-                       <Link to={'/recipes'}><img src={recipeImage} alt="Recipe Photo"/></Link>
+                       <Link to={'/recipes'}><img src={recipeFeatured?.thumbnail} alt="Featured Recipe"/></Link>
                        <Link to={'/recipes'}>Title</Link>
                    </div>
                </div>
