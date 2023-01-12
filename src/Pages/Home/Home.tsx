@@ -30,7 +30,7 @@ const Home = () => {
                 </Helmet>
             </HelmetProvider>
             <div className='book-container'>
-                <img src={homePhoto} alt="Henry Gets Moving"/>
+                <Link to={require("../../Assets/HenryGetsMovingBook.pdf")} target={"blank"}><img src={homePhoto} alt="Henry Gets Moving"/></Link>
             </div>
             <div className='home-content'>
                 <Weather/>
