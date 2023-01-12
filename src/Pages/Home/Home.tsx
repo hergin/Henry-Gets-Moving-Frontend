@@ -37,7 +37,7 @@ const Home = () => {
                <div className='otd-div'>
                    <div className='of-the-day'>
                        <p>Exercise of the Day</p>
-                       <Link to={'/get-moving'}><img src={exerciseImage} alt="Exercise Photo"/></Link>
+                       <Link to={'/get-moving'}><img src={exerciseFeatured?.thumbnail_link} alt="Featured Exercise"/></Link>
                        <Link to={'/get-moving'}>Title</Link>
                    </div>
                    <div className='of-the-day'>
