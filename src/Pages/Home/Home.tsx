@@ -43,7 +43,7 @@ const Home = () => {
                    <div className='of-the-day'>
                        <p>Recipe of the Day</p>
                        <Link to={'/recipes'}><img src={recipeFeatured?.thumbnail} alt="Featured Recipe"/></Link>
-                       <Link to={'/recipes'}>Title</Link>
+                       <Link to={'/recipes'}>{recipeFeatured?.name}</Link>
                    </div>
                </div>
             </div>
