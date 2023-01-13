@@ -303,6 +303,39 @@ const Admin = () => {
         }
     }
 
+    const saveExerciseCategory = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault()
+        const formData = new FormData()
+        formData.append("name", exerciseCategory.name)
+        if (exerciseCategory.id) {
+            await fetch(`${API_URL}/exerciseCategories/${exerciseCategory.id}`, {
+                method: 'PUT',
+                body: formData,
+            }).then((response) => {
+                if (response.status >= 400 && response.status < 600) {
+                    alert("Bad response from server")
+                } else {
+                    window.alert("Exercise category submitted!")
+                    window.location.reload()
+                    return response.json()
+                }
+            })
+        } else {
+            await fetch(`${API_URL}/exerciseCategories`, {
+                method: 'POST',
+                body: formData,
+            }).then((response) => {
+                if (response.status >= 400 && response.status < 600) {
+                    alert("Bad response from server")
+                } else {
+                    window.alert("Exercise category submitted!")
+                    window.location.reload()
+                    return response.json()
+                }
+            })
+        }
+    }
+
     return (
         <div className='admin'>
             <HelmetProvider>
