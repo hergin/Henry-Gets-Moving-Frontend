@@ -353,6 +353,39 @@ const Admin = () => {
         }
     }
 
+    const saveRecipeCategory = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault()
+        const formData = new FormData()
+        formData.append("name", recipeCategory.name)
+        if (recipeCategory.id) {
+            await fetch(`${API_URL}/recipeCategories/${recipeCategory.id}`, {
+                method: 'PUT',
+                body: formData,
+            }).then((response) => {
+                if (response.status >= 400 && response.status < 600) {
+                    alert("Bad response from server")
+                } else {
+                    window.alert("Recipe category submitted!")
+                    window.location.reload()
+                    return response.json()
+                }
+            })
+        } else {
+            await fetch(`${API_URL}/recipeCategories`, {
+                method: 'POST',
+                body: formData,
+            }).then((response) => {
+                if (response.status >= 400 && response.status < 600) {
+                    alert("Bad response from server")
+                } else {
+                    window.alert("Recipe category submitted!")
+                    window.location.reload()
+                    return response.json()
+                }
+            })
+        }
+    }
+
     return (
         <div className='admin'>
             <HelmetProvider>
