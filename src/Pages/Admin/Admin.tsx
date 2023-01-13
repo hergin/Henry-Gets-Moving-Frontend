@@ -336,6 +336,23 @@ const Admin = () => {
         }
     }
 
+    const deleteExerciseCategory = async (e: { preventDefault: () => void; }) => {
+        e.preventDefault()
+        const confirm = window.confirm("Are you sure you want to delete?")
+        if (confirm) {
+            await fetch(`${API_URL}/exerciseCategories/${exerciseCategory.id}`, {
+                method: 'DELETE',
+            }).then((res) => {
+                if (res.status >= 400 && res.status < 600) {
+                    alert("Bad response from server")
+                } else {
+                    window.location.reload()
+                    return res.json()
+                }
+            })
+        }
+    }
+
     return (
         <div className='admin'>
             <HelmetProvider>
