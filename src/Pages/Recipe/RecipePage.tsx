@@ -62,11 +62,11 @@ const RecipePage = () => {
             <Weather/>
             <div className='otd-div'>
                 <div className='otd-image'>
-                    <img src={recipeStock} alt={"OTD Thumbnail"}/>
+                    <img src={featuredRecipe?.thumbnail} alt={"OTD Thumbnail"}/>
                 </div>
                 <div className='otd-text'>
                     <h2>Recipe of the Day</h2>
-                    <p>Recipe Name</p>
+                    <p>{featuredRecipe?.name}</p>
                 </div>
             </div>
             <div className='recipe-content'>
