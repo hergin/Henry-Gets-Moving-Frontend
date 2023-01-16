@@ -84,11 +84,11 @@ const ExercisePage = () => {
             <Weather/>
             <div className='otd-div'>
                 <div className='otd-image'>
-                    <img src={exerciseStock} alt={"OTD Thumbnail"}/>
+                    <img src={featuredExercise?.thumbnail_link} alt={"OTD Thumbnail"}/>
                 </div>
                 <div className='otd-text'>
                     <h2>Exercise of the Day</h2>
-                    <p>Exercise Name</p>
+                    <p>{featuredExercise?.name}</p>
                 </div>
             </div>
             <div className='trophy-div'>
