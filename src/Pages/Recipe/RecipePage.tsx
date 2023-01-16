@@ -15,6 +15,7 @@ const RecipePage = () => {
     const [searchText, setSearchText] = useState("")
     const [noMoreRecipes, setNoMoreRecipes] = useState(false)
     const [page, setPage] = useState(2)
+    const [featuredRecipe, setFeaturedRecipe] = useState<Recipe>();
 
     useEffect(() => {
         API.getPaginatedRecipes(String(1)).then((response) => setRecipes(response.data));
