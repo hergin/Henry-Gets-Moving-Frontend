@@ -17,6 +17,7 @@ const ExercisePage = () => {
     const [selectedCategory, setSelectedCategory] = useState("");
     const [noMoreExercises, setNoMoreExercises] = useState(false)
     const [page, setPage] = useState(2)
+    const [featuredExercise, setFeaturedExercise] = useState<Exercise>();
 
     useEffect(() => {
         API.getPaginatedExercises(String(1)).then((response) => setExercises(response.data));
