@@ -27,6 +27,7 @@ const ExercisePage = () => {
             }
         })
         API.getExerciseCategories().then((category) => setExerciseCategory(category));
+        API.getFeaturedExercise().then((exercise) => setFeaturedExercise(exercise));
     }, [])
     const navigate = useNavigate();
 
