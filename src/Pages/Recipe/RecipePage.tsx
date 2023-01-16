@@ -25,6 +25,7 @@ const RecipePage = () => {
             }
         })
         API.getRecipeCategories().then((category) => setRecipeCategory(category));
+        API.getFeaturedRecipe().then((recipe) => setFeaturedRecipe(recipe));
     }, [])
 
     const onCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
