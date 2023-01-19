@@ -1,3 +1,4 @@
+import { ResultType } from "@remix-run/router/dist/utils";
 import {
     Recipe,
     Exercise,
@@ -266,17 +267,17 @@ const getExerciseLogs = async (): Promise<ExerciseLog[]> => {
     });
 }
 
-const getTotalLoggedDuration = (familyMember: string, date: Date = new Date()): number => {
-    let totalDurations: number[] = [];
-    getExerciseLogs().then(function(logs) {
+const getTotalLoggedDuration = async (familyMember: string, date: Date = new Date()): Promise<number> => {
+    let result = 0;
+    await getExerciseLogs().then(function(logs) {
         logs.forEach(function (log) {
-            if (log.name === familyMember && new Date(log.date).toLocaleDateString() === date.toLocaleDateString())
-                totalDurations.push(parseInt(log.duration));
+            if (log.name === familyMember && new Date(log.date).toLocaleDateString() === date.toLocaleDateString()) {
+                result += parseInt(log.duration);
+                console.log(`Added ${log.duration} from ${log} and now result is ${result}`);
+            }
         });
     });
-    let result = 0;
-    totalDurations.forEach((duration) => result += duration);
-    return result;
+    return Promise.resolve(result);
 }
 
 const isLoggedIn = (): boolean => {
