@@ -267,7 +267,16 @@ const getExerciseLogs = async (): Promise<ExerciseLog[]> => {
 }
 
 const getTotalLoggedDuration = (familyMember: string, date: Date = new Date()): number => {
-    
+    let totalDurations: number[] = [];
+    getExerciseLogs().then(function(logs) {
+        logs.forEach(function (log) {
+            if (log.name === familyMember && new Date(log.date).toLocaleDateString() === date.toLocaleDateString())
+                totalDurations.push(parseInt(log.duration));
+        });
+    });
+    let result = 0;
+    totalDurations.forEach((duration) => result += duration);
+    return result;
 }
 
 const isLoggedIn = (): boolean => {
