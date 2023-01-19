@@ -266,9 +266,9 @@ const getExerciseLogs = async (): Promise<ExerciseLog[]> => {
     });
 }
 
-
-
-
+const getTotalLoggedDuration = (familyMember: string, date: Date = new Date()): number => {
+    
+}
 
 const isLoggedIn = (): boolean => {
     return sessionStorage.getItem('session_key') != null;
