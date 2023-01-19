@@ -300,7 +300,8 @@ const API ={
     getFamilyMembers,
     getMemberExerciseLogs,
     getPaginatedDemos,
-    getExerciseLogs
+    getExerciseLogs,
+    getTotalLoggedDuration
 }
 
 export default API;
