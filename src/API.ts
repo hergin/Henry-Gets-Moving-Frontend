@@ -273,7 +273,6 @@ const getTotalLoggedDuration = async (familyMember: string, date: Date = new Dat
         logs.forEach(function (log) {
             if (log.name === familyMember && new Date(log.date).toLocaleDateString() === date.toLocaleDateString()) {
                 result += parseInt(log.duration);
-                console.log(`Added ${log.duration} from ${log} and now result is ${result}`);
             }
         });
     });
