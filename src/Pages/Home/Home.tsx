@@ -30,20 +30,20 @@ const Home = () => {
                 </Helmet>
             </HelmetProvider>
             <div className='book-container'>
-                <img src={homePhoto} alt="Henry Gets Moving"/>
+                <Link to={require("../../Assets/HenryGetsMovingBook.pdf")} target={"blank"}><img src={homePhoto} alt="Henry Gets Moving"/></Link>
             </div>
             <div className='home-content'>
                 <Weather/>
                <div className='otd-div'>
                    <div className='of-the-day'>
                        <p>Exercise of the Day</p>
-                       <Link to={'/get-moving'}><img src={exerciseImage} alt="Exercise Photo"/></Link>
-                       <Link to={'/get-moving'}>Title</Link>
+                       <Link to={'/get-moving'}><img src={exerciseFeatured?.thumbnail_link} alt="Featured Exercise"/></Link>
+                       <Link to={'/get-moving'}>{exerciseFeatured?.name}</Link>
                    </div>
                    <div className='of-the-day'>
                        <p>Recipe of the Day</p>
-                       <Link to={'/recipes'}><img src={recipeImage} alt="Recipe Photo"/></Link>
-                       <Link to={'/recipes'}>Title</Link>
+                       <Link to={'/recipes'}><img src={recipeFeatured?.thumbnail} alt="Featured Recipe"/></Link>
+                       <Link to={'/recipes'}>{recipeFeatured?.name}</Link>
                    </div>
                </div>
             </div>

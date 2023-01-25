@@ -17,6 +17,7 @@ const ExercisePage = () => {
     const [selectedCategory, setSelectedCategory] = useState("");
     const [noMoreExercises, setNoMoreExercises] = useState(false)
     const [page, setPage] = useState(2)
+    const [featuredExercise, setFeaturedExercise] = useState<Exercise>();
 
     useEffect(() => {
         API.getPaginatedExercises(String(1)).then((response) => setExercises(response.data));
@@ -26,6 +27,7 @@ const ExercisePage = () => {
             }
         })
         API.getExerciseCategories().then((category) => setExerciseCategory(category));
+        API.getFeaturedExercise().then((exercise) => setFeaturedExercise(exercise));
     }, [])
     const navigate = useNavigate();
 
@@ -82,11 +84,11 @@ const ExercisePage = () => {
             <Weather/>
             <div className='otd-div'>
                 <div className='otd-image'>
-                    <img src={exerciseStock} alt={"OTD Thumbnail"}/>
+                    <img src={featuredExercise?.thumbnail_link} alt={"OTD Thumbnail"}/>
                 </div>
                 <div className='otd-text'>
                     <h2>Exercise of the Day</h2>
-                    <p>Exercise Name</p>
+                    <p>{featuredExercise?.name}</p>
                 </div>
             </div>
             <div className='trophy-div'>
@@ -161,5 +163,4 @@ const ExercisePage = () => {
     )
 }
 
-// @ts-ignore
 export default ExercisePage

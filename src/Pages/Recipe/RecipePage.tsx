@@ -15,6 +15,7 @@ const RecipePage = () => {
     const [searchText, setSearchText] = useState("")
     const [noMoreRecipes, setNoMoreRecipes] = useState(false)
     const [page, setPage] = useState(2)
+    const [featuredRecipe, setFeaturedRecipe] = useState<Recipe>();
 
     useEffect(() => {
         API.getPaginatedRecipes(String(1)).then((response) => setRecipes(response.data));
@@ -24,6 +25,7 @@ const RecipePage = () => {
             }
         })
         API.getRecipeCategories().then((category) => setRecipeCategory(category));
+        API.getFeaturedRecipe().then((recipe) => setFeaturedRecipe(recipe));
     }, [])
 
     const onCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -60,11 +62,11 @@ const RecipePage = () => {
             <Weather/>
             <div className='otd-div'>
                 <div className='otd-image'>
-                    <img src={recipeStock} alt={"OTD Thumbnail"}/>
+                    <img src={featuredRecipe?.thumbnail} alt={"OTD Thumbnail"}/>
                 </div>
                 <div className='otd-text'>
                     <h2>Recipe of the Day</h2>
-                    <p>Recipe Name</p>
+                    <p>{featuredRecipe?.name}</p>
                 </div>
             </div>
             <div className='recipe-content'>
