@@ -266,6 +266,36 @@ const getExerciseLogs = async (): Promise<ExerciseLog[]> => {
     });
 }
 
+const swapFeaturedExercise = async (exerciseId: string): Promise<Exercise> => {
+    return await fetch(`${API_URL}/changeFeaturedExercise/${exerciseId}`, {
+        method: "POST"
+    })
+        .then((response) => {
+            return response.json();
+        }).then((response) => {
+            return response;
+        }).catch((response) => {
+            return {
+                errorCode: response.status,
+                error: response.statusText,
+            }
+        });
+}
+const swapFeaturedRecipe = async (recipeId: string): Promise<Recipe> => {
+    return await fetch(`${API_URL}/changeFeaturedRecipe/${recipeId}`, {
+        method: "POST"
+    })
+        .then((response) => {
+            return response.json();
+        }).then((response) => {
+            return response;
+        }).catch((response) => {
+            return {
+                errorCode: response.status,
+                error: response.statusText,
+            }
+        });
+}
 
 
 
@@ -291,7 +321,9 @@ const API ={
     getFamilyMembers,
     getMemberExerciseLogs,
     getPaginatedDemos,
-    getExerciseLogs
+    getExerciseLogs,
+    swapFeaturedRecipe,
+    swapFeaturedExercise
 }
 
 export default API;
