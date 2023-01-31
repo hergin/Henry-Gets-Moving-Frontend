@@ -14,14 +14,14 @@ export const API_URL = "http://127.0.0.1:3333";
 const getRecipes = async (): Promise<Recipe[]> => {
     return await fetch(`${API_URL}/recipes`)
         .then((response) => {
-        return response.json();
-    }).then((response) => {
-        return response.map((recipe: any) => {
-            return {
-                ...recipe
-            } as Recipe
-        });
-    }).catch((response) => {
+            return response.json();
+        }).then((response) => {
+            return response.map((recipe: any) => {
+                return {
+                    ...recipe
+                } as Recipe
+            });
+        }).catch((response) => {
             return {
                 errorCode: response.status,
                 error: response.statusText,
@@ -202,32 +202,32 @@ const getFeaturedExercise = async (): Promise<Exercise> => {
 
 const getFamilyMembers = async (): Promise<FamilyMember[]> => {
     return await fetch(`${API_URL}/familyMembers`, {
-        method: "GET",
+            method: "GET",
             headers: {
                 Authorization: `Bearer ${sessionStorage.getItem("session_key")}`
             }
         }
     ).then((response) => {
-            if (response.ok) return response.json();
+        if (response.ok) return response.json();
+        return {
+            errorCode: response.status,
+            error: response.statusText,
+        }
+    }).then((response) => {
+        return response.map((familyMember: any) => {
             return {
-                errorCode: response.status,
-                error: response.statusText,
-            }
-        }).then((response) => {
-            return response.map((familyMember: any) => {
-                return {
-                    ...familyMember
-                } as FamilyMember
-            });
+                ...familyMember
+            } as FamilyMember
         });
+    });
 }
 
 const getMemberExerciseLogs = async (familyMemberId: string): Promise<ExerciseLog[]> => {
     return await fetch(`${API_URL}/exerciseLogs/${familyMemberId}`, {
         method: "GET",
-            headers: {
-                Authorization: `Bearer ${sessionStorage.getItem("session_key")}`
-            }
+        headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("session_key")}`
+        }
     })
         .then((response) => {
             return response.json();
@@ -266,9 +266,17 @@ const getExerciseLogs = async (): Promise<ExerciseLog[]> => {
     });
 }
 
-
-
-
+const getTotalLoggedDuration = async (familyMember: string, date: Date = new Date()): Promise<number> => {
+    let result = 0;
+    await getExerciseLogs().then(function(logs) {
+        logs.forEach(function (log) {
+            if (log.name === familyMember && new Date(log.date).toLocaleDateString() === date.toLocaleDateString()) {
+                result += parseInt(log.duration);
+            }
+        });
+    });
+    return Promise.resolve(result);
+}
 
 const isLoggedIn = (): boolean => {
     return sessionStorage.getItem('session_key') != null;
@@ -291,7 +299,8 @@ const API ={
     getFamilyMembers,
     getMemberExerciseLogs,
     getPaginatedDemos,
-    getExerciseLogs
+    getExerciseLogs,
+    getTotalLoggedDuration
 }
 
 export default API;
