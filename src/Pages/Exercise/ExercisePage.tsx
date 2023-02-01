@@ -1,6 +1,12 @@
 import './Exercise.scss';
 import exerciseStock from '../../Assets/exerciseStock.jpg'
-import trophy from '../../Assets/40mins.svg'
+import trophy0 from '../../Assets/0mins.svg';
+import trophy10 from  '../../Assets/10mins.svg';
+import trophy20 from '../../Assets/20mins.svg';
+import trophy30 from '../../Assets/30mins.svg';
+import trophy40 from '../../Assets/40mins.svg';
+import trophy50 from '../../Assets/50mins.svg';
+import trophy60 from '../../Assets/60mins.svg';
 import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import exit from '../../Assets/Exit.svg';
@@ -76,6 +82,40 @@ const ExercisePage = () => {
             }
         )
     }
+
+    const trophy = () => {
+        if (duration != null){
+            if (duration >= 0 && duration < 10){
+                return(
+                    <img src={trophy0} alt={"0 mins trophy"}/>
+                )
+            } else if (duration >= 10 && duration < 20){
+                return(
+                    <img src={trophy10} alt={"10 mins trophy"}/>
+                )
+            } else if (duration >= 20 && duration < 30){
+                return(
+                    <img src={trophy20} alt={"20 mins trophy"}/>
+                )
+            } else if (duration >= 30 && duration < 40){
+                return(
+                    <img src={trophy30} alt={"30 mins trophy"}/>
+                )
+            } else if (duration >= 40 && duration < 50){
+                return(
+                    <img src={trophy40} alt={"40 mins trophy"}/>
+                )
+            } else if (duration >= 50 && duration < 60){
+                return(
+                    <img src={trophy50} alt={"50 mins trophy"}/>
+                )
+            } else if (duration >= 60) {
+                return(
+                    <img src={trophy60} alt={"60 mins trophy"}/>
+                )
+            }
+        }
+    }
     return (
         <div className="exercise">
             <HelmetProvider>
@@ -96,7 +136,7 @@ const ExercisePage = () => {
             {API.isLoggedIn() &&
             <div className='trophy-div'>
                 <div className='trophy-image'>
-                    <img src={trophy} alt={"Trophy"}/>
+                    {trophy()}
                 </div>
                 <div className='trophy-text'>
                     <p>You Have Logged</p>
