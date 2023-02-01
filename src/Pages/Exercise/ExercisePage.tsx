@@ -14,7 +14,7 @@ import {Helmet, HelmetProvider} from "react-helmet-async";
 import Grass from "../../Components/Grass";
 import Weather from "../../Components/Weather";
 import API from '../../API';
-import {Exercise, ExerciseCategory} from "../../Structs/DataTypes";
+import {Exercise, ExerciseCategory, FamilyMember} from "../../Structs/DataTypes";
 
 const ExercisePage = () => {
     const [selectedExercise, setSelectedExercise] = useState<null | Exercise>(null);
@@ -25,6 +25,8 @@ const ExercisePage = () => {
     const [page, setPage] = useState(2)
     const [featuredExercise, setFeaturedExercise] = useState<Exercise>();
     const [duration, setDuration] = useState<null | number>();
+    const [members, setFamilyMembers] = useState([] as FamilyMember[]);
+    const [familyMember, setFamilyMember] = useState({} as FamilyMember)
 
     useEffect(() => {
         API.getPaginatedExercises(String(1)).then((response) => setExercises(response.data));
@@ -36,6 +38,10 @@ const ExercisePage = () => {
         API.getExerciseCategories().then((category) => setExerciseCategory(category));
         API.getFeaturedExercise().then((exercise) => setFeaturedExercise(exercise));
         API.getTotalLoggedDuration("").then((duration) => setDuration(duration));
+        API.getFamilyMembers().then((members) => {
+            setFamilyMembers(members)
+            setFamilyMember(members[0])
+        });
     }, [])
     const navigate = useNavigate();
 
@@ -116,6 +122,40 @@ const ExercisePage = () => {
             }
         }
     }
+
+    const messages = () => {
+        if (duration != null){
+            if (duration >= 0 && duration < 10){
+                return(
+                    <p>Hey! You should get Moving!</p>
+                )
+            } else if (duration >= 10 && duration < 20){
+                return(
+                    <p>Way to go! Now keep it up!</p>
+                )
+            } else if (duration >= 20 && duration < 30){
+                return(
+                    <p>Keep up the good work!</p>
+                )
+            } else if (duration >= 30 && duration < 40){
+                return(
+                    <p>Half way through! You got this!</p>
+                )
+            } else if (duration >= 40 && duration < 50){
+                return(
+                    <p>You're moving like Henry!</p>
+                )
+            } else if (duration >= 50 && duration < 60){
+                return(
+                    <p>Just a little more! You're almost there!</p>
+                )
+            } else if (duration >= 60) {
+                return(
+                    <p>You did it! Great job!</p>
+                )
+            }
+        }
+    }
     return (
         <div className="exercise">
             <HelmetProvider>
@@ -133,7 +173,7 @@ const ExercisePage = () => {
                     <p>{featuredExercise?.name}</p>
                 </div>
             </div>
-            {API.isLoggedIn() &&
+            {API.isLoggedIn() && members.length !== 0 &&
             <div className='trophy-div'>
                 <div className='trophy-image'>
                     {trophy()}
@@ -141,8 +181,8 @@ const ExercisePage = () => {
                 <div className='trophy-text'>
                     <p>You Have Logged</p>
                     <p>{duration} minutes</p>
-                    <p>for Child's Name</p>
-                    <p>Keep up the good work!</p>
+                    <p>for {familyMember.name}</p>
+                    {messages()}
                 </div>
             </div>
             }
