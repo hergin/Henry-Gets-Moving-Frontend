@@ -180,8 +180,20 @@ const ExercisePage = () => {
                 </div>
                 <div className='trophy-text'>
                     <p>You Have Logged</p>
-                    <p>{duration} minutes</p>
-                    <p>for {familyMember.name}</p>
+                    <p>{duration} minutes for</p>
+                    <select onChange={(event) => {
+                        event.preventDefault()
+                        const index: number = parseInt(event.currentTarget.value, 10)
+                        setFamilyMember(familyMember => {
+                            return {...(members[index] as FamilyMember)}
+                        })
+                    }}>
+                        {members && members.map((member, index) => {
+                            return (
+                                <option value={index}>{member.name}</option>
+                            )
+                        })}
+                    </select>
                     {messages()}
                 </div>
             </div>
