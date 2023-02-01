@@ -18,6 +18,7 @@ const ExercisePage = () => {
     const [noMoreExercises, setNoMoreExercises] = useState(false)
     const [page, setPage] = useState(2)
     const [featuredExercise, setFeaturedExercise] = useState<Exercise>();
+    const [duration, setDuration] = useState<null | number>();
 
     useEffect(() => {
         API.getPaginatedExercises(String(1)).then((response) => setExercises(response.data));
@@ -28,6 +29,7 @@ const ExercisePage = () => {
         })
         API.getExerciseCategories().then((category) => setExerciseCategory(category));
         API.getFeaturedExercise().then((exercise) => setFeaturedExercise(exercise));
+        API.getTotalLoggedDuration("").then((duration) => setDuration(duration));
     }, [])
     const navigate = useNavigate();
 
@@ -91,17 +93,19 @@ const ExercisePage = () => {
                     <p>{featuredExercise?.name}</p>
                 </div>
             </div>
+            {API.isLoggedIn() &&
             <div className='trophy-div'>
                 <div className='trophy-image'>
                     <img src={trophy} alt={"Trophy"}/>
                 </div>
                 <div className='trophy-text'>
                     <p>You Have Logged</p>
-                    <p>40 minutes</p>
+                    <p>{duration} minutes</p>
                     <p>for Child's Name</p>
                     <p>Keep up the good work!</p>
                 </div>
             </div>
+            }
             <div className='exercise-log-exercise'>
                 <button onClick={() => {
                     navigate(API.isLoggedIn() ? '/exercise-log' : '/login');
