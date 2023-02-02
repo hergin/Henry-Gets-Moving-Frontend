@@ -254,6 +254,13 @@ button:disabled {
     form{
         padding: 40px;
     }
+
+    .crossword-component{
+        flex-direction: column;
+        .direction{
+            margin: 5px;
+        }
+    }
 }
 
 
