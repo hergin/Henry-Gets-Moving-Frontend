@@ -4,6 +4,7 @@ import React from "react";
 import squirmMaze from '../../Assets/squirm_maze.png';
 import crossword from '../../Assets/crossword.png';
 import race from '../../Assets/henry_race.png';
+import CrosswordComponent from "../../Components/Crossword/CrosswordComponent";
 type Game = {
     [key: string]: any;
     thumbnail: string;
@@ -44,7 +45,7 @@ const Game = () => {
             {/*<div className="game-picker">*/}
             {/*    {gamesLayout(games_list)}*/}
             {/*</div>*/}
-            <h1>Coming Soon...</h1>
+            <CrosswordComponent/>
         </div>
     )
 }
