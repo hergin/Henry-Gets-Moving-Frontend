@@ -163,6 +163,16 @@ button:disabled {
     display: none;
 }
 
+.crossword-component{
+    display: flex;
+    .itmnhl{
+        flex: 1 1 10%;
+    }
+    .blVNBR{
+        display: flex;
+    }
+}
+
 //Desktop Styling
 @media (min-width: 1050px) {
     .home-content {
