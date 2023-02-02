@@ -37,7 +37,7 @@ const ExercisePage = () => {
         })
         API.getExerciseCategories().then((category) => setExerciseCategory(category));
         API.getFeaturedExercise().then((exercise) => setFeaturedExercise(exercise));
-        API.getTotalLoggedDuration("").then((duration) => setDuration(duration));
+        API.getTotalLoggedDuration(familyMember.name).then((duration) => setDuration(duration));
         API.getFamilyMembers().then((members) => {
             setFamilyMembers(members)
             setFamilyMember(members[0])
