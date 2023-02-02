@@ -164,12 +164,19 @@ button:disabled {
 }
 
 .crossword-component{
+    margin: 10px auto 0;
+    width: 95%;
     display: flex;
     .itmnhl{
         flex: 1 1 10%;
     }
     .blVNBR{
         display: flex;
+        padding: 0;
+        margin-bottom: 2em;
+    }
+    .direction{
+        margin: 0 10px;
     }
 }
 
@@ -214,6 +221,9 @@ button:disabled {
         width: 30%;
         padding-bottom: 0;
     }
+    .crossword-component{
+       padding-bottom: 4em;
+    }
 }
 
 //Phone Styling
@@ -257,9 +267,6 @@ button:disabled {
 
     .crossword-component{
         flex-direction: column;
-        .direction{
-            margin: 5px;
-        }
     }
 }
 

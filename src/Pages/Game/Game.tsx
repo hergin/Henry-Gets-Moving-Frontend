@@ -5,6 +5,8 @@ import squirmMaze from '../../Assets/squirm_maze.png';
 import crossword from '../../Assets/crossword.png';
 import race from '../../Assets/henry_race.png';
 import CrosswordComponent from "../../Components/Crossword/CrosswordComponent";
+import Weather from "../../Components/Weather";
+import Grass from "../../Components/Grass";
 type Game = {
     [key: string]: any;
     thumbnail: string;
@@ -39,6 +41,7 @@ const Game = () => {
                     <title>Game</title>
                 </Helmet>
             </HelmetProvider>
+            <Weather/>
             {/*<div className="game-container">*/}
             {/*    <img src={squirmMaze} alt="Squirm's maze"/>*/}
             {/*</div>*/}
@@ -46,6 +49,7 @@ const Game = () => {
             {/*    {gamesLayout(games_list)}*/}
             {/*</div>*/}
             <CrosswordComponent/>
+            <Grass/>
         </div>
     )
 }
