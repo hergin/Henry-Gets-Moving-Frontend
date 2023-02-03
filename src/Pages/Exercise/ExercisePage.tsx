@@ -1,6 +1,12 @@
 import './Exercise.scss';
 import exerciseStock from '../../Assets/exerciseStock.jpg'
-import trophy from '../../Assets/40mins.svg'
+import trophy0 from '../../Assets/0mins.svg';
+import trophy10 from  '../../Assets/10mins.svg';
+import trophy20 from '../../Assets/20mins.svg';
+import trophy30 from '../../Assets/30mins.svg';
+import trophy40 from '../../Assets/40mins.svg';
+import trophy50 from '../../Assets/50mins.svg';
+import trophy60 from '../../Assets/60mins.svg';
 import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import exit from '../../Assets/Exit.svg';
@@ -8,7 +14,7 @@ import {Helmet, HelmetProvider} from "react-helmet-async";
 import Grass from "../../Components/Grass";
 import Weather from "../../Components/Weather";
 import API from '../../API';
-import {Exercise, ExerciseCategory} from "../../Structs/DataTypes";
+import {Exercise, ExerciseCategory, FamilyMember} from "../../Structs/DataTypes";
 
 const ExercisePage = () => {
     const [selectedExercise, setSelectedExercise] = useState<null | Exercise>(null);
@@ -18,6 +24,9 @@ const ExercisePage = () => {
     const [noMoreExercises, setNoMoreExercises] = useState(false)
     const [page, setPage] = useState(2)
     const [featuredExercise, setFeaturedExercise] = useState<Exercise>();
+    const [duration, setDuration] = useState<null | number>();
+    const [members, setFamilyMembers] = useState([] as FamilyMember[]);
+    const [familyMember, setFamilyMember] = useState({} as FamilyMember)
 
     useEffect(() => {
         API.getPaginatedExercises(String(1)).then((response) => setExercises(response.data));
@@ -28,7 +37,16 @@ const ExercisePage = () => {
         })
         API.getExerciseCategories().then((category) => setExerciseCategory(category));
         API.getFeaturedExercise().then((exercise) => setFeaturedExercise(exercise));
+        API.getTotalLoggedDuration(familyMember.name).then((duration) => setDuration(duration));
+        API.getFamilyMembers().then((members) => {
+            setFamilyMembers(members)
+            setFamilyMember(members[0])
+        });
     }, [])
+
+    useEffect(() => {
+        API.getTotalLoggedDuration(familyMember.name).then((duration) => setDuration(duration));
+    }, [familyMember])
     const navigate = useNavigate();
 
     const onCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -74,6 +92,74 @@ const ExercisePage = () => {
             }
         )
     }
+
+    const trophy = () => {
+        if (duration != null){
+            if (duration >= 0 && duration < 10){
+                return(
+                    <img src={trophy0} alt={"0 mins trophy"}/>
+                )
+            } else if (duration >= 10 && duration < 20){
+                return(
+                    <img src={trophy10} alt={"10 mins trophy"}/>
+                )
+            } else if (duration >= 20 && duration < 30){
+                return(
+                    <img src={trophy20} alt={"20 mins trophy"}/>
+                )
+            } else if (duration >= 30 && duration < 40){
+                return(
+                    <img src={trophy30} alt={"30 mins trophy"}/>
+                )
+            } else if (duration >= 40 && duration < 50){
+                return(
+                    <img src={trophy40} alt={"40 mins trophy"}/>
+                )
+            } else if (duration >= 50 && duration < 60){
+                return(
+                    <img src={trophy50} alt={"50 mins trophy"}/>
+                )
+            } else if (duration >= 60) {
+                return(
+                    <img src={trophy60} alt={"60 mins trophy"}/>
+                )
+            }
+        }
+    }
+
+    const messages = () => {
+        if (duration != null){
+            if (duration >= 0 && duration < 10){
+                return(
+                    <p>Hey! You should get Moving!</p>
+                )
+            } else if (duration >= 10 && duration < 20){
+                return(
+                    <p>Way to go! Now keep it up!</p>
+                )
+            } else if (duration >= 20 && duration < 30){
+                return(
+                    <p>Keep up the good work!</p>
+                )
+            } else if (duration >= 30 && duration < 40){
+                return(
+                    <p>Half way through! You got this!</p>
+                )
+            } else if (duration >= 40 && duration < 50){
+                return(
+                    <p>You're moving like Henry!</p>
+                )
+            } else if (duration >= 50 && duration < 60){
+                return(
+                    <p>Just a little more! You're almost there!</p>
+                )
+            } else if (duration >= 60) {
+                return(
+                    <p>You did it! Great job!</p>
+                )
+            }
+        }
+    }
     return (
         <div className="exercise">
             <HelmetProvider>
@@ -91,17 +177,31 @@ const ExercisePage = () => {
                     <p>{featuredExercise?.name}</p>
                 </div>
             </div>
+            {API.isLoggedIn() && members.length !== 0 &&
             <div className='trophy-div'>
                 <div className='trophy-image'>
-                    <img src={trophy} alt={"Trophy"}/>
+                    {trophy()}
                 </div>
                 <div className='trophy-text'>
                     <p>You Have Logged</p>
-                    <p>40 minutes</p>
-                    <p>for Child's Name</p>
-                    <p>Keep up the good work!</p>
+                    <p>{duration} minutes for</p>
+                    <select onChange={(event) => {
+                        event.preventDefault()
+                        const index: number = parseInt(event.currentTarget.value, 10)
+                        setFamilyMember(familyMember => {
+                            return {...(members[index] as FamilyMember)}
+                        })
+                    }}>
+                        {members && members.map((member, index) => {
+                            return (
+                                <option value={index}>{member.name}</option>
+                            )
+                        })}
+                    </select>
+                    {messages()}
                 </div>
             </div>
+            }
             <div className='exercise-log-exercise'>
                 <button onClick={() => {
                     navigate(API.isLoggedIn() ? '/exercise-log' : '/login');
