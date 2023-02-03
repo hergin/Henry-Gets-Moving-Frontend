@@ -311,14 +311,14 @@ const Admin = () => {
     }
     const saveFeatured = async (e: { preventDefault: () => void; }) => {
         e.preventDefault()
-        console.log(currentFeaturedRecipe)
-        if(currentFeaturedExercise){
-            await API.swapFeaturedExercise(currentFeaturedExercise.id.toString())
-        }
-        console.log(currentFeaturedExercise)
         if(currentFeaturedRecipe){
-            await API.swapFeaturedRecipe(currentFeaturedRecipe.id.toString())
+            await API.swapFeaturedRecipe(currentFeaturedRecipe.id.toString()).then( () => {alert("Featured Recipe Updated")})
         }
+        if(currentFeaturedExercise){
+            await API.swapFeaturedExercise(currentFeaturedExercise.id.toString()).then(() => {alert("Featured Exercise Updated")})
+        }
+        window.location.reload()
+
 
     }
 
@@ -499,8 +499,9 @@ const Admin = () => {
 
                                     })
                                 }}>
+                                    <option value="select">Select Featured Recipe</option>
                                 {recipes && recipes.map((recipe, index: number) => (
-                                    <option value={index}>{recipe.name}</option>
+                                    <option value={index} selected={recipe.id == currentFeaturedRecipe.id}>{recipe.name}</option>
                                 ))}</select>
                             </div>
                             <div className='field'>
@@ -514,8 +515,9 @@ const Admin = () => {
                                     })
 
                                 }}>
+                                    <option value="select">Select Featured Exercise</option>
                                 {exercises && exercises.map((exercise, index: number) => (
-                                    <option value={index}>{exercise.name}</option>
+                                    <option value={index} selected={exercise.id == currentFeaturedExercise.id}>{exercise.name}</option>
                                 ))}</select>
                             </div>
                             <div className='otd-save'>
