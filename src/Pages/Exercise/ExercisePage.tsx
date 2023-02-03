@@ -43,6 +43,10 @@ const ExercisePage = () => {
             setFamilyMember(members[0])
         });
     }, [])
+
+    useEffect(() => {
+        API.getTotalLoggedDuration(familyMember.name).then((duration) => setDuration(duration));
+    }, [familyMember])
     const navigate = useNavigate();
 
     const onCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
