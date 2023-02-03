@@ -168,7 +168,7 @@ button:disabled {
     width: 95%;
     display: flex;
     .itmnhl{
-        flex: 1 1 10%;
+        flex: 1 1 25%;
     }
     .blVNBR{
         display: flex;
@@ -223,6 +223,9 @@ button:disabled {
     }
     .crossword-component{
        padding-bottom: 4em;
+        .itmnhl{
+            flex: 0.5 1 10%;
+        }
     }
 }
 
