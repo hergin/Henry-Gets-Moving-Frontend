@@ -33,6 +33,10 @@ const Admin = () => {
     const [recipeCategories, setRecipeCategories] = useState([] as RecipeCategory[])
     const [demonstrationCategory, setDemonstrationCategory] = useState({} as DemonstrationCategory)
     const [demonstrationCategories, setDemonstrationCategories] = useState([] as DemonstrationCategory[])
+    const [currentFeaturedExercise, setCurrentFeaturedExercise] = useState({} as Exercise)
+    const [currentFeaturedRecipe, setCurrentFeaturedRecipe] = useState({} as Recipe)
+    const [newFeaturedExercise, setNewFeaturedExercise] = useState({} as Exercise)
+    const [newFeaturedRecipe, setNewFeaturedRecipe] = useState({} as Recipe)
 
     useEffect(() => {
         API.getRecipes().then((recipes) => setRecipes(recipes));
@@ -42,6 +46,8 @@ const Admin = () => {
         API.getExerciseCategories().then((exerciseCategories) => setExerciseCategories(exerciseCategories))
         API.getRecipeCategories().then((recipeCategories) => setRecipeCategories(recipeCategories))
         API.getDemonstrationCategories().then((demonstrationCategories) => setDemonstrationCategories(demonstrationCategories))
+        API.getFeaturedExercise().then((exercise) => setCurrentFeaturedExercise(exercise))
+        API.getFeaturedRecipe().then((recipe) => setCurrentFeaturedRecipe(recipe))
     }, [])
 
     const loadDiagram = (event: React.FormEvent<HTMLSelectElement>) => {
@@ -252,6 +258,7 @@ const Admin = () => {
         formData.append("cook_time", recipe.cook_time)
         formData.append("ingredients", recipe.ingredients)
         formData.append("recipe_steps", recipe.recipe_steps)
+        formData.append("prep_time", recipe.prep_time)
         formData.append("category_id", String(recipe.category_id))
         if (recipe.is_featured) {
             formData.append("is_featured", String(exercise.is_featured))
@@ -301,6 +308,18 @@ const Admin = () => {
                 }
             })
         }
+    }
+    const saveFeatured = async (e: { preventDefault: () => void; }) => {
+        e.preventDefault()
+        console.log(currentFeaturedRecipe)
+        if(currentFeaturedExercise){
+            await API.swapFeaturedExercise(currentFeaturedExercise.id.toString())
+        }
+        console.log(currentFeaturedExercise)
+        if(currentFeaturedRecipe){
+            await API.swapFeaturedRecipe(currentFeaturedRecipe.id.toString())
+        }
+
     }
 
     return (
@@ -473,14 +492,34 @@ const Admin = () => {
                         <form className='otd-form'>
                             <div className='field'>
                                 <label>Recipe of the Day</label>
-                                <select className='otd-select'></select>
+                                <select className='otd-select' onChange={event => {
+                                    event.preventDefault()
+                                    setCurrentFeaturedRecipe(recipe => {
+                                        return {...(recipes[parseInt(event.target.value, 10)] as Recipe)}
+
+                                    })
+                                }}>
+                                {recipes && recipes.map((recipe, index: number) => (
+                                    <option value={index}>{recipe.name}</option>
+                                ))}</select>
                             </div>
                             <div className='field'>
                                 <label>Exercise of the Day</label>
-                                <select className='otd-select'></select>
+                                <select className='otd-select' onChange={event => {
+                                    event.preventDefault()
+
+                                     setCurrentFeaturedExercise(exercise => {
+                                        return {...(exercises[parseInt(event.target.value, 10)] as Exercise)}
+
+                                    })
+
+                                }}>
+                                {exercises && exercises.map((exercise, index: number) => (
+                                    <option value={index}>{exercise.name}</option>
+                                ))}</select>
                             </div>
                             <div className='otd-save'>
-                                <button className='save'>Save Changes</button>
+                                <button className='save' onClick={saveFeatured}>Save Changes</button>
                             </div>
                         </form>
                     </div>
