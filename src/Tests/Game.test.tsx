@@ -15,4 +15,20 @@ describe("crossword",()=>{
             expect(cell.innerHTML).toEqual('B');
         });
     });
+    describe("reset",()=>{
+        test('exists',()=>{
+            render(<Game/>);
+            expect(screen.getByText("Reset")).toBeInTheDocument();
+        });
+        test('works',()=>{
+            const {container} = render(<Game/>);
+            fireEvent.click(screen.getByText('Fill all answers'));
+            // make sure it's filled
+            const cell = container.getElementsByClassName('guess-text-correct')[0];
+            expect(cell.innerHTML).toEqual('B');
+            fireEvent.click(screen.getByText('Reset'));
+            // and assert it's no longer filled
+            expect(cell.innerHTML).toEqual('');
+        });
+    });
 });
