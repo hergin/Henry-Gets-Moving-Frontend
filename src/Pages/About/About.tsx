@@ -15,7 +15,7 @@ const About = () => {
                     <title>About</title>
                 </Helmet>
             </HelmetProvider>
-           <Weather/>
+            <Weather/>
             <div className='team-photo'>
                 <img src={teamPhoto} alt={"Henry Gets Moving Team"}/>
             </div>
@@ -23,12 +23,11 @@ const About = () => {
                 <h1>Henry Gets Moving in Delaware County</h1>
                 <div className='text'>
                     <p>
-                        Henry the Hamster is a young boy who overcomes his obesity challenge with an active lifestyle
+                        Henry the Hamster overcomes his obesity challenge with an active lifestyle
                         and healthy eating. When we first meet Henry, he is overweight, having difficulty in school and
-                        at play. Like many children, Henry is teased for his weight. A discouraged Henry receives
-                        positive support from his friend, his physician, and his family to overcome his obesity and poor
-                        eating habits. Henry’s determination and his positive support network are the foundation of
-                        successful community wellness movements.
+                        at play. A discouraged Henry receives positive support from his friend, his physician, and his
+                        family to overcome his obesity and poor eating habits. Henry’s determination and his positive
+                        support network are the foundation of successful community wellness movements.
                     </p>
                     <p>
                         Obesity is the foremost American public health problem. According to the Center for Disease
@@ -41,7 +40,8 @@ const About = () => {
                     </p>
                 </div>
                 <div className='links'>
-                    <a href={'https://www.youtube.com/channel/UCf5XxC_7PcJx_t5vU9Es2pA'} target={"_blank"} className='yt'>
+                    <a href={'https://www.youtube.com/channel/UCf5XxC_7PcJx_t5vU9Es2pA'} target={"_blank"}
+                       className='yt'>
                         <img src={youtube} alt='YouTube'/>
                     </a>
                     <a href={'https://m.facebook.com/profile.php?id=100063703680476&_rdr'} target={"_blank"}>
@@ -49,7 +49,7 @@ const About = () => {
                     </a>
                 </div>
             </div>
-          <Grass/>
+            <Grass/>
         </div>
     )
 }
