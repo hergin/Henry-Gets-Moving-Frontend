@@ -33,7 +33,6 @@ function App() {
                 <Route path='/recipes' element={<RecipePage/>}/>
                 <Route path='/register' element={<Register/>}/>
                 <Route path='/admin' element={<Admin/>}/>
-                <Route path='/wordsearch' element={<WordsearchComponent/>}/>
             </Routes>
         </div>
     );
