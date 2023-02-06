@@ -476,17 +476,17 @@ const Admin = () => {
                             </div>
                         </form>
                     </div>
-                    <div>
-                        <form className='add-category-form'>
-                            <div className='field'>
-                                <label>Add Demo Category</label>
-                                <input className='add-category'></input>
-                            </div>
-                            <div className='otd-save'>
-                                <button className='save'>Save Category</button>
-                            </div>
-                        </form>
-                    </div>
+                    {/*<div>*/}
+                    {/*    <form className='add-category-form'>*/}
+                    {/*        <div className='field'>*/}
+                    {/*            <label>Add Demo Category</label>*/}
+                    {/*            <input className='add-category'></input>*/}
+                    {/*        </div>*/}
+                    {/*        <div className='otd-save'>*/}
+                    {/*            <button className='save'>Save Category</button>*/}
+                    {/*        </div>*/}
+                    {/*    </form>*/}
+                    {/*</div>*/}
                     <div>
                         <h2 className='otd'>Of the Day</h2>
                         <form className='otd-form'>
