@@ -334,7 +334,7 @@ const API ={
     getPaginatedDemos,
     getExerciseLogs,
     swapFeaturedRecipe,
-    swapFeaturedExercise
+    swapFeaturedExercise,
     getTotalLoggedDuration
 }
 
