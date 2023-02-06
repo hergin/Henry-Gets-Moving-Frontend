@@ -1,0 +1,78 @@
+.wordsearch {
+  padding-bottom: 4%;
+
+  .table-div {
+    margin: auto;
+    background: white;
+    width: 80vw;
+    border: 3px solid green;
+    padding: 10px;
+    cursor: pointer;
+  }
+
+  .wordsearch-title {
+    text-align: center;
+    font-size: 1.3rem;
+  }
+
+  tr {
+    display: flex;
+    justify-content: center;
+  }
+
+  td {
+    width: 2.5vw;
+    text-align: center;
+    font-weight: 500;
+    padding: 8px;
+  }
+
+  .answer-list {
+    align-items: center;
+    margin: auto;
+    width: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    font-size: 1.2rem;
+  }
+
+  .selected {
+    background-color: #FDEE1F;
+  }
+
+  p {
+    font-weight: 700;
+    padding: 3px;
+  }
+
+  //Desktop Styling
+  @media (min-width: 1050px) {
+    .table-div{
+      width: 65vw;
+    }
+  }
+
+  //Phone Styling
+  @media (max-width: 750px) {
+    tr{
+      justify-content: space-between;
+      text-align: center;
+    }
+    td{
+      font-size: 1rem;
+      padding: 4px;
+    }
+    .table-div {
+      width: 94vw;
+      padding: 3px;
+    }
+    .answer-list{
+      width: 90%;
+      padding-bottom: 2em;
+    }
+    p{
+      padding: 2px;
+    }
+  }
+}

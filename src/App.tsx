@@ -14,6 +14,7 @@ import RecipePage from "./Pages/Recipe/RecipePage";
 import Register from "./Pages/Register/Register";
 import Admin from "./Pages/Admin/Admin";
 import './App.scss';
+import WordsearchComponent from "./Components/Wordsearch/WordsearchComponent";
 
 function App() {
     return (
