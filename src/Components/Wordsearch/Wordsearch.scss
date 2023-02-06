@@ -1,0 +1,35 @@
+.table-div {
+  margin: auto;
+  background: white;
+  width: 80vw;
+  border: 3px solid green;
+  padding: 10px;
+}
+.wordsearch-title{
+  text-align: center;
+  font-size: 1.3rem;
+}
+tr{
+  display: flex;
+}
+td{
+  width: 2.5vw;
+  text-align: center;
+  font-weight: 500;
+  padding: 8px;
+}
+.answer-list{
+  align-items: center;
+  margin: auto;
+  width: 80%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+.selected {
+  background-color: #FDEE1F;
+}
+p {
+  font-weight: 700;
+  padding: .7vw;
+}
