@@ -479,7 +479,7 @@ const Admin = () => {
                     <div>
                         <form className='add-category-form'>
                             <div className='field'>
-                                <label>Add Category</label>
+                                <label>Add Demo Category</label>
                                 <input className='add-category'></input>
                             </div>
                             <div className='otd-save'>
