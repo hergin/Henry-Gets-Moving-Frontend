@@ -39,7 +39,7 @@ const WordsearchComponent = () => {
     }
 
     return (
-        <div>
+        <div className={"wordsearch"}>
             <h4 className={"wordsearch-title"}>Henry Gets Moving WordSearch</h4>
             <div className={"table-div"}>
                 {wordsearchTable()}
