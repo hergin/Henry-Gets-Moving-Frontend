@@ -1,5 +1,5 @@
 import React from "react";
-
+import '../Wordsearch/Wordsearch.scss'
 const WordsearchComponent = () => {
     const wordsearchGrid = [['K', 'R', 'P', 'G', 'Z', 'J', 'B', 'U', 'U', 'F', 'D', 'K', 'F', 'O', 'O', 'T', 'B', 'A', 'L', 'L'],
                             ['A', 'U', 'G', 'X', 'V', 'D', 'L', 'T', 'F', 'F', 'I', 'K', 'Z', 'Y', 'F', 'G', 'H', 'X', 'H', 'O'],
@@ -17,28 +17,41 @@ const WordsearchComponent = () => {
                             ['P', 'V', 'E', 'E', 'M', 'C', 'V', 'X', 'G', 'E', 'K', 'Z', 'C', 'U', 'W', 'W', 'H', 'R', 'L', 'E'],
                             ['D', 'V', 'R', 'S', 'K', 'W', 'W', 'G', 'O', 'L', 'F', 'A', 'A', 'F', 'M', 'W', 'P', 'G', 'F', 'F']]
 
+    const wordsearchAnswers = ["Basketball", "Exercise", "Nutrition", "Football",
+                                "Healthy", "Fitness", "Running", "Skating",
+                                "Active", "Golf", "Dancing", "Soccer"]
     const wordsearchTable = () => {
-        return wordsearchGrid.map((row) => {
+        return wordsearchGrid.map((row, rowindex) => {
             return (
-                <div>
+                <div className={"row-div"}>
                     <tr>
-                        {row.map((string) => {
+                        {row.map((string, colindex) => {
                             return (
-                                <td>{string}</td>
+                                <td id={`r${rowindex}c${colindex}`} onClick={(e) => { // @ts-ignore
+                                    document.getElementById(e.target.id).className = document.getElementById(e.target.id).className== "selected" ? "none" : "selected"}}>{string}</td>
                             )
+
                         })}
                     </tr>
                 </div>
-
             )
         })
     }
 
     return (
         <div>
-            <div>
+            <h4 className={"wordsearch-title"}>Henry Gets Moving WordSearch</h4>
+            <div className={"table-div"}>
                 {wordsearchTable()}
             </div>
+            <div className={"answer-list"}>
+                {wordsearchAnswers.map((answer) => {
+                    return (
+                        <p className={"wordsearch-answer"}>{answer}</p>
+                    )
+                })}
+            </div>
+
         </div>
 
     )
