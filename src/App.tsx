@@ -14,6 +14,7 @@ import RecipePage from "./Pages/Recipe/RecipePage";
 import Register from "./Pages/Register/Register";
 import Admin from "./Pages/Admin/Admin";
 import './App.scss';
+import WordsearchComponent from "./Components/Wordsearch/WordsearchComponent";
 
 function App() {
     return (
@@ -32,6 +33,7 @@ function App() {
                 <Route path='/recipes' element={<RecipePage/>}/>
                 <Route path='/register' element={<Register/>}/>
                 <Route path='/admin' element={<Admin/>}/>
+                <Route path='/wordsearch' element={<WordsearchComponent/>}/>
             </Routes>
         </div>
     );

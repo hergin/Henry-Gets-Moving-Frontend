@@ -17,6 +17,30 @@ const WordsearchComponent = () => {
                             ['P', 'V', 'E', 'E', 'M', 'C', 'V', 'X', 'G', 'E', 'K', 'Z', 'C', 'U', 'W', 'W', 'H', 'R', 'L', 'E'],
                             ['D', 'V', 'R', 'S', 'K', 'W', 'W', 'G', 'O', 'L', 'F', 'A', 'A', 'F', 'M', 'W', 'P', 'G', 'F', 'F']]
 
+    const wordsearchTable = () => {
+        return wordsearchGrid.map((row) => {
+            return (
+                <div>
+                    <tr>
+                        {row.map((string) => {
+                            return (
+                                <td>{string}</td>
+                            )
+                        })}
+                    </tr>
+                </div>
 
+            )
+        })
+    }
+
+    return (
+        <div>
+            <div>
+                {wordsearchTable()}
+            </div>
+        </div>
+
+    )
 }
 export default WordsearchComponent;
