@@ -45,7 +45,9 @@ const ExercisePage = () => {
     }, [])
 
     useEffect(() => {
-        API.getTotalLoggedDuration(familyMember.name).then((duration) => setDuration(duration));
+        if(familyMember){
+            API.getTotalLoggedDuration(familyMember.name).then((duration) => setDuration(duration));
+        }
     }, [familyMember])
     const navigate = useNavigate();
 
@@ -177,30 +179,30 @@ const ExercisePage = () => {
                     <p>{featuredExercise?.name}</p>
                 </div>
             </div>
-            {API.isLoggedIn() && members.length !== 0 &&
-            <div className='trophy-div'>
-                <div className='trophy-image'>
-                    {trophy()}
+            {API.isLoggedIn() && members.length !== 0 && familyMember &&
+                <div className='trophy-div'>
+                    <div className='trophy-image'>
+                        {familyMember && trophy()}
+                    </div>
+                    <div className='trophy-text'>
+                        <p>You Have Logged</p>
+                        <p>{duration} minutes for</p>
+                        <select onChange={(event) => {
+                            event.preventDefault()
+                            const index: number = parseInt(event.currentTarget.value, 10)
+                            setFamilyMember(familyMember => {
+                                return {...(members[index] as FamilyMember)}
+                            })
+                        }}>
+                            {members && members.map((member, index) => {
+                                return (
+                                    <option value={index}>{member.name}</option>
+                                )
+                            })}
+                        </select>
+                        {messages()}
+                    </div>
                 </div>
-                <div className='trophy-text'>
-                    <p>You Have Logged</p>
-                    <p>{duration} minutes for</p>
-                    <select onChange={(event) => {
-                        event.preventDefault()
-                        const index: number = parseInt(event.currentTarget.value, 10)
-                        setFamilyMember(familyMember => {
-                            return {...(members[index] as FamilyMember)}
-                        })
-                    }}>
-                        {members && members.map((member, index) => {
-                            return (
-                                <option value={index}>{member.name}</option>
-                            )
-                        })}
-                    </select>
-                    {messages()}
-                </div>
-            </div>
             }
             <div className='exercise-log-exercise'>
                 <button onClick={() => {
