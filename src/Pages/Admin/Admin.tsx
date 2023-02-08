@@ -37,6 +37,8 @@ const Admin = () => {
     const [currentFeaturedRecipe, setCurrentFeaturedRecipe] = useState({} as Recipe)
     const [newFeaturedExercise, setNewFeaturedExercise] = useState({} as Exercise)
     const [newFeaturedRecipe, setNewFeaturedRecipe] = useState({} as Recipe)
+    const [newCategoryType, setNewCategoryType] = useState("")
+    const [newCategoryName, setNewCategoryName] = useState("")
 
     useEffect(() => {
         API.getRecipes().then((recipes) => setRecipes(recipes));
@@ -318,8 +320,23 @@ const Admin = () => {
             await API.swapFeaturedExercise(currentFeaturedExercise.id.toString()).then(() => {alert("Featured Exercise Updated")})
         }
         window.location.reload()
-
-
+    }
+    const addCategory = async (e: { preventDefault: () => void; }) => {
+        e.preventDefault()
+        const formData = new FormData();
+        formData.append("name", newCategoryName)
+        await fetch(`${API_URL}/${newCategoryType}`, {
+            method: 'POST',
+            body: formData
+        }).then((res) => {
+            if (res.status >= 400 && res.status < 600) {
+                alert("Bad response from server")
+            } else {
+                alert("New Category Added")
+                window.location.reload()
+                return res.json()
+            }
+        })
     }
 
     return (
@@ -480,10 +497,16 @@ const Admin = () => {
                         <form className='add-category-form'>
                             <div className='field'>
                                 <label>Add Category</label>
-                                <input className='add-category'></input>
+                                <select className='add-category-for' onChange={(e) => {setNewCategoryType(e.target.value)} }>
+                                    <option value="select">Select What To Add Category For</option>
+                                    <option value={"demoCategories"}>Demonstrations</option>
+                                    <option value={"exerciseCategories"}>Exercises</option>
+                                    <option value={"recipeCategories"}>Recipes</option>
+                                </select>
+                                <input className='add-category' placeholder="Category Name" onChange={(e) => {setNewCategoryName(e.target.value)}}></input>
                             </div>
                             <div className='otd-save'>
-                                <button className='save'>Save Category</button>
+                                <button className='save' onClick={addCategory}>Save Category</button>
                             </div>
                         </form>
                     </div>
