@@ -121,7 +121,7 @@ const exercise_categories = [
     }
 ];
 
-const exercises = [
+const exercises: Exercise[] = [
     {
         id: 1,
         name: "Burpees",
@@ -265,6 +265,11 @@ function getFeaturedRecipe() {
             return Promise.resolve(recipes[i]);
     }
 }
+
+function getTotalLoggedDuration(name: string) {
+    return Promise.resolve(20);
+}
+
 const API = {
     getExerciseLogs,
     getFamilyMembers,
@@ -279,7 +284,8 @@ const API = {
     getDemonstrations,
     getDemonstrationCategories,
     getPaginatedRecipes,
-    getPaginatedExercises
+    getPaginatedExercises,
+    getTotalLoggedDuration
 };
 
 module.exports = API;

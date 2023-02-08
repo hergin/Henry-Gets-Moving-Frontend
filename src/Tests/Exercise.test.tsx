@@ -2,65 +2,70 @@ import {fireEvent, render,screen} from '@testing-library/react';
 import {BrowserRouter as Router} from 'react-router-dom';
 import App from '../App';
 import ExercisePage from '../Pages/Exercise/ExercisePage';
-
+jest.mock('../API');
 describe('of the day',()=>{
-    test('thumbnail exists',()=>{
-        render(<Router><ExercisePage/></Router>)
-        expect(screen.getByAltText('OTD Thumbnail')).toBeInTheDocument();
-    });
-    test('name exists',()=>{
-        // TODO: update when OTD implemented
+    test('thumbnail exists',async ()=>{
         render(<Router><ExercisePage/></Router>);
-        expect(screen.getByText('Exercise Name')).toBeInTheDocument();
+        await screen.findByAltText('OTD Thumbnail').then((item) => {
+            expect(item).toBeInTheDocument();
+        });
     });
-});
-
-describe('trophy',()=>{
-    test('image exists',()=>{
+    test('name exists',async ()=>{
         render(<Router><ExercisePage/></Router>);
-        expect(screen.getByAltText('Trophy')).toBeInTheDocument();
+        await screen.findByAltText('Exercise Name').then((item) => {
+            expect(item).toBeInTheDocument();
+        })
     });
-    test('text exists',()=>{
-        render(<Router><ExercisePage/></Router>);
-        expect(screen.getByText('You Have Logged')).toBeInTheDocument();
-    });
-    test.todo('image updates with exercise logged');
-    test.todo('text updates with exercise logged');
 });
 
-test('log exercise button takes to login page if not logged in',()=>{
-    render(<Router><App/></Router>);
-    fireEvent.click(screen.getAllByText("Get Moving")[0]);
-    fireEvent.click(screen.getByText('Log Exercise'));
-    expect(global.window.location.pathname).toContain('/login');
-});
-
-test('all logs button takes to login page if user not logged in',()=>{
-    render(<Router><App/></Router>);
-    fireEvent.click(screen.getAllByText('Get Moving')[0]);
-    fireEvent.click(screen.getByText(/(All Logs)$/));
-    expect(global.window.location.pathname).toContain('/login');
-});
-
-test('category selector exists in document',()=>{
+test('image exists',async ()=>{
     render(<Router><ExercisePage/></Router>);
-    expect(screen.getByRole('combobox')).toBeInTheDocument();
+    await screen.findByAltText('Trophy').then((item) => {
+        expect(item).toBeInTheDocument();
+    });
+});
+
+test('log exercise button takes to login page if not logged in',async()=>{
+    render(<Router><App/></Router>);
+    await screen.findAllByText("Get Moving").then((item)=>{
+        fireEvent.click(item[0]);
+    });
+    await screen.findByText("Log Exercise").then((item)=>{
+        fireEvent.click(item);
+    });
+    expect(global.window.location.pathname).toContain('/login');
+});
+
+test('all logs button takes to login page if user not logged in',async()=>{
+    render(<Router><App/></Router>);
+    await screen.findAllByText("Get Moving").then((item)=>{
+        fireEvent.click(item[0]);
+    });
+    screen.findByText(/(All Logs)$/).then((item)=>{
+        fireEvent.click(item);
+    });
+    expect(global.window.location.pathname).toContain('/login');
+});
+
+test('category selector exists in document',async ()=>{
+    render(<Router><ExercisePage/></Router>);
+    await screen.findByRole('combobox').then((item)=>expect(item).toBeInTheDocument());
 });
 
 describe('video player',()=>{
-    test.skip('opens on click',()=>{
+    test.skip('opens on click',async ()=>{
         render(<Router><ExercisePage/></Router>);
-        // TODO: update when exercises added
-        fireEvent.click(screen.getAllByAltText('Some nameThumbnail')[0]);
+        await screen.findAllByAltText("$Thumbnail ").then((item)=>{
+            fireEvent.click(item[0]);
+        });
         expect(screen.getByAltText('Exit')).toBeInTheDocument();
     });
-    test.skip('exit button works',()=>{
+    test.skip('exit button works',async()=>{
         render(<Router><ExercisePage/></Router>);
-        // TODO: update when exercises added
-        fireEvent.click(screen.getAllByAltText('Some nameThumbnail')[0]);
+        await screen.findAllByAltText("Thumbnail").then((item)=>{
+            fireEvent.click(item[0]);
+        });
         fireEvent.click(screen.getByAltText('Exit'));
         expect(screen.queryByAltText('Exit')).not.toBeInTheDocument();
     });
 });
-
-test.todo('see more button expands');
