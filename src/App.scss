@@ -163,52 +163,6 @@ button:disabled {
     display: none;
 }
 
-.crossword-component{
-    margin: 10px auto 0;
-    display: flex;
-    flex-direction: column;
-    padding-bottom: 5em;
-    .dOZCor{
-        display: flex;
-        max-width: 95%;
-        flex-direction: column;
-        margin: 0 5em;
-    }
-    .kTgCyp{
-        max-width: 95%;
-    }
-    .itmnhl{
-        flex: .5 1 10%;
-        width: 60%;
-        margin: auto;
-    }
-    .direction{
-        margin: 0 10px;
-        font-size: 1.2rem;
-    }
-    .blVNBR{
-        display: flex;
-        padding: 0;
-    }
-    .sc-hLBbgP{
-        margin: 10px auto;
-    }
-    .iZvkJO{
-        background-color: #EC2B23;
-        border: #D4231B solid 1px;
-        box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
-        text-decoration: none;
-        color: white;
-        font-size: 1.4rem;
-        border-radius: 15px;
-        font-weight: 600;
-        padding: 5px 20px;
-        text-shadow: 0 4px 4px #00000040;
-        cursor: pointer;
-
-    }
-}
-
 //Desktop Styling
 @media (min-width: 1050px) {
     .home-content {
@@ -250,11 +204,6 @@ button:disabled {
         width: 30%;
         padding-bottom: 0;
     }
-    .crossword-component{
-        .dOZCor{
-            flex-direction: row;
-        }
-    }
 }
 
 //Phone Styling
@@ -294,14 +243,6 @@ button:disabled {
 
     form{
         padding: 40px;
-    }
-    .crossword-component{
-        .itmnhl{
-            width: 90%;
-        }
-        .dOZCor{
-            margin: 0 auto;
-        }
     }
 }
 

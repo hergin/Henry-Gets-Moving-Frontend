@@ -288,7 +288,7 @@ const Admin = () => {
                 if (response.status >= 400 && response.status < 600) {
                     alert("Bad response from server")
                 } else {
-                    window.alert("Exercise submitted!")
+                    window.alert("Recipe submitted!")
                     window.location.reload()
                     return response.json()
                 }

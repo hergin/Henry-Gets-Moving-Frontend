@@ -7,6 +7,7 @@ import race from '../../Assets/henry_race.png';
 import CrosswordComponent from "../../Components/Crossword/CrosswordComponent";
 import Weather from "../../Components/Weather";
 import Grass from "../../Components/Grass";
+import WordsearchComponent from "../../Components/Wordsearch/WordsearchComponent";
 type Game = {
     [key: string]: any;
     thumbnail: string;
@@ -49,6 +50,7 @@ const Game = () => {
             {/*    {gamesLayout(games_list)}*/}
             {/*</div>*/}
             <CrosswordComponent/>
+            <WordsearchComponent/>
             <Grass/>
         </div>
     )

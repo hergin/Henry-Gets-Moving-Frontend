@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
+import '../Crossword/CrosswordComponent.scss';
 import Crossword, {CrosswordImperative, CrosswordProps} from '@jaredreisinger/react-crossword';
 // @ts-ignore
 import styled from 'styled-components';
@@ -133,7 +134,7 @@ function CrosswordComponent() {
     return (
         <div className='crossword-component'>
                 <Commands>
-                    <Command onClick={fillAllAnswers}>Fill all answers</Command>
+                    <Command onClick={fillAllAnswers}>See Answers</Command>
                     <Command onClick={reset}>Reset</Command>
                 </Commands>
                 <CrosswordWrapper>
