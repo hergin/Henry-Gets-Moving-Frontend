@@ -1,5 +1,5 @@
 import './Header.scss';
-import {Link, useLocation} from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 import API from "../../API";
 import squirm from '../../Assets/worm.png'
 import Nav from "../Nav/Nav";
@@ -7,14 +7,20 @@ import Nav from "../Nav/Nav";
 const Header = () => {
     let location = useLocation()
     let excludedPaths = ['/admin']
+    let nav = useNavigate()
 
     if (excludedPaths.includes(location.pathname)) {
         return null;
     }
 
+    function logOut() {
+        API.logOut();
+        nav('/home');
+    }
+
     function headerLogIn() {
         if (API.isLoggedIn()) {
-            return <button className='red-button' onClick={API.logOut}>Log out</button>
+            return <button className='red-button' onClick={logOut}>Log out</button>
         } else {
             return <Link to={'/login'} className='login-button'>Login</Link>
         }
