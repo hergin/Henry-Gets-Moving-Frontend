@@ -315,6 +315,10 @@ const isLoggedIn = (): boolean => {
     return sessionStorage.getItem('session_key') != null;
 }
 
+const logOut = () => {
+    sessionStorage.removeItem('session_key')
+}
+
 const API ={
     getRecipes,
     getExercises,
@@ -335,7 +339,8 @@ const API ={
     getExerciseLogs,
     swapFeaturedRecipe,
     swapFeaturedExercise,
-    getTotalLoggedDuration
+    getTotalLoggedDuration,
+    logOut
 }
 
 export default API;
