@@ -15,7 +15,7 @@ const Header = () => {
 
     function logOut() {
         API.logOut();
-        nav('/home');
+        nav('/');
     }
 
     function headerLogIn() {
