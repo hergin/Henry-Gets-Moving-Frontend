@@ -14,7 +14,7 @@ const Header = () => {
 
     function headerLogIn() {
         if (API.isLoggedIn()) {
-            return <div className='squirm'><img src={squirm} alt=""/></div>
+            return <button className='red-button' onClick={API.logOut}>Log out</button>
         } else {
             return <Link to={'/login'} className='login-button'>Login</Link>
         }
