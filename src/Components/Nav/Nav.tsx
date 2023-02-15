@@ -1,22 +1,27 @@
 import './Nav.scss'
 import Hamburger from "../Hamburger/Hamburger";
 import {useState} from "react";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import API from "../../API";
-import squirm from "../../Assets/worm.png";
 
 export default function Nav() {
     const [open, setOpen] = useState(false);
+    let nav = useNavigate()
 
     const toggleMenu = () => {
         setOpen(!open)
     }
 
+    function logOut() {
+        API.logOut();
+        nav('/');
+    }
+
     function headerLogIn() {
         if (API.isLoggedIn()) {
-            return <div className='squirm'><img src={squirm} alt=""/></div>
+            return <button className='red-button' onClick={logOut}>Log out</button>
         } else {
-            return <Link to={'/login'} className='login-button' onClick={event => setOpen(false)}>Login</Link>
+            return <Link to={'/login'} className='login-button'>Login</Link>
         }
     }
 
