@@ -344,7 +344,8 @@ const API ={
     swapFeaturedRecipe,
     swapFeaturedExercise,
     getTotalLoggedDuration,
-    logOut
+    logOut,
+    parseEmbedLink
 }
 
 export default API;
