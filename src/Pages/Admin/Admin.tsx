@@ -125,7 +125,7 @@ const Admin = () => {
         event.preventDefault()
         const formData = new FormData()
         formData.append("name", demo.name)
-        formData.append("video_link", demo.video_link)
+        formData.append("video_link", demo.video_link.includes("watch?v=") ? API.parseEmbedLink(demo.video_link) : demo.video_link)
         formData.append("thumbnail_link", demo.thumbnail_link)
         formData.append("demonstration_category_id", String(demo.demonstration_category_id))
         if (demo.id) {
