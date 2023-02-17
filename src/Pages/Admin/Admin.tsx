@@ -188,7 +188,7 @@ const Admin = () => {
         event.preventDefault()
         const formData = new FormData()
         formData.append("name", exercise.name)
-        formData.append("video_link", exercise.video_link)
+        formData.append("video_link", exercise.video_link.includes("watch?v=") ? API.parseEmbedLink(exercise.video_link) : exercise.video_link)
         formData.append("thumbnail_link", exercise.thumbnail_link)
         formData.append("category_id", String(exercise.category_id))
         if (exercise.is_featured) {
