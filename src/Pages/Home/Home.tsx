@@ -32,7 +32,9 @@ const Home = () => {
                 </Helmet>
             </HelmetProvider>
             <div className='book-container'>
-                <Link to={require("../../Assets/HenryGetsMovingBook.pdf")} target={"blank"}><img src={homePhoto} alt="Henry Gets Moving"/></Link>
+                <Link to={require("../../Assets/HenryGetsMovingBook.pdf")} target={"blank"}>
+                    <img src={homePhoto} alt="Henry Gets Moving"/>
+                </Link>
             </div>
             <div className='home-content'>
                 <div className='weather'>
