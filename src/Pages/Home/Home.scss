@@ -3,9 +3,26 @@
     display: flex;
     justify-content: center;
     background-color: #FDEE1F;
-    img{
-      width: 100%;
+    flex-direction: column;
+    padding-bottom: 20px;
+    a{
+      margin: auto;
+      img{
+        width: 100%;
+      }
     }
+  }
+  .click-me{
+    margin: auto;
+    animation: swing 5s infinite;
+  }
+
+  @keyframes swing {
+    20% { transform: rotate(15deg); }
+    40% { transform: rotate(-10deg); }
+    60% { transform: rotate(5deg); }
+    80% { transform: rotate(-5deg); }
+    100% { transform: rotate(0deg); }
   }
 
   .home-content {
@@ -66,6 +83,7 @@
     .otd-div {
       margin-bottom: 5em;
     }
+
   }
   //Phone Styling
   @media (max-width: 750px) {
