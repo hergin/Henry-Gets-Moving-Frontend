@@ -11,6 +11,8 @@ import {Helmet, HelmetProvider} from "react-helmet-async";
 import Weather from "../../Components/Weather";
 import API from "../../API";
 import {Exercise, Recipe} from "../../Structs/DataTypes";
+import clouds from "../../Assets/clouds.gif";
+import sun from "../../Assets/sun.gif";
 
 const Home = () => {
 
@@ -33,7 +35,18 @@ const Home = () => {
                 <Link to={require("../../Assets/HenryGetsMovingBook.pdf")} target={"blank"}><img src={homePhoto} alt="Henry Gets Moving"/></Link>
             </div>
             <div className='home-content'>
-                <Weather/>
+                <div className='weather'>
+                    <img className='clouds' src={clouds} alt={'clouds'}/>
+                    <img className='sun' src={sun} alt={'sun'}/>
+                </div>
+                <div className='weather-desktop'>
+                    <img className='clouds' src={clouds} alt={'clouds'}/>
+                    <img className='sun' src={sun} alt={'sun'}/>
+                </div>
+                <div className='weather-mobile'>
+                    <img className='clouds' src={clouds} alt={'clouds'}/>
+                    <img className='sun' src={sun} alt={'sun'}/>
+                </div>
                <div className='otd-div'>
                    <div className='of-the-day'>
                        <p>Exercise of the Day</p>
