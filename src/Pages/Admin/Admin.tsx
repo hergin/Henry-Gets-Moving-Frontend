@@ -503,17 +503,19 @@ const Admin = () => {
                         <form className='add-category-form'>
                             <div className='field'>
                                 <label>Add Category</label>
-                                <select className='add-category-for' onChange={(e) => {
-                                    setNewCategoryType(e.target.value)
-                                }}>
-                                    <option value="select">Add Category To</option>
-                                    <option value={"demoCategories"}>Demonstrations</option>
-                                    <option value={"exerciseCategories"}>Exercises</option>
-                                    <option value={"recipeCategories"}>Recipes</option>
-                                </select>
-                                <input className='add-category' placeholder="Category Name" onChange={(e) => {
-                                    setNewCategoryName(e.target.value)
-                                }}/>
+                                <div className='add-categories'>
+                                    <select className='add-category-for' onChange={(e) => {
+                                        setNewCategoryType(e.target.value)
+                                    }}>
+                                        <option value="select">Add Category To</option>
+                                        <option value={"demoCategories"}>Demonstrations</option>
+                                        <option value={"exerciseCategories"}>Exercises</option>
+                                        <option value={"recipeCategories"}>Recipes</option>
+                                    </select>
+                                    <input className='add-category' placeholder="Category Name" onChange={(e) => {
+                                        setNewCategoryName(e.target.value)
+                                    }}/>
+                                </div>
                             </div>
                             <div className='otd-save'>
                                 <button className='save' onClick={addCategory}>Save Category</button>

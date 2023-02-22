@@ -127,14 +127,20 @@
     }
 
     .add-category-for {
-      width: 25%;
+      width: 40%;
     }
   }
 
   .add-category-form {
     input {
-      width: 35%;
+      width: 55%;
     }
+  }
+
+  .add-categories{
+    display: flex;
+    justify-content: space-between;
+    width: 67.5%;
   }
 
   .save {
