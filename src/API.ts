@@ -325,6 +325,10 @@ const parseEmbedLink = (link: string) => {
         embed = link.replace("watch?v=", "embed/");
     else if (link.includes("youtu.be"))
         embed = link.replace("youtu.be","youtube.com/embed");
+
+    if (!link.includes("www"))
+        embed = embed.replace(embed.substring("https://".length-1,embed.length-1), "https://www."+embed.substring("https://".length-1));
+
     return embed.includes("&") ? embed.substring(0, embed.indexOf("&")) : embed;
 }
 
