@@ -1,8 +1,8 @@
 import './Game.scss';
 import {Helmet, HelmetProvider} from "react-helmet-async";
-import React from "react";
-import squirmMaze from '../../Assets/squirm_maze.png';
-import race from '../../Assets/henry_race.png';
+import React, {useState} from "react";
+import squirmMaze from '../../Assets/Games/squirm_maze.png';
+import race from '../../Assets/Games/henry_race.png';
 import CrosswordComponent from "../../Components/Crossword/CrosswordComponent";
 import Weather from "../../Components/Weather";
 import Grass from "../../Components/Grass";
@@ -10,29 +10,50 @@ import WordsearchComponent from "../../Components/Wordsearch/WordsearchComponent
 import rightArrow from '../../Assets/RightArrow.svg';
 import leftArrow from '../../Assets/LeftArrow.svg';
 import {GameType} from "../../Structs/DataTypes";
-import moveCube from '../../Assets/MoveCube.png'
+import moveCube from '../../Assets/Games/MoveCube.png'
+import rockPaperScissors from '../../Assets/Games/RPSShowdown.png';
+import matching from '../../Assets/Games/FruitMatching.png';
+import bingo from '../../Assets/Games/FitnessBingo.png'
 
 const Game = () => {
     const games_list = [
         {
             thumbnail: race,
-            link: '../../Assets/henry_race.png',
+            link: race,
             name: 'Henry Gets Moving Race'
         },
         {
             thumbnail: squirmMaze,
-            link: '../../Assets/squirm_maze.png',
+            link: squirmMaze,
             name: 'Squirm Maze'
         },
         {
             thumbnail: moveCube,
-            link: '../../Assets/TheMoveCube.pdf',
+            link: moveCube,
             name: 'The Move Cube'
-        }
+        },
+        {
+            thumbnail: rockPaperScissors,
+            link: rockPaperScissors,
+            name: 'Rock, Paper, Scissors Showdown'
+        },
+        {
+            thumbnail: matching,
+            link: matching,
+            name: 'Fruit Matching'
+        },
+        {
+            thumbnail: bingo,
+            link: bingo,
+            name: 'Fitness Bingo'
+        },
     ];
 
+    const [startSlice, setStartSlice] = useState(0);
+    const [maxSlice, setMaxSlice] = useState(3);
+
     const gamesLayout = (games: GameType[]) => {
-        return games.map((game) => {
+        return games.slice(startSlice, maxSlice).map((game) => {
                 return (
                     <div className='individual-game'>
                         <a href={game.link} download target='_blank'>
