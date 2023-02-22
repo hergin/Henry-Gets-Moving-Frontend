@@ -29,6 +29,7 @@ export default function Nav() {
         <div className='menu-nav'>
             <div className='navigation'>
                 <ul className={open ? 'open' : 'closed'}>
+                    <li><Link to={'/'} onClick={event => setOpen(false)}>Home</Link></li>
                     <li><Link to={'/get-moving'} onClick={event => setOpen(false)}>Get Moving</Link></li>
                     <li><Link to={'/recipes'} onClick={event => setOpen(false)}>Recipes</Link></li>
                     <li><Link to={'/learn-more'} onClick={event => setOpen(false)}>Learn More</Link></li>

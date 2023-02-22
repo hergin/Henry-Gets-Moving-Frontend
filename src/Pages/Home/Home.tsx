@@ -1,16 +1,16 @@
 import './Home.scss';
 import homePhoto from '../../Assets/henry-gets-moving-home.jpg'
 import {Link} from "react-router-dom";
-import recipeImage from '../../Assets/recipeStock.jpg';
-import exerciseImage from '../../Assets/exerciseStock.jpg';
 import React, {useEffect, useState} from "react";
 import footerImage from "../../Assets/HomeFooter.svg";
 import footerDesktopImage from '../../Assets/HomeFooterDesktop.svg';
 import footerMobileImage from '../../Assets/HomeFooterMobile.svg'
 import {Helmet, HelmetProvider} from "react-helmet-async";
-import Weather from "../../Components/Weather";
+import clickMe from '../../Assets/ClickMe.svg'
 import API from "../../API";
 import {Exercise, Recipe} from "../../Structs/DataTypes";
+import clouds from "../../Assets/clouds.gif";
+import sun from "../../Assets/sun.gif";
 
 const Home = () => {
 
@@ -30,10 +30,26 @@ const Home = () => {
                 </Helmet>
             </HelmetProvider>
             <div className='book-container'>
-                <Link to={require("../../Assets/HenryGetsMovingBook.pdf")} target={"blank"}><img src={homePhoto} alt="Henry Gets Moving"/></Link>
+                <Link to={require("../../Assets/HenryGetsMovingBook.pdf")} target={"blank"}>
+                    <img src={homePhoto} alt="Henry Gets Moving"/>
+                </Link>
+                <div className='click-me'>
+                    <img src={clickMe} alt="Click Me!"/>
+                </div>
             </div>
             <div className='home-content'>
-                <Weather/>
+                <div className='weather'>
+                    <img className='clouds' src={clouds} alt={'clouds'}/>
+                    <img className='sun' src={sun} alt={'sun'}/>
+                </div>
+                <div className='weather-desktop'>
+                    <img className='clouds' src={clouds} alt={'clouds'}/>
+                    <img className='sun' src={sun} alt={'sun'}/>
+                </div>
+                <div className='weather-mobile'>
+                    <img className='clouds' src={clouds} alt={'clouds'}/>
+                    <img className='sun' src={sun} alt={'sun'}/>
+                </div>
                <div className='otd-div'>
                    <div className='of-the-day'>
                        <p>Exercise of the Day</p>

@@ -2,6 +2,8 @@ import React from "react";
 import weather from "../Assets/Weather.svg";
 import weatherDesktop from '../Assets/WeatherDesktop.svg';
 import weatherMobile from "../Assets/WeatherMobile.svg";
+import sun from '../Assets/sun.gif';
+import clouds from '../Assets/clouds.gif'
 
 const Weather = () => {
     return (
