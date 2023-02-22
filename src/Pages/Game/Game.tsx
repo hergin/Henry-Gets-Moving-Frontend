@@ -8,6 +8,9 @@ import CrosswordComponent from "../../Components/Crossword/CrosswordComponent";
 import Weather from "../../Components/Weather";
 import Grass from "../../Components/Grass";
 import WordsearchComponent from "../../Components/Wordsearch/WordsearchComponent";
+import rightArrow from '../../Assets/RightArrow.svg';
+import leftArrow from '../../Assets/LeftArrow.svg';
+
 type Game = {
     [key: string]: any;
     thumbnail: string;
@@ -17,24 +20,18 @@ const Game = () => {
     const games_list = [
         {
             thumbnail: crossword,
-            name: "Healthy Eating Crossword"
+            link: '../../Assets/crossword.png'
         },
         {
             thumbnail: race,
-            name: "Henry's Big Race"
+            link: '../../Assets/henry_race.png'
+        },
+        {
+            thumbnail: squirmMaze,
+            link: '../../Assets/squirm_maze.png'
         }
     ];
-    const gamesLayout = (game: Game[]) => {
-        return game.map((game) => {
-                return (
-                    <div className='grid-content'>
-                        <img src={game.thumbnail} alt={game.name + " Thumbnail"}/>
-                        <p className='name'>{game.name}</p>
-                    </div>
-                )
-            }
-        )
-    }
+
     return (
         <div className="game">
             <HelmetProvider>
@@ -43,15 +40,23 @@ const Game = () => {
                 </Helmet>
             </HelmetProvider>
             <Weather/>
-            {/*<div className="game-container">*/}
-            {/*    <img src={squirmMaze} alt="Squirm's maze"/>*/}
-            {/*</div>*/}
-            {/*<div className="game-picker">*/}
-            {/*    {gamesLayout(games_list)}*/}
-            {/*</div>*/}
+            <h3>Henry Gets Moving Crossword</h3>
             <CrosswordComponent/>
+            <h3>Henry Gets Moving Word Search</h3>
             <WordsearchComponent/>
             <Grass/>
+            <h3>Downloadable Games</h3>
+            <div className='games-list'>
+                <div className='arrow'>
+                    <img src={leftArrow} alt={"Left"}/>
+                </div>
+                <div>
+                   list
+                </div>
+                <div className='arrow'>
+                    <img src={rightArrow} alt={"Right"}/>
+                </div>
+            </div>
         </div>
     )
 }
