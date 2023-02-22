@@ -68,15 +68,15 @@
     }
   }
 
-  .form{
+  .form {
     margin-bottom: 20px;
   }
 
-  .otd-form{
+  .otd-form {
     margin-top: 20px;
   }
 
-  .demo-form{
+  .demo-form {
     margin-bottom: 20px;
   }
 
@@ -125,13 +125,15 @@
       font-family: Mulish, serif;
       box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
     }
+
+    .add-category-for {
+      width: 25%;
+    }
   }
 
-  .add-category-form{
-    .field{
-      input{
-        width: 55%;
-      }
+  .add-category-form {
+    input {
+      width: 35%;
     }
   }
 
@@ -178,7 +180,8 @@
     margin: auto;
     padding-bottom: 3em;
   }
-  .back-arrow{
+
+  .back-arrow {
     width: 85%;
   }
 }
