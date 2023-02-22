@@ -325,7 +325,7 @@ const parseEmbedLink = (link: string) => {
         embed = link.replace("watch?v=", "embed/");
     else if (link.includes("youtu.be"))
         embed = link.replace("youtu.be","youtube.com/embed");
-    return embed.includes("&") ? link.substring(0, link.indexOf("&")-1) : embed;
+    return embed.includes("&") ? link.substring(0, link.indexOf("&")) : embed;
 }
 
 const API ={
