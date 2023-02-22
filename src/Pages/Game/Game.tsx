@@ -10,6 +10,7 @@ import WordsearchComponent from "../../Components/Wordsearch/WordsearchComponent
 import rightArrow from '../../Assets/RightArrow.svg';
 import leftArrow from '../../Assets/LeftArrow.svg';
 import {GameType} from "../../Structs/DataTypes";
+import moveCube from '../../Assets/MoveCube.png'
 
 const Game = () => {
     const games_list = [
@@ -22,6 +23,11 @@ const Game = () => {
             thumbnail: squirmMaze,
             link: '../../Assets/squirm_maze.png',
             name: 'Squirm Maze'
+        },
+        {
+            thumbnail: moveCube,
+            link: '../../Assets/TheMoveCube.pdf',
+            name: 'The Move Cube'
         }
     ];
 
@@ -29,7 +35,7 @@ const Game = () => {
         return games.map((game) => {
                 return (
                     <div className='individual-game'>
-                        <a href={game.link} download>
+                        <a href={game.link} download target='_blank'>
                             <img src={game.thumbnail} alt={game.name}/>
                         </a>
                         <p>{game.name}</p>
