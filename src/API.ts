@@ -320,7 +320,10 @@ const logOut = () => {
 }
 
 const parseEmbedLink = (link: string) => {
-    return link.replace("watch?v=", "embed/");
+    if (link.includes("watch?v="))
+        return link.replace("watch?v=", "embed/");
+    else if (link.includes("youtu.be"))
+        return link.replace("youtu.be","youtube.com/embed");
 }
 
 const API ={
