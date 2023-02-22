@@ -10,4 +10,7 @@ describe("parse embed",()=>{
     test("embed link",()=>{
         expect(API.parseEmbedLink("https://www.youtube.com/embed/1wGOHbcQKIc")).toEqual("https://www.youtube.com/embed/1wGOHbcQKIc");
     });
+    test("youtu.be",()=>{
+        expect(API.parseEmbedLink("https://youtu.be/1wGOHbcQKIc")).toEqual("https://www.youtube.com/embed/1wGOHbcQKIc");
+    });
 });
