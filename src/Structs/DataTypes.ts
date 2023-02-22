@@ -72,3 +72,10 @@ export type ExerciseLog = {
     family_member_id?: number,
     FamilyMember?: FamilyMember
 }
+
+export type GameType = {
+    [key: string]: any;
+    thumbnail: string;
+    link: string;
+    name: string;
+}
