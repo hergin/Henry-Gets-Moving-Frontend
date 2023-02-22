@@ -125,7 +125,7 @@ const Admin = () => {
         event.preventDefault()
         const formData = new FormData()
         formData.append("name", demo.name)
-        formData.append("video_link", demo.video_link)
+        formData.append("video_link", demo.video_link.includes("watch?v=") ? API.parseEmbedLink(demo.video_link) : demo.video_link)
         formData.append("thumbnail_link", demo.thumbnail_link)
         formData.append("demonstration_category_id", String(demo.demonstration_category_id))
         if (demo.id) {
@@ -188,7 +188,7 @@ const Admin = () => {
         event.preventDefault()
         const formData = new FormData()
         formData.append("name", exercise.name)
-        formData.append("video_link", exercise.video_link)
+        formData.append("video_link", exercise.video_link.includes("watch?v=") ? API.parseEmbedLink(exercise.video_link) : exercise.video_link)
         formData.append("thumbnail_link", exercise.thumbnail_link)
         formData.append("category_id", String(exercise.category_id))
         if (exercise.is_featured) {
@@ -313,11 +313,15 @@ const Admin = () => {
     }
     const saveFeatured = async (e: { preventDefault: () => void; }) => {
         e.preventDefault()
-        if(currentFeaturedRecipe){
-            await API.swapFeaturedRecipe(currentFeaturedRecipe.id.toString()).then( () => {alert("Featured Recipe Updated")})
+        if (currentFeaturedRecipe) {
+            await API.swapFeaturedRecipe(currentFeaturedRecipe.id.toString()).then(() => {
+                alert("Featured Recipe Updated")
+            })
         }
-        if(currentFeaturedExercise){
-            await API.swapFeaturedExercise(currentFeaturedExercise.id.toString()).then(() => {alert("Featured Exercise Updated")})
+        if (currentFeaturedExercise) {
+            await API.swapFeaturedExercise(currentFeaturedExercise.id.toString()).then(() => {
+                alert("Featured Exercise Updated")
+            })
         }
         window.location.reload()
     }
@@ -366,7 +370,8 @@ const Admin = () => {
                             </div>
                             <div className='field'>
                                 <label>Name</label>
-                                <input placeholder="Exercise Name" title={exercise?.name} value={exercise?.name ? String(exercise?.name) : ""}
+                                <input placeholder="Exercise Name" title={exercise?.name}
+                                       value={exercise?.name ? String(exercise?.name) : ""}
                                        onChange={event => {
                                            setExercise((exercise) => {
                                                return {...exercise, name: event.target.value} as Exercise
@@ -437,7 +442,8 @@ const Admin = () => {
                             </div>
                             <div className='field'>
                                 <label>Name</label>
-                                <input placeholder="Demonstration Name" title={demo?.name} value={demo?.name ? String(demo?.name) : ""}
+                                <input placeholder="Demonstration Name" title={demo?.name}
+                                       value={demo?.name ? String(demo?.name) : ""}
                                        onChange={event => {
                                            setDemo((demo) => {
                                                return {...demo, name: event.target.value} as Demonstration
@@ -457,7 +463,7 @@ const Admin = () => {
                                        }}/>
                             </div>
                             <div className='field'>
-                                <label>Embed Video Link</label>
+                                <label>Video Link</label>
                                 <input placeholder="https://www.youtube.com/embed/00000000" title={demo?.video_link}
                                        value={demo?.video_link ? String(demo?.video_link) : ""}
                                        onChange={event => {
@@ -497,13 +503,19 @@ const Admin = () => {
                         <form className='add-category-form'>
                             <div className='field'>
                                 <label>Add Category</label>
-                                <select className='add-category-for' onChange={(e) => {setNewCategoryType(e.target.value)} }>
-                                    <option value="select">Select What To Add Category For</option>
-                                    <option value={"demoCategories"}>Demonstrations</option>
-                                    <option value={"exerciseCategories"}>Exercises</option>
-                                    <option value={"recipeCategories"}>Recipes</option>
-                                </select>
-                                <input className='add-category' placeholder="Category Name" onChange={(e) => {setNewCategoryName(e.target.value)}}></input>
+                                <div className='add-categories'>
+                                    <select className='add-category-for' onChange={(e) => {
+                                        setNewCategoryType(e.target.value)
+                                    }}>
+                                        <option value="select">Add Category To</option>
+                                        <option value={"demoCategories"}>Demonstrations</option>
+                                        <option value={"exerciseCategories"}>Exercises</option>
+                                        <option value={"recipeCategories"}>Recipes</option>
+                                    </select>
+                                    <input className='add-category' placeholder="Category Name" onChange={(e) => {
+                                        setNewCategoryName(e.target.value)
+                                    }}/>
+                                </div>
                             </div>
                             <div className='otd-save'>
                                 <button className='save' onClick={addCategory}>Save Category</button>
@@ -523,25 +535,25 @@ const Admin = () => {
                                     })
                                 }}>
                                     <option value="select">Select Featured Recipe</option>
-                                {recipes && recipes.map((recipe, index: number) => (
-                                    <option value={index} selected={recipe.id == currentFeaturedRecipe.id}>{recipe.name}</option>
-                                ))}</select>
+                                    {recipes && recipes.map((recipe, index: number) => (
+                                        <option value={index}
+                                                selected={recipe.id == currentFeaturedRecipe.id}>{recipe.name}</option>
+                                    ))}</select>
                             </div>
                             <div className='field'>
                                 <label>Exercise of the Day</label>
                                 <select className='otd-select' onChange={event => {
                                     event.preventDefault()
 
-                                     setCurrentFeaturedExercise(exercise => {
+                                    setCurrentFeaturedExercise(exercise => {
                                         return {...(exercises[parseInt(event.target.value, 10)] as Exercise)}
-
                                     })
-
                                 }}>
                                     <option value="select">Select Featured Exercise</option>
-                                {exercises && exercises.map((exercise, index: number) => (
-                                    <option value={index} selected={exercise.id == currentFeaturedExercise.id}>{exercise.name}</option>
-                                ))}</select>
+                                    {exercises && exercises.map((exercise, index: number) => (
+                                        <option value={index}
+                                                selected={exercise.id == currentFeaturedExercise.id}>{exercise.name}</option>
+                                    ))}</select>
                             </div>
                             <div className='otd-save'>
                                 <button className='save' onClick={saveFeatured}>Save Changes</button>
@@ -566,7 +578,8 @@ const Admin = () => {
                             </div>
                             <div className='field'>
                                 <label>Name</label>
-                                <input placeholder="Recipe Name" title={recipe?.name} value={recipe?.name ? String(recipe?.name) : ""}
+                                <input placeholder="Recipe Name" title={recipe?.name}
+                                       value={recipe?.name ? String(recipe?.name) : ""}
                                        onChange={event => {
                                            setRecipe((recipe) => {
                                                return {...recipe, name: event.target.value} as Recipe
@@ -673,7 +686,7 @@ const Admin = () => {
                                            setDiagram((diagram) => {
                                                return {...diagram, name: event.target.value} as Diagram
                                            })
-                                       }} />
+                                       }}/>
                             </div>
                             <div className='field'>
                                 <label>Thumbnail Link</label>

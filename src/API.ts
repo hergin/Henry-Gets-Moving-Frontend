@@ -319,6 +319,10 @@ const logOut = () => {
     sessionStorage.removeItem('session_key')
 }
 
+const parseEmbedLink = (link: string) => {
+    return link.replace("watch?v=", "embed/");
+}
+
 const API ={
     getRecipes,
     getExercises,
@@ -340,7 +344,8 @@ const API ={
     swapFeaturedRecipe,
     swapFeaturedExercise,
     getTotalLoggedDuration,
-    logOut
+    logOut,
+    parseEmbedLink
 }
 
 export default API;
