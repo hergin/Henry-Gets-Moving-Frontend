@@ -28,7 +28,7 @@ const Game = () => {
     const gamesLayout = (games: GameType[]) => {
         return games.map((game) => {
                 return (
-                    <div className='layout'>
+                    <div className='individual-game'>
                         <a href={game.link} download>
                             <img src={game.thumbnail} alt={game.name}/>
                         </a>
@@ -57,7 +57,9 @@ const Game = () => {
                 <div className='arrow'>
                     <img src={leftArrow} alt={"Left"}/>
                 </div>
-                {gamesLayout(games_list)}
+                <div className='games'>
+                    {gamesLayout(games_list)}
+                </div>
                 <div className='arrow'>
                     <img src={rightArrow} alt={"Right"}/>
                 </div>
