@@ -391,8 +391,8 @@ const Admin = () => {
                                        }}/>
                             </div>
                             <div className='field'>
-                                <label>Embed Video Link</label>
-                                <input placeholder="https://www.youtube.com/embed/00000000" title={exercise?.video_link}
+                                <label>Video Link</label>
+                                <input placeholder="https://www.youtube.com/watch?v=00000000" title={exercise?.video_link}
                                        value={exercise?.video_link ? String(exercise?.video_link) : ""}
                                        onChange={event => {
                                            setExercise((exercise) => {
@@ -507,7 +507,7 @@ const Admin = () => {
                                     <select className='add-category-for' onChange={(e) => {
                                         setNewCategoryType(e.target.value)
                                     }}>
-                                        <option value="select">Add Category To</option>
+                                        <option value=" ">Add Category To</option>
                                         <option value={"demoCategories"}>Demonstrations</option>
                                         <option value={"exerciseCategories"}>Exercises</option>
                                         <option value={"recipeCategories"}>Recipes</option>
