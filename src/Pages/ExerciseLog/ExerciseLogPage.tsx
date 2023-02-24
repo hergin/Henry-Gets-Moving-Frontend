@@ -27,6 +27,10 @@ const ExerciseLogPage = () => {
     async function handleSubmit(e: { preventDefault: () => void; }) {
         e.preventDefault();
         const formData = new FormData();
+        if (duration.length > 3) {
+            window.alert(duration + " minutes is not a valid duration!");
+            return;
+        }
         formData.append("name", child)
         formData.append("intensity", intensity)
         formData.append("duration", duration)
