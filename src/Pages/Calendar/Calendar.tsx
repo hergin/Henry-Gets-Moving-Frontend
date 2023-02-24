@@ -63,7 +63,14 @@ const Calendar = () => {
                 <ReactCalendar onClickDay={(date) => {
                     selectDay(date)
                 }} value={selectedDate} minDate={new Date(2022, 9, 20)}
-                               className="date-picker"/>
+                               className="date-picker"
+                               tileClassName={({date}) => {
+                                    let time = 0;
+                                    API.getTotalLoggedDuration(familyMember.name, date).then((duration)=>{time=duration;console.log(duration)});
+                                    if (time > 0 && time < 60) return "any-minutes-logged";
+                                    else if (time > 59) return "sixty-minutes-logged";
+                                    else return null;
+                               }}/>
                 <div className={"date-member-select"}>
                     <h1>On {selectedDate.toLocaleDateString()}…</h1>
                     <select onChange={(event) => {
