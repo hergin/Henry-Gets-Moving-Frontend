@@ -25,6 +25,13 @@
     }
   }
 
+  .any-minutes-logged {
+    background-color: greenyellow;
+  }
+  .sixty-minutes-logged {
+    background-color: goldenrod;
+  }
+
   button:disabled {
     background-color: #FDEE1F;
   }
