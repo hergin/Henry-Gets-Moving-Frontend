@@ -66,11 +66,11 @@ const Calendar = () => {
                                className="date-picker"
                                tileClassName={({date, view}) => {
                                 if (view === 'month'){
-                                    return API.getTotalLoggedDuration(familyMember.name, date).then((duration)=>{
-                                        if (duration > 0 && duration < 60) return "any-minutes-logged";
-                                        else if (duration > 59) return "sixty-minutes-logged";
-                                        else return 'no-minutes-logged';
-                                    });
+                                    let time = 0;
+                                    API.getTotalLoggedDuration(familyMember.name, date).then((duration)=>time=duration);
+                                    if (time > 0 && time < 60) return "any-minutes-logged";
+                                    else if (time > 59) return "sixty-minutes-logged";
+                                    else return 'no-minutes-logged';
                                }else return 'no-minutes-logged';}}/>
                 <div className={"date-member-select"}>
                     <h1>On {selectedDate.toLocaleDateString()}…</h1>
