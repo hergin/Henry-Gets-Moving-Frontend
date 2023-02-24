@@ -12,7 +12,6 @@ import leftArrow from '../../Assets/LeftArrow.svg';
 import {GameType} from "../../Structs/DataTypes";
 import moveCube from '../../Assets/Games/MoveCube.png'
 import rockPaperScissors from '../../Assets/Games/RPSShowdown.png';
-import matching from '../../Assets/Games/FruitMatching.png';
 import bingo from '../../Assets/Games/FitnessBingo.png'
 
 const Game = () => {
@@ -36,11 +35,6 @@ const Game = () => {
             thumbnail: rockPaperScissors,
             link: rockPaperScissors,
             name: 'Rock, Paper, Scissors Showdown'
-        },
-        {
-            thumbnail: matching,
-            link: matching,
-            name: 'Fruit Matching'
         },
         {
             thumbnail: bingo,
@@ -88,7 +82,7 @@ const Game = () => {
                     {gamesLayout(games_list)}
                 </div>
                 <div className='arrow'>
-                    <img src={rightArrow} alt={"Right"}/>
+                    <img src={rightArrow}/>
                 </div>
             </div>
         </div>
