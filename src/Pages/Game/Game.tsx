@@ -75,13 +75,39 @@ const Game = () => {
             <Grass/>
             <h3>Downloadable Games</h3>
             <div className='games-list'>
-                <div className='arrow'>
+                <div className='arrow' onClick={
+                    event => {
+                        if (startSlice == 0) {
+                            setStartSlice(games_list.length - ((games_list.length % 3) ? games_list.length % 3 : 3))
+                            setMaxSlice(games_list.length)
+                        }
+                        if (startSlice == games_list.length - ((games_list.length % 3) ? games_list.length % 3 : 3)) {
+                            setMaxSlice(startSlice)
+                            setStartSlice(prev => prev - 3)
+                        } else if (startSlice > 0) {
+                            setStartSlice(prev => prev - 3);
+                            {
+                                setMaxSlice(prev => prev - 3)
+                            }
+                        }
+                    }}>
                     <img src={leftArrow} alt={"Left"}/>
                 </div>
                 <div className='games'>
                     {gamesLayout(games_list)}
                 </div>
-                <div className='arrow'>
+                <div className='arrow' onClick={
+                    event => {
+                        if (maxSlice < games_list.length) {
+                            setStartSlice(maxSlice);
+                            {
+                                setMaxSlice(maxSlice + 3)
+                            }
+                        } else {
+                            setStartSlice(0)
+                            setMaxSlice(3)
+                        }
+                    }}>
                     <img src={rightArrow}/>
                 </div>
             </div>
