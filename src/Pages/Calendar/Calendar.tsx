@@ -64,14 +64,15 @@ const Calendar = () => {
                     selectDay(date)
                 }} value={selectedDate} minDate={new Date(2022, 9, 20)}
                                className="date-picker"
-                               tileClassName={({date, view}) => {
+                               tileContent={({date, view}) => {
                                 if (view === 'month'){
-                                    let time = 0;
-                                    API.getTotalLoggedDuration(familyMember.name, date).then((duration)=>time=duration);
-                                    if (time > 0 && time < 60) return "any-minutes-logged";
-                                    else if (time > 59) return "sixty-minutes-logged";
-                                    else return 'no-minutes-logged';
-                               }else return 'no-minutes-logged';}}/>
+                                    return API.getTotalLoggedDuration(familyMember.name, date).then((duration)=>{
+                                        console.log("time is "+duration)
+                                    if (duration > 0 && duration < 60) return date.getDay().toString()+"🏆";
+                                    else if (duration > 59) return date.getDay().toString()+"🟢";
+                                    else return date.getDay().toString();
+                               });} else return null;
+                            }}/>
                 <div className={"date-member-select"}>
                     <h1>On {selectedDate.toLocaleDateString()}…</h1>
                     <select onChange={(event) => {
