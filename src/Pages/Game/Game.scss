@@ -1,17 +1,76 @@
-.game{
-  h1{
+.game {
+  h1 {
     display: flex;
     margin: auto;
     justify-content: center;
     align-items: center;
     height: 75vh;
   }
+
+  h3 {
+    text-align: center;
+    margin: 10px 0;
+    font-size: 1.4rem;
+    justify-content: flex-start;
+  }
+
+  .games-list {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin: auto;
+    padding-bottom: 75px;
+  }
+
+  .arrow {
+    cursor: pointer;
+    width: 15%;
+    margin: 0 5px;
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .games {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .individual-game {
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 30%;
+    margin: 0 5px;
+
+    a {
+      margin: auto;
+
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    p {
+      text-align: center;
+    }
+  }
+
   //Desktop Styling
   @media (min-width: 1050px) {
-
+    .games-list {
+      width: 70%;
+    }
+    .arrow {
+      width: 5%;
+    }
   }
   //Phone Styling
   @media (max-width: 750px) {
-
+    .games-list {
+      width: 90%;
+    }
   }
 }

@@ -1,40 +1,89 @@
 import './Game.scss';
 import {Helmet, HelmetProvider} from "react-helmet-async";
-import React from "react";
-import squirmMaze from '../../Assets/squirm_maze.png';
-import crossword from '../../Assets/crossword.png';
-import race from '../../Assets/henry_race.png';
+import React, {useState} from "react";
+import squirmMaze from '../../Assets/Games/squirm_maze.png';
+import race from '../../Assets/Games/henry_race.png';
 import CrosswordComponent from "../../Components/Crossword/CrosswordComponent";
 import Weather from "../../Components/Weather";
 import Grass from "../../Components/Grass";
 import WordsearchComponent from "../../Components/Wordsearch/WordsearchComponent";
-type Game = {
-    [key: string]: any;
-    thumbnail: string;
-    name: string;
-}
+import rightArrow from '../../Assets/RightArrow.svg';
+import leftArrow from '../../Assets/LeftArrow.svg';
+import {GameType} from "../../Structs/DataTypes";
+import moveCube from '../../Assets/Games/MoveCube.png'
+import rockPaperScissors from '../../Assets/Games/RPSShowdown.png';
+import bingo from '../../Assets/Games/FitnessBingo.png'
+import musicalChairs from '../../Assets/Games/MusicalChairs.png'
+import HenryBored from '../../Assets/Games/HenryBored.png'
+import HenryHungry from '../../Assets/Games/HenryHungry.png'
+import pumpkin from '../../Assets/Games/PumpkinWorkout.png'
+
 const Game = () => {
     const games_list = [
         {
-            thumbnail: crossword,
-            name: "Healthy Eating Crossword"
+            thumbnail: race,
+            link: race,
+            name: 'Henry Gets Moving Race'
         },
         {
-            thumbnail: race,
-            name: "Henry's Big Race"
-        }
+            thumbnail: squirmMaze,
+            link: squirmMaze,
+            name: 'Squirm Maze'
+        },
+        {
+            thumbnail: moveCube,
+            link: moveCube,
+            name: 'The Move Cube'
+        },
+        {
+            thumbnail: rockPaperScissors,
+            link: rockPaperScissors,
+            name: 'Rock, Paper, Scissors Showdown'
+        },
+        {
+            thumbnail: bingo,
+            link: bingo,
+            name: 'Fitness Bingo'
+        },
+        {
+            thumbnail: musicalChairs,
+            link: musicalChairs,
+            name: 'Musical Chairs Workout'
+        },
+        {
+            thumbnail: HenryBored,
+            link: HenryBored,
+            name: "Henry's Bored"
+        },
+        {
+            thumbnail: HenryHungry,
+            link: HenryHungry,
+            name: "Henry's Hungry"
+        },
+        {
+            thumbnail: pumpkin,
+            link: pumpkin,
+            name: 'Pumpkin Workout'
+        },
     ];
-    const gamesLayout = (game: Game[]) => {
-        return game.map((game) => {
+
+    const [startSlice, setStartSlice] = useState(0);
+    const [maxSlice, setMaxSlice] = useState(3);
+
+    const gamesLayout = (games: GameType[]) => {
+        return games.slice(startSlice, maxSlice).map((game) => {
                 return (
-                    <div className='grid-content'>
-                        <img src={game.thumbnail} alt={game.name + " Thumbnail"}/>
-                        <p className='name'>{game.name}</p>
+                    <div className='individual-game'>
+                        <a href={game.link} download target='_blank'>
+                            <img src={game.thumbnail} alt={game.name}/>
+                        </a>
+                        <p>{game.name}</p>
                     </div>
                 )
             }
         )
     }
+
     return (
         <div className="game">
             <HelmetProvider>
@@ -43,15 +92,49 @@ const Game = () => {
                 </Helmet>
             </HelmetProvider>
             <Weather/>
-            {/*<div className="game-container">*/}
-            {/*    <img src={squirmMaze} alt="Squirm's maze"/>*/}
-            {/*</div>*/}
-            {/*<div className="game-picker">*/}
-            {/*    {gamesLayout(games_list)}*/}
-            {/*</div>*/}
+            <h3>Henry Gets Moving Crossword</h3>
             <CrosswordComponent/>
+            <h3>Henry Gets Moving Word Search</h3>
             <WordsearchComponent/>
             <Grass/>
+            <h3>Downloadable Games</h3>
+            <div className='games-list'>
+                <div className='arrow' onClick={
+                    event => {
+                        if (startSlice == 0) {
+                            setStartSlice(games_list.length - ((games_list.length % 3) ? games_list.length % 3 : 3))
+                            setMaxSlice(games_list.length)
+                        }
+                        if (startSlice == games_list.length - ((games_list.length % 3) ? games_list.length % 3 : 3)) {
+                            setMaxSlice(startSlice)
+                            setStartSlice(prev => prev - 3)
+                        } else if (startSlice > 0) {
+                            setStartSlice(prev => prev - 3);
+                            {
+                                setMaxSlice(prev => prev - 3)
+                            }
+                        }
+                    }}>
+                    <img src={leftArrow} alt={"Left"}/>
+                </div>
+                <div className='games'>
+                    {gamesLayout(games_list)}
+                </div>
+                <div className='arrow' onClick={
+                    event => {
+                        if (maxSlice < games_list.length) {
+                            setStartSlice(maxSlice);
+                            {
+                                setMaxSlice(maxSlice + 3)
+                            }
+                        } else {
+                            setStartSlice(0)
+                            setMaxSlice(3)
+                        }
+                    }}>
+                    <img src={rightArrow}/>
+                </div>
+            </div>
         </div>
     )
 }
