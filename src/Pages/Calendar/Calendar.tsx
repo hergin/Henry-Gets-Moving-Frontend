@@ -14,6 +14,21 @@ import VigorousIntensity from '../../Assets/VigorousIntensity.svg'
 import {Link} from "react-router-dom";
 
 const Calendar = () => {
+    async function deleteLog(logToDelete: ExerciseLog) {
+        console.log(logToDelete);
+        if (window.confirm("Delete this exercise log?")){
+            await fetch(`${API.API_URL}/exerciseLogs/${logToDelete.id}`, {
+                method: 'DELETE',
+            }).then((res) => {
+                if (res.status >= 400 && res.status < 600) {
+                    alert("Error deleting log")
+                } else {
+                    window.location.reload()
+                    return res.json()
+                }
+            })
+        }
+    }
     const [selectedDate, selectDay] = useState(new Date());
     const [members, setFamilyMembers] = useState([] as FamilyMember[]);
     const [familyMember, setFamilyMember] = useState({} as FamilyMember)
@@ -110,7 +125,7 @@ const Calendar = () => {
                                 {log.intensity === "Vigorous" &&
                                     <img src={VigorousIntensity}/>
                                 }
-                                {<button className={'red-button'} onClick={deleteLog}>Delete</button>}
+                                {<button className={'red-button'} onClick={function () {deleteLog(log)}}>Delete</button>}
                             </div>
                         )
                     })}
