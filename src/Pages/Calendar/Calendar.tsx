@@ -22,6 +22,7 @@ const Calendar = () => {
                 if (res.status >= 400 && res.status < 600) {
                     alert("Error deleting log")
                 } else {
+                    alert("Exercise log successfully deleted!")
                     window.location.reload()
                     return res.json()
                 }
