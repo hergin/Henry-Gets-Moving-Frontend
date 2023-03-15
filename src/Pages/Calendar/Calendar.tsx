@@ -110,6 +110,7 @@ const Calendar = () => {
                                 {log.intensity === "Vigorous" &&
                                     <img src={VigorousIntensity}/>
                                 }
+                                {<button className={'red-button'} onClick={deleteLog}>Delete</button>}
                             </div>
                         )
                     })}
