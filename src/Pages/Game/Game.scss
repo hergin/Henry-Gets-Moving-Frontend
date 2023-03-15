@@ -24,7 +24,7 @@
 
   .arrow {
     cursor: pointer;
-    width: 5%;
+    width: 15%;
     margin: 0 5px;
 
     img {
@@ -46,7 +46,6 @@
 
     a {
       margin: auto;
-      height: 100%;
 
       img {
         width: 100%;
@@ -63,6 +62,9 @@
   @media (min-width: 1050px) {
     .games-list {
       width: 70%;
+    }
+    .arrow {
+      width: 5%;
     }
   }
   //Phone Styling
