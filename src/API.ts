@@ -320,7 +320,16 @@ const logOut = () => {
 }
 
 const parseEmbedLink = (link: string) => {
-    return link.replace("watch?v=", "embed/");
+    let embed = link;
+    if (link.includes("watch?v="))
+        embed = link.replace("watch?v=", "embed/");
+    else if (link.includes("youtu.be"))
+        embed = link.replace("youtu.be","youtube.com/embed");
+
+    if (!link.includes("www"))
+        embed = embed.replace(embed.substring("https://".length,embed.length), "www."+embed.substring("https://".length,embed.length));
+
+    return embed.includes("&") ? embed.substring(0, embed.indexOf("&")) : embed;
 }
 
 const API ={
