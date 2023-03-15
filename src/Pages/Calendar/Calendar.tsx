@@ -15,7 +15,6 @@ import {Link} from "react-router-dom";
 
 const Calendar = () => {
     async function deleteLog(logToDelete: ExerciseLog) {
-        console.log(logToDelete);
         if (window.confirm("Delete this exercise log?")){
             await fetch(`${API.API_URL}/exerciseLogs/${logToDelete.id}`, {
                 method: 'DELETE',
