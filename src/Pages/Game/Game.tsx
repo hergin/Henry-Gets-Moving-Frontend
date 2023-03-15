@@ -13,6 +13,10 @@ import {GameType} from "../../Structs/DataTypes";
 import moveCube from '../../Assets/Games/MoveCube.png'
 import rockPaperScissors from '../../Assets/Games/RPSShowdown.png';
 import bingo from '../../Assets/Games/FitnessBingo.png'
+import musicalChairs from '../../Assets/Games/MusicalChairs.png'
+import HenryBored from '../../Assets/Games/HenryBored.png'
+import HenryHungry from '../../Assets/Games/HenryHungry.png'
+import pumpkin from '../../Assets/Games/PumpkinWorkout.png'
 
 const Game = () => {
     const games_list = [
@@ -40,6 +44,26 @@ const Game = () => {
             thumbnail: bingo,
             link: bingo,
             name: 'Fitness Bingo'
+        },
+        {
+            thumbnail: musicalChairs,
+            link: musicalChairs,
+            name: 'Musical Chairs Workout'
+        },
+        {
+            thumbnail: HenryBored,
+            link: HenryBored,
+            name: "Henry's Bored"
+        },
+        {
+            thumbnail: HenryHungry,
+            link: HenryHungry,
+            name: "Henry's Hungry"
+        },
+        {
+            thumbnail: pumpkin,
+            link: pumpkin,
+            name: 'Pumpkin Workout'
         },
     ];
 
