@@ -186,10 +186,13 @@ const Admin = () => {
 
     const saveExercise = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
+        const thumbnail = await fetch(`https://noembed.com/embed?dataType=json&url=` + exercise.video_link).then((response) => {
+            return response.json()
+        })
         const formData = new FormData()
         formData.append("name", exercise.name)
         formData.append("video_link", exercise.video_link.includes("watch?v=") ? API.parseEmbedLink(exercise.video_link) : exercise.video_link)
-        formData.append("thumbnail_link", exercise.thumbnail_link)
+        formData.append("thumbnail_link", thumbnail.thumbnail_url)
         formData.append("category_id", String(exercise.category_id))
         if (exercise.is_featured) {
             formData.append("is_featured", String(exercise.is_featured))
@@ -375,17 +378,6 @@ const Admin = () => {
                                        onChange={event => {
                                            setExercise((exercise) => {
                                                return {...exercise, name: event.target.value} as Exercise
-                                           });
-
-                                       }}/>
-                            </div>
-                            <div className='field'>
-                                <label>Thumbnail Link</label>
-                                <input title={exercise.thumbnail_link}
-                                       value={exercise?.thumbnail_link ? String(exercise?.thumbnail_link) : ""}
-                                       onChange={event => {
-                                           setExercise((exercise) => {
-                                               return {...exercise, thumbnail_link: event.target.value} as Exercise
                                            });
 
                                        }}/>
