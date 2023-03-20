@@ -60,7 +60,6 @@ const recipes: Recipe[] = [
         cook_time: "20 years",
         ingredients: "Banana, Bread",
         recipe_steps: "Step 1: cook\nStep 2: eat",
-        category_id: 1,
         is_featured: true,
         prep_time: "200 years"
     },
@@ -71,7 +70,6 @@ const recipes: Recipe[] = [
         cook_time: "20 millennia",
         ingredients: "Bread, Bread",
         recipe_steps: "Step 1: cook\nStep 2: DON'T eat",
-        category_id: 1,
         is_featured: false,
         prep_time: "8000 years"
     },
@@ -82,7 +80,6 @@ const recipes: Recipe[] = [
         cook_time: "20 eternities",
         ingredients: "Superpowers, Bread",
         recipe_steps: "Step 1: create\nStep 2: LIVE",
-        category_id: 2,
         is_featured: false,
         prep_time: "12 seconds"
     },
@@ -93,7 +90,6 @@ const recipes: Recipe[] = [
         cook_time: "20 picoseconds",
         ingredients: "Air",
         recipe_steps: "Breathe",
-        category_id: 2,
         is_featured: false,
         prep_time: "Nothing"
     }
@@ -128,7 +124,6 @@ const exercises: Exercise[] = [
         thumbnail_link: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.verywellfit.com%2Fthmb%2FFA7LqmnXM77quHgCLvVZIYWkeFA%3D%2F2125x1416%2Ffilters%3Afill(FFDB5D%2C1)%2FGettyImages-598308041-5707ef713df78c7d9ea4f5ee.jpg",
         video_link: "https://www.youtube.com/embed/K6fCnO9TjG0",
         is_featured: true,
-        category_id: 1
     },
     {
         id: 2,
@@ -136,7 +131,6 @@ const exercises: Exercise[] = [
         thumbnail_link: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.verywellfit.com%2Fthmb%2FFA7LqmnXM77quHgCLvVZIYWkeFA%3D%2F2125x1416%2Ffilters%3Afill(FFDB5D%2C1)%2FGettyImages-598308041-5707ef713df78c7d9ea4f5ee.jpg",
         video_link: "https://www.youtube.com/embed/K6fCnO9TjG0",
         is_featured: false,
-        category_id: 1
     }
 ];
 

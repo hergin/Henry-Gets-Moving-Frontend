@@ -84,6 +84,20 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
+    .search-wrapper{
+      border: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      input{
+        width: auto;
+      }
+      span {
+        display: flex;
+        align-items: center;
+        align-content: center;
+      }
+    }
 
     label {
       font-size: 1.2rem;

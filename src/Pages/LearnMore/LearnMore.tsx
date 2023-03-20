@@ -54,13 +54,13 @@ const LearnMore = () => {
     const demoLayout = (individualDemo: Demonstration[], filter: string) => {
         return individualDemo.filter((demo) => {
             if (filter === "") return true;
-            return demo.demonstrationCategory?.id.toString() === filter;
+            return (demo.demoCategories?.map(x => x.name).join(", ")!).includes(filter);
         }).map((demo) => {
                 return (
                     <div className='grid-content'>
                        <img src={demo.thumbnail_link} onClick={e => (setSelectedDemo(demo))} alt={demo.name + " Thumbnail"}/>
                         <p className='name'>{demo.name}</p>
-                        <p className='category'>{demo.demonstrationCategory?.name}</p>
+                        <p className='category'>{demo.demoCategories?.map(x => x.name).join(", ")}</p>
                     </div>
                 )
             }

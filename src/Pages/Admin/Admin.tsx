@@ -17,6 +17,7 @@ import {API_URL} from "../../API";
 import {Link} from "react-router-dom";
 import BackArrow from "../../Components/BackArrow/BackArrow";
 import {Helmet, HelmetProvider} from "react-helmet-async";
+import {Multiselect} from "multiselect-react-dropdown";
 
 const Admin = () => {
     const [recipes, setRecipes] = useState([] as Recipe[]);
@@ -27,11 +28,11 @@ const Admin = () => {
     const [demo, setDemo] = useState({} as Demonstration)
     const [recipe, setRecipe] = useState({} as Recipe)
     const [exercise, setExercise] = useState({} as Exercise)
-    const [exerciseCategory, setExerciseCategory] = useState({} as ExerciseCategory)
+    const [selectedExerciseCategories, setSelectedExerciseCategories] = useState([] as ExerciseCategory[])
     const [exerciseCategories, setExerciseCategories] = useState([] as ExerciseCategory[])
-    const [recipeCategory, setRecipeCategory] = useState({} as RecipeCategory)
+    const [selectedRecipeCategories, setSelectedRecipeCategories] = useState([] as RecipeCategory[])
     const [recipeCategories, setRecipeCategories] = useState([] as RecipeCategory[])
-    const [demonstrationCategory, setDemonstrationCategory] = useState({} as DemonstrationCategory)
+    const [selectedDemoCategories, setSelectedDemoCategories] = useState([] as DemonstrationCategory[])
     const [demonstrationCategories, setDemonstrationCategories] = useState([] as DemonstrationCategory[])
     const [currentFeaturedExercise, setCurrentFeaturedExercise] = useState({} as Exercise)
     const [currentFeaturedRecipe, setCurrentFeaturedRecipe] = useState({} as Recipe)
@@ -118,27 +119,41 @@ const Admin = () => {
             return {...(demos[index] as Demonstration)}
 
         })
-        setDemonstrationCategory((demos[index].demonstrationCategory as DemonstrationCategory))
+        console.log(demos)
+        setSelectedDemoCategories((demos[index].demoCategories as DemonstrationCategory[]))
     }
 
     const saveDemonstration = async (event: React.FormEvent<HTMLFormElement>) => {
+        const catIDS = selectedDemoCategories.map((category) => {return category.id})
         event.preventDefault()
         const formData = new FormData()
         formData.append("name", demo.name)
         formData.append("video_link", demo.video_link.includes("watch?v=") ? API.parseEmbedLink(demo.video_link) : demo.video_link)
         formData.append("thumbnail_link", demo.thumbnail_link)
-        formData.append("demonstration_category_id", String(demo.demonstration_category_id))
         if (demo.id) {
             await fetch(`${API_URL}/demos/${demo.id}`, {
                 method: 'PUT',
                 body: formData,
-            }).then((response) => {
+            }).then(async (response) => {
                 if (response.status >= 400 && response.status < 600) {
                     alert("Bad response from server")
                 } else {
-                    window.alert("Demonstration submitted!")
-                    window.location.reload()
-                    return response.json()
+                    await fetch(`${API_URL}/setDemoCategories/${demo.id}`, {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(catIDS),
+                    }).then((response) => {
+                        if (response.status >= 400 && response.status < 600) {
+                            alert("Bad response from server")
+                        } else {
+                            window.alert("Demonstration submitted!")
+                            window.location.reload()
+                            return response.json()
+                        }
+                    })
                 }
             })
         } else {
@@ -149,9 +164,28 @@ const Admin = () => {
                 if (response.status >= 400 && response.status < 600) {
                     alert("Bad response from server")
                 } else {
-                    window.alert("Demonstration submitted!")
-                    window.location.reload()
                     return response.json()
+                }
+            }).then(async (response) => {
+                if (response.status >= 400 && response.status < 600) {
+                    alert("Bad response from server")
+                } else {
+                    await fetch(`${API_URL}/setDemoCategories/${response.id}`, {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(catIDS),
+                    }).then((response) => {
+                        if (response.status >= 400 && response.status < 600) {
+                            alert("Bad response from server")
+                        } else {
+                            window.alert("Demo submitted!")
+                            window.location.reload()
+                            return response.json()
+                        }
+                    })
                 }
             })
         }
@@ -181,7 +215,7 @@ const Admin = () => {
             return {...(exercises[index] as Exercise)}
 
         })
-        setExerciseCategory((exercises[index].exerciseCategory as ExerciseCategory))
+        setSelectedExerciseCategories((exercises[index].exerciseCategories as ExerciseCategory[]))
     }
 
     const saveExercise = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -189,11 +223,11 @@ const Admin = () => {
         const thumbnail = await fetch(`https://noembed.com/embed?dataType=json&url=` + exercise.video_link).then((response) => {
             return response.json()
         })
+        const catIDS = selectedExerciseCategories.map((category) => {return category.id})
         const formData = new FormData()
         formData.append("name", exercise.name)
         formData.append("video_link", exercise.video_link.includes("watch?v=") ? API.parseEmbedLink(exercise.video_link) : exercise.video_link)
         formData.append("thumbnail_link", thumbnail.thumbnail_url)
-        formData.append("category_id", String(exercise.category_id))
         if (exercise.is_featured) {
             formData.append("is_featured", String(exercise.is_featured))
         } else {
@@ -203,13 +237,27 @@ const Admin = () => {
             await fetch(`${API_URL}/exercises/${exercise.id}`, {
                 method: 'PUT',
                 body: formData,
-            }).then((response) => {
+            }).then(async (response) => {
                 if (response.status >= 400 && response.status < 600) {
                     alert("Bad response from server")
                 } else {
-                    window.alert("Exercise submitted!")
-                    window.location.reload()
-                    return response.json()
+                    await fetch(`${API_URL}/setExerciseCategories/${exercise.id}`, {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(catIDS),
+                    }).then((response) => {
+                        if (response.status >= 400 && response.status < 600) {
+                            alert("Bad response from server")
+                        }
+                        else {
+                            window.alert("Exercise submitted!")
+                            window.location.reload()
+                            return response.json()
+                        }
+                    })
                 }
             })
         } else {
@@ -220,9 +268,28 @@ const Admin = () => {
                 if (response.status >= 400 && response.status < 600) {
                     alert("Bad response from server")
                 } else {
-                    window.alert("Exercise submitted!")
-                    window.location.reload()
                     return response.json()
+                }
+            }).then(async (response) => {
+                if (response.status >= 400 && response.status < 600) {
+                    alert("Bad response from server")
+                } else {
+                    await fetch(`${API_URL}/setExerciseCategories/${response.id}`, {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(catIDS),
+                    }).then((response) => {
+                        if (response.status >= 400 && response.status < 600) {
+                            alert("Bad response from server")
+                        } else {
+                            window.alert("Exercise submitted!")
+                            window.location.reload()
+                            return response.json()
+                        }
+                    })
                 }
             })
         }
@@ -253,10 +320,11 @@ const Admin = () => {
             return {...(recipes[index] as Recipe)}
 
         })
-        setRecipeCategory((recipes[index].recipeCategory as RecipeCategory))
+        setSelectedRecipeCategories((recipes[index].recipeCategories as RecipeCategory[]))
     }
     const saveRecipe = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
+        const catIDS = selectedRecipeCategories.map((category) => {return category.id})
         const formData = new FormData()
         formData.append("name", recipe.name)
         formData.append("thumbnail", recipe.thumbnail)
@@ -264,7 +332,6 @@ const Admin = () => {
         formData.append("ingredients", recipe.ingredients)
         formData.append("recipe_steps", recipe.recipe_steps)
         formData.append("prep_time", recipe.prep_time)
-        formData.append("category_id", String(recipe.category_id))
         if (recipe.is_featured) {
             formData.append("is_featured", String(exercise.is_featured))
         } else {
@@ -274,13 +341,26 @@ const Admin = () => {
             await fetch(`${API_URL}/recipes/${recipe.id}`, {
                 method: 'PUT',
                 body: formData,
-            }).then((response) => {
+            }).then(async (response) => {
                 if (response.status >= 400 && response.status < 600) {
                     alert("Bad response from server")
                 } else {
-                    window.alert("Recipe submitted!")
-                    window.location.reload()
-                    return response.json()
+                    await fetch(`${API_URL}/setRecipeCategories/${recipe.id}`, {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(catIDS),
+                    }).then((response) => {
+                        if (response.status >= 400 && response.status < 600) {
+                            alert("Bad response from server")
+                        } else {
+                            window.alert("Recipe submitted!")
+                            window.location.reload()
+                            return response.json()
+                        }
+                    })
                 }
             })
         } else {
@@ -291,9 +371,28 @@ const Admin = () => {
                 if (response.status >= 400 && response.status < 600) {
                     alert("Bad response from server")
                 } else {
-                    window.alert("Recipe submitted!")
-                    window.location.reload()
                     return response.json()
+                }
+            }).then(async (response) => {
+                if (response.status >= 400 && response.status < 600) {
+                    alert("Bad response from server")
+                } else {
+                    await fetch(`${API_URL}/setRecipeCategories/${response.id}`, {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(catIDS),
+                    }).then((response) => {
+                        if (response.status >= 400 && response.status < 600) {
+                            alert("Bad response from server")
+                        } else {
+                            window.alert("Recipe submitted!")
+                            window.location.reload()
+                            return response.json()
+                        }
+                    })
                 }
             })
         }
@@ -346,6 +445,7 @@ const Admin = () => {
         })
     }
 
+    // @ts-ignore
     return (
         <div className='admin'>
             <HelmetProvider>
@@ -384,7 +484,8 @@ const Admin = () => {
                             </div>
                             <div className='field'>
                                 <label>Video Link</label>
-                                <input placeholder="https://www.youtube.com/watch?v=00000000" title={exercise?.video_link}
+                                <input placeholder="https://www.youtube.com/watch?v=00000000"
+                                       title={exercise?.video_link}
                                        value={exercise?.video_link ? String(exercise?.video_link) : ""}
                                        onChange={event => {
                                            setExercise((exercise) => {
@@ -395,23 +496,19 @@ const Admin = () => {
                             </div>
                             <div className='field'>
                                 <label>Category</label>
-                                <select
-                                    defaultValue={""}
-                                    onChange={event => {
-                                        event.preventDefault()
-                                        setExercise(exercise => {
-                                            return {
-                                                ...exercise,
-                                                category_id: parseInt(event.target.value)
-                                            } as Exercise
-                                        })
-                                    }}>
-                                    <option value="" disabled>Select Category</option>
-                                    {exerciseCategories && exerciseCategories.map((category) => (
-                                        <option selected={category.id == exercise.category_id}
-                                                value={category.id}>{category?.name}</option>
-                                    ))}
-                                </select>
+                                <Multiselect
+                                             onKeyPressFn={function noRefCheck(){}}
+                                             onRemove={(selectedList) => {
+                                                 setSelectedExerciseCategories(selectedList)
+                                             }}
+                                             onSearch={function noRefCheck(){}}
+                                             onSelect={(selectedList) => {
+                                                 setSelectedExerciseCategories(selectedList)
+                                             }}
+                                             selectedValues={selectedExerciseCategories}
+                                             placeholder={"Select Categories"}
+                                             options={exerciseCategories}
+                                             displayValue="name"/>
                             </div>
                             <div className='buttons'>
                                 <button className='delete' onClick={deleteExercise}>Delete Exercise</button>
@@ -467,23 +564,19 @@ const Admin = () => {
                             </div>
                             <div className='field'>
                                 <label>Category</label>
-                                <select
-                                    defaultValue={""}
-                                    onChange={event => {
-                                        event.preventDefault()
-                                        setDemo(demo => {
-                                            return {
-                                                ...demo,
-                                                demonstration_category_id: parseInt(event.target.value)
-                                            } as Demonstration
-                                        })
-                                    }}>
-                                    <option value="" disabled>Select Category</option>
-                                    {demonstrationCategories && demonstrationCategories.map((category) => (
-                                        <option selected={category.id == demo.demonstration_category_id}
-                                                value={category.id}>{category?.name}</option>
-                                    ))}
-                                </select>
+                                <Multiselect
+                                    onKeyPressFn={function noRefCheck(){}}
+                                    onRemove={(selectedList) => {
+                                        setSelectedDemoCategories(selectedList)
+                                    }}
+                                    onSearch={function noRefCheck(){}}
+                                    onSelect={(selectedList) => {
+                                        setSelectedDemoCategories(selectedList)
+                                    }}
+                                    selectedValues={selectedDemoCategories}
+                                    placeholder={"Select Categories"}
+                                    options={demonstrationCategories}
+                                    displayValue="name"/>
                             </div>
                             <div className='buttons'>
                                 <button className='delete' onClick={deleteDemonstration}>Delete Demo</button>
@@ -592,20 +685,20 @@ const Admin = () => {
                             </div>
                             <div className='field'>
                                 <label>Category</label>
-                                <select
-                                    defaultValue={""}
-                                    onChange={event => {
-                                        event.preventDefault()
-                                        setRecipe(recipe => {
-                                            return {...recipe, category_id: parseInt(event.target.value)} as Recipe
-                                        })
-                                    }}>
-                                    <option value="" disabled>Select Category</option>
-                                    {recipeCategories && recipeCategories.map((category) => (
-                                        <option selected={category.id == recipe.category_id}
-                                                value={category.id}>{category?.name}</option>
-                                    ))}
-                                </select>
+                                <Multiselect
+                                    className={"multiSelect"}
+                                    onKeyPressFn={function noRefCheck(){}}
+                                    onRemove={(selectedList) => {
+                                        setSelectedRecipeCategories(selectedList)
+                                    }}
+                                    onSearch={function noRefCheck(){}}
+                                    onSelect={(selectedList) => {
+                                        setSelectedRecipeCategories(selectedList)
+                                    }}
+                                    selectedValues={selectedRecipeCategories}
+                                    placeholder={"Select Categories"}
+                                    options={recipeCategories}
+                                    displayValue="name"/>
                             </div>
                             <div className='field'>
                                 <label>Prep Time</label>
