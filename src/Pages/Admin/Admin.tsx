@@ -27,7 +27,7 @@ const Admin = () => {
     const [demo, setDemo] = useState({} as Demonstration)
     const [recipe, setRecipe] = useState({} as Recipe)
     const [exercise, setExercise] = useState({} as Exercise)
-    const [exerciseCategory, setExerciseCategory] = useState({} as ExerciseCategory)
+    const [selectedExerciseCategories, setSelectedExerciseCategories] = useState([] as ExerciseCategory[])
     const [exerciseCategories, setExerciseCategories] = useState([] as ExerciseCategory[])
     const [recipeCategory, setRecipeCategory] = useState({} as RecipeCategory)
     const [recipeCategories, setRecipeCategories] = useState([] as RecipeCategory[])
@@ -51,6 +51,21 @@ const Admin = () => {
         API.getFeaturedExercise().then((exercise) => setCurrentFeaturedExercise(exercise))
         API.getFeaturedRecipe().then((recipe) => setCurrentFeaturedRecipe(recipe))
     }, [])
+
+    // @ts-ignore
+    const toggleOption = (option) => {
+        setSelectedExerciseCategories(prevSelected => {
+            // if it's in, remove
+            const newArray = [...prevSelected]
+            if (newArray.includes(option)) {
+                return newArray.filter(item => item != option)
+                // else, add
+            } else {
+                newArray.push(option)
+                return newArray;
+            }
+        })
+    }
 
     const loadDiagram = (event: React.FormEvent<HTMLSelectElement>) => {
         event.preventDefault()
@@ -181,7 +196,7 @@ const Admin = () => {
             return {...(exercises[index] as Exercise)}
 
         })
-        setExerciseCategory((exercises[index].exerciseCategory as ExerciseCategory))
+        setSelectedExerciseCategories((exercises[index].exerciseCategories as ExerciseCategory[]))
     }
 
     const saveExercise = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -189,11 +204,13 @@ const Admin = () => {
         const thumbnail = await fetch(`https://noembed.com/embed?dataType=json&url=` + exercise.video_link).then((response) => {
             return response.json()
         })
+        const catIDS = selectedExerciseCategories.map((category) => {return category.id})
+        const categoryFormData = new FormData()
+        categoryFormData.append("categories", JSON.stringify(catIDS))
         const formData = new FormData()
         formData.append("name", exercise.name)
         formData.append("video_link", exercise.video_link.includes("watch?v=") ? API.parseEmbedLink(exercise.video_link) : exercise.video_link)
         formData.append("thumbnail_link", thumbnail.thumbnail_url)
-        formData.append("category_id", String(exercise.category_id))
         if (exercise.is_featured) {
             formData.append("is_featured", String(exercise.is_featured))
         } else {
@@ -203,13 +220,27 @@ const Admin = () => {
             await fetch(`${API_URL}/exercises/${exercise.id}`, {
                 method: 'PUT',
                 body: formData,
-            }).then((response) => {
+            }).then(async (response) => {
                 if (response.status >= 400 && response.status < 600) {
                     alert("Bad response from server")
                 } else {
-                    window.alert("Exercise submitted!")
-                    window.location.reload()
-                    return response.json()
+                    await fetch(`${API_URL}/setExerciseCategories/${exercise.id}`, {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(catIDS),
+                    }).then((response) => {
+                        if (response.status >= 400 && response.status < 600) {
+                            alert("Bad response from server")
+                        }
+                        else {
+                            window.alert("Exercise submitted!")
+                            window.location.reload()
+                            return response.json()
+                        }
+                    })
                 }
             })
         } else {
@@ -220,9 +251,28 @@ const Admin = () => {
                 if (response.status >= 400 && response.status < 600) {
                     alert("Bad response from server")
                 } else {
-                    window.alert("Exercise submitted!")
-                    window.location.reload()
                     return response.json()
+                }
+            }).then(async (response) => {
+                if (response.status >= 400 && response.status < 600) {
+                    alert("Bad response from server")
+                } else {
+                    await fetch(`${API_URL}/setExerciseCategories/${response.id}`, {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(catIDS),
+                    }).then((response) => {
+                        if (response.status >= 400 && response.status < 600) {
+                            alert("Bad response from server")
+                        } else {
+                            window.alert("Exercise submitted!")
+                            window.location.reload()
+                            return response.json()
+                        }
+                    })
                 }
             })
         }
@@ -346,6 +396,7 @@ const Admin = () => {
         })
     }
 
+    // @ts-ignore
     return (
         <div className='admin'>
             <HelmetProvider>
@@ -384,7 +435,8 @@ const Admin = () => {
                             </div>
                             <div className='field'>
                                 <label>Video Link</label>
-                                <input placeholder="https://www.youtube.com/watch?v=00000000" title={exercise?.video_link}
+                                <input placeholder="https://www.youtube.com/watch?v=00000000"
+                                       title={exercise?.video_link}
                                        value={exercise?.video_link ? String(exercise?.video_link) : ""}
                                        onChange={event => {
                                            setExercise((exercise) => {
@@ -395,23 +447,23 @@ const Admin = () => {
                             </div>
                             <div className='field'>
                                 <label>Category</label>
-                                <select
-                                    defaultValue={""}
-                                    onChange={event => {
-                                        event.preventDefault()
-                                        setExercise(exercise => {
-                                            return {
-                                                ...exercise,
-                                                category_id: parseInt(event.target.value)
-                                            } as Exercise
-                                        })
-                                    }}>
-                                    <option value="" disabled>Select Category</option>
-                                    {exerciseCategories && exerciseCategories.map((category) => (
-                                        <option selected={category.id == exercise.category_id}
-                                                value={category.id}>{category?.name}</option>
-                                    ))}
-                                </select>
+                                <div className="c-multi-select-dropdown">
+                                    <div className="c-multi-select-dropdown__selected">
+                                        <div>{selectedExerciseCategories.map((selected) => {return `${selected.name} `})}</div>
+                                    </div>
+                                    <ul className="c-multi-select-dropdown__options">
+                                        {exerciseCategories.map(option => {
+                                            const isSelected = selectedExerciseCategories.includes(option);
+
+                                            return (
+                                                <li className="c-multi-select-dropdown__option" onClick={() => toggleOption(option)}>
+                                                    <input type="checkbox" checked={isSelected} className="c-multi-select-dropdown__option-checkbox"></input>
+                                                    <span>{option.name}</span>
+                                                </li>
+                                            )
+                                        })}
+                                    </ul>
+                                </div>
                             </div>
                             <div className='buttons'>
                                 <button className='delete' onClick={deleteExercise}>Delete Exercise</button>
