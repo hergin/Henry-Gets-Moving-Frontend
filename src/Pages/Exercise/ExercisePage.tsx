@@ -86,7 +86,7 @@ const ExercisePage = () => {
                             <img src={exercise.thumbnail_link} onClick={e => (setSelectedExercise(exercise))}
                                  alt={exercise.name + " Thumbnail"}/>
                             <p className='name'>{exercise.name}</p>
-                            <p className='category'>{exercise.exerciseCategory?.name}</p>
+                            <p className='category'>{exercise.exerciseCategories?.map(x => x.name).join(", ")}</p>
                         </div>
 
                     </>
@@ -243,7 +243,7 @@ const ExercisePage = () => {
                             </div>
                             <div className='exercise-text'>
                                 <p className='dbox-name'>{selectedExercise.name}</p>
-                                <p className='dbox-category'>{selectedExercise.exerciseCategory?.name}</p>
+                                <p className='dbox-category'>{selectedExercise.exerciseCategories?.map(x => x.name).join(", ")}</p>
                             </div>
                         </div>
                         <div>
