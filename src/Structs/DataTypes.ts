@@ -8,7 +8,7 @@ export type Recipe = {
     recipe_steps: string,
     category_id: number,
     is_featured: boolean,
-    recipeCategory?: RecipeCategory
+    recipeCategories?: [RecipeCategory]
 }
 export type RecipeCategory = {
     id: number,
