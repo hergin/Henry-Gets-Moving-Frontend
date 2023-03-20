@@ -22,7 +22,7 @@ export type Exercise = {
     video_link: string,
     is_featured: boolean,
     category_id: number,
-    exerciseCategory?: ExerciseCategory
+    exerciseCategories?: [ExerciseCategory]
 }
 export type ExerciseCategory = {
     id: number,
