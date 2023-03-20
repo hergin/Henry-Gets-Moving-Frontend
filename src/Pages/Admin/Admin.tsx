@@ -314,7 +314,6 @@ const Admin = () => {
         formData.append("ingredients", recipe.ingredients)
         formData.append("recipe_steps", recipe.recipe_steps)
         formData.append("prep_time", recipe.prep_time)
-        formData.append("category_id", String(recipe.category_id))
         if (recipe.is_featured) {
             formData.append("is_featured", String(exercise.is_featured))
         } else {
