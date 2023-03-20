@@ -102,6 +102,7 @@ const Calendar = () => {
                             <p>Exercise Type</p>
                             <p>Duration</p>
                             <p>Intensity</p>
+                            <p>Delete</p>
                         </div>}
                     {(!exerciseLogs || exerciseLogs.filter((log) => {return new Date(log.date).toDateString() == selectedDate.toDateString() && log.family_member_id == familyMember.id}).length == 0) &&
                         <div className='no-logs'>
