@@ -32,7 +32,7 @@ export type Demonstration = {
     name: string,
     thumbnail_link: string,
     video_link: string,
-    demonstrationCategories?: [DemonstrationCategory]
+    demoCategories?: [DemonstrationCategory]
 }
 
 export type Diagram = {

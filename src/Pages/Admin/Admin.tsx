@@ -32,7 +32,7 @@ const Admin = () => {
     const [exerciseCategories, setExerciseCategories] = useState([] as ExerciseCategory[])
     const [selectedRecipeCategories, setSelectedRecipeCategories] = useState([] as RecipeCategory[])
     const [recipeCategories, setRecipeCategories] = useState([] as RecipeCategory[])
-    const [demonstrationCategory, setDemonstrationCategory] = useState({} as DemonstrationCategory)
+    const [selectedDemoCategories, setSelectedDemoCategories] = useState([] as DemonstrationCategory[])
     const [demonstrationCategories, setDemonstrationCategories] = useState([] as DemonstrationCategory[])
     const [currentFeaturedExercise, setCurrentFeaturedExercise] = useState({} as Exercise)
     const [currentFeaturedRecipe, setCurrentFeaturedRecipe] = useState({} as Recipe)
@@ -52,21 +52,6 @@ const Admin = () => {
         API.getFeaturedExercise().then((exercise) => setCurrentFeaturedExercise(exercise))
         API.getFeaturedRecipe().then((recipe) => setCurrentFeaturedRecipe(recipe))
     }, [])
-
-    // @ts-ignore
-    const toggleOption = (option) => {
-        setSelectedExerciseCategories(prevSelected => {
-            // if it's in, remove
-            const newArray = [...prevSelected]
-            if (newArray.includes(option)) {
-                return newArray.filter(item => item != option)
-                // else, add
-            } else {
-                newArray.push(option)
-                return newArray;
-            }
-        })
-    }
 
     const loadDiagram = (event: React.FormEvent<HTMLSelectElement>) => {
         event.preventDefault()
@@ -134,27 +119,41 @@ const Admin = () => {
             return {...(demos[index] as Demonstration)}
 
         })
-        setDemonstrationCategory((demos[index].demonstrationCategory as DemonstrationCategory))
+        console.log(demos)
+        setSelectedDemoCategories((demos[index].demoCategories as DemonstrationCategory[]))
     }
 
     const saveDemonstration = async (event: React.FormEvent<HTMLFormElement>) => {
+        const catIDS = selectedDemoCategories.map((category) => {return category.id})
         event.preventDefault()
         const formData = new FormData()
         formData.append("name", demo.name)
         formData.append("video_link", demo.video_link.includes("watch?v=") ? API.parseEmbedLink(demo.video_link) : demo.video_link)
         formData.append("thumbnail_link", demo.thumbnail_link)
-        formData.append("demonstration_category_id", String(demo.demonstration_category_id))
         if (demo.id) {
             await fetch(`${API_URL}/demos/${demo.id}`, {
                 method: 'PUT',
                 body: formData,
-            }).then((response) => {
+            }).then(async (response) => {
                 if (response.status >= 400 && response.status < 600) {
                     alert("Bad response from server")
                 } else {
-                    window.alert("Demonstration submitted!")
-                    window.location.reload()
-                    return response.json()
+                    await fetch(`${API_URL}/setDemoCategories/${demo.id}`, {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(catIDS),
+                    }).then((response) => {
+                        if (response.status >= 400 && response.status < 600) {
+                            alert("Bad response from server")
+                        } else {
+                            window.alert("Demonstration submitted!")
+                            window.location.reload()
+                            return response.json()
+                        }
+                    })
                 }
             })
         } else {
@@ -165,9 +164,28 @@ const Admin = () => {
                 if (response.status >= 400 && response.status < 600) {
                     alert("Bad response from server")
                 } else {
-                    window.alert("Demonstration submitted!")
-                    window.location.reload()
                     return response.json()
+                }
+            }).then(async (response) => {
+                if (response.status >= 400 && response.status < 600) {
+                    alert("Bad response from server")
+                } else {
+                    await fetch(`${API_URL}/setDemoCategories/${response.id}`, {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(catIDS),
+                    }).then((response) => {
+                        if (response.status >= 400 && response.status < 600) {
+                            alert("Bad response from server")
+                        } else {
+                            window.alert("Demo submitted!")
+                            window.location.reload()
+                            return response.json()
+                        }
+                    })
                 }
             })
         }
@@ -546,23 +564,19 @@ const Admin = () => {
                             </div>
                             <div className='field'>
                                 <label>Category</label>
-                                <select
-                                    defaultValue={""}
-                                    onChange={event => {
-                                        event.preventDefault()
-                                        setDemo(demo => {
-                                            return {
-                                                ...demo,
-                                                demonstration_category_id: parseInt(event.target.value)
-                                            } as Demonstration
-                                        })
-                                    }}>
-                                    <option value="" disabled>Select Category</option>
-                                    {demonstrationCategories && demonstrationCategories.map((category) => (
-                                        <option selected={category.id == demo.demonstration_category_id}
-                                                value={category.id}>{category?.name}</option>
-                                    ))}
-                                </select>
+                                <Multiselect
+                                    onKeyPressFn={function noRefCheck(){}}
+                                    onRemove={(selectedList) => {
+                                        setSelectedDemoCategories(selectedList)
+                                    }}
+                                    onSearch={function noRefCheck(){}}
+                                    onSelect={(selectedList) => {
+                                        setSelectedDemoCategories(selectedList)
+                                    }}
+                                    selectedValues={selectedDemoCategories}
+                                    placeholder={"Select Categories"}
+                                    options={demonstrationCategories}
+                                    displayValue="name"/>
                             </div>
                             <div className='buttons'>
                                 <button className='delete' onClick={deleteDemonstration}>Delete Demo</button>
