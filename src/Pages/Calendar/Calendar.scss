@@ -155,7 +155,7 @@
     }
 
     .red-button{
-      width: 6%;
+      width: 9%;
       font-size: 1.3rem;
     }
   }
@@ -163,6 +163,19 @@
   @media (max-width: 750px) {
     .react-calendar__navigation {
       text-align: center;
+    }
+    .legend{
+      p{
+        font-size: 1rem;
+      }
+    }
+    .log{
+      p{
+        font-size:1rem;
+      }
+    }
+    .red-button{
+      padding: 0 5px;
     }
   }
 }
