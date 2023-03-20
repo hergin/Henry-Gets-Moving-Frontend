@@ -17,6 +17,7 @@ import {API_URL} from "../../API";
 import {Link} from "react-router-dom";
 import BackArrow from "../../Components/BackArrow/BackArrow";
 import {Helmet, HelmetProvider} from "react-helmet-async";
+import {Multiselect} from "multiselect-react-dropdown";
 
 const Admin = () => {
     const [recipes, setRecipes] = useState([] as Recipe[]);
@@ -29,7 +30,7 @@ const Admin = () => {
     const [exercise, setExercise] = useState({} as Exercise)
     const [selectedExerciseCategories, setSelectedExerciseCategories] = useState([] as ExerciseCategory[])
     const [exerciseCategories, setExerciseCategories] = useState([] as ExerciseCategory[])
-    const [recipeCategory, setRecipeCategory] = useState({} as RecipeCategory)
+    const [selectedRecipeCategories, setSelectedRecipeCategories] = useState([] as RecipeCategory[])
     const [recipeCategories, setRecipeCategories] = useState([] as RecipeCategory[])
     const [demonstrationCategory, setDemonstrationCategory] = useState({} as DemonstrationCategory)
     const [demonstrationCategories, setDemonstrationCategories] = useState([] as DemonstrationCategory[])
@@ -205,8 +206,6 @@ const Admin = () => {
             return response.json()
         })
         const catIDS = selectedExerciseCategories.map((category) => {return category.id})
-        const categoryFormData = new FormData()
-        categoryFormData.append("categories", JSON.stringify(catIDS))
         const formData = new FormData()
         formData.append("name", exercise.name)
         formData.append("video_link", exercise.video_link.includes("watch?v=") ? API.parseEmbedLink(exercise.video_link) : exercise.video_link)
@@ -303,10 +302,11 @@ const Admin = () => {
             return {...(recipes[index] as Recipe)}
 
         })
-        setRecipeCategory((recipes[index].recipeCategory as RecipeCategory))
+        setSelectedRecipeCategories((recipes[index].recipeCategories as RecipeCategory[]))
     }
     const saveRecipe = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
+        const catIDS = selectedRecipeCategories.map((category) => {return category.id})
         const formData = new FormData()
         formData.append("name", recipe.name)
         formData.append("thumbnail", recipe.thumbnail)
@@ -324,13 +324,26 @@ const Admin = () => {
             await fetch(`${API_URL}/recipes/${recipe.id}`, {
                 method: 'PUT',
                 body: formData,
-            }).then((response) => {
+            }).then(async (response) => {
                 if (response.status >= 400 && response.status < 600) {
                     alert("Bad response from server")
                 } else {
-                    window.alert("Recipe submitted!")
-                    window.location.reload()
-                    return response.json()
+                    await fetch(`${API_URL}/setRecipeCategories/${recipe.id}`, {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(catIDS),
+                    }).then((response) => {
+                        if (response.status >= 400 && response.status < 600) {
+                            alert("Bad response from server")
+                        } else {
+                            window.alert("Recipe submitted!")
+                            window.location.reload()
+                            return response.json()
+                        }
+                    })
                 }
             })
         } else {
@@ -341,9 +354,28 @@ const Admin = () => {
                 if (response.status >= 400 && response.status < 600) {
                     alert("Bad response from server")
                 } else {
-                    window.alert("Recipe submitted!")
-                    window.location.reload()
                     return response.json()
+                }
+            }).then(async (response) => {
+                if (response.status >= 400 && response.status < 600) {
+                    alert("Bad response from server")
+                } else {
+                    await fetch(`${API_URL}/setRecipeCategories/${response.id}`, {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(catIDS),
+                    }).then((response) => {
+                        if (response.status >= 400 && response.status < 600) {
+                            alert("Bad response from server")
+                        } else {
+                            window.alert("Recipe submitted!")
+                            window.location.reload()
+                            return response.json()
+                        }
+                    })
                 }
             })
         }
@@ -447,23 +479,19 @@ const Admin = () => {
                             </div>
                             <div className='field'>
                                 <label>Category</label>
-                                <div className="c-multi-select-dropdown">
-                                    <div className="c-multi-select-dropdown__selected">
-                                        <div>{selectedExerciseCategories.map((selected) => {return `${selected.name} `})}</div>
-                                    </div>
-                                    <ul className="c-multi-select-dropdown__options">
-                                        {exerciseCategories.map(option => {
-                                            const isSelected = selectedExerciseCategories.includes(option);
-
-                                            return (
-                                                <li className="c-multi-select-dropdown__option" onClick={() => toggleOption(option)}>
-                                                    <input type="checkbox" checked={isSelected} className="c-multi-select-dropdown__option-checkbox"></input>
-                                                    <span>{option.name}</span>
-                                                </li>
-                                            )
-                                        })}
-                                    </ul>
-                                </div>
+                                <Multiselect
+                                             onKeyPressFn={function noRefCheck(){}}
+                                             onRemove={(selectedList) => {
+                                                 setSelectedExerciseCategories(selectedList)
+                                             }}
+                                             onSearch={function noRefCheck(){}}
+                                             onSelect={(selectedList) => {
+                                                 setSelectedExerciseCategories(selectedList)
+                                             }}
+                                             selectedValues={selectedExerciseCategories}
+                                             placeholder={"Select Categories"}
+                                             options={exerciseCategories}
+                                             displayValue="name"/>
                             </div>
                             <div className='buttons'>
                                 <button className='delete' onClick={deleteExercise}>Delete Exercise</button>
@@ -644,20 +672,20 @@ const Admin = () => {
                             </div>
                             <div className='field'>
                                 <label>Category</label>
-                                <select
-                                    defaultValue={""}
-                                    onChange={event => {
-                                        event.preventDefault()
-                                        setRecipe(recipe => {
-                                            return {...recipe, category_id: parseInt(event.target.value)} as Recipe
-                                        })
-                                    }}>
-                                    <option value="" disabled>Select Category</option>
-                                    {recipeCategories && recipeCategories.map((category) => (
-                                        <option selected={category.id == recipe.category_id}
-                                                value={category.id}>{category?.name}</option>
-                                    ))}
-                                </select>
+                                <Multiselect
+                                    className={"multiSelect"}
+                                    onKeyPressFn={function noRefCheck(){}}
+                                    onRemove={(selectedList) => {
+                                        setSelectedRecipeCategories(selectedList)
+                                    }}
+                                    onSearch={function noRefCheck(){}}
+                                    onSelect={(selectedList) => {
+                                        setSelectedRecipeCategories(selectedList)
+                                    }}
+                                    selectedValues={selectedRecipeCategories}
+                                    placeholder={"Select Categories"}
+                                    options={recipeCategories}
+                                    displayValue="name"/>
                             </div>
                             <div className='field'>
                                 <label>Prep Time</label>
