@@ -78,7 +78,7 @@ const ExercisePage = () => {
     const exerciseLayout = (individualExercise: Exercise[], filter: string) => {
         return  individualExercise.filter((exercise) => {
             if (filter === "") return true;
-            return exercise.category_id.toString() === filter;
+            return (exercise.exerciseCategories?.map(x => x.name).join(", ")!).includes(filter);
         }).map((exercise) => {
                 return (
                     <>
