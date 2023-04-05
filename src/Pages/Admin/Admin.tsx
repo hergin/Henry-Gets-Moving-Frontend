@@ -40,6 +40,7 @@ const Admin = () => {
     const [newFeaturedRecipe, setNewFeaturedRecipe] = useState({} as Recipe)
     const [newCategoryType, setNewCategoryType] = useState("")
     const [newCategoryName, setNewCategoryName] = useState("")
+    const [deleteCategoryName, deleteCategoryType] = useState("")
 
     useEffect(() => {
         API.getRecipes().then((recipes) => setRecipes(recipes));
@@ -439,6 +440,23 @@ const Admin = () => {
                 alert("Bad response from server")
             } else {
                 alert("New Category Added")
+                window.location.reload()
+                return res.json()
+            }
+        })
+    }
+    const deleteCategory = async (e: {preventDefault:()=>void;}) => {
+        e.preventDefault();
+        const formData = new FormData();
+        formData.append("name", deleteCategoryName);
+        await fetch(`${API_URL}/${deleteCategoryType}`, {
+            method: 'DELETE',
+            body: formData
+        }).then((res) => {
+            if (res.status >= 400 && res.status < 600) {
+                alert("Bad response from server")
+            } else {
+                alert(`Category ${deleteCategoryName} deleted`);
                 window.location.reload()
                 return res.json()
             }
