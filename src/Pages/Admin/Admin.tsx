@@ -40,7 +40,8 @@ const Admin = () => {
     const [newFeaturedRecipe, setNewFeaturedRecipe] = useState({} as Recipe)
     const [newCategoryType, setNewCategoryType] = useState("")
     const [newCategoryName, setNewCategoryName] = useState("")
-    const [deleteCategoryName, deleteCategoryType] = useState("")
+    const [deleteCategoryName, setDeleteCategoryName] = useState("")
+    const [deleteCategoryType, setDeleteCategoryType] = useState("")
 
     useEffect(() => {
         API.getRecipes().then((recipes) => setRecipes(recipes));
