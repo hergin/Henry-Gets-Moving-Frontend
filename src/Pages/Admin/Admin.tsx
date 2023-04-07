@@ -42,7 +42,7 @@ const Admin = () => {
     const [newCategoryName, setNewCategoryName] = useState("")
     const [deleteCategoryName, setDeleteCategoryName] = useState("")
     const [deleteCategoryType, setDeleteCategoryType] = useState("")
-    var deleteCategoryValues: any[] = [];
+    const [deleteCategoryValues, setDeleteCategoryValues] = useState([] as any[]);
 
     useEffect(() => {
         API.getRecipes().then((recipes) => setRecipes(recipes));
