@@ -122,7 +122,6 @@ const Admin = () => {
             return {...(demos[index] as Demonstration)}
 
         })
-        console.log(demos)
         setSelectedDemoCategories((demos[index].demoCategories as DemonstrationCategory[]))
     }
 
@@ -452,6 +451,10 @@ const Admin = () => {
     }
     const deleteCategory = async (e: {preventDefault:()=>void;}) => {
         e.preventDefault();
+        if (deleteCategoryName === "select" || !deleteCategoryName) {
+            window.alert("Please select a category");
+            return;
+        }
         const formData = new FormData();
         formData.append("name", deleteCategoryName);
         await fetch(`${API_URL}/${deleteCategoryType}`, {
