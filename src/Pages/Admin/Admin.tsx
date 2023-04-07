@@ -638,25 +638,25 @@ const Admin = () => {
                                 <div className='add-categories'>
                                     <select className='add-category-for' onChange={(e) => {
                                         switch (e.target.value) {
-                                            case "demoCategories": deleteCategoryValues = demonstrationCategories; break;
-                                            case "exerciseCategories": deleteCategoryValues = exerciseCategories; break;
-                                            case "recipeCategories": deleteCategoryValues = recipeCategories; break;
-                                        }
+                                            case "demoCategories": setDeleteCategoryValues(demonstrationCategories); break;
+                                            case "exerciseCategories": setDeleteCategoryValues(exerciseCategories); break;
+                                            case "recipeCategories": setDeleteCategoryValues(recipeCategories); break;
+                                        }; setDeleteCategoryType(e.target.value);
                                     }}>
-                                        <option value=" ">Delete Category From</option>
+                                        <option value=" " disabled selected>Delete Category From</option>
                                         <option value={"demoCategories"}>Demonstrations</option>
                                         <option value={"exerciseCategories"}>Exercises</option>
                                         <option value={"recipeCategories"}>Recipes</option>
                                     </select>
                                     <select onChange={setDeleteCategory}>
-                                        <option value="select">Select Category</option>
+                                        <option value="select" disabled selected>Select Category</option>
                                         {deleteCategoryValues && deleteCategoryValues.map((category) => (
                                             <option value={category.name}>{category.name}</option>
                                         ))}</select>
                                 </div>
                             </div>
                             <div className='otd-save'>
-                                <button className='save' onClick={deleteCategory}>Delete Category</button>
+                                <button className='delete' onClick={deleteCategory}>Delete Category</button>
                             </div>
                         </form>
                     </div>
