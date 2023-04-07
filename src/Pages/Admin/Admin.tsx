@@ -42,6 +42,7 @@ const Admin = () => {
     const [newCategoryName, setNewCategoryName] = useState("")
     const [deleteCategoryName, setDeleteCategoryName] = useState("")
     const [deleteCategoryType, setDeleteCategoryType] = useState("")
+    var deleteCategoryValues: any[] = [];
 
     useEffect(() => {
         API.getRecipes().then((recipes) => setRecipes(recipes));
@@ -313,7 +314,10 @@ const Admin = () => {
             })
         }
     }
-
+    const setDeleteCategory = (event: React.FormEvent<HTMLSelectElement>) => {
+        event.preventDefault();
+        setDeleteCategoryName(event.currentTarget.value);
+    }
     const loadRecipe = (event: React.FormEvent<HTMLSelectElement>) => {
         event.preventDefault()
         const index: number = parseInt(event.currentTarget.value, 10)
@@ -623,6 +627,33 @@ const Admin = () => {
                             </div>
                             <div className='otd-save'>
                                 <button className='save' onClick={addCategory}>Save Category</button>
+                            </div>
+                        </form>
+                        <form className='add-category-form'>
+                            <div className='field'>
+                                <label>Delete Category</label>
+                                <div className='add-categories'>
+                                    <select className='add-category-for' onChange={(e) => {
+                                        switch (e.target.value) {
+                                            case "demoCategories": deleteCategoryValues = demonstrationCategories; break;
+                                            case "exerciseCategories": deleteCategoryValues = exerciseCategories; break;
+                                            case "recipeCategories": deleteCategoryValues = recipeCategories; break;
+                                        }
+                                    }}>
+                                        <option value=" ">Delete Category From</option>
+                                        <option value={"demoCategories"}>Demonstrations</option>
+                                        <option value={"exerciseCategories"}>Exercises</option>
+                                        <option value={"recipeCategories"}>Recipes</option>
+                                    </select>
+                                    <select onChange={setDeleteCategory}>
+                                        <option value="select">Select Category</option>
+                                        {deleteCategoryValues && deleteCategoryValues.map((category) => (
+                                            <option value={category.name}>{category.name}</option>
+                                        ))}</select>
+                                </div>
+                            </div>
+                            <div className='otd-save'>
+                                <button className='save' onClick={deleteCategory}>Delete Category</button>
                             </div>
                         </form>
                     </div>
