@@ -128,7 +128,7 @@ const Admin = () => {
         event.preventDefault()
         const formData = new FormData()
         formData.append("name", demo.name)
-        formData.append("video_link", demo.video_link.includes("watch?v=") ? API.parseEmbedLink(demo.video_link) : demo.video_link)
+        formData.append("video_link", API.parseEmbedLink(demo.video_link))
         formData.append("thumbnail_link", demo.thumbnail_link)
         if (demo.id) {
             await fetch(`${API_URL}/demos/${demo.id}`, {
@@ -226,7 +226,7 @@ const Admin = () => {
         const catIDS = selectedExerciseCategories.map((category) => {return category.id})
         const formData = new FormData()
         formData.append("name", exercise.name)
-        formData.append("video_link", exercise.video_link.includes("watch?v=") ? API.parseEmbedLink(exercise.video_link) : exercise.video_link)
+        formData.append("video_link", API.parseEmbedLink(exercise.video_link))
         formData.append("thumbnail_link", thumbnail.thumbnail_url)
         if (exercise.is_featured) {
             formData.append("is_featured", String(exercise.is_featured))
@@ -553,7 +553,7 @@ const Admin = () => {
                             </div>
                             <div className='field'>
                                 <label>Video Link</label>
-                                <input placeholder="https://www.youtube.com/embed/00000000" title={demo?.video_link}
+                                <input placeholder="https://www.youtube.com/watch?v=00000000" title={demo?.video_link}
                                        value={demo?.video_link ? String(demo?.video_link) : ""}
                                        onChange={event => {
                                            setDemo((demo) => {
