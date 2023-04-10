@@ -131,6 +131,17 @@ const Calendar = () => {
                         )
                     })}
                 </div>
+                <div className="edit-menu">
+                    <p>Edit {familyMember.name}</p>
+                    <label htmlFor="name-changer">Name</label>
+                    <input type="text" id="name-changer" onChange={event => {
+                        setFamilyMember((member) => {
+                            return {...member, name: event.target.value}
+                        })
+                    }}>{familyMember.name}</input>
+
+                    <button className="red-button" onClick={editFamilyMember}>Save changes</button>
+                </div>
                 <div className='swings'>
                     <img src={swings} alt={"Henry and Jasmine on Swings"}/>
                 </div>
