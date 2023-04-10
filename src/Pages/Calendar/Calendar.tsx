@@ -156,6 +156,7 @@ const Calendar = () => {
                     }}>{familyMember.name}</input>
 
                     <button className="red-button" onClick={editFamilyMember}>Save changes</button>
+                    <button className="red-button" onClick={deleteFamilyMember}>Delete family member</button>
                 </div>
                 <div className='swings'>
                     <img src={swings} alt={"Henry and Jasmine on Swings"}/>
