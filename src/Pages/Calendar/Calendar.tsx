@@ -33,6 +33,7 @@ const Calendar = () => {
         if (newName == familyMember.name) return;
         const formData = new FormData();
         formData.append("name", newName);
+        formData.append("user_id", String(familyMember.user_id))
         await fetch(`${API.API_URL}/familyMembers/${familyMember.id}`, {
                 method: 'PUT',
                 headers: {
