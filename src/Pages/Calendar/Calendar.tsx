@@ -44,6 +44,19 @@ const Calendar = () => {
                 }
             })
     }
+    async function deleteFamilyMember() {
+        await fetch(`${API.API_URL}/familyMember/${familyMember.id}`, {
+                method: 'DELETE',
+            }).then((res) => {
+                if (res.status >= 400 && res.status < 600) {
+                    alert("Error deleting family member")
+                } else {
+                    alert("Family member successfully deleted!")
+                    window.location.reload()
+                    return res.json()
+                }
+            })
+    }
     const [selectedDate, selectDay] = useState(new Date());
     const [members, setFamilyMembers] = useState([] as FamilyMember[]);
     const [familyMember, setFamilyMember] = useState({} as FamilyMember)
