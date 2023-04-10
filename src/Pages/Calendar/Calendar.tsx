@@ -29,6 +29,21 @@ const Calendar = () => {
             })
         }
     }
+    async function editFamilyMember() {
+        const formData = new FormData();
+        formData.append("name", familyMember.name);
+        await fetch(`${API.API_URL}/familyMembers/${familyMember.id}`, {
+                method: 'PUT',
+            }).then((res) => {
+                if (res.status >= 400 && res.status < 600) {
+                    alert("Error editing family member")
+                } else {
+                    alert("Changes saved!")
+                    window.location.reload()
+                    return res.json()
+                }
+            })
+    }
     const [selectedDate, selectDay] = useState(new Date());
     const [members, setFamilyMembers] = useState([] as FamilyMember[]);
     const [familyMember, setFamilyMember] = useState({} as FamilyMember)
