@@ -30,8 +30,9 @@ const Calendar = () => {
         }
     }
     async function editFamilyMember() {
+        if (newName == familyMember.name) return;
         const formData = new FormData();
-        formData.append("name", familyMember.name);
+        formData.append("name", newName);
         await fetch(`${API.API_URL}/familyMembers/${familyMember.id}`, {
                 method: 'PUT',
             }).then((res) => {
@@ -62,6 +63,7 @@ const Calendar = () => {
     const [members, setFamilyMembers] = useState([] as FamilyMember[]);
     const [familyMember, setFamilyMember] = useState({} as FamilyMember)
     const [exerciseLogs, setExerciseLogs] = useState([] as ExerciseLog[])
+    const [newName, setNewName] = useState("")
     const [dailyTime, setDailyTime] = useState(0)
     useEffect(() => {
         API.getFamilyMembers().then((members) => {
@@ -72,6 +74,8 @@ const Calendar = () => {
         API.getExerciseLogs().then((logs) => {
             setExerciseLogs(logs)
         })
+        console.log(newName)
+        console.log(Boolean(newName))
     }, []);
     if(members.length == 0){
         return (
@@ -163,13 +167,9 @@ const Calendar = () => {
                 <div className="edit-menu">
                     <p>Edit {familyMember.name}</p>
                     <label htmlFor="name-changer">Name</label>
-                    <input type="text" id="name-changer" value={familyMember.name} onChange={event => {
-                        setFamilyMember((member) => {
-                            return {...member, name: event.target.value}
-                        })
-                    }}></input>
+                    <input type="text" id="name-changer" defaultValue={familyMember.name} onChange={event => {setNewName(event.target.value);}}></input>
 
-                    <button className="red-button" onClick={editFamilyMember}>Save changes</button>
+                    <button className="red-button" onClick={editFamilyMember} disabled={newName == familyMember.name || !Boolean(newName)}>Save changes</button>
                     <button className="red-button" onClick={deleteFamilyMember}>Delete family member</button>
                 </div>
                 <div className='swings'>
