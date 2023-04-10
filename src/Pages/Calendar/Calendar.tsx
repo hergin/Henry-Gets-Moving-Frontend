@@ -35,6 +35,10 @@ const Calendar = () => {
         formData.append("name", newName);
         await fetch(`${API.API_URL}/familyMembers/${familyMember.id}`, {
                 method: 'PUT',
+                headers: {
+                    Authorization: `Bearer ${sessionStorage.getItem("session_key")}`
+                },
+                body: formData
             }).then((res) => {
                 if (res.status >= 400 && res.status < 600) {
                     alert("Error editing family member")
@@ -49,6 +53,9 @@ const Calendar = () => {
         if (!window.confirm(`Are you sure you want to delete ${familyMember.name}? This action cannot be undone!`)) return;
         await fetch(`${API.API_URL}/familyMember/${familyMember.id}`, {
                 method: 'DELETE',
+                headers: {
+                    Authorization: `Bearer ${sessionStorage.getItem("session_key")}`
+                }
             }).then((res) => {
                 if (res.status >= 400 && res.status < 600) {
                     alert("Error deleting family member")
