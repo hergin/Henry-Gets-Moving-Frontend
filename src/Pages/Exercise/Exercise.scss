@@ -159,10 +159,6 @@
 
     .grid-content > img {
       height: 165px;
-      &:hover {
-        transform: translateY(-10px);
-        transition: transform 0.2s ease 0s;
-      }
     }
 
     .see-more:hover{
