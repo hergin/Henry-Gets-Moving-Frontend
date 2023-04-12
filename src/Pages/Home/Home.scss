@@ -58,6 +58,9 @@
       text-decoration: none;
       width: 80%;
       text-align: center;
+      &:visited{
+        color:black;
+      }
     }
 
     img {
@@ -92,9 +95,9 @@
       margin-bottom: 5em;
     }
     .of-the-day{
-      width: 90%;
+      width: 85%;
       a{
-        width: 70%;
+        width: 100%;
       }
     }
   }
