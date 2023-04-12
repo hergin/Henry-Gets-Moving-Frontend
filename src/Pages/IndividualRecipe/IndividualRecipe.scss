@@ -64,6 +64,8 @@
       width: 30%;
       img{
         height: 35vh;
+        object-fit: cover;
+        object-position: center;
       }
     }
     p {
