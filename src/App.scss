@@ -45,6 +45,9 @@ img {
   padding: 5px 20px;
   text-shadow: 0 4px 4px #00000040;
   cursor: pointer;
+  &:hover{
+    background-color: #f33945;
+  }
 }
 
 .footer {
