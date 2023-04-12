@@ -5,9 +5,10 @@
     margin-bottom: 20px;
   }
 
-  .otd-image{
+  .otd-image {
     width: 20%;
     margin-right: 20px;
+
     img {
       width: 100%;
       margin-right: 20px;
@@ -93,6 +94,11 @@
     }
   }
 
+  .grid-content > img {
+    object-position: center;
+    height: 125px;
+  }
+
   .name {
     font-size: 1.4rem;
     font-weight: 700;
@@ -124,7 +130,7 @@
 
   //Desktop Styling
   @media (min-width: 1050px) {
-    .otd-text{
+    .otd-text {
       p {
         font-size: 1.6rem;
       }
@@ -133,7 +139,7 @@
     h2 {
       font-size: 2rem;
     }
-    .trophy-text{
+    .trophy-text {
       font-size: 1.4rem;
     }
 
@@ -142,20 +148,38 @@
       margin: 0 10em;
     }
 
-    .desktop-dialog{
+    .desktop-dialog {
       display: flex;
     }
 
-    .exercise-text{
+    .exit-button {
+      width: 3%;
+      margin-left: 20px;
+    }
+
+    .grid-content > img {
+      height: 165px;
+      &:hover {
+        transform: translateY(-10px);
+        transition: transform 0.2s ease 0s;
+      }
+    }
+
+    .see-more:hover{
+      transform: translateY(-5px);
+      transition: transform 0.2s ease 0s;
+    }
+
+    .exercise-text {
       display: flex;
       flex-direction: column;
       justify-content: center;
     }
 
-    .select-link{
+    .select-link {
       width: 85%;
     }
-    .exercise-grid{
+    .exercise-grid {
       padding-bottom: 4em;
     }
 
@@ -196,7 +220,7 @@
     .exercise-log {
       margin-bottom: 2em;
     }
-    .exercise-log-exercise{
+    .exercise-log-exercise {
       margin-bottom: 1em;
     }
 
@@ -211,12 +235,12 @@
       width: 40%;
     }
 
-    .name{
+    .name {
       font-size: 1.2rem;
       text-align: center;
     }
 
-    .category{
+    .category {
       font-size: 1rem;
     }
   }
