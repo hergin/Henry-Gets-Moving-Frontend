@@ -28,6 +28,13 @@ const ExercisePage = () => {
     const [members, setFamilyMembers] = useState([] as FamilyMember[]);
     const [familyMember, setFamilyMember] = useState({} as FamilyMember)
 
+    document.addEventListener('keydown', function (event) {
+        const key = event.key; // const {key} = event; in ES6+
+        if (key === "Escape") {
+            setSelectedExercise(null);
+        }
+    });
+
     useEffect(() => {
         API.getPaginatedExercises(String(1)).then((response) => setExercises(response.data));
         API.getPaginatedExercises(String(page)).then((response) => {
