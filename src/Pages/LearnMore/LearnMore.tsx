@@ -16,7 +16,14 @@ const LearnMore = () => {
     const [selectedCategory, setSelectedCategory] = useState("");
     const [diagrams, setDiagrams] = useState([] as Diagram[])
     const [page, setPage] = useState(2)
-    const [noMoreDemos, setNoMoreDemos] = useState(false)
+    const [noMoreDemos, setNoMoreDemos] = useState(false);
+
+    document.addEventListener('keydown', function (event) {
+        const key = event.key; // const {key} = event; in ES6+
+        if (key === "Escape") {
+            setSelectedDemo(null);
+        }
+    });
 
     useEffect(() => {
         API.getPaginatedDemos('1').then((demos) => setDemos(demos.data));
