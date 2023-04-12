@@ -69,7 +69,7 @@
     display: flex;
     flex-flow: row wrap;
     margin: auto;
-    width: 88%;
+    width: 90%;
     justify-content: space-between;
     padding-bottom: 2em;
 
@@ -77,7 +77,6 @@
       width: 100%;
       box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
       cursor: pointer;
-      height: 100%;
     }
   }
 
@@ -101,6 +100,9 @@
     width: 5%;
     margin-left: 20px;
   }
+  .grid-content > img{
+    height: 200px;
+  }
 
   //Desktop Styling
   @media (min-width: 1050px) {
@@ -110,6 +112,13 @@
     }
     .exit-button{
       width: 3%;
+    }
+    .demo-grid{
+      width: 88%;
+    }
+
+    .grid-content > img{
+      height: 250px;
     }
   }
   //Phone Styling
@@ -137,6 +146,9 @@
     }
     .exit-button{
       width: 10%;
+    }
+    .grid-content > img{
+      height: 150px;
     }
   }
 }
