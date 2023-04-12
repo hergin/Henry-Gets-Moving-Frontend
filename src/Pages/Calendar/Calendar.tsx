@@ -52,7 +52,7 @@ const Calendar = () => {
     }
     async function deleteFamilyMember() {
         if (!window.confirm(`Are you sure you want to delete ${familyMember.name}? This action cannot be undone!`)) return;
-        await fetch(`${API.API_URL}/familyMember/${familyMember.id}`, {
+        await fetch(`${API.API_URL}/familyMembers/${familyMember.id}`, {
                 method: 'DELETE',
                 headers: {
                     Authorization: `Bearer ${sessionStorage.getItem("session_key")}`
