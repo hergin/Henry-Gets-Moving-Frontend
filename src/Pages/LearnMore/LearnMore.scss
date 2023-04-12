@@ -97,11 +97,19 @@
     font-size: 1.2rem;
   }
 
+  .exit-button{
+    width: 5%;
+    margin-left: 20px;
+  }
+
   //Desktop Styling
   @media (min-width: 1050px) {
     .episode-player {
       width: 50%;
       margin: 0 auto;
+    }
+    .exit-button{
+      width: 3%;
     }
   }
   //Phone Styling
@@ -126,6 +134,9 @@
     }
     .content{
       width: 45%;
+    }
+    .exit-button{
+      width: 10%;
     }
   }
 }
