@@ -10,9 +10,12 @@ interface BackArrowProps {
 export default function BackArrow({route}: BackArrowProps) {
     return (
         <div className="back-arrow">
-            <Link to={route}>
+            <Link to={route} className='tablet'>
                 <img src={back} alt="Back"/>
                 <p>Back</p>
+            </Link>
+            <Link to={route} className='desktop'>
+                <div className='arrow'/>
             </Link>
         </div>
     );
