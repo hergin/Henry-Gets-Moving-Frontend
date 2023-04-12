@@ -161,6 +161,86 @@
     background-color: white;
     border: none;
     cursor: pointer;
+    width: 10%;
+    img{
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+  .background-color{
+    background: rgba(153, 153, 153, 0.7);
+  }
+
+  form{
+    padding: 20px;
+    margin: 100px auto;
+  }
+
+  label {
+    margin: 1em 0;
+    font-weight: 700;
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+  }
+
+  .label-input {
+    display: flex;
+    justify-content: space-between;
+
+    p {
+      text-align: center;
+    }
+  }
+
+  .intensity-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 5px;
+
+    img {
+      width: 65px;
+      cursor: pointer;
+    }
+  }
+
+  input {
+    padding: .6em;
+    font-size: 1.2rem;
+    border-radius: 10px;
+    border: 1px solid black;
+    margin: auto 0 auto auto;
+    width: 60%;
+  }
+
+  .icons{
+    display: flex;
+    width: 65%;
+    justify-content: space-between;
+  }
+
+  .intensity {
+    display: flex;
+  }
+
+  .selected{
+    background-color:rgba(0,0,0,.25);
+    border-radius: 10px;
+    padding: 5px;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: space-around;
+    margin: 1em 0;
+  }
+
+  .red-button {
+    font-size: 1.2rem;
+    font-weight: 600;
   }
 
   //Desktop Styling
@@ -177,7 +257,7 @@
     }
 
     .red-button{
-      width: 9%;
+      width: 25%;
       font-size: 1.3rem;
     }
     .edit-content{
@@ -201,6 +281,12 @@
         background-color: white;
       }
     }
+    .edit-button{
+      width: 5%;
+    }
+    .exit-button{
+      width: 5%;
+    }
   }
   //Phone Styling
   @media (max-width: 750px) {
@@ -216,8 +302,32 @@
       p{
         font-size:1rem;
       }
+      >img{
+        width: 10%;
+      }
     }
     .red-button{
+      padding: 10px 20px;
+      font-size: 1rem;
+    }
+
+    label{
+      font-size: 1rem;
+    }
+    form{
+      width: 80%;
+      margin: 300px auto;
+    }
+    input{
+      font-size: 1rem;
+    }
+    .intensity-icon{
+      img{
+        width: 40px;
+      }
+    }
+    .edit-button{
+      width: 15%;
       padding: 5px;
     }
     .edit-content{
