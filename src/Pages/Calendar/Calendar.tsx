@@ -173,7 +173,8 @@ const Calendar = () => {
                                                 </div>
                                             </div>
                                             <div className='buttons'>
-                                                <button className='red-button' type="submit">Log Exercise</button>
+                                                <button className='red-button' type="submit">Delete Log</button>
+                                                <button className='red-button' type="submit">Save Log</button>
                                             </div>
                                         </form>
                                     </div>
