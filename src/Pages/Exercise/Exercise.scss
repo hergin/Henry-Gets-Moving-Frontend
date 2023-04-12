@@ -128,11 +128,6 @@
     display: flex;
   }
 
-  .exit-button{
-    width: 5%;
-    margin-left: 20px;
-  }
-
   //Desktop Styling
   @media (min-width: 1050px) {
     .otd-text {
@@ -159,10 +154,15 @@
 
     .exit-button {
       width: 3%;
+      margin-left: 20px;
     }
 
     .grid-content > img {
       height: 165px;
+      &:hover {
+        transform: translateY(-10px);
+        transition: transform 0.2s ease 0s;
+      }
     }
 
     .see-more:hover{
@@ -242,12 +242,6 @@
 
     .category {
       font-size: 1rem;
-    }
-    .exit-button{
-      width: 10%;
-    }
-    .grid-content > img{
-      height: 95px;
     }
   }
 }
