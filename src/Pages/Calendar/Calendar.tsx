@@ -13,6 +13,10 @@ import ModerateIntensity from '../../Assets/ModerateIntensity.svg'
 import VigorousIntensity from '../../Assets/VigorousIntensity.svg'
 import {Link} from "react-router-dom";
 import Edit from '../../Assets/Edit.svg'
+import exit from "../../Assets/Exit.svg";
+import light from "../../Assets/LightIntensity.svg";
+import medium from "../../Assets/ModerateIntensity.svg";
+import hard from "../../Assets/VigorousIntensity.svg";
 
 const Calendar = () => {
     async function deleteLog(logToDelete: ExerciseLog) {
@@ -36,6 +40,7 @@ const Calendar = () => {
     const [exerciseLogs, setExerciseLogs] = useState([] as ExerciseLog[])
     const [dailyTime, setDailyTime] = useState(0)
     const [selectedLog, setSelectedLog] = useState<null | ExerciseLog>(null);
+    const [intensity, setIntensity] = useState("");
     useEffect(() => {
         API.getFamilyMembers().then((members) => {
             setFamilyMembers(members)
@@ -129,6 +134,52 @@ const Calendar = () => {
                                     <img src={VigorousIntensity}/>
                                 }
                                 {<button className={'edit-button'} onClick={e => (setSelectedLog(log))}><img src={Edit} alt={"Edit"}/></button>}
+                                {selectedLog &&
+                                <div className='dialog-box'>
+                                    <div className='background-color'>
+                                        <form>
+                                            <div className='exit-button'>
+                                                <img src={exit} alt='Exit' onClick={e => (setSelectedLog(null))}/>
+                                            </div>
+                                            <div className='log-input'>
+                                                <div className='label-input'>
+                                                    <label>Child's Name</label>
+                                                    <input/>
+                                                </div>
+                                                <div className='label-input'>
+                                                    <label>Exercise Type</label>
+                                                    <input/>
+                                                </div>
+                                                <div className='intensity label-input'>
+                                                    <label>Intensity</label>
+                                                    <div className="icons">
+                                                        <div className={intensity === 'Light' ? 'intensity-icon selected' : "intensity-icon"} onClick={(e => setIntensity("Light"))}>
+                                                            <img src={light} alt={"Light Intensity"} />
+                                                            <p>Light</p>
+                                                        </div>
+                                                        <div className={intensity === 'Moderate' ? 'intensity-icon selected' : "intensity-icon"} onClick={(e => setIntensity("Moderate"))}>
+                                                            <img src={medium} alt={"Moderate Intensity"}/>
+                                                            <p>Moderate</p>
+                                                        </div>
+                                                        <div className={intensity === 'Vigorous' ? 'intensity-icon selected' : "intensity-icon"} onClick={(e => setIntensity("Vigorous"))}>
+                                                            <img src={hard} alt={"Vigorous Intensity"}/>
+                                                            <p>Vigorous</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className='label-input'>
+                                                    <label>Duration</label>
+                                                    <input placeholder="# of Minutes"/>
+                                                </div>
+                                            </div>
+                                            <div className='buttons'>
+                                                <button className='red-button' type="submit">Log Exercise</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div className='background'/>
+                                </div>
+                                }
                             </div>
                         )
                     })}
