@@ -37,7 +37,7 @@
     align-items: center;
     justify-content: space-evenly;
     width: 100%;
-    padding-bottom: 5em;
+    padding-bottom: 10em;
   }
 
   .of-the-day {
@@ -56,7 +56,7 @@
     a {
       font-size: 1.6rem;
       text-decoration: none;
-      width: 50%;
+      width: 80%;
       text-align: center;
     }
 
@@ -70,13 +70,6 @@
     }
   }
 
-  @media (max-width: 1050px) and (min-width: 1000px) {
-    .otd-div {
-      margin-top: 5em;
-    }
-  }
-
-
   //Desktop Styling
   @media (min-width: 1050px) {
     .home-content {
@@ -84,9 +77,13 @@
     }
 
     .otd-div {
-      margin-bottom: 5em;
+      margin-bottom: 2em;
     }
-
+    .of-the-day{
+      a{
+        width: 50%;
+      }
+    }
   }
   //Phone Styling
   @media (max-width: 750px) {
