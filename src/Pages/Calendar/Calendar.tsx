@@ -83,6 +83,10 @@ const Calendar = () => {
     const [dailyTime, setDailyTime] = useState(0)
     const [selectedLog, setSelectedLog] = useState<null | ExerciseLog>(null);
     const [intensity, setIntensity] = useState("");
+    const [formIntensity, setFormIntensity] = useState("");
+    const [formChild, setFormChild] = useState("");
+    const [formExercise, setFormExercise] = useState("");
+    const [formDuration, setFormDuration] = useState("");
     useEffect(() => {
         API.getFamilyMembers().then((members) => {
             setFamilyMembers(members)
@@ -205,24 +209,49 @@ const Calendar = () => {
                                             <div className='log-input'>
                                                 <div className='label-input'>
                                                     <label>Child's Name</label>
-                                                    <input/>
+                                                    <input defaultValue={selectedLog.name} onChange={(event) => {
+                                                        setSelectedLog((log) => {
+                                                            return {...log, name: event.target.value} as ExerciseLog
+                                                        })
+                                                    }
+                                                    }/>
                                                 </div>
                                                 <div className='label-input'>
                                                     <label>Exercise Type</label>
-                                                    <input/>
+                                                    <input defaultValue={selectedLog.type} onChange={(event) => {
+                                                        setSelectedLog((log) => {
+                                                            return {...log, type: event.target.value} as ExerciseLog
+                                                        })
+                                                    }
+                                                    }/>
                                                 </div>
                                                 <div className='intensity label-input'>
                                                     <label>Intensity</label>
                                                     <div className="icons">
-                                                        <div className={intensity === 'Light' ? 'intensity-icon selected' : "intensity-icon"} onClick={(e => setIntensity("Light"))}>
+                                                        <div className={selectedLog.intensity === 'Light' ? 'intensity-icon selected' : "intensity-icon"} onClick={(event) => {
+                                                            setSelectedLog((log) => {
+                                                                return {...log, intensity: "Light"} as ExerciseLog
+                                                            })
+                                                        }
+                                                        }>
                                                             <img src={light} alt={"Light Intensity"} />
                                                             <p>Light</p>
                                                         </div>
-                                                        <div className={intensity === 'Moderate' ? 'intensity-icon selected' : "intensity-icon"} onClick={(e => setIntensity("Moderate"))}>
+                                                        <div className={selectedLog.intensity  === 'Moderate' ? 'intensity-icon selected' : "intensity-icon"} onClick={(event) => {
+                                                            setSelectedLog((log) => {
+                                                                return {...log, intensity: "Moderate"} as ExerciseLog
+                                                            })
+                                                        }
+                                                        }>
                                                             <img src={medium} alt={"Moderate Intensity"}/>
                                                             <p>Moderate</p>
                                                         </div>
-                                                        <div className={intensity === 'Vigorous' ? 'intensity-icon selected' : "intensity-icon"} onClick={(e => setIntensity("Vigorous"))}>
+                                                        <div className={selectedLog.intensity  === 'Vigorous' ? 'intensity-icon selected' : "intensity-icon"} onClick={(event) => {
+                                                            setSelectedLog((log) => {
+                                                                return {...log, intensity: "Vigorous"} as ExerciseLog
+                                                            })
+                                                        }
+                                                        }>
                                                             <img src={hard} alt={"Vigorous Intensity"}/>
                                                             <p>Vigorous</p>
                                                         </div>
@@ -230,7 +259,12 @@ const Calendar = () => {
                                                 </div>
                                                 <div className='label-input'>
                                                     <label>Duration</label>
-                                                    <input placeholder="# of Minutes"/>
+                                                    <input placeholder="# of Minutes" defaultValue={selectedLog.duration} onChange={(event) => {
+                                                        setSelectedLog((log) => {
+                                                            return {...log, duration: event.target.value} as ExerciseLog
+                                                        })
+                                                    }
+                                                    }/>
                                                 </div>
                                             </div>
                                             <div className='buttons'>
