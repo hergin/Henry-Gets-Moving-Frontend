@@ -157,6 +157,12 @@
     background-color: white;
   }
 
+  .edit-button{
+    background-color: white;
+    border: none;
+    cursor: pointer;
+  }
+
   //Desktop Styling
   @media (min-width: 1050px) {
     .legend {

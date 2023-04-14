@@ -12,6 +12,7 @@ import LightIntensity from '../../Assets/LightIntensity.svg'
 import ModerateIntensity from '../../Assets/ModerateIntensity.svg'
 import VigorousIntensity from '../../Assets/VigorousIntensity.svg'
 import {Link} from "react-router-dom";
+import Edit from '../../Assets/Edit.svg'
 
 const Calendar = () => {
     async function deleteLog(logToDelete: ExerciseLog) {
@@ -76,6 +77,7 @@ const Calendar = () => {
     const [exerciseLogs, setExerciseLogs] = useState([] as ExerciseLog[])
     const [newName, setNewName] = useState("")
     const [dailyTime, setDailyTime] = useState(0)
+    const [selectedLog, setSelectedLog] = useState<null | ExerciseLog>(null);
     useEffect(() => {
         API.getFamilyMembers().then((members) => {
             setFamilyMembers(members)
@@ -161,7 +163,7 @@ const Calendar = () => {
                         <p>Exercise Type</p>
                         <p>Duration</p>
                         <p>Intensity</p>
-                        <p>Delete</p>
+                        <p>Edit</p>
                     </div>}
                     {(!exerciseLogs || exerciseLogs.filter((log) => {
                         return new Date(log.date).toDateString() == selectedDate.toDateString() && log.family_member_id == familyMember.id
@@ -187,9 +189,7 @@ const Calendar = () => {
                                 {log.intensity === "Vigorous" &&
                                 <img src={VigorousIntensity}/>
                                 }
-                                {<button className={'red-button'} onClick={function () {
-                                    deleteLog(log)
-                                }}>Delete</button>}
+                                {<button className={'edit-button'} onClick={e => (setSelectedLog(log))}><img src={Edit} alt={"Edit"}/></button>}
                             </div>
                         )
                     })}
