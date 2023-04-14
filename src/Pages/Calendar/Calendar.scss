@@ -141,6 +141,22 @@
     }
   }
 
+  .edit-menu{
+    width: 90%;
+    margin: auto;
+  }
+
+  .edit-content{
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .save:disabled{
+    background-color: white;
+  }
+
   //Desktop Styling
   @media (min-width: 1050px) {
     .legend {
@@ -157,6 +173,27 @@
     .red-button{
       width: 9%;
       font-size: 1.3rem;
+    }
+    .edit-content{
+      width: 70%;
+      label{
+        font-size: 1.4rem;
+        margin-right: 10px;
+      }
+    }
+    #name-changer{
+      margin-right: 10px;
+      font-size: 1.4rem;
+    }
+    .delete{
+      width: 35%;
+    }
+    .save{
+      width: 30%;
+      margin-right: 10px;
+      &:disabled:hover{
+        background-color: white;
+      }
     }
   }
   //Phone Styling
@@ -175,7 +212,21 @@
       }
     }
     .red-button{
-      padding: 0 5px;
+      padding: 5px;
+    }
+    .edit-content{
+      width: 100%;
+      label{
+        margin-right: 10px;
+      }
+    }
+    #name-changer{
+      width: 20%;
+      margin-right: 10px;
+    }
+    .save{
+      margin-right: 10px;
+      padding: 5px;
     }
   }
 }
