@@ -40,6 +40,9 @@ const Admin = () => {
     const [newFeaturedRecipe, setNewFeaturedRecipe] = useState({} as Recipe)
     const [newCategoryType, setNewCategoryType] = useState("")
     const [newCategoryName, setNewCategoryName] = useState("")
+    const [deleteCategoryName, setDeleteCategoryName] = useState("")
+    const [deleteCategoryType, setDeleteCategoryType] = useState("")
+    const [deleteCategoryValues, setDeleteCategoryValues] = useState([] as any[]);
 
     useEffect(() => {
         API.getRecipes().then((recipes) => setRecipes(recipes));
@@ -119,7 +122,6 @@ const Admin = () => {
             return {...(demos[index] as Demonstration)}
 
         })
-        console.log(demos)
         setSelectedDemoCategories((demos[index].demoCategories as DemonstrationCategory[]))
     }
 
@@ -311,7 +313,10 @@ const Admin = () => {
             })
         }
     }
-
+    const setDeleteCategory = (event: React.FormEvent<HTMLSelectElement>) => {
+        event.preventDefault();
+        setDeleteCategoryName(event.currentTarget.value);
+    }
     const loadRecipe = (event: React.FormEvent<HTMLSelectElement>) => {
         event.preventDefault()
         const index: number = parseInt(event.currentTarget.value, 10)
@@ -439,6 +444,27 @@ const Admin = () => {
                 alert("Bad response from server")
             } else {
                 alert("New Category Added")
+                window.location.reload()
+                return res.json()
+            }
+        })
+    }
+    const deleteCategory = async (e: {preventDefault:()=>void;}) => {
+        e.preventDefault();
+        if (deleteCategoryName === "select" || !deleteCategoryName) {
+            window.alert("Please select a category");
+            return;
+        }
+        const formData = new FormData();
+        formData.append("name", deleteCategoryName);
+        await fetch(`${API_URL}/${deleteCategoryType}`, {
+            method: 'DELETE',
+            body: formData
+        }).then((res) => {
+            if (res.status >= 400 && res.status < 600) {
+                alert("Bad response from server")
+            } else {
+                alert(`Category ${deleteCategoryName} deleted`);
                 window.location.reload()
                 return res.json()
             }
@@ -604,6 +630,33 @@ const Admin = () => {
                             </div>
                             <div className='otd-save'>
                                 <button className='save' onClick={addCategory}>Save Category</button>
+                            </div>
+                        </form>
+                        <form className='add-category-form'>
+                            <div className='field'>
+                                <label>Delete Category</label>
+                                <div className='add-categories'>
+                                    <select className='add-category-for' onChange={(e) => {
+                                        switch (e.target.value) {
+                                            case "demoCategories": setDeleteCategoryValues(demonstrationCategories); break;
+                                            case "exerciseCategories": setDeleteCategoryValues(exerciseCategories); break;
+                                            case "recipeCategories": setDeleteCategoryValues(recipeCategories); break;
+                                        }; setDeleteCategoryType(e.target.value);
+                                    }}>
+                                        <option value=" " disabled selected>Delete Category From</option>
+                                        <option value={"demoCategories"}>Demonstrations</option>
+                                        <option value={"exerciseCategories"}>Exercises</option>
+                                        <option value={"recipeCategories"}>Recipes</option>
+                                    </select>
+                                    <select onChange={setDeleteCategory} className='delete-category'>
+                                        <option value="select" disabled selected>Select Category</option>
+                                        {deleteCategoryValues && deleteCategoryValues.map((category) => (
+                                            <option value={category.name}>{category.name}</option>
+                                        ))}</select>
+                                </div>
+                            </div>
+                            <div className='otd-save'>
+                                <button className='delete' onClick={deleteCategory}>Delete Category</button>
                             </div>
                         </form>
                     </div>
