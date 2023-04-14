@@ -15,7 +15,7 @@ import {Link} from "react-router-dom";
 
 const Calendar = () => {
     async function deleteLog(logToDelete: ExerciseLog) {
-        if (window.confirm("Delete this exercise log?")){
+        if (window.confirm("Delete this exercise log?")) {
             await fetch(`${API.API_URL}/exerciseLogs/${logToDelete.id}`, {
                 method: 'DELETE',
             }).then((res) => {
@@ -29,44 +29,47 @@ const Calendar = () => {
             })
         }
     }
+
     async function editFamilyMember() {
         if (newName == familyMember.name) return;
         const formData = new FormData();
         formData.append("name", newName);
         formData.append("user_id", String(familyMember.user_id))
         await fetch(`${API.API_URL}/familyMembers/${familyMember.id}`, {
-                method: 'PUT',
-                headers: {
-                    Authorization: `Bearer ${sessionStorage.getItem("session_key")}`
-                },
-                body: formData
-            }).then((res) => {
-                if (res.status >= 400 && res.status < 600) {
-                    alert("Error editing family member")
-                } else {
-                    alert("Changes saved!")
-                    window.location.reload()
-                    return res.json()
-                }
-            })
+            method: 'PUT',
+            headers: {
+                Authorization: `Bearer ${sessionStorage.getItem("session_key")}`
+            },
+            body: formData
+        }).then((res) => {
+            if (res.status >= 400 && res.status < 600) {
+                alert("Error editing family member")
+            } else {
+                alert("Changes saved!")
+                window.location.reload()
+                return res.json()
+            }
+        })
     }
+
     async function deleteFamilyMember() {
         if (!window.confirm(`Are you sure you want to delete ${familyMember.name}? This action cannot be undone!`)) return;
         await fetch(`${API.API_URL}/familyMember/${familyMember.id}`, {
-                method: 'DELETE',
-                headers: {
-                    Authorization: `Bearer ${sessionStorage.getItem("session_key")}`
-                }
-            }).then((res) => {
-                if (res.status >= 400 && res.status < 600) {
-                    alert("Error deleting family member")
-                } else {
-                    alert("Family member successfully deleted!")
-                    window.location.reload()
-                    return res.json()
-                }
-            })
+            method: 'DELETE',
+            headers: {
+                Authorization: `Bearer ${sessionStorage.getItem("session_key")}`
+            }
+        }).then((res) => {
+            if (res.status >= 400 && res.status < 600) {
+                alert("Error deleting family member")
+            } else {
+                alert("Family member successfully deleted!")
+                window.location.reload()
+                return res.json()
+            }
+        })
     }
+
     const [selectedDate, selectDay] = useState(new Date());
     const [members, setFamilyMembers] = useState([] as FamilyMember[]);
     const [familyMember, setFamilyMember] = useState({} as FamilyMember)
@@ -85,7 +88,7 @@ const Calendar = () => {
         console.log(newName)
         console.log(Boolean(newName))
     }, []);
-    if(members.length == 0){
+    if (members.length == 0) {
         return (
             <div className={"calendar"}>
                 <HelmetProvider>
@@ -96,7 +99,8 @@ const Calendar = () => {
                 <Weather/>
                 <BackArrow route={'/get-moving'}/>
                 <div className='no-submits'>
-                    <p>You have never submitted an exercise log before! To view the calendar, get moving and submit your first log!</p>
+                    <p>You have never submitted an exercise log before! To view the calendar, get moving and submit your
+                        first log!</p>
                     <Link className={'red-button'} to={'/exercise-log'}>Get Moving!</Link>
                 </div>
                 <div className='swings'>
@@ -105,8 +109,7 @@ const Calendar = () => {
                 <Grass/>
             </div>
         )
-    }
-    else{
+    } else {
         return (
             <div className="calendar">
                 <HelmetProvider>
@@ -120,6 +123,19 @@ const Calendar = () => {
                     selectDay(date)
                 }} value={selectedDate} minDate={new Date(2022, 9, 20)}
                                className="date-picker"/>
+                <div className="edit-menu">
+                    <h3>Edit Family Members</h3>
+                    <div className='edit-content'>
+                        <label htmlFor="name-changer">Name</label>
+                        <input type="text" id="name-changer" defaultValue={familyMember.name} onChange={event => {
+                            setNewName(event.target.value);
+                        }}/>
+                        <button className="red-button save" onClick={editFamilyMember}
+                                disabled={newName == familyMember.name || !Boolean(newName)}>Save changes
+                        </button>
+                        <button className="red-button delete" onClick={deleteFamilyMember}>Delete family member</button>
+                    </div>
+                </div>
                 <div className={"date-member-select"}>
                     <h1>On {selectedDate.toLocaleDateString()}…</h1>
                     <select onChange={(event) => {
@@ -137,19 +153,23 @@ const Calendar = () => {
                     </select>
                 </div>
                 <div className='exercise-logs-div'>
-                    {(exerciseLogs && exerciseLogs.filter((log) => {return new Date(log.date).toDateString() == selectedDate.toDateString() && log.family_member_id == familyMember.id}).length != 0) &&
-                        <div className='legend'>
-                            <p>Name</p>
-                            <p>Exercise Type</p>
-                            <p>Duration</p>
-                            <p>Intensity</p>
-                            <p>Delete</p>
-                        </div>}
-                    {(!exerciseLogs || exerciseLogs.filter((log) => {return new Date(log.date).toDateString() == selectedDate.toDateString() && log.family_member_id == familyMember.id}).length == 0) &&
-                        <div className='no-logs'>
-                            <p>There are no exercise logs for {familyMember.name} on this day.</p>
-                            <Link className={'red-button'} to={'/exercise-log'}>Get Moving!</Link>
-                        </div>}
+                    {(exerciseLogs && exerciseLogs.filter((log) => {
+                        return new Date(log.date).toDateString() == selectedDate.toDateString() && log.family_member_id == familyMember.id
+                    }).length != 0) &&
+                    <div className='legend'>
+                        <p>Name</p>
+                        <p>Exercise Type</p>
+                        <p>Duration</p>
+                        <p>Intensity</p>
+                        <p>Delete</p>
+                    </div>}
+                    {(!exerciseLogs || exerciseLogs.filter((log) => {
+                        return new Date(log.date).toDateString() == selectedDate.toDateString() && log.family_member_id == familyMember.id
+                    }).length == 0) &&
+                    <div className='no-logs'>
+                        <p>There are no exercise logs for {familyMember.name} on this day.</p>
+                        <Link className={'red-button'} to={'/exercise-log'}>Get Moving!</Link>
+                    </div>}
                     {exerciseLogs && exerciseLogs.filter((log) => {
                         return new Date(log.date).toDateString() == selectedDate.toDateString() && log.family_member_id == familyMember.id
                     }).map((log) => {
@@ -159,26 +179,20 @@ const Calendar = () => {
                                 <p>{log.type}</p>
                                 <p>{log.duration} minutes</p>
                                 {log.intensity === "Light" &&
-                                    <img src={LightIntensity}/>
+                                <img src={LightIntensity}/>
                                 }
                                 {log.intensity === "Moderate" &&
-                                    <img src={ModerateIntensity}/>
+                                <img src={ModerateIntensity}/>
                                 }
                                 {log.intensity === "Vigorous" &&
-                                    <img src={VigorousIntensity}/>
+                                <img src={VigorousIntensity}/>
                                 }
-                                {<button className={'red-button'} onClick={function () {deleteLog(log)}}>Delete</button>}
+                                {<button className={'red-button'} onClick={function () {
+                                    deleteLog(log)
+                                }}>Delete</button>}
                             </div>
                         )
                     })}
-                </div>
-                <div className="edit-menu">
-                    <p>Edit {familyMember.name}</p>
-                    <label htmlFor="name-changer">Name</label>
-                    <input type="text" id="name-changer" defaultValue={familyMember.name} onChange={event => {setNewName(event.target.value);}}></input>
-
-                    <button className="red-button" onClick={editFamilyMember} disabled={newName == familyMember.name || !Boolean(newName)}>Save changes</button>
-                    <button className="red-button" onClick={deleteFamilyMember}>Delete family member</button>
                 </div>
                 <div className='swings'>
                     <img src={swings} alt={"Henry and Jasmine on Swings"}/>
