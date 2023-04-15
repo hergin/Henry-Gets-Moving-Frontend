@@ -2,7 +2,7 @@ import './Calendar.scss'
 import {Helmet, HelmetProvider} from "react-helmet-async";
 import React, {useEffect, useState} from "react";
 import {Calendar as ReactCalendar} from "react-calendar";
-import API from '../../API';
+import API, {API_URL} from '../../API';
 import {Exercise, ExerciseLog, FamilyMember} from '../../Structs/DataTypes';
 import Weather from "../../Components/Weather";
 import Grass from "../../Components/Grass";
@@ -19,61 +19,6 @@ import medium from "../../Assets/ModerateIntensity.svg";
 import hard from "../../Assets/VigorousIntensity.svg";
 
 const Calendar = () => {
-    async function deleteLog(logToDelete: ExerciseLog) {
-        if (window.confirm("Delete this exercise log?")) {
-            await fetch(`${API.API_URL}/exerciseLogs/${logToDelete.id}`, {
-                method: 'DELETE',
-            }).then((res) => {
-                if (res.status >= 400 && res.status < 600) {
-                    alert("Error deleting log")
-                } else {
-                    alert("Exercise log successfully deleted!")
-                    window.location.reload()
-                    return res.json()
-                }
-            })
-        }
-    }
-
-    async function editFamilyMember() {
-        if (newName == familyMember.name) return;
-        const formData = new FormData();
-        formData.append("name", newName);
-        formData.append("user_id", String(familyMember.user_id))
-        await fetch(`${API.API_URL}/familyMembers/${familyMember.id}`, {
-            method: 'PUT',
-            headers: {
-                Authorization: `Bearer ${sessionStorage.getItem("session_key")}`
-            },
-            body: formData
-        }).then((res) => {
-            if (res.status >= 400 && res.status < 600) {
-                alert("Error editing family member")
-            } else {
-                alert("Changes saved!")
-                window.location.reload()
-                return res.json()
-            }
-        })
-    }
-
-    async function deleteFamilyMember() {
-        if (!window.confirm(`Are you sure you want to delete ${familyMember.name}? This action cannot be undone!`)) return;
-        await fetch(`${API.API_URL}/familyMembers/${familyMember.id}`, {
-            method: 'DELETE',
-            headers: {
-                Authorization: `Bearer ${sessionStorage.getItem("session_key")}`
-            }
-        }).then((res) => {
-            if (res.status >= 400 && res.status < 600) {
-                alert("Error deleting family member")
-            } else {
-                alert("Family member successfully deleted!")
-                window.location.reload()
-                return res.json()
-            }
-        })
-    }
 
     const [selectedDate, selectDay] = useState(new Date());
     const [members, setFamilyMembers] = useState([] as FamilyMember[]);
@@ -99,6 +44,108 @@ const Calendar = () => {
         console.log(newName)
         console.log(Boolean(newName))
     }, []);
+
+    const deleteFamilyMember = async () => {
+        if (!window.confirm(`Are you sure you want to delete ${familyMember.name}? This action cannot be undone!`)) return;
+        await fetch(`${API_URL}/familyMembers/${familyMember.id}`, {
+            method: 'DELETE',
+            headers: {
+                Authorization: `Bearer ${sessionStorage.getItem("session_key")}`
+            }
+        }).then((res) => {
+            if (res.status >= 400 && res.status < 600) {
+                alert("Error deleting family member")
+            } else {
+                alert("Family member successfully deleted!")
+                window.location.reload()
+                return res.json()
+            }
+        })
+    }
+
+    const editFamilyMember = async () => {
+        if (newName == familyMember.name) return;
+        const formData = new FormData();
+        formData.append("name", newName);
+        formData.append("user_id", String(familyMember.user_id))
+        await fetch(`${API_URL}/familyMembers/${familyMember.id}`, {
+            method: 'PUT',
+            headers: {
+                Authorization: `Bearer ${sessionStorage.getItem("session_key")}`
+            },
+            body: formData
+        }).then((res) => {
+            if (res.status >= 400 && res.status < 600) {
+                alert("Error editing family member")
+            } else {
+                alert("Changes saved!")
+                window.location.reload()
+                return res.json()
+            }
+        })
+    }
+    const deleteLog = async (e: { preventDefault: () => void; }) => {
+        e.preventDefault();
+        if (window.confirm("Delete this exercise log?")) {
+            await fetch(`${API_URL}/exerciseLogs/${selectedLog?.id}`, {
+                method: 'DELETE',
+            })
+                .then(response => {
+                    return response.json();
+                })
+                .then(response => {
+                    window.alert("Exercise log deleted!")
+                    window.location.reload()
+                    return response
+                })
+                .catch(err => {
+                    window.alert(err);
+                })
+        }
+    }
+    const updateLog = async (e: { preventDefault: () => void; }) => {
+        e.preventDefault();
+        const formData = new FormData()
+        formData.append("name", selectedLog?.name!)
+        formData.append("intensity", selectedLog?.intensity!)
+        formData.append("duration", selectedLog?.duration!)
+        formData.append("type", selectedLog?.type!)
+        formData.append("date", selectedLog?.date!)
+        const childFormData = new FormData()
+        childFormData.append("name", selectedLog?.name!)
+        console.log(selectedLog)
+        const familyMember = await fetch(`${API_URL}/checkFamilyMember`, {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${sessionStorage.getItem("session_key")}`
+            },
+            body: childFormData,
+        })
+            .then(response => {
+                return response.json();
+            })
+        await formData.append('family_member_id', familyMember.id)
+        return fetch(`${API_URL}/exerciseLogs/${selectedLog?.id}`, {
+            method: "PUT",
+            headers: {
+                Authorization: `Bearer ${sessionStorage.getItem("session_key")}`
+            },
+            body: formData,
+
+        })
+            .then(response => {
+                return response.json();
+            })
+            .then(response => {
+                window.alert("Your exercise log has been updated!")
+                window.location.reload()
+                return response
+            })
+            .catch(err => {
+                window.alert(err);
+            })
+    }
+
     if (members.length == 0) {
         return (
             <div className={"calendar"}>
@@ -202,7 +249,7 @@ const Calendar = () => {
                                 {selectedLog &&
                                 <div className='dialog-box'>
                                     <div className='background-color'>
-                                        <form>
+                                        <form onSubmit={updateLog}>
                                             <div className='exit-button'>
                                                 <img src={exit} alt='Exit' onClick={e => (setSelectedLog(null))}/>
                                             </div>
@@ -268,7 +315,7 @@ const Calendar = () => {
                                                 </div>
                                             </div>
                                             <div className='buttons'>
-                                                <button className='red-button' type="submit">Delete Log</button>
+                                                <button className='red-button' onClick={deleteLog}>Delete Log</button>
                                                 <button className='red-button' type="submit">Save Log</button>
                                             </div>
                                         </form>
