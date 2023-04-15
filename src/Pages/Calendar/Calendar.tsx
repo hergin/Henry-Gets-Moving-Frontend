@@ -185,11 +185,15 @@ const Calendar = () => {
                     <h3>Edit Family Members</h3>
                     <div className='edit-content'>
                         <label htmlFor="name-changer">Name</label>
-                        <input type="text" id="name-changer" defaultValue={familyMember.name} onChange={event => {
-                            setNewName(event.target.value);
-                        }}/>
+                        <input type="text" id="name-changer" value={familyMember?.name ? String(familyMember?.name) : ""}
+                               onChange={event => {
+                                   setFamilyMember((familyMember) => {
+                                       return {...familyMember, name: event.target.value} as FamilyMember
+                                   });
+
+                               }}/>
                         <button className="red-button save" onClick={editFamilyMember}
-                                disabled={newName == familyMember.name || !Boolean(newName)}>Save changes
+                                disabled={members.includes(familyMember) || !familyMember.name}>Save changes
                         </button>
                         <button className="red-button delete" onClick={deleteFamilyMember}>Delete family member</button>
                     </div>
