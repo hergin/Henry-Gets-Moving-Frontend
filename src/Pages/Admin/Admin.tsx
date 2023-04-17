@@ -40,6 +40,7 @@ const Admin = () => {
     const [deleteCategoryID, setDeleteCategoryID] = useState("")
     const [deleteCategoryType, setDeleteCategoryType] = useState("")
     const [deleteCategoryValues, setDeleteCategoryValues] = useState([] as any[]);
+    const [password, setPassword] = useState("")
 
     useEffect(() => {
         API.getRecipes().then((recipes) => setRecipes(recipes));
@@ -52,6 +53,27 @@ const Admin = () => {
         API.getFeaturedExercise().then((exercise) => setCurrentFeaturedExercise(exercise))
         API.getFeaturedRecipe().then((recipe) => setCurrentFeaturedRecipe(recipe))
     }, [])
+
+    const getAdminAccess = async (event: { preventDefault: () => void; }) => {
+        event.preventDefault()
+        const formData = new FormData()
+        formData.append("password", password)
+        await fetch(`${API_URL}/admin`, {
+            method: 'POST',
+            body: formData
+        }).then((res) => {
+            if (res.status >= 400 && res.status < 600) {
+                alert("Bad response from server")
+                window.location.reload()
+            } else {
+                return res.json()
+            }
+        }).then(async (res) => {
+            await sessionStorage.setItem("access", res.access)
+            window.location.reload()
+
+        })
+    }
 
     const loadDiagram = (event: React.FormEvent<HTMLSelectElement>) => {
         event.preventDefault()
@@ -477,360 +499,390 @@ const Admin = () => {
                 </Helmet>
             </HelmetProvider>
             <Weather/>
-            <BackArrow route="/"/>
-            <h1>Admin Panel</h1>
-            <div className='content'>
-                <div className="form-div">
-                    <div>
-                        <form className='exercise-form form' onSubmit={saveExercise}>
-                            <div className='add-edit'>
-                                <h2>Add Exercise</h2>
-                                <div className='edit-select'>
-                                    <label>Edit Exercise</label>
-                                    <select onChange={loadExercise}>
-                                        <option value="select">Select Exercise</option>
-                                        {exercises && exercises.map((exercise, index: number) => (
-                                            <option value={index}>{exercise.name}</option>
-                                        ))}</select>
-                                </div>
-                            </div>
-                            <div className='field'>
-                                <label>Name</label>
-                                <input placeholder="Exercise Name" title={exercise?.name}
-                                       value={exercise?.name ? String(exercise?.name) : ""}
-                                       onChange={event => {
-                                           setExercise((exercise) => {
-                                               return {...exercise, name: event.target.value} as Exercise
-                                           });
-
-                                       }}/>
-                            </div>
-                            <div className='field'>
-                                <label>Video Link</label>
-                                <input placeholder="https://www.youtube.com/watch?v=00000000"
-                                       title={exercise?.video_link}
-                                       value={exercise?.video_link ? String(exercise?.video_link) : ""}
-                                       onChange={event => {
-                                           setExercise((exercise) => {
-                                               return {...exercise, video_link: event.target.value} as Exercise
-                                           });
-
-                                       }}/>
-                            </div>
-                            <div className='field'>
-                                <label>Category</label>
-                                <Multiselect
-                                             onKeyPressFn={function noRefCheck(){}}
-                                             onRemove={(selectedList) => {
-                                                 setSelectedExerciseCategories(selectedList)
-                                             }}
-                                             onSearch={function noRefCheck(){}}
-                                             onSelect={(selectedList) => {
-                                                 setSelectedExerciseCategories(selectedList)
-                                             }}
-                                             selectedValues={selectedExerciseCategories}
-                                             placeholder={"Select Categories"}
-                                             options={exerciseCategories}
-                                             displayValue="name"/>
-                            </div>
-                            <div className='buttons'>
-                                <button className='delete' onClick={deleteExercise}>Delete Exercise</button>
-                                <button className='save'>Save Exercise</button>
-                            </div>
-                        </form>
-                    </div>
-                    <div>
-                        <form className='demo-form form' onSubmit={saveDemonstration}>
-                            <div className='add-edit'>
-                                <h2>Add Demonstration</h2>
-                                <div className='edit-select'>
-                                    <label>Edit Demo</label>
-                                    <select onChange={loadDemonstration}>
-                                        <option value="select">Select Demo</option>
-                                        {demos && demos.map((demo, index: number) => (
-                                            <option value={index}>{demo.name}</option>
-                                        ))}</select>
-                                </div>
-                            </div>
-                            <div className='field'>
-                                <label>Name</label>
-                                <input placeholder="Demonstration Name" title={demo?.name}
-                                       value={demo?.name ? String(demo?.name) : ""}
-                                       onChange={event => {
-                                           setDemo((demo) => {
-                                               return {...demo, name: event.target.value} as Demonstration
-                                           });
-
-                                       }}/>
-                            </div>
-                            <div className='field'>
-                                <label>Video Link</label>
-                                <input placeholder="https://www.youtube.com/watch?v=00000000" title={demo?.video_link}
-                                       value={demo?.video_link ? String(demo?.video_link) : ""}
-                                       onChange={event => {
-                                           setDemo((demo) => {
-                                               return {...demo, video_link: event.target.value} as Demonstration
-                                           });
-
-                                       }}/>
-                            </div>
-                            <div className='field'>
-                                <label>Category</label>
-                                <Multiselect
-                                    onKeyPressFn={function noRefCheck(){}}
-                                    onRemove={(selectedList) => {
-                                        setSelectedDemoCategories(selectedList)
-                                    }}
-                                    onSearch={function noRefCheck(){}}
-                                    onSelect={(selectedList) => {
-                                        setSelectedDemoCategories(selectedList)
-                                    }}
-                                    selectedValues={selectedDemoCategories}
-                                    placeholder={"Select Categories"}
-                                    options={demonstrationCategories}
-                                    displayValue="name"/>
+            {!sessionStorage.getItem("access") &&
+                <div className={'admin-access-form'}>
+                    <BackArrow route="/"/>
+                        <form onSubmit={getAdminAccess}>
+                            <div className='password-input'>
+                                <label>Please Enter the Admin Password</label>
+                                <input onChange={(e) => setPassword(e.target.value)} value={password} type="password"/>
                             </div>
                             <div className='buttons'>
                                 <button className='delete' onClick={deleteDemonstration}>Delete Demo</button>
                                 <button className='save'>Save Demo</button>
-                            </div>
+                           </div>
                         </form>
+                </div>}
+
+            {sessionStorage.getItem("access") &&
+                <div>
+                    <BackArrow route="/"/>
+                    <h1>Admin Panel</h1>
+                    <div className='content'>
+                        <div className="form-div">
+                            <div>
+                                <form className='exercise-form form' onSubmit={saveExercise}>
+                                    <div className='add-edit'>
+                                        <h2>Add Exercise</h2>
+                                        <div className='edit-select'>
+                                            <label>Edit Exercise</label>
+                                            <select onChange={loadExercise}>
+                                                <option value="select">Select Exercise</option>
+                                                {exercises && exercises.map((exercise, index: number) => (
+                                                    <option value={index}>{exercise.name}</option>
+                                                ))}</select>
+                                        </div>
+                                    </div>
+                                    <div className='field'>
+                                        <label>Name</label>
+                                        <input placeholder="Exercise Name" title={exercise?.name}
+                                               value={exercise?.name ? String(exercise?.name) : ""}
+                                               onChange={event => {
+                                                   setExercise((exercise) => {
+                                                       return {...exercise, name: event.target.value} as Exercise
+                                                   });
+
+                                               }}/>
+                                    </div>
+                                    <div className='field'>
+                                        <label>Video Link</label>
+                                        <input placeholder="https://www.youtube.com/watch?v=00000000"
+                                               title={exercise?.video_link}
+                                               value={exercise?.video_link ? String(exercise?.video_link) : ""}
+                                               onChange={event => {
+                                                   setExercise((exercise) => {
+                                                       return {...exercise, video_link: event.target.value} as Exercise
+                                                   });
+
+                                               }}/>
+                                    </div>
+                                    <div className='field'>
+                                        <label>Category</label>
+                                        <Multiselect
+                                            onKeyPressFn={function noRefCheck(){}}
+                                            onRemove={(selectedList) => {
+                                                setSelectedExerciseCategories(selectedList)
+                                            }}
+                                            onSearch={function noRefCheck(){}}
+                                            onSelect={(selectedList) => {
+                                                setSelectedExerciseCategories(selectedList)
+                                            }}
+                                            selectedValues={selectedExerciseCategories}
+                                            placeholder={"Select Categories"}
+                                            options={exerciseCategories}
+                                            displayValue="name"/>
+                                    </div>
+                                    <div className='buttons'>
+                                        <button className='delete' onClick={deleteExercise}>Delete Exercise</button>
+                                        <button className='save'>Save Exercise</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div>
+                                <form className='demo-form form' onSubmit={saveDemonstration}>
+                                    <div className='add-edit'>
+                                        <h2>Add Demonstration</h2>
+                                        <div className='edit-select'>
+                                            <label>Edit Demo</label>
+                                            <select onChange={loadDemonstration}>
+                                                <option value="select">Select Demo</option>
+                                                {demos && demos.map((demo, index: number) => (
+                                                    <option value={index}>{demo.name}</option>
+                                                ))}</select>
+                                        </div>
+                                    </div>
+                                    <div className='field'>
+                                        <label>Name</label>
+                                        <input placeholder="Demonstration Name" title={demo?.name}
+                                               value={demo?.name ? String(demo?.name) : ""}
+                                               onChange={event => {
+                                                   setDemo((demo) => {
+                                                       return {...demo, name: event.target.value} as Demonstration
+                                                   });
+
+                                               }}/>
+                                    </div>
+                                    <div className='field'>
+                                        <label>Thumbnail Link</label>
+                                        <input placeholder="" title={demo.thumbnail_link}
+                                               value={demo?.thumbnail_link ? String(demo?.thumbnail_link) : ""}
+                                               onChange={event => {
+                                                   setDemo((demo) => {
+                                                       return {...demo, thumbnail_link: event.target.value} as Demonstration
+                                                   });
+
+                                               }}/>
+                                    </div>
+                                    <div className='field'>
+                                        <label>Video Link</label>
+                                        <input placeholder="https://www.youtube.com/watch?v=00000000" title={demo?.video_link}
+                                               value={demo?.video_link ? String(demo?.video_link) : ""}
+                                               onChange={event => {
+                                                   setDemo((demo) => {
+                                                       return {...demo, video_link: event.target.value} as Demonstration
+                                                   });
+
+                                               }}/>
+                                    </div>
+                                    <div className='field'>
+                                        <label>Category</label>
+                                        <Multiselect
+                                            onKeyPressFn={function noRefCheck(){}}
+                                            onRemove={(selectedList) => {
+                                                setSelectedDemoCategories(selectedList)
+                                            }}
+                                            onSearch={function noRefCheck(){}}
+                                            onSelect={(selectedList) => {
+                                                setSelectedDemoCategories(selectedList)
+                                            }}
+                                            selectedValues={selectedDemoCategories}
+                                            placeholder={"Select Categories"}
+                                            options={demonstrationCategories}
+                                            displayValue="name"/>
+                                    </div>
+                                    <div className='buttons'>
+                                        <button className='delete' onClick={deleteDemonstration}>Delete Demo</button>
+                                        <button className='save'>Save Demo</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div>
+                                <form className='add-category-form'>
+                                    <div className='field'>
+                                        <label>Add Category</label>
+                                        <div className='add-categories'>
+                                            <select className='add-category-for' onChange={(e) => {
+                                                setNewCategoryType(e.target.value)
+                                            }}>
+                                                <option value=" ">Add Category To</option>
+                                                <option value={"demoCategories"}>Demonstrations</option>
+                                                <option value={"exerciseCategories"}>Exercises</option>
+                                                <option value={"recipeCategories"}>Recipes</option>
+                                            </select>
+                                            <input className='add-category' placeholder="Category Name" onChange={(e) => {
+                                                setNewCategoryName(e.target.value)
+                                            }}/>
+                                        </div>
+                                    </div>
+                                    <div className='otd-save'>
+                                        <button className='save' onClick={addCategory}>Save Category</button>
+                                    </div>
+                                </form>
+                                <form className='add-category-form'>
+                                    <div className='field'>
+                                        <label>Delete Category</label>
+                                        <div className='add-categories'>
+                                            <select className='add-category-for' onChange={(e) => {
+                                                switch (e.target.value) {
+                                                    case "demoCategories": setDeleteCategoryValues(demonstrationCategories); break;
+                                                    case "exerciseCategories": setDeleteCategoryValues(exerciseCategories); break;
+                                                    case "recipeCategories": setDeleteCategoryValues(recipeCategories); break;
+                                                }; setDeleteCategoryType(e.target.value);
+                                            }}>
+                                                <option value=" " disabled selected>Delete Category From</option>
+                                                <option value={"demoCategories"}>Demonstrations</option>
+                                                <option value={"exerciseCategories"}>Exercises</option>
+                                                <option value={"recipeCategories"}>Recipes</option>
+                                            </select>
+                                            <select onChange={setDeleteCategory} className='delete-category'>
+                                                <option value="select" disabled selected>Select Category</option>
+                                                {deleteCategoryValues && deleteCategoryValues.map((category) => (
+                                                    <option value={category.name}>{category.name}</option>
+                                                ))}</select>
+                                        </div>
+                                    </div>
+                                    <div className='otd-save'>
+                                        <button className='delete' onClick={deleteCategory}>Delete Category</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div>
+                                <h2 className='otd'>Of the Day</h2>
+                                <form className='otd-form'>
+                                    <div className='field'>
+                                        <label>Recipe of the Day</label>
+                                        <select className='otd-select' onChange={event => {
+                                            event.preventDefault()
+                                            setCurrentFeaturedRecipe(recipe => {
+                                                return {...(recipes[parseInt(event.target.value, 10)] as Recipe)}
+
+                                            })
+                                        }}>
+                                            <option value="select">Select Featured Recipe</option>
+                                            {recipes && recipes.map((recipe, index: number) => (
+                                                <option value={index}
+                                                        selected={recipe.id == currentFeaturedRecipe.id}>{recipe.name}</option>
+                                            ))}</select>
+                                    </div>
+                                    <div className='field'>
+                                        <label>Exercise of the Day</label>
+                                        <select className='otd-select' onChange={event => {
+                                            event.preventDefault()
+
+                                            setCurrentFeaturedExercise(exercise => {
+                                                return {...(exercises[parseInt(event.target.value, 10)] as Exercise)}
+                                            })
+                                        }}>
+                                            <option value="select">Select Featured Exercise</option>
+                                            {exercises && exercises.map((exercise, index: number) => (
+                                                <option value={index}
+                                                        selected={exercise.id == currentFeaturedExercise.id}>{exercise.name}</option>
+                                            ))}</select>
+                                    </div>
+                                    <div className='otd-save'>
+                                        <button className='save' onClick={saveFeatured}>Save Changes</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <hr/>
+                        <div className="form-div">
+                            <div>
+                                <form className='recipe-form form' onSubmit={saveRecipe}>
+                                    <div className='add-edit'>
+                                        <h2>Add Recipe</h2>
+                                        <div className='edit-select'>
+                                            <label>Edit Recipe</label>
+                                            <select onChange={loadRecipe}>
+                                                <option value="select">Select Recipe</option>
+                                                {recipes && recipes.map((recipe, index) => (
+                                                    <option value={index}>{recipe.name}</option>
+                                                ))}</select>
+                                        </div>
+                                    </div>
+                                    <div className='field'>
+                                        <label>Name</label>
+                                        <input placeholder="Recipe Name" title={recipe?.name}
+                                               value={recipe?.name ? String(recipe?.name) : ""}
+                                               onChange={event => {
+                                                   setRecipe((recipe) => {
+                                                       return {...recipe, name: event.target.value} as Recipe
+                                                   });
+
+                                               }}/>
+                                    </div>
+                                    <div className='field'>
+                                        <label>Thumbnail Link</label>
+                                        <input title={recipe?.thumbnail}
+                                               value={recipe?.thumbnail ? String(recipe?.thumbnail) : ""}
+                                               onChange={event => {
+                                                   setRecipe((recipe) => {
+                                                       return {...recipe, thumbnail: event.target.value} as Recipe
+                                                   });
+
+                                               }}/>
+                                    </div>
+                                    <div className='field'>
+                                        <label>Category</label>
+                                        <Multiselect
+                                            className={"multiSelect"}
+                                            onKeyPressFn={function noRefCheck(){}}
+                                            onRemove={(selectedList) => {
+                                                setSelectedRecipeCategories(selectedList)
+                                            }}
+                                            onSearch={function noRefCheck(){}}
+                                            onSelect={(selectedList) => {
+                                                setSelectedRecipeCategories(selectedList)
+                                            }}
+                                            selectedValues={selectedRecipeCategories}
+                                            placeholder={"Select Categories"}
+                                            options={recipeCategories}
+                                            displayValue="name"/>
+                                    </div>
+                                    <div className='field'>
+                                        <label>Prep Time</label>
+                                        <input placeholder="000 Minutes" defaultValue={recipe?.prep_time}
+                                               value={recipe?.prep_time ? String(recipe?.prep_time) : ""} onChange={event => {
+                                            setRecipe((recipe) => {
+                                                return {...recipe, prep_time: event.target.value} as Recipe
+                                            });
+
+                                        }}/>
+                                    </div>
+                                    <div className='field'>
+                                        <label>Cook Time</label>
+                                        <input placeholder="000 Minutes" defaultValue={recipe?.cook_time}
+                                               value={recipe?.cook_time ? String(recipe?.cook_time) : ""} onChange={event => {
+                                            setRecipe((recipe) => {
+                                                return {...recipe, cook_time: event.target.value} as Recipe
+                                            });
+
+                                        }}/>
+                                    </div>
+                                    <div className='field'>
+                                        <label>Ingredients</label>
+                                        <textarea placeholder="1. Ingredient&#10;2. Ingredient&#10;3. Ingredient"
+                                                  defaultValue={recipe?.ingredients}
+                                                  value={recipe?.ingredients ? String(recipe?.ingredients) : ""}
+                                                  onChange={event => {
+                                                      setRecipe((recipe) => {
+                                                          return {...recipe, ingredients: event.target.value} as Recipe
+                                                      });
+
+                                                  }}/>
+                                    </div>
+                                    <div className='field'>
+                                        <label>Recipe Steps</label>
+                                        <textarea placeholder="1. Step&#10;2. Step&#10;3. Step"
+                                                  defaultValue={recipe?.recipe_steps}
+                                                  value={recipe?.recipe_steps ? String(recipe?.recipe_steps) : ""}
+                                                  onChange={event => {
+                                                      setRecipe((recipe) => {
+                                                          return {...recipe, recipe_steps: event.target.value} as Recipe
+                                                      });
+
+                                                  }}/>
+                                    </div>
+                                    <div className='buttons'>
+                                        <button className='delete' onClick={deleteRecipe}>Delete Recipe</button>
+                                        <button className='save'>Save Recipe</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div>
+                                <form className='diagram-form' onSubmit={saveDiagram}>
+                                    <div className='add-edit'>
+                                        <h2>Add Diagram</h2>
+                                        <div className='edit-select'>
+                                            <label>Edit Diagram</label>
+                                            <select onChange={loadDiagram}>
+                                                <option value="select">Select Diagram</option>
+                                                {diagrams && diagrams.map((diagram, index: number) => (
+                                                    <option value={index}>{diagram.name}</option>
+                                                ))}</select>
+                                        </div>
+                                    </div>
+                                    <div className='field'>
+                                        <label>Name</label>
+                                        <input placeholder="Diagram Name" title={diagram.name}
+                                               value={diagram?.name ? diagram.name : ""}
+                                               onChange={event => {
+                                                   setDiagram((diagram) => {
+                                                       return {...diagram, name: event.target.value} as Diagram
+                                                   })
+                                               }}/>
+                                    </div>
+                                    <div className='field'>
+                                        <label>Thumbnail Link</label>
+                                        <input title={diagram.thumbnail_link}
+                                               value={diagram?.thumbnail_link ? String(diagram?.thumbnail_link) : ""}
+                                               onChange={event => {
+                                                   setDiagram((diagram) => {
+                                                       return {...diagram, thumbnail_link: event.target.value} as Diagram
+                                                   });
+
+                                               }}/>
+                                    </div>
+                                    <div className='buttons'>
+                                        <button className='delete' onClick={deleteDiagram}>Delete Diagram</button>
+                                        <button className='save'>Save Diagram</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                        <form className='add-category-form'>
-                            <div className='field'>
-                                <label>Add Category</label>
-                                <div className='add-categories'>
-                                    <select className='add-category-for' onChange={(e) => {
-                                        setNewCategoryType(e.target.value)
-                                    }}>
-                                        <option value=" ">Add Category To</option>
-                                        <option value={"demoCategories"}>Demonstrations</option>
-                                        <option value={"exerciseCategories"}>Exercises</option>
-                                        <option value={"recipeCategories"}>Recipes</option>
-                                    </select>
-                                    <input className='add-category' placeholder="Category Name" onChange={(e) => {
-                                        setNewCategoryName(e.target.value)
-                                    }}/>
-                                </div>
-                            </div>
-                            <div className='otd-save'>
-                                <button className='save' onClick={addCategory}>Save Category</button>
-                            </div>
-                        </form>
-                        <form className='add-category-form'>
-                            <div className='field'>
-                                <label>Delete Category</label>
-                                <div className='add-categories'>
-                                    <select className='add-category-for' onChange={(e) => {
-                                        switch (e.target.value) {
-                                            case "demoCategories": setDeleteCategoryValues(demonstrationCategories); break;
-                                            case "exerciseCategories": setDeleteCategoryValues(exerciseCategories); break;
-                                            case "recipeCategories": setDeleteCategoryValues(recipeCategories); break;
-                                        }; setDeleteCategoryType(e.target.value);
-                                    }}>
-                                        <option value=" " disabled selected>Delete Category From</option>
-                                        <option value={"demoCategories"}>Demonstrations</option>
-                                        <option value={"exerciseCategories"}>Exercises</option>
-                                        <option value={"recipeCategories"}>Recipes</option>
-                                    </select>
-                                    <select onChange={setDeleteCategory} className='delete-category'>
-                                        <option value="select" disabled selected>Select Category</option>
-                                        {deleteCategoryValues && deleteCategoryValues.map((category) => (
-                                            <option value={category.id}>{category.name}</option>
-                                        ))}</select>
-                                </div>
-                            </div>
-                            <div className='otd-save'>
-                                <button className='delete' onClick={deleteCategory}>Delete Category</button>
-                            </div>
-                        </form>
-                    </div>
-                    <div>
-                        <h2 className='otd'>Of the Day</h2>
-                        <form className='otd-form'>
-                            <div className='field'>
-                                <label>Recipe of the Day</label>
-                                <select className='otd-select' onChange={event => {
-                                    event.preventDefault()
-                                    setCurrentFeaturedRecipe(recipe => {
-                                        return {...(recipes[parseInt(event.target.value, 10)] as Recipe)}
+                </div>}
 
-                                    })
-                                }}>
-                                    <option value="select">Select Featured Recipe</option>
-                                    {recipes && recipes.map((recipe, index: number) => (
-                                        <option value={index}
-                                                selected={recipe.id == currentFeaturedRecipe.id}>{recipe.name}</option>
-                                    ))}</select>
-                            </div>
-                            <div className='field'>
-                                <label>Exercise of the Day</label>
-                                <select className='otd-select' onChange={event => {
-                                    event.preventDefault()
-
-                                    setCurrentFeaturedExercise(exercise => {
-                                        return {...(exercises[parseInt(event.target.value, 10)] as Exercise)}
-                                    })
-                                }}>
-                                    <option value="select">Select Featured Exercise</option>
-                                    {exercises && exercises.map((exercise, index: number) => (
-                                        <option value={index}
-                                                selected={exercise.id == currentFeaturedExercise.id}>{exercise.name}</option>
-                                    ))}</select>
-                            </div>
-                            <div className='otd-save'>
-                                <button className='save' onClick={saveFeatured}>Save Changes</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <hr/>
-                <div className="form-div">
-                    <div>
-                        <form className='recipe-form form' onSubmit={saveRecipe}>
-                            <div className='add-edit'>
-                                <h2>Add Recipe</h2>
-                                <div className='edit-select'>
-                                    <label>Edit Recipe</label>
-                                    <select onChange={loadRecipe}>
-                                        <option value="select">Select Recipe</option>
-                                        {recipes && recipes.map((recipe, index) => (
-                                            <option value={index}>{recipe.name}</option>
-                                        ))}</select>
-                                </div>
-                            </div>
-                            <div className='field'>
-                                <label>Name</label>
-                                <input placeholder="Recipe Name" title={recipe?.name}
-                                       value={recipe?.name ? String(recipe?.name) : ""}
-                                       onChange={event => {
-                                           setRecipe((recipe) => {
-                                               return {...recipe, name: event.target.value} as Recipe
-                                           });
-
-                                       }}/>
-                            </div>
-                            <div className='field'>
-                                <label>Thumbnail Link</label>
-                                <input title={recipe?.thumbnail}
-                                       value={recipe?.thumbnail ? String(recipe?.thumbnail) : ""}
-                                       onChange={event => {
-                                           setRecipe((recipe) => {
-                                               return {...recipe, thumbnail: event.target.value} as Recipe
-                                           });
-
-                                       }}/>
-                            </div>
-                            <div className='field'>
-                                <label>Category</label>
-                                <Multiselect
-                                    className={"multiSelect"}
-                                    onKeyPressFn={function noRefCheck(){}}
-                                    onRemove={(selectedList) => {
-                                        setSelectedRecipeCategories(selectedList)
-                                    }}
-                                    onSearch={function noRefCheck(){}}
-                                    onSelect={(selectedList) => {
-                                        setSelectedRecipeCategories(selectedList)
-                                    }}
-                                    selectedValues={selectedRecipeCategories}
-                                    placeholder={"Select Categories"}
-                                    options={recipeCategories}
-                                    displayValue="name"/>
-                            </div>
-                            <div className='field'>
-                                <label>Prep Time</label>
-                                <input placeholder="000 Minutes" defaultValue={recipe?.prep_time}
-                                       value={recipe?.prep_time ? String(recipe?.prep_time) : ""} onChange={event => {
-                                    setRecipe((recipe) => {
-                                        return {...recipe, prep_time: event.target.value} as Recipe
-                                    });
-
-                                }}/>
-                            </div>
-                            <div className='field'>
-                                <label>Cook Time</label>
-                                <input placeholder="000 Minutes" defaultValue={recipe?.cook_time}
-                                       value={recipe?.cook_time ? String(recipe?.cook_time) : ""} onChange={event => {
-                                    setRecipe((recipe) => {
-                                        return {...recipe, cook_time: event.target.value} as Recipe
-                                    });
-
-                                }}/>
-                            </div>
-                            <div className='field'>
-                                <label>Ingredients</label>
-                                <textarea placeholder="1. Ingredient&#10;2. Ingredient&#10;3. Ingredient"
-                                          defaultValue={recipe?.ingredients}
-                                          value={recipe?.ingredients ? String(recipe?.ingredients) : ""}
-                                          onChange={event => {
-                                              setRecipe((recipe) => {
-                                                  return {...recipe, ingredients: event.target.value} as Recipe
-                                              });
-
-                                          }}/>
-                            </div>
-                            <div className='field'>
-                                <label>Recipe Steps</label>
-                                <textarea placeholder="1. Step&#10;2. Step&#10;3. Step"
-                                          defaultValue={recipe?.recipe_steps}
-                                          value={recipe?.recipe_steps ? String(recipe?.recipe_steps) : ""}
-                                          onChange={event => {
-                                              setRecipe((recipe) => {
-                                                  return {...recipe, recipe_steps: event.target.value} as Recipe
-                                              });
-
-                                          }}/>
-                            </div>
-                            <div className='buttons'>
-                                <button className='delete' onClick={deleteRecipe}>Delete Recipe</button>
-                                <button className='save'>Save Recipe</button>
-                            </div>
-                        </form>
-                    </div>
-                    <div>
-                        <form className='diagram-form' onSubmit={saveDiagram}>
-                            <div className='add-edit'>
-                                <h2>Add Diagram</h2>
-                                <div className='edit-select'>
-                                    <label>Edit Diagram</label>
-                                    <select onChange={loadDiagram}>
-                                        <option value="select">Select Diagram</option>
-                                        {diagrams && diagrams.map((diagram, index: number) => (
-                                            <option value={index}>{diagram.name}</option>
-                                        ))}</select>
-                                </div>
-                            </div>
-                            <div className='field'>
-                                <label>Name</label>
-                                <input placeholder="Diagram Name" title={diagram.name}
-                                       value={diagram?.name ? diagram.name : ""}
-                                       onChange={event => {
-                                           setDiagram((diagram) => {
-                                               return {...diagram, name: event.target.value} as Diagram
-                                           })
-                                       }}/>
-                            </div>
-                            <div className='field'>
-                                <label>Thumbnail Link</label>
-                                <input title={diagram.thumbnail_link}
-                                       value={diagram?.thumbnail_link ? String(diagram?.thumbnail_link) : ""}
-                                       onChange={event => {
-                                           setDiagram((diagram) => {
-                                               return {...diagram, thumbnail_link: event.target.value} as Diagram
-                                           });
-
-                                       }}/>
-                            </div>
-                            <div className='buttons'>
-                                <button className='delete' onClick={deleteDiagram}>Delete Diagram</button>
-                                <button className='save'>Save Diagram</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
             <div className='swings'>
                 <img src={swings} alt={"Henry and Jasmine on Swings"}/>
             </div>
