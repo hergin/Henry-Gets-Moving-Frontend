@@ -302,7 +302,7 @@ const getTotalLoggedDuration = async (familyMember: string, date: Date = new Dat
     let result = 0;
     await getExerciseLogs().then(function(logs) {
         logs.forEach(function (log) {
-            if (log.name === familyMember && new Date(log.date).toLocaleDateString() === date.toLocaleDateString()) {
+            if (log.familyMember?.name === familyMember && new Date(log.date).toLocaleDateString() === date.toLocaleDateString()) {
                 result += parseInt(log.duration);
             }
         });
