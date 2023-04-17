@@ -14,7 +14,6 @@ import {
 } from "../../Structs/DataTypes";
 import API from "../../API";
 import {API_URL} from "../../API";
-import {Link} from "react-router-dom";
 import BackArrow from "../../Components/BackArrow/BackArrow";
 import {Helmet, HelmetProvider} from "react-helmet-async";
 import {Multiselect} from "multiselect-react-dropdown";
@@ -36,11 +35,9 @@ const Admin = () => {
     const [demonstrationCategories, setDemonstrationCategories] = useState([] as DemonstrationCategory[])
     const [currentFeaturedExercise, setCurrentFeaturedExercise] = useState({} as Exercise)
     const [currentFeaturedRecipe, setCurrentFeaturedRecipe] = useState({} as Recipe)
-    const [newFeaturedExercise, setNewFeaturedExercise] = useState({} as Exercise)
-    const [newFeaturedRecipe, setNewFeaturedRecipe] = useState({} as Recipe)
     const [newCategoryType, setNewCategoryType] = useState("")
     const [newCategoryName, setNewCategoryName] = useState("")
-    const [deleteCategoryName, setDeleteCategoryName] = useState("")
+    const [deleteCategoryID, setDeleteCategoryID] = useState("")
     const [deleteCategoryType, setDeleteCategoryType] = useState("")
     const [deleteCategoryValues, setDeleteCategoryValues] = useState([] as any[]);
     const [password, setPassword] = useState("")
@@ -340,7 +337,7 @@ const Admin = () => {
     }
     const setDeleteCategory = (event: React.FormEvent<HTMLSelectElement>) => {
         event.preventDefault();
-        setDeleteCategoryName(event.currentTarget.value);
+        setDeleteCategoryID(event.currentTarget.value);
     }
     const loadRecipe = (event: React.FormEvent<HTMLSelectElement>) => {
         event.preventDefault()
@@ -476,20 +473,17 @@ const Admin = () => {
     }
     const deleteCategory = async (e: {preventDefault:()=>void;}) => {
         e.preventDefault();
-        if (deleteCategoryName === "select" || !deleteCategoryName) {
+        if (deleteCategoryID === "select" || !deleteCategoryID) {
             window.alert("Please select a category");
             return;
         }
-        const formData = new FormData();
-        formData.append("name", deleteCategoryName);
-        await fetch(`${API_URL}/${deleteCategoryType}`, {
+        await fetch(`${API_URL}/${deleteCategoryType}/${deleteCategoryID}`, {
             method: 'DELETE',
-            body: formData
         }).then((res) => {
             if (res.status >= 400 && res.status < 600) {
                 alert("Bad response from server")
             } else {
-                alert(`Category ${deleteCategoryName} deleted`);
+                alert(`Category deleted`);
                 window.location.reload()
                 return res.json()
             }
@@ -514,8 +508,9 @@ const Admin = () => {
                                 <input onChange={(e) => setPassword(e.target.value)} value={password} type="password"/>
                             </div>
                             <div className='buttons'>
-                                <button className='red-button' type="submit">Get Access</button>
-                            </div>
+                                <button className='delete' onClick={deleteDemonstration}>Delete Demo</button>
+                                <button className='save'>Save Demo</button>
+                           </div>
                         </form>
                 </div>}
 
