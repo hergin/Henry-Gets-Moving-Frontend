@@ -508,8 +508,7 @@ const Admin = () => {
                                 <input onChange={(e) => setPassword(e.target.value)} value={password} type="password"/>
                             </div>
                             <div className='buttons'>
-                                <button className='delete' onClick={deleteDemonstration}>Delete Demo</button>
-                                <button className='save'>Save Demo</button>
+                                <button className='red-button' type="submit">Get Access</button>
                            </div>
                         </form>
                 </div>}
