@@ -17,6 +17,7 @@ const LearnMore = () => {
     const [diagrams, setDiagrams] = useState([] as Diagram[])
     const [page, setPage] = useState(2)
     const [noMoreDemos, setNoMoreDemos] = useState(false);
+    const [searchText, setSearchText] = useState("")
 
     document.addEventListener('keydown', function (event) {
         const key = event.key; // const {key} = event; in ES6+
@@ -58,10 +59,12 @@ const LearnMore = () => {
         )
     }
 
-    const demoLayout = (individualDemo: Demonstration[], filter: string) => {
+    const demoLayout = (individualDemo: Demonstration[], filter: string, searchText: string) => {
         return individualDemo.filter((demo) => {
-            if (filter === "") return true;
-            return (demo.demoCategories?.map(x => x.name).join(", ")!).includes(filter);
+            return ((demo.demoCategories?.map(x => x.name).join(", ")!).includes(filter) || (filter === "")) && ((demo?.name
+                .toLowerCase()
+                .includes(searchText.toLowerCase()) || !searchText) || ((demo.demoCategories?.map(x => x.name).join(", ")!).toLowerCase()
+                .includes(searchText.toLowerCase())));
         }).map((demo) => {
                 return (
                     <div className='grid-content'>
@@ -105,10 +108,10 @@ const LearnMore = () => {
                         <option value="" >All</option>
                         {categoryLayout(demoCategory)}
                     </select>
-                    <input id='search' placeholder="Search"/>
+                    <input id='search' placeholder="Search" onChange={(event) => {setSearchText(event.target.value)}}/>
                 </div>
                 <div className='demo-grid'>
-                    {demoLayout(demos, selectedCategory)}
+                    {demoLayout(demos, selectedCategory, searchText)}
                 </div>
                 {selectedDemo &&
                 <div className='dialog-box'>
