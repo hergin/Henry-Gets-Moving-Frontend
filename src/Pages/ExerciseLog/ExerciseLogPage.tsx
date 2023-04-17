@@ -31,7 +31,6 @@ const ExerciseLogPage = () => {
             window.alert(duration + " minutes is not a valid duration!");
             return;
         }
-        formData.append("name", child)
         formData.append("intensity", intensity)
         formData.append("duration", duration)
         formData.append("type", exercise)

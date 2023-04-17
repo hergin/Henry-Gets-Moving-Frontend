@@ -150,10 +150,13 @@ const Admin = () => {
     const saveDemonstration = async (event: React.FormEvent<HTMLFormElement>) => {
         const catIDS = selectedDemoCategories.map((category) => {return category.id})
         event.preventDefault()
+        const thumbnail = await fetch(`https://noembed.com/embed?dataType=json&url=` + demo.video_link).then((response) => {
+            return response.json()
+        })
         const formData = new FormData()
         formData.append("name", demo.name)
         formData.append("video_link", API.parseEmbedLink(demo.video_link))
-        formData.append("thumbnail_link", demo.thumbnail_link)
+        formData.append("thumbnail_link", thumbnail.thumbnail_url)
         if (demo.id) {
             await fetch(`${API_URL}/demos/${demo.id}`, {
                 method: 'PUT',
