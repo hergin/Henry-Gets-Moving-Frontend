@@ -27,11 +27,7 @@ const Calendar = () => {
     const [newName, setNewName] = useState("")
     const [dailyTime, setDailyTime] = useState(0)
     const [selectedLog, setSelectedLog] = useState<null | ExerciseLog>(null);
-    const [intensity, setIntensity] = useState("");
-    const [formIntensity, setFormIntensity] = useState("");
-    const [formChild, setFormChild] = useState("");
-    const [formExercise, setFormExercise] = useState("");
-    const [formDuration, setFormDuration] = useState("");
+    const [selectedLogFamilyMember, setSelectedLogFamilyMember] = useState({} as FamilyMember)
     useEffect(() => {
         API.getFamilyMembers().then((members) => {
             setFamilyMembers(members)
@@ -41,8 +37,6 @@ const Calendar = () => {
         API.getExerciseLogs().then((logs) => {
             setExerciseLogs(logs)
         })
-        console.log(newName)
-        console.log(Boolean(newName))
     }, []);
 
     const deleteFamilyMember = async () => {
@@ -64,9 +58,8 @@ const Calendar = () => {
     }
 
     const editFamilyMember = async () => {
-        if (newName == familyMember.name) return;
         const formData = new FormData();
-        formData.append("name", newName);
+        formData.append("name", familyMember.name);
         formData.append("user_id", String(familyMember.user_id))
         await fetch(`${API_URL}/familyMembers/${familyMember.id}`, {
             method: 'PUT',
@@ -106,13 +99,12 @@ const Calendar = () => {
     const updateLog = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
         const formData = new FormData()
-        formData.append("name", selectedLog?.name!)
         formData.append("intensity", selectedLog?.intensity!)
         formData.append("duration", selectedLog?.duration!)
         formData.append("type", selectedLog?.type!)
         formData.append("date", selectedLog?.date!)
         const childFormData = new FormData()
-        childFormData.append("name", selectedLog?.name!)
+        childFormData.append("name", selectedLogFamilyMember.name)
         console.log(selectedLog)
         const familyMember = await fetch(`${API_URL}/checkFamilyMember`, {
             method: "POST",
@@ -237,7 +229,7 @@ const Calendar = () => {
                     }).map((log) => {
                         return (
                             <div className='log'>
-                                <p>{log.name}</p>
+                                <p>{log.familyMember?.name}</p>
                                 <p>{log.type}</p>
                                 <p>{log.duration} minutes</p>
                                 {log.intensity === "Light" &&
@@ -249,7 +241,7 @@ const Calendar = () => {
                                 {log.intensity === "Vigorous" &&
                                 <img src={VigorousIntensity}/>
                                 }
-                                {<button className={'edit-button'} onClick={e => (setSelectedLog(log))}><img src={Edit} alt={"Edit"}/></button>}
+                                {<button className={'edit-button'} onClick={e => {setSelectedLog(log); setSelectedLogFamilyMember(log.familyMember!)}}><img src={Edit} alt={"Edit"}/></button>}
                                 {selectedLog &&
                                 <div className='dialog-box'>
                                     <div className='background-color'>
@@ -260,9 +252,9 @@ const Calendar = () => {
                                             <div className='log-input'>
                                                 <div className='label-input'>
                                                     <label>Child's Name</label>
-                                                    <input defaultValue={selectedLog.name} onChange={(event) => {
-                                                        setSelectedLog((log) => {
-                                                            return {...log, name: event.target.value} as ExerciseLog
+                                                    <input defaultValue={selectedLogFamilyMember.name} onChange={(event) => {
+                                                        setSelectedLogFamilyMember((log) => {
+                                                            return {...log, name: event.target.value} as FamilyMember
                                                         })
                                                     }
                                                     }/>

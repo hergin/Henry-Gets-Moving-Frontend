@@ -64,10 +64,9 @@ export type ExerciseLog = {
     type: string,
     intensity: string,
     duration: string,
-    name: string,
     date: string
     family_member_id?: number,
-    FamilyMember?: FamilyMember
+    familyMember?: FamilyMember
 }
 
 export type GameType = {
