@@ -14,7 +14,6 @@ import {
 } from "../../Structs/DataTypes";
 import API from "../../API";
 import {API_URL} from "../../API";
-import {Link} from "react-router-dom";
 import BackArrow from "../../Components/BackArrow/BackArrow";
 import {Helmet, HelmetProvider} from "react-helmet-async";
 import {Multiselect} from "multiselect-react-dropdown";
@@ -36,8 +35,6 @@ const Admin = () => {
     const [demonstrationCategories, setDemonstrationCategories] = useState([] as DemonstrationCategory[])
     const [currentFeaturedExercise, setCurrentFeaturedExercise] = useState({} as Exercise)
     const [currentFeaturedRecipe, setCurrentFeaturedRecipe] = useState({} as Recipe)
-    const [newFeaturedExercise, setNewFeaturedExercise] = useState({} as Exercise)
-    const [newFeaturedRecipe, setNewFeaturedRecipe] = useState({} as Recipe)
     const [newCategoryType, setNewCategoryType] = useState("")
     const [newCategoryName, setNewCategoryName] = useState("")
     const [deleteCategoryID, setDeleteCategoryID] = useState("")
