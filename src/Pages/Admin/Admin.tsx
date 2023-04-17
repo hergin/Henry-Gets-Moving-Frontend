@@ -40,7 +40,7 @@ const Admin = () => {
     const [newFeaturedRecipe, setNewFeaturedRecipe] = useState({} as Recipe)
     const [newCategoryType, setNewCategoryType] = useState("")
     const [newCategoryName, setNewCategoryName] = useState("")
-    const [deleteCategoryName, setDeleteCategoryName] = useState("")
+    const [deleteCategoryID, setDeleteCategoryID] = useState("")
     const [deleteCategoryType, setDeleteCategoryType] = useState("")
     const [deleteCategoryValues, setDeleteCategoryValues] = useState([] as any[]);
 
@@ -318,7 +318,7 @@ const Admin = () => {
     }
     const setDeleteCategory = (event: React.FormEvent<HTMLSelectElement>) => {
         event.preventDefault();
-        setDeleteCategoryName(event.currentTarget.value);
+        setDeleteCategoryID(event.currentTarget.value);
     }
     const loadRecipe = (event: React.FormEvent<HTMLSelectElement>) => {
         event.preventDefault()
@@ -454,20 +454,17 @@ const Admin = () => {
     }
     const deleteCategory = async (e: {preventDefault:()=>void;}) => {
         e.preventDefault();
-        if (deleteCategoryName === "select" || !deleteCategoryName) {
+        if (deleteCategoryID === "select" || !deleteCategoryID) {
             window.alert("Please select a category");
             return;
         }
-        const formData = new FormData();
-        formData.append("name", deleteCategoryName);
-        await fetch(`${API_URL}/${deleteCategoryType}`, {
+        await fetch(`${API_URL}/${deleteCategoryType}/${deleteCategoryID}`, {
             method: 'DELETE',
-            body: formData
         }).then((res) => {
             if (res.status >= 400 && res.status < 600) {
                 alert("Bad response from server")
             } else {
-                alert(`Category ${deleteCategoryName} deleted`);
+                alert(`Category deleted`);
                 window.location.reload()
                 return res.json()
             }
@@ -643,7 +640,7 @@ const Admin = () => {
                                     <select onChange={setDeleteCategory} className='delete-category'>
                                         <option value="select" disabled selected>Select Category</option>
                                         {deleteCategoryValues && deleteCategoryValues.map((category) => (
-                                            <option value={category.name}>{category.name}</option>
+                                            <option value={category.id}>{category.name}</option>
                                         ))}</select>
                                 </div>
                             </div>
