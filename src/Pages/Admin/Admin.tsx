@@ -687,7 +687,7 @@ const Admin = () => {
                                             <select onChange={setDeleteCategory} className='delete-category'>
                                                 <option value="select" disabled selected>Select Category</option>
                                                 {deleteCategoryValues && deleteCategoryValues.map((category) => (
-                                                    <option value={category.name}>{category.name}</option>
+                                                    <option value={category.id}>{category.name}</option>
                                                 ))}</select>
                                         </div>
                                     </div>
