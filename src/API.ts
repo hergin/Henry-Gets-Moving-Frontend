@@ -9,7 +9,7 @@ import {
     FamilyMember, ExerciseLog
 } from "./Structs/DataTypes";
 
-export const API_URL = "http://127.0.0.1:3333";
+export const API_URL = "https://henrygetsmoving.community.bsu.edu:3333";
 
 const getRecipes = async (): Promise<Recipe[]> => {
     return await fetch(`${API_URL}/recipes`)
@@ -107,7 +107,7 @@ const getDiagrams = async (): Promise<Diagram[]> => {
         });
 }
 
-const getPaginatedDemos = async (page:string) => {
+const getPaginatedDemos = async (page: string) => {
     return await fetch(`${API_URL}/paginatedDemos/?page=${page}`)
         .then((response) => {
             return response.json();
@@ -202,11 +202,11 @@ const getFeaturedExercise = async (): Promise<Exercise> => {
 
 const getFamilyMembers = async (): Promise<FamilyMember[]> => {
     return await fetch(`${API_URL}/familyMembers`, {
-            method: "GET",
-            headers: {
-                Authorization: `Bearer ${sessionStorage.getItem("session_key")}`
-            }
+        method: "GET",
+        headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("session_key")}`
         }
+    }
     ).then((response) => {
         if (response.ok) return response.json();
         return {
@@ -300,7 +300,7 @@ const swapFeaturedRecipe = async (recipeId: string): Promise<Recipe> => {
 
 const getTotalLoggedDuration = async (familyMember: string, date: Date = new Date()): Promise<number> => {
     let result = 0;
-    await getExerciseLogs().then(function(logs) {
+    await getExerciseLogs().then(function (logs) {
         logs.forEach(function (log) {
             if (log.familyMember?.name === familyMember && new Date(log.date).toLocaleDateString() === date.toLocaleDateString()) {
                 result += parseInt(log.duration);
@@ -324,15 +324,15 @@ const parseEmbedLink = (link: string) => {
     if (link.includes("watch?v="))
         embed = link.replace("watch?v=", "embed/");
     else if (link.includes("youtu.be"))
-        embed = link.replace("youtu.be","youtube.com/embed");
+        embed = link.replace("youtu.be", "youtube.com/embed");
 
     if (!link.includes("www"))
-        embed = embed.replace(embed.substring("https://".length,embed.length), "www."+embed.substring("https://".length,embed.length));
+        embed = embed.replace(embed.substring("https://".length, embed.length), "www." + embed.substring("https://".length, embed.length));
 
     return embed.includes("&") ? embed.substring(0, embed.indexOf("&")) : embed;
 }
 
-const API ={
+const API = {
     getRecipes,
     getExercises,
     getPaginatedExercises,
